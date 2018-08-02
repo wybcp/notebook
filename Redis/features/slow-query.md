@@ -32,6 +32,9 @@ OK
 OK
 127.0.0.1:6379> config rewrite
 OK
+127.0.0.1:6379> config get slowlog-max-len
+1) "slowlog-max-len"
+2) "2000"
 ```
 
 ## 查询慢日志
@@ -74,3 +77,4 @@ OK
 - 建议线上环境最大存储条数设为1000以上
 - 高QPS场景时，将`slowlog-log-slower-than`设置为1000
 - 定期执行`slow get`将慢日志持久化到其他存储中
+
