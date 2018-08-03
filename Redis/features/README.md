@@ -6,3 +6,4 @@ Redis 提供的各种功能。
 
 - [慢查询分析](slow-query.md)
 - [Redis shell](redis-shell.md)
+- [Pipeline](Pipeline.md)
