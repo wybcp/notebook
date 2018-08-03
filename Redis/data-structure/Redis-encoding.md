@@ -4,7 +4,7 @@
 object encoding key
 ```
 
-查看内部编码的方式。
+查看数据结构内部编码的方式。
 
 ## string字符串
 
