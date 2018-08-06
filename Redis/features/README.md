@@ -10,3 +10,4 @@ Redis 提供的各种功能。
 - [事务](transaction.md)
 - [发布订阅](publish-subscribe.md)
 - [地理信息定位](GEO.md)
+- [持久化](persistence.md)
