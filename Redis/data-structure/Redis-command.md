@@ -181,23 +181,31 @@ sorted set是string类型元素的集合，不同的是每个元素都会关联�
 
 ## 七、Bitmaps
 
-bitmaps事实上并不是一种新的数据类型，而是基于字符串位操作的集合，由于字符串是二进制安全的，并且最长可支持512M，所以它们可以用来存储2的32次方（ `512*1024*1024*8` ）不同位的数据。
+bitmaps 事实上并不是一种新的数据类型，而是基于字符串位操作的集合，由于字符串是二进制安全的，并且最长可支持512M，所以它们可以用来存储2的32次方（ `512*1024*1024*8` ）不同位的数据。
 
-bitmaps的位操作分成两组：1.固定时间的单个位操作，比如把字符串的某个位设置为1或者0，或者获取某个位上的值 2.对于一组位的操作，对给定的比特范围内，统计设定值为1的数目。
+bitmaps 的位操作分成两组：1.固定时间的单个位操作，比如把字符串的某个位设置为1或者0，或者获取某个位上的值 2.对于一组位的操作，对给定的比特范围内，统计设定值为1的数目。
 
-bitmaps最大的优势是在存储数据时可以极大的节省空间，比如在一个项目中采用自增长的id来标识用户，就可以仅用512M的内存来记录4亿用户的信息（比如用户是否希望收到新的通知，用1和0标识）
+bitmaps 最大的优势是在存储**大**数据时可以极大的节省空间，比如在一个项目中采用自增长的id来标识用户，就可以仅用512M的内存来记录4亿用户的信息（比如用户是否希望收到新的通知，用1和0标识）。
 
-- setbit key offset value
-- getbit key offset：没有offset也返回0
-- bitcount key [start][end]：返回指定范围内1的个数
-- bitop operation destkey key [key...]：operation代表and，or，not，xor操作，
-- bitpos key targetBit [start][end]：计算第一个为targetBit的偏移量
+因为许多应用的用户id从一个指定数字（例如1000）开始，直接对应造成一定浪费，可以提前将用户id减去指定数字。
+
+- `setbit key offset value`
+- `getbit key offset`：没有 offset 也返回0
+- `bitcount key [start] [end]`：返回指定范围内1的个数
+- `bitop operation destkey key [key...]`：operation 代表 and，or，not，xor 操作，将结果保存于 destkey
+- `bitpos key targetBit [start] [end]`：计算第一个为 targetBit 的偏移量
 
 ## 八、HyperLogLog
 
-HyperLogLog主要解决大数据应用中的非精确计数（可能多也可能少，但是会在一个合理的范围）操作，它可以接受多个元素作为输入，并给出输入元素的基数估算值，基数指的是集合中不同元素的数量。比如 {'apple', 'banana', 'cherry', 'banana', 'apple'} 的基数就是 3 。 HyperLogLog 的优点是，即使输入元素的数量或者体积非常非常大，计算基数所需的空间总是固定的、并且是很小的。在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。
+HyperLogLog 主要解决大数据应用中的非精确计数（可能多也可能少，但是会在一个合理的范围）操作，它可以接受多个元素作为输入，并给出输入元素的基数估算值，基数指的是集合中不同元素的数量，一种计数算法。比如 {'apple', 'banana', 'cherry', 'banana', 'apple'} 的基数就是 3 。
 
-关于这个数据类型的误差：在一个大小为12k的key所存储的hyperloglog集合基数计算的误差是%0.81。
+HyperLogLog 的优点是，即使输入元素的数量或者体积非常非常大，计算基数所需的空间总是固定的、并且是很小的。在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。
+
+关于这个数据类型的误差：在一个大小为12k的key所存储的 Hyperloglog 集合基数计算的误差是0.81%。
+
+- `pfadd key element [element...]`：添加元素，成功返回1
+- `pfcount key [key...]`：计算独立元素个数
+- `pfmerge destkey sourcekey [sourcekey...]`：求并集保存到 destkey
 
 ## 七、服务器相关命令
 
