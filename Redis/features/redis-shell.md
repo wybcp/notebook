@@ -5,6 +5,7 @@ Redis 提供的 shell 工具。
 ## reids-cli
 
 - `redis-cli --stat` ：实时获取信息
+- `redis-cli -h host -p port` ：连接redis
 - `redis-cli --raw`： 返回格式化的结果，能正常显示中文
 - `redis-cli --bigkeys`：对redis中的key进行采样，寻找较大的keys。不用担心会阻塞redis很长时间不能处理其他的请求。执行的结果可以用于分析redis的内存的使用状态，每种类型key的平均大小。
 - `redis-cli --latency`：测试客户端到目标 Redis 的网络延迟`redis-cli -h 127.0.0.1 -p 6379 --latency`,执行一次，取平均
@@ -18,7 +19,7 @@ Redis 提供的 shell 工具。
 
 ## redis-server
 
-`redis-server --test-memory 1024` 当前系统能否稳定分配指定容量（1024MB）的内存给Redis，避免Redis崩溃，检测时间较长，。
+`redis-server --test-memory 1024` 当前系统能否稳定分配指定容量（1024MB）的内存给Redis，避免Redis崩溃，检测时间较长。
 
 ## redis-benchmark
 
