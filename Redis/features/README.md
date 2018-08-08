@@ -12,3 +12,5 @@ Redis 提供的各种功能。
 - [地理信息定位](GEO.md)
 - [持久化](persistence.md)
 - [复制](replication.md)
+- [阻塞](block.md)
+- [排序](order.md)
