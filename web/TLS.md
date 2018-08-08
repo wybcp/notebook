@@ -11,3 +11,7 @@ TLS 1.3 已经被 IESG  正式批准为[建议标准](https://datatracker.ietf.o
 TLS 1.3 最大优势是：安全性增强、访问速度更快。
 
 ## TLS 1.3 与 TLS 1.2对比
+
+## 测试工具
+
+https://www.ssllabs.com/ssltest/
