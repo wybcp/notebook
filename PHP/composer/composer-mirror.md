@@ -40,8 +40,8 @@ composer config repo.packagist composer https://packagist.laravel-china.org
 composer 命令后面加上 -vvv （是 3 个 v）可以打印出调错信息，命令如下：
 
 ```shell
-$ composer -vvv create-project laravel/laravel blog
-$ composer -vvv require psr/log
+composer -vvv create-project laravel/laravel blog
+composer -vvv require psr/log
 ```
 
 使用 laravel new 命令创建工程， 这个命令会从下一个 zip 包，里面自带了 `composer.lock`，也无法使用镜像加速，解决方法：

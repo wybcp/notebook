@@ -6,6 +6,8 @@ object encoding key
 
 查看数据结构内部编码的方式。
 
+通过不同的编码方式实现效率和空间的平衡。
+
 ## string字符串
 
 - int：8 byte的长整型
