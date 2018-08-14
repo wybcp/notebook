@@ -5,7 +5,7 @@
 - [2018 PHP](PHP-2018.md)
 - [composer包管理及常见扩展包](composer/README.md)
 - [官方文档](http://php.net/manual/zh/langref.php)
-- [数组函数]()
+- [数组函数](array.md)
 - [字符串函数]()
 - [垃圾回收机制]()
 - [面向对象]()
