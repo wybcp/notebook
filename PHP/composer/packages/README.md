@@ -5,3 +5,4 @@
 ## 目录
 
 - [Composer 并行加速插件](parallel-install.md)
+- [PHP CS 格式化](php-cs.md)
