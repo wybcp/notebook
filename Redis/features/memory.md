@@ -40,16 +40,16 @@ active_defrag_running:0
 lazyfree_pending_objects:0
 ```
 
-理想情况是mem_fragmentation_ratio略微大于1。
+理想情况是 mem_fragmentation_ratio 略微大于 1。
 
 - mem_fragmentation_ratio>1，说明有部分内存没有用于存储数据，而被内存碎片化消耗
-- mem_fragmentation_ratio<1，操作系统将一部分redis内存交换到硬盘，可能导致性能变差
+- mem_fragmentation_ratio<1，操作系统将一部分 redis 内存交换到硬盘，可能导致性能变差
 
 ### 进程内消耗
 
 #### 自身内存
 
-redis空进程自身消耗很小，used_memory_rss 3m左右，used_memory 800k左右。
+redis 空进程自身消耗很小，used_memory_rss 3m 左右，used_memory 800k 左右。
 
 #### 对象内存
 
@@ -59,9 +59,9 @@ sizeof(keys)+sizeof(values)
 
 #### 缓存内存
 
-- 客户端缓存，所有连接到redis服务器TCP连接的输入输出缓存，输入缓存无法控制，最大为1，如果超时将断开连接。输出缓存参数`client-output-buffer-limit`。
+- 客户端缓存，所有连接到 redis 服务器 TCP 连接的输入输出缓存，输入缓存无法控制，最大为 1，如果超时将断开连接。输出缓存参数`client-output-buffer-limit`。
 - 复制积压缓冲区，
-- AOF缓冲区。
+- AOF 缓冲区。
 
 #### 内存碎片
 
@@ -111,12 +111,12 @@ Redis 存储的数据都是使用 Redisobject 来封装。
 
 - refcount 字段：记录引用次数，`object refcount {key}`获取当前对象的引用次数
 
-- *ptr 字段：与数据内容相关，如果是整数，直接存储数据；否则表示指向数据的指针。
+- \*ptr 字段：与数据内容相关，如果是整数，直接存储数据；否则表示指向数据的指针。
 
 ### 缩减键值对象
 
 - key 长度：在完整描述业务的情况下，键越短越好
-- value 长度：把业务对象序列化，选中合适的序列化工具；如果内存紧张，可以使用snappy压缩工具处理常见的json 等通用格式数据。
+- value 长度：把业务对象序列化，选中合适的序列化工具；如果内存紧张，可以使用 snappy 压缩工具处理常见的 json 等通用格式数据。
 
 ### 共享对象池
 

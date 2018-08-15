@@ -8,7 +8,7 @@ redis 一般问题处理方法。
 127.0.0.1:6379> ping
 ```
 
-返回PONG说明正常。
+返回 PONG 说明正常。
 
 ## 探测服务延迟
 
@@ -16,15 +16,15 @@ redis 一般问题处理方法。
 redis-cli --latency
 ```
 
-显示的单位是milliseconds，作为参考，千兆网一跳一般延迟为0.16ms左右。
+显示的单位是 milliseconds，作为参考，千兆网一跳一般延迟为 0.16ms 左右。
 
 ## 监控正在请求执行的命令
 
-在cli下执行monitor，**生产环境慎用**
+在 cli 下执行 monitor，**生产环境慎用**
 
 ## 查看统计信息
 
-在cli下执行`info [section]`，可只查看部分信息：
+在 cli 下执行`info [section]`，可只查看部分信息：
 
 ```shell
 127.0.0.1:6379> info
@@ -155,7 +155,7 @@ db2:keys=1,expires=0,avg_ttl=0 ###keyspace 部分记录了数据库相关的统�
 
 ## 获取慢查询
 
-`SLOWLOG GET 10`结果为查询ID、发生时间、运行时长和原命令
+`SLOWLOG GET 10`结果为查询 ID、发生时间、运行时长和原命令
 
 ```shell
 1 ###查询ID
@@ -174,23 +174,23 @@ wechat
 127.0.0.1:58826
 ```
 
-默认10毫秒，默认只保留最后的128条。单线程的模型下，一个请求占掉10毫秒是件大事情，注意设置和显示的单位为微秒，注意这个时间是不包含网络延迟的。
+默认 10 毫秒，默认只保留最后的 128 条。单线程的模型下，一个请求占掉 10 毫秒是件大事情，注意设置和显示的单位为微秒，注意这个时间是不包含网络延迟的。
 
-+ `slowlog get`：获取慢查询日志
-+ `slowlog len`：获取慢查询日志条数
-+ `slowlog reset`：清空慢查询
+- `slowlog get`：获取慢查询日志
+- `slowlog len`：获取慢查询日志条数
+- `slowlog reset`：清空慢查询
 
 ## 查看客户端
 
-+ `client list`：列出所有连接
-+ `client kill`：杀死某个连接， 例如`CLIENT KILL 127.0.0.1:43501`
-+ `client getname`：获取连接的名称 默认nil
-+ `client setname "名称"`：设置连接名称,便于调试
+- `client list`：列出所有连接
+- `client kill`：杀死某个连接， 例如`CLIENT KILL 127.0.0.1:43501`
+- `client getname`：获取连接的名称 默认 nil
+- `client setname "名称"`：设置连接名称,便于调试
 
 ## 查看日志
 
-日志位置在/redis/log下，redis.log为redis主日志，sentinel.log为sentinel监控日志。
+日志位置在/redis/log 下，redis.log 为 redis 主日志，sentinel.log 为 sentinel 监控日志。
 
 ## 并发延迟检查
 
-top看到单个CPU 100%时，就是垂直扩展的时候了。如果需要让CPU使用率最大化，可以配置Redis实例数对应CPU数, Redis实例数对应端口数(8核Cpu, 8个实例, 8个端口), 以提高并发。
+top 看到单个 CPU 100%时，就是垂直扩展的时候了。如果需要让 CPU 使用率最大化，可以配置 Redis 实例数对应 CPU 数, Redis 实例数对应端口数(8 核 Cpu, 8 个实例, 8 个端口), 以提高并发。

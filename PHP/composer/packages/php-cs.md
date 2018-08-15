@@ -1,4 +1,4 @@
-# PHP代码风格一致性
+# PHP 代码风格一致性
 
 ## 一、背景
 
@@ -11,11 +11,11 @@ PHP 开发团队统一 PSR-2 的编码风格规范。
 1. 安装 PHP-CS
 2. 配置 PHP-CS
 3. 集成到编辑器
-4. git触发检测
+4. git 触发检测
 
 ## 二、PHP-CS 简介
 
-[PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)（简称为PHP-CS）是一个代码风格检测工具， 要求 PHP 5.4.0以上版本，包含两类脚本：`phpcs` 和 `phpcbf`。
+[PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)（简称为 PHP-CS）是一个代码风格检测工具， 要求 PHP 5.4.0 以上版本，包含两类脚本：`phpcs` 和 `phpcbf`。
 
 ### phpcs
 
@@ -35,7 +35,7 @@ PHP-CS 依赖于 composer，请自行安装。
 
 ### 3.2 安装 PHP-CS
 
-安装PHP-CS：
+安装 PHP-CS：
 
 ```shell
 composer global require "squizlabs/php_codesniffer=*"
@@ -101,15 +101,15 @@ phpcbf test.php
 
 1. 设置->code style -> PHP 中选择风格为 psr1/psr2
 
-    ![php-cs-1](../images/php-cs-1.png)
+   ![php-cs-1](../images/php-cs-1.png)
 
 2. 设置->languages->php->code sniffer 中设置 phpcs 的路径
 
-    ![php-cs-2](../images/php-cs-2.png)
+   ![php-cs-2](../images/php-cs-2.png)
 
-3. 设置->Editor->Inspections 展开点击右侧的PHP，勾选 Quality tools 下面的两个 PHP 选项， PHP Code Sniffer validation 选择使用 PSR2， PHP Mess Detector validation 选择全部 options：
+3. 设置->Editor->Inspections 展开点击右侧的 PHP，勾选 Quality tools 下面的两个 PHP 选项， PHP Code Sniffer validation 选择使用 PSR2， PHP Mess Detector validation 选择全部 options：
 
-    ![php-cs-3](../images/php-cs-3.png)
+   ![php-cs-3](../images/php-cs-3.png)
 
 ### 集成 phpcs
 
@@ -163,7 +163,7 @@ done
 exit 0
 ```
 
-需要注意的是让这个文件有可执行权限，最直接的办法就是设置为777，参考命令如下：
+需要注意的是让这个文件有可执行权限，最直接的办法就是设置为 777，参考命令如下：
 
 ```shell
 chmod 777 .git/hooks/pre-commit
@@ -171,6 +171,6 @@ chmod 777 .git/hooks/pre-commit
 
 ## 参考
 
-- 汤青松：[使用PHPCS+GIT钩子保障团队开发中代码风格一致性实践](https://zhuanlan.zhihu.com/p/41813339)
+- 汤青松：[使用 PHPCS+GIT 钩子保障团队开发中代码风格一致性实践](https://zhuanlan.zhihu.com/p/41813339)
 - 阅码人生：[PHP 系列：代码规范之 Code Sniffer](https://laravel-china.org/articles/5646/php-series-code-sniffer-for-code-specification)
 - squizlabs：[PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)

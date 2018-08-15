@@ -1,6 +1,6 @@
 # Composer 授权
 
-由于 GitHub api 限制调用频率，使用 composer 时可能会频繁要求你输入你的 github 账号及密码。你可以使用提前配置避免这个问题。 
+由于 GitHub api 限制调用频率，使用 composer 时可能会频繁要求你输入你的 github 账号及密码。你可以使用提前配置避免这个问题。
 
 配置过程如下：
 
@@ -10,9 +10,9 @@
 
    ```json
    {
-       "github-oauth": {
-           "github.com": "oauthtoken"
-       }
+     "github-oauth": {
+       "github.com": "oauthtoken"
+     }
    }
    ```
 

@@ -8,7 +8,7 @@ Composer 根据本地定义的 `composer.json` 信息去查询 Packagist，Packa
 
 ## Composer.json
 
-这是Composer的核心，是Composer的规则。
+这是 Composer 的核心，是 Composer 的规则。
 
 ## Composer 命令行工具
 

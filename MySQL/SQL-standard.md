@@ -1,8 +1,8 @@
-**SQL 分类：**
+# SQL标准
 
 **SQL 语句主要可以划分为以下 4 个类别。**
 
-**DDL（Data Definition Languages）语句：**数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定义。常用的语句关键字主要包括 create、drop、alter等。
+**DDL（Data Definition Languages）语句：**数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定义。常用的语句关键字主要包括 create、drop、alter 等。
 
 ```sql
 CREATE <![TEMPORARY|TEMP]> TABLE [IF NOT EXISTS] tbl_name (
@@ -35,7 +35,7 @@ ALTER TABLE table
           ALTER INDEX index_name {VISIBLE | INVISIBLE}
 ```
 
-**DQL（Data Query Language SELECT ）数据查询语言，select语句。**
+**DQL（Data Query Language SELECT ）数据查询语言，select 语句。**
 
 ```sql
 SELECT
@@ -62,7 +62,7 @@ SELECT
       | INTO DUMPFILE 'file_name'
       | INTO var_name [, var_name]]
     [FOR UPDATE | LOCK IN SHARE MODE]]
-    [FOR {UPDATE | SHARE} [OF tbl_name [, tbl_name] ...] [NOWAIT | SKIP LOCKED] 
+    [FOR {UPDATE | SHARE} [OF tbl_name [, tbl_name] ...] [NOWAIT | SKIP LOCKED]
       | LOCK IN SHARE MODE]]
 ```
 
@@ -76,8 +76,8 @@ INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);
 ```
 
 ```sql
-DELETE FROM table 
-  [ WHERE condition ] 
+DELETE FROM table
+  [ WHERE condition ]
   [ORDER BY ...]
   [LIMIT row_count]
 ```
@@ -133,4 +133,4 @@ GRANT ALL ON db1.* TO 'jeffrey'@'localhost';
 
 SQL92 http://owen.sj.ca.us/rkowen/howto/sql92F.html
 
-MySql文档 https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html
+MySql 文档 https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html

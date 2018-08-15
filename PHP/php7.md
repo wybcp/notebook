@@ -1,14 +1,14 @@
 # php7
 
-php7发布已经升级到7.2，里面发生了很多的变化。本文整理php7.0至php7.2的新特性和一些变化。
+php7 发布已经升级到 7.2，里面发生了很多的变化。本文整理 php7.0 至 php7.2 的新特性和一些变化。
 
 ## PHP7.0
 
-### PHP7.0新特性
+### PHP7.0 新特性
 
 #### 1. 组合比较符 (<=>)
 
-组合比较符号用于比较两个表达式。当 $a 小于、等于或大于 $b 时它分别返回-1、0或1，比较规则延续常规比较规则。对象不能进行比较
+组合比较符号用于比较两个表达式。当 $a 小于、等于或大于 $b 时它分别返回-1、0 或 1，比较规则延续常规比较规则。对象不能进行比较
 
 ```php
 var_dump('PHP' <=> 'Node'); // int(1)
@@ -30,7 +30,6 @@ $a = isset($_GET['a']) ? $_GET['a'] : 'none';
 
 #PHP 7
 $a = isset($_GET['a']) ?? 'none';
-
 ```
 
 #### 4. 变量类型声明
@@ -69,7 +68,7 @@ fun(3);//Fatal error
 
 #### 6. 匿名类
 
-php7 允许new class {} 创建一个匿名的对象。
+php7 允许 new class {} 创建一个匿名的对象。
 
 ```php
 //php7以前
@@ -94,7 +93,7 @@ $util->setLogger(new class {
 
 #### 7. Unicode codepoint 转译语法
 
-这接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
+这接受一个以 16 进制形式的 Unicode codepoint，并打印出一个双引号或 heredoc 包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
 
 ```PHP
 echo "\u{aa}";// ª
@@ -136,7 +135,7 @@ $data = unserialize($foo, ["allowed_classes" => true]);
 
 #### 10. IntlChar 类
 
-这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
+这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装 intl 拓展
 
 ```php
 printf('%x', IntlChar::CODEPOINT_MAX);
@@ -170,7 +169,7 @@ use app\model{A,B}
 
 #### 13.生成器支持返回表达式
 
- 它允许在生成器函数中通过使用 *return* 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 *Generator::getReturn()* 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
+它允许在生成器函数中通过使用 _return_ 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 _Generator::getReturn()_ 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
 
 ```php
 $gen = (function() {
@@ -315,7 +314,7 @@ PHP 7 改变了大多数错误的报告方式。不同于传统（PHP 5）的错
 
 这也意味着，当发生错误的时候，以前代码中的一些错误处理的代码将无法被触发。 因为在 PHP 7 版本中，已经使用抛出异常的错误处理机制了。 （如果代码中没有捕获 **Error** 异常，那么会引发致命错误）。set_error_handle 不一定接收的是异常，有可能是错误。
 
-ERROR层级结构：
+ERROR 层级结构：
 
 ```
 interface Throwable
@@ -382,13 +381,13 @@ true
 false
 ```
 
-#### 5.$HTTP_RAW_POST_DATA 被移 
+#### 5.$HTTP_RAW_POST_DATA 被移
 
 $HTTP_RAW_POST_DATA 被移，使用`php://input`代替
 
 #### 6. 移除了 ASP 和 script PHP 标签
 
-| 开标签                       | 闭标签         |
+| 开标签                    | 闭标签      |
 | ------------------------- | ----------- |
 | `<%`                      | `%>`        |
 | `<%=`                     | `%>`        |
@@ -396,11 +395,11 @@ $HTTP_RAW_POST_DATA 被移，使用`php://input`代替
 
 ## PHP7.1
 
-### PHP7.1新特性
+### PHP7.1 新特性
 
 #### 1. 可为空（Nullable）类型
 
-参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是null
+参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是 null
 
 ```php
 #php5
@@ -422,12 +421,11 @@ function fun1(?$a)
 }
 fun1(null);//null
 fun1('1');//1
-
 ```
 
 #### 2. void 类型
 
-返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void来说，**NULL** 不是一个合法的返回值。
+返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void 来说，**NULL** 不是一个合法的返回值。
 
 ```php
 function fun() :void
@@ -463,7 +461,7 @@ function iterator(iterable $iter)
 
 #### 5. 多异常捕获处理
 
-一个catch语句块现在可以通过管道字符(*|*)来实现多个异常的捕获。 这对于需要同时处理来自不同类的不同异常时很有用
+一个 catch 语句块现在可以通过管道字符(_|_)来实现多个异常的捕获。 这对于需要同时处理来自不同类的不同异常时很有用
 
 ```php
 try {
@@ -473,7 +471,7 @@ try {
 }
 ```
 
-#### 6. list支持键名
+#### 6. list 支持键名
 
 ```php
 $data = [
@@ -493,9 +491,9 @@ $a= "hello";
 $a[-2];//l
 ```
 
-#### 8. 将callback 转闭包
+#### 8. 将 callback 转闭包
 
-Closure新增了一个静态方法，用于将callable快速地 转为一个Closure 对象。
+Closure 新增了一个静态方法，用于将 callable 快速地 转为一个 Closure 对象。
 
 ```php
 <?php
@@ -518,23 +516,21 @@ $privFunc('some value');
 
 #### 9. http2 服务推送
 
-对http2服务器推送的支持现在已经被加入到 CURL 扩展
+对 http2 服务器推送的支持现在已经被加入到 CURL 扩展
 
-### PHP7.1变更
+### PHP7.1 变更
 
 #### 1. 传递参数过少时将抛出错误
 
-过去我们传递参数过少 会产生warning。php7.1开始会抛出error
+过去我们传递参数过少 会产生 warning。php7.1 开始会抛出 error
 
-#### 2. 移除了ext/mcrypt拓展
-
-
+#### 2. 移除了 ext/mcrypt 拓展
 
 ## PHP7.2
 
-### PHP7.2新特性
+### PHP7.2 新特性
 
-#### 1. 增加新的类型object
+#### 1. 增加新的类型 object
 
 ```php
 function test(object $obj) : object
@@ -547,7 +543,7 @@ test(new StdClass());
 
 #### 2. 通过名称加载扩展
 
-扩展文件不再需要通过文件加载 (Unix下以*.so*为文件扩展名，在Windows下以 *.dll* 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用
+扩展文件不再需要通过文件加载 (Unix 下以*.so*为文件扩展名，在 Windows 下以 _.dll_ 为文件扩展名) 进行指定。可以在 php.ini 配置文件进行启用
 
 ```ini
 ; ini file
@@ -573,13 +569,13 @@ abstract class B extends A
 }
 ```
 
-#### 4. 使用Argon2算法生成密码散列
+#### 4. 使用 Argon2 算法生成密码散列
 
-Argon2 已经被加入到密码散列（password hashing） API (这些函数以 *password_* 开头), 以下是暴露出来的常量
+Argon2 已经被加入到密码散列（password hashing） API (这些函数以 _password\__ 开头), 以下是暴露出来的常量
 
 #### 5. 新增 PDO 字符串扩展类型
 
-当你准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
+当你准备支持多语言字符集，PDO 的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
 
 - **PDO::PARAM_STR_NATL**
 - **PDO::PARAM_STR_CHAR**
@@ -607,13 +603,13 @@ use Foo\Bar\{
 var_dump(number_format(-0.01)); // now outputs string(1) "0" instead of string(2) "-0"
 ```
 
-#### 2. get_class()不再允许null。
+#### 2. get_class()不再允许 null。
 
 ```php
 var_dump(get_class(null))// warning
 ```
 
-#### 4. count 作用在不是 Countable Types 将发生warning
+#### 4. count 作用在不是 Countable Types 将发生 warning
 
 ```php
 count(1), // integers are not countable
@@ -621,25 +617,25 @@ count(1), // integers are not countable
 
 #### 5. 不带引号的字符串
 
-在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring。
+在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生 waring。
 
 ```php
 var_dump(HEELLO);
 ```
 
-#### 6. __autoload 被废弃
+#### 6. \_\_autoload 被废弃
 
-__autoload方法已被废弃
+\_\_autoload 方法已被废弃
 
 #### 7. each 被废弃
 
-使用此函数遍历时，比普通的 *foreach* 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
+使用此函数遍历时，比普通的 _foreach_ 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
 
-#### 8. is_object、gettype修正
+#### 8. is_object、gettype 修正
 
-is_object 作用在**__PHP_Incomplete_Class** 将反正 true
+is_object 作用在**\_\_PHP_Incomplete_Class** 将反正 true
 
-gettype作用在闭包在将正确返回resource
+gettype 作用在闭包在将正确返回 resource
 
 #### 9. Convert Numeric Keys in Object/Array Casts
 
@@ -663,4 +659,3 @@ http://php.net/manual/zh/migration70.new-features.php
 http://php.net/manual/zh/migration71.new-features.php
 
 http://php.net/manual/zh/migration72.new-features.php
-

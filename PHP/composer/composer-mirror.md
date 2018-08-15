@@ -1,6 +1,6 @@
 # composer 中国镜像
 
-## Packagist / Composer中国全量镜像
+## Packagist / Composer 中国全量镜像
 
 [Packagist / Composer 中国全量镜像](https://pkg.phpcomposer.com/)
 

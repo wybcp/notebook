@@ -4,7 +4,7 @@ Redis Sentinel 是 Redis 高可用实现方案。
 
 当主节点出现故障，Redis Sentinel 能自动发现故障和故障转移，并通知应用方。
 
-sentinel 节点是独立的 Redis节点，只不过不存储数据，只能执行部分命令。
+sentinel 节点是独立的 Redis 节点，只不过不存储数据，只能执行部分命令。
 
 ## 安装及部署
 
@@ -87,30 +87,29 @@ sentinel failover-timeout mymaster 180000
 #   the exact parallel-syncs progression as specified.
 #
 # Default is 3 minutes.
-
 ```
 
 启动 sentinel ：`redis-sentinel redis-sentinel-26379.conf`或`redis-server redis-sentinel-26379.conf --sentinel`。
 
-需要注意的是，配置文件在 sentinel 运行期间是会被动态修改的，例如当发生主备切换时候，配置文件中的master会被修改为另外一个slave。这样，之后sentinel如果重启时，就可以根据这个配置来恢复其之前所监控的redis集群的状态。
+需要注意的是，配置文件在 sentinel 运行期间是会被动态修改的，例如当发生主备切换时候，配置文件中的 master 会被修改为另外一个 slave。这样，之后 sentinel 如果重启时，就可以根据这个配置来恢复其之前所监控的 redis 集群的状态。
 
-`monitor`：定期监控主节点，quorum 参数用于发现故障和判断，一般设置为sentinel节点的一半加1。
+`monitor`：定期监控主节点，quorum 参数用于发现故障和判断，一般设置为 sentinel 节点的一半加 1。
 
-`down-after-milliseconds`：sentinel会向master发送心跳PING来确认master是否存活，如果master在“一定时间范围”内不回应PONG或者是回复了一个错误消息，那么这个sentinel会主观地(单方面地)认为这个master已经不可用了(subjectively down， 也简称为SDOWN)。而这个down-after-milliseconds就是用来指定这个“一定时间范围”的，单位是毫秒。
+`down-after-milliseconds`：sentinel 会向 master 发送心跳 PING 来确认 master 是否存活，如果 master 在“一定时间范围”内不回应 PONG 或者是回复了一个错误消息，那么这个 sentinel 会主观地(单方面地)认为这个 master 已经不可用了(subjectively down， 也简称为 SDOWN)。而这个 down-after-milliseconds 就是用来指定这个“一定时间范围”的，单位是毫秒。
 
-`parallel-syncs`：当新master产生时，同时进行“slaveof”到新master并进行“SYNC”的slave个数，默认为1，建议保持默认值，在salve执行salveof与同步时，将会终止客户端请求。
+`parallel-syncs`：当新 master 产生时，同时进行“slaveof”到新 master 并进行“SYNC”的 slave 个数，默认为 1，建议保持默认值，在 salve 执行 salveof 与同步时，将会终止客户端请求。
 
-`failover-timeout`：故障转移超时时间，failover过期时间，当failover开始后，在此时间内仍然没有触发任何failover操作，当前sentinel将会认为此次failoer失败。
+`failover-timeout`：故障转移超时时间，failover 过期时间，当 failover 开始后，在此时间内仍然没有触发任何 failover 操作，当前 sentinel 将会认为此次 failoer 失败。
 
 ## API
 
 - `sentinel masters` ：列出所有被监视的主节点，以及这些主节点的当前状态。
 - `sentinel slaves <master name>` ：列出给定主节点的所有从节点，以及这些从节点的当前状态。
-- `sentinel sentinels <master name>` ：列出给定主节点的所有sentinel节点。
+- `sentinel sentinels <master name>` ：列出给定主节点的所有 sentinel 节点。
 - `sentinel get-master-addr-by-name <master name>` ： 返回给定名字的主节点的 IP 地址和端口号。 如果这个主节点正在执行故障转移操作， 或者针对这个主节点的故障转移操作已经完成， 那么这个命令返回新的主节点的 IP 地址和端口号。
 - `sentinel reset <pattern>` ： 重置所有名字和给定模式 `pattern` 相匹配的主节点。 `pattern` 参数是一个 Glob 风格的模式。 重置操作清除主节点目前的所有状态， 包括正在执行中的故障转移， 并移除目前已经发现和关联的， 主节点的所有从节点和 Sentinel 。
 - `sentinel failover <master name>` ： 当主节点失效时， 在不询问其他 Sentinel 意见的情况下， 强制开始一次自动故障迁移 （不过发起故障转移的 Sentinel 会向其他 Sentinel 发送一个新的配置，其他 Sentinel 会根据这个配置进行相应的更新）。
-- `sentinel ckquorum <master name>`：检测当前的sentinel节点是否满足 quorum 的要求。
+- `sentinel ckquorum <master name>`：检测当前的 sentinel 节点是否满足 quorum 的要求。
 - `sentinel flushconfig`：将当前的 sentinel 配置强制刷到磁盘。
 - `sentinel remove <master name>`：移除对指定 master 节点的监控。
 - `sentinel monitor <master name> ip port quorum`：监控指定主节点

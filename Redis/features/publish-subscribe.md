@@ -1,10 +1,10 @@
 # 发布订阅
 
-Redis 作为一个 pub/sub server，在订阅者和发布者之间起到了消息路由的功能。订阅者可以通过`subscribe`和`psubscribe`命令向 redis server 订阅自己感兴趣的消息类型，redis将消息类型称为频道(channel)。当发布者通过`publish`命令向 redis server 发送特定类型的消息时。订阅该消息类型的全部 client 都会收到此消息。这里消息的传递是多对多的。一个client可以订阅多个 channel,也可以向多个 channel 发送消息。
+Redis 作为一个 pub/sub server，在订阅者和发布者之间起到了消息路由的功能。订阅者可以通过`subscribe`和`psubscribe`命令向 redis server 订阅自己感兴趣的消息类型，redis 将消息类型称为频道(channel)。当发布者通过`publish`命令向 redis server 发送特定类型的消息时。订阅该消息类型的全部 client 都会收到此消息。这里消息的传递是多对多的。一个 client 可以订阅多个 channel,也可以向多个 channel 发送消息。
 
 ## 实例
 
-终端A：
+终端 A：
 
 ```shell
 127.0.0.1:6379> subscribe comments
@@ -14,7 +14,7 @@ Reading messages... (press Ctrl-C to quit)
 3) (integer) 1
 ```
 
-终端B:
+终端 B:
 
 ```shell
 127.0.0.1:6379> subscribe comments
@@ -24,14 +24,14 @@ Reading messages... (press Ctrl-C to quit)
 3) (integer) 1
 ```
 
-终端C：
+终端 C：
 
 ```shell
 127.0.0.1:6379> publish comments good!
 (integer) 2
 ```
 
-终端A:
+终端 A:
 
 ```shell
 127.0.0.1:6379> subscribe comments
@@ -44,7 +44,7 @@ Reading messages... (press Ctrl-C to quit)
 3) "good!"
 ```
 
-终端B：
+终端 B：
 
 ```shell
 127.0.0.1:6379> subscribe comments
@@ -57,7 +57,7 @@ Reading messages... (press Ctrl-C to quit)
 3) "good!"
 ```
 
-可以使用psubscribe通过通配符进行多个channel的订阅
+可以使用 psubscribe 通过通配符进行多个 channel 的订阅
 
 ## 命令
 
