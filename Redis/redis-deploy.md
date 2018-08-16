@@ -1,26 +1,29 @@
+#部署
+
 ## 启动
 
 ### 启动 redis
 
 #### 默认配置
 
-```
-$ redis-server
+```shell
+redis-server
 ```
 
 #### 配置文件（建议）
 
-```
-$ redis-server /path/to/redis.conf
+```shell
+redis-server /path/to/redis.conf
 ```
 
 重要配置：
-config | config introduction
----|---
-port | 端口
-logfile | 日志文件
-dir | redis 工作目录（存放持久化和日志文件）
-daemonize| 是否以进程守护的方式启动 redis
+
+| config    | config introduction                    |
+| --------- | -------------------------------------- |
+| port      | 端口                                   |
+| logfile   | 日志文件                               |
+| dir       | redis 工作目录（存放持久化和日志文件） |
+| daemonize | 是否以进程守护的方式启动 redis         |
 
 #### 运行配置（不建议）
 
