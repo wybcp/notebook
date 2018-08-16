@@ -16,7 +16,7 @@
   更好的 PHP 进程管理方式，可以有效控制内存和进程、可以平滑重载 PHP 配置
 - 流程：
   - step1:nginx 接收到一条 http 请求，会把环境变量，请求参数转变成 php 能懂的 php 变量
-  ```
+  ```cinfig
   // nginx 配置资料
   location ~ \.php$ {
         include snippets/fastcgi-php.conf; //step1

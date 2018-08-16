@@ -571,7 +571,7 @@ abstract class B extends A
 
 #### 4. 使用 Argon2 算法生成密码散列
 
-Argon2 已经被加入到密码散列（password hashing） API (这些函数以 _password\__ 开头), 以下是暴露出来的常量
+Argon2 已经被加入到密码散列（password hashing） API (这些函数以 \_password\_\_ 开头), 以下是暴露出来的常量
 
 #### 5. 新增 PDO 字符串扩展类型
 
@@ -623,9 +623,9 @@ count(1), // integers are not countable
 var_dump(HEELLO);
 ```
 
-#### 6. \_\_autoload 被废弃
+#### 6.  被废弃
 
-\_\_autoload 方法已被废弃
+`__autoload` 方法已被废弃
 
 #### 7. each 被废弃
 
@@ -633,7 +633,7 @@ var_dump(HEELLO);
 
 #### 8. is_object、gettype 修正
 
-is_object 作用在**\_\_PHP_Incomplete_Class** 将反正 true
+is_object 作用在`__PHP_Incomplete_Class` 将反正 true
 
 gettype 作用在闭包在将正确返回 resource
 
@@ -654,8 +654,6 @@ var_dump(
 
 ## 参考资料
 
-http://php.net/manual/zh/migration70.new-features.php
-
-http://php.net/manual/zh/migration71.new-features.php
-
-http://php.net/manual/zh/migration72.new-features.php
+- [php7.0 新特性](http://php.net/manual/zh/migration70.new-features.php)
+- [php7.1 新特性](http://php.net/manual/zh/migration71.new-features.php)
+- [php7.2 新特性](http://php.net/manual/zh/migration72.new-features.php)

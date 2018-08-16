@@ -1,29 +1,17 @@
 # PHP
 
+PHP 缩写最初的来源“Personal Home Page”（个人主页），逐渐成为了现在的“PHP：超文本预处理器”。
+
+2015 年 PHP 发布了里程碑式的版本 PHP 7.0，极大的提升了 Zend 引擎的性能，并降低了 PHP 的整体内存使用率。
+
 ## 目录
 
 - [2018 PHP](PHP-2018.md)
 - [composer 包管理及常见扩展包](composer/README.md)
 - [官方文档](http://php.net/manual/zh/langref.php)
-- [数组函数](array.md)
-- [字符串函数]()
-- [垃圾回收机制]()
-- [面向对象]()
-  - 封装
-  - 继承
-  - 多态
-- [zval 结构]()
-- [魔术方法]()
-- [抽象类和接口]()
-- [MVC]()
-- [访问修饰符]()
-- [正则表达式]()
-- [FPM、FastCGI]()
+- [函数](./function/README.md)
+- [优化](./optimization/README.md)
 - [PSR 规范](https://github.com/PizzaLiu/PHP-FIG)
-  - **PSR 1 基本代码规范**
-  - **PSR 2 代码风格指南**
-  - **PSR 3 日志接口**
-  - **PSR 4 改进的自动加载**
 
 ### 面向对象
 

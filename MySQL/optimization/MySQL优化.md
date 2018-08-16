@@ -1,4 +1,4 @@
-## mysql 优化
+# mysql 优化
 
 - 不要查询不需要的列
 
@@ -35,8 +35,6 @@ select * from user where name like '%a'
 - 应尽量避免在 where 子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描
 
 - 很多时候用 exists 代替 in 是一个好的选择：
-
--
 
 ## btree 索引
 
@@ -107,4 +105,4 @@ select * from user where name = '11' order by age desc; //age 没有索引
 
 - 在索引列上有多个等于条件，这也是一种范围。不能使用索引
 
-https://blog.csdn.net/samjustin1/article/details/52212421
+[原文](https://blog.csdn.net/samjustin1/article/details/52212421)

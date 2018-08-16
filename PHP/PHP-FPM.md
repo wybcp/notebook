@@ -173,18 +173,18 @@ source /etc/profile
 
 - 进程数调整
 
-> pm.max_children = 300; **静态方式**下开启的 php-fpm 进程数量
->
-> pm.start_servers = 20; **动态方式**下的起始 php-fpm 进程数量
->
-> pm.min_spare_servers = 5; **动态方式**下的最小 php-fpm 进程数量
->
-> pm.max_spare_servers = 35; **动态方式**下的最大 php-fpm 进程数量
->
-> request_slowlog_timeout = 2; 开启慢日志
-> slowlog = log/$pool.log.slow; 慢日志路径
->
-> rlimit_files = 1024; 增加 php-fpm 打开文件描述符的限制
+  > pm.max_children = 300; **静态方式**下开启的 php-fpm 进程数量
+  >
+  > pm.start_servers = 20; **动态方式**下的起始 php-fpm 进程数量
+  >
+  > pm.min_spare_servers = 5; **动态方式**下的最小 php-fpm 进程数量
+  >
+  > pm.max_spare_servers = 35; **动态方式**下的最大 php-fpm 进程数量
+  >
+  > request_slowlog_timeout = 2; 开启慢日志
+  > slowlog = log/$pool.log.slow; 慢日志路径
+  >
+  > rlimit_files = 1024; 增加 php-fpm 打开文件描述符的限制
 
 **一般来说一台服务器正常情况下每一个 php-cgi 所耗费的内存在 20M 左右 。**
 

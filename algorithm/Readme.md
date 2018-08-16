@@ -1,42 +1,42 @@
-## 算法
+# 算法
 
 > 算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。
 
-### 算法的特征
+## 算法的特征
 
 - 有穷性
 
-算法的有穷性是指算法必须能在执行有限个步骤之后终止； 
+算法的有穷性是指算法必须能在执行有限个步骤之后终止；
 
 - 确定性
 
-算法的每一步骤必须有确切的定义； 
+算法的每一步骤必须有确切的定义；
 
 - 输入
 
-一个算法有0个或多个输入 
+一个算法有 0 个或多个输入
 
 - 输出
 
-一个算法有一个或多个输出，以反映对输入数据加工后的结果 
+一个算法有一个或多个输出，以反映对输入数据加工后的结果
 
 - 可行性
 
-算法中执行的任何计算步骤都是可以被分解为基本的可执行的操作步 
+算法中执行的任何计算步骤都是可以被分解为基本的可执行的操作步
 
 ### 时间复杂度
 
-时间复杂度是执行算法所需要的工作量，一般来说，计算机算法是问题规模n 的函数f(n)，算法的时间复杂度也因此记做。
+时间复杂度是执行算法所需要的工作量，一般来说，计算机算法是问题规模 n 的函数 f(n)，算法的时间复杂度也因此记做。
 
 `T(n)=Ο(f(n))`
 
-因此，问题的规模n 越大，算法执行的时间的增长率与f(n) 的增长率正相关
+因此，问题的规模 n 越大，算法执行的时间的增长率与 f(n) 的增长率正相关
 
 ### 空间复杂度
 
 算法的空间复杂度是指算法需要消耗的内存空间。其计算和表示方法与时间 复杂度类似。
 
-![时间复杂度](http://hi.csdn.net/attachment/201105/24/0_1306225542srVx.gif) 
+![时间复杂度](http://hi.csdn.net/attachment/201105/24/0_1306225542srVx.gif)
 
 ### 常见算法
 
@@ -60,6 +60,7 @@ function BubbleSort(array $container)
     return $container;
 }
 ```
+
 - [插入排序](https://github.com/xianyunyh/arithmetic-php/blob/master/package/Sort/InsertSort.php)
 
 ```php
@@ -74,7 +75,7 @@ function InsertSort(array $container)
             $container[$j+1] = $container[$j];
             $j--;
         }
-        if($i != $j+1) 
+        if($i != $j+1)
             $container[$j+1] = $temp;
     }
     return $container;
@@ -103,8 +104,6 @@ function ShellSort(array $container)
     return $container;
 }
 ```
-
-
 
 - [选择排序](https://github.com/xianyunyh/arithmetic-php/blob/master/package/Sort/SelectSort.php)
 
@@ -229,7 +228,3 @@ function BinaryQueryRecursive(array $container, $search, $low = 0, $top = 'defau
   - 二叉树的深度
   - 二叉树的遍历
   - 重建二叉树
-
-  
-
-  
