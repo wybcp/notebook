@@ -2,7 +2,7 @@
 
 个人编程学习中所作的笔记，包括 PHP、Python、Redis、MySQL 等。
 
-##  目录
+## 目录
 
 - [Redis](./Redis/README.md)
 - [MySQL](./MySQL/README.md)
