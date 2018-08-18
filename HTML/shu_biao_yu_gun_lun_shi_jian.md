@@ -1,0 +1,7 @@
+# 鼠标与滚轮事件
+
+鼠标事件都是在浏览器视口中的特定位置上发生的，clientX和clientY；页面坐标pageX和pageY；屏幕坐标screenX和screenY。
+
+只有在同一元素上相继触发mousedown和mouseup事件，才会触发click事件。只有两次click事件，才会触发一次dbclick事件。
+
+滚轮事件mousewheel事件，跟踪鼠标滚轮。
