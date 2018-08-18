@@ -14,4 +14,8 @@ TLS 1.3 最大优势是：安全性增强、访问速度更快。
 
 ## 测试工具
 
-https://www.ssllabs.com/ssltest/
+[ssllabs](https://www.ssllabs.com/ssltest/)
+
+## 参考
+
+- [A Detailed Look at RFC 8446 (a.k.a. TLS 1.3)](https://blog.cloudflare.com/rfc-8446-aka-tls-1-3/)
