@@ -1,12 +1,12 @@
 # 用户代理检测
 
-用户代理字符串检测脚本，包括呈现引擎、平台、window系统、移动设备和游戏系统。
+用户代理字符串检测脚本，包括呈现引擎、平台、window 系统、移动设备和游戏系统。
 
 ```
 var client = function(){
 
     //rendering engines
-    var engine = {            
+    var engine = {
         ie: 0,
         gecko: 0,
         webkit: 0,
@@ -14,12 +14,12 @@ var client = function(){
         opera: 0,
 
         //complete version
-        ver: null  
+        ver: null
     };
-    
+
     //browsers
     var browser = {
-        
+
         //browsers
         ie: 0,
         firefox: 0,
@@ -32,13 +32,13 @@ var client = function(){
         ver: null
     };
 
-    
+
     //platform/device/OS
     var system = {
         win: false,
         mac: false,
         x11: false,
-        
+
         //mobile devices
         iphone: false,
         ipod: false,
@@ -47,21 +47,21 @@ var client = function(){
         android: false,
         nokiaN: false,
         winMobile: false,
-        
+
         //game systems
         wii: false,
-        ps: false 
-    };    
+        ps: false
+    };
 
     //detect rendering engines/browsers
-    var ua = navigator.userAgent;    
+    var ua = navigator.userAgent;
     if (window.opera){
         engine.ver = browser.ver = window.opera.version();
         engine.opera = browser.opera = parseFloat(engine.ver);
     } else if (/AppleWebKit\/(\S+)/.test(ua)){
         engine.ver = RegExp["$1"];
         engine.webkit = parseFloat(engine.ver);
-        
+
         //figure out if it's Chrome or Safari
         if (/Chrome\/(\S+)/.test(ua)){
             browser.ver = RegExp["$1"];
@@ -80,31 +80,31 @@ var client = function(){
                 safariVersion = 1.3;
             } else {
                 safariVersion = 2;
-            }   
-            
-            browser.safari = browser.ver = safariVersion;        
+            }
+
+            browser.safari = browser.ver = safariVersion;
         }
     } else if (/KHTML\/(\S+)/.test(ua) || /Konqueror\/([^;]+)/.test(ua)){
         engine.ver = browser.ver = RegExp["$1"];
         engine.khtml = browser.konq = parseFloat(engine.ver);
-    } else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)){    
+    } else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)){
         engine.ver = RegExp["$1"];
         engine.gecko = parseFloat(engine.ver);
-        
+
         //determine if it's Firefox
         if (/Firefox\/(\S+)/.test(ua)){
             browser.ver = RegExp["$1"];
             browser.firefox = parseFloat(browser.ver);
         }
-    } else if (/MSIE ([^;]+)/.test(ua)){    
+    } else if (/MSIE ([^;]+)/.test(ua)){
         engine.ver = browser.ver = RegExp["$1"];
         engine.ie = browser.ie = parseFloat(engine.ver);
     }
-    
+
     //detect browsers
     browser.ie = engine.ie;
     browser.opera = engine.opera;
-    
+
 
     //detect platform
     var p = navigator.platform;
@@ -131,8 +131,8 @@ var client = function(){
                         break;
                     default:
                         system.win = "NT";
-                        break;                
-                }                            
+                        break;
+                }
             } else if (RegExp["$1"] == "9x"){
                 system.win = "ME";
             } else {
@@ -140,13 +140,13 @@ var client = function(){
             }
         }
     }
-    
+
     //mobile devices
     system.iphone = ua.indexOf("iPhone") > -1;
     system.ipod = ua.indexOf("iPod") > -1;
     system.ipad = ua.indexOf("iPad") > -1;
     system.nokiaN = ua.indexOf("NokiaN") > -1;
-    
+
     //windows mobile
     if (system.win == "CE"){
         system.winMobile = system.win;
@@ -156,8 +156,8 @@ var client = function(){
             system.winMobile = parseFloat(RegExp["$1"]);
         }
     }
-    
-    
+
+
     //determine iOS version
     if (system.mac && ua.indexOf("Mobile") > -1){
         if (/CPU (?:iPhone )?OS (\d+_\d+)/.test(ua)){
@@ -166,24 +166,22 @@ var client = function(){
             system.ios = 2;  //can't really detect - so guess
         }
     }
-    
+
     //determine Android version
     if (/Android (\d+\.\d+)/.test(ua)){
         system.android = parseFloat(RegExp.$1);
     }
-    
+
     //gaming systems
     system.wii = ua.indexOf("Wii") > -1;
     system.ps = /playstation/i.test(ua);
-    
+
     //return it
     return {
         engine:     engine,
         browser:    browser,
-        system:     system        
+        system:     system
     };
 
 }();
 ```
-
-

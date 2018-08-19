@@ -133,3 +133,7 @@ $f();
 ## 目录
 
 - [文件](file.md)
+- [数组](array.md)
+- [字符串](string.md)
+- [魔术方法](magic-function.md)
+- [执行外部程序](shell-exec.md)

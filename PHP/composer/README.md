@@ -12,3 +12,5 @@ Composer 非常的简单,通过简单的一条命令将需要的代码包下载�
 - [composer 镜像](composer-mirror.md)
 - [composer 授权](composer-authentication.md)
 - [PHP 扩展包](packages/README.md)
+  - [Composer 并行加速插件](packages/parallel-install.md)
+  - [PHP CS 格式化](packages/php-cs.md)
