@@ -15,7 +15,7 @@ PHP 缩写最初的来源“Personal Home Page”（个人主页），逐渐成�
   - [composer 授权](composer/composer-authentication.md)
   - [PHP 扩展包](composer/packages/README.md)
     - [Composer 并行加速插件](composer/packages/parallel-install.md)
-    - [PHP CS 格式化](composer/packages/php-cs.md)
+    - [PHP CS 格式化](composer/packages/php-cs.md)
 - [官方文档](http://php.net/manual/zh/langref.php)
 - [函数](function/README.md)
   - [文件](function/file.md)

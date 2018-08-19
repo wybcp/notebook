@@ -12,8 +12,11 @@
 ; Default Value: Off
 ; Development Value: 4096
 ; Production Value: 4096
+; 值为8的倍数
 ; http://php.net/output-buffering
 output_buffering = 4096
+implicit_flush=false
+
 ```
 
 在 php 文件中使用 `ob_start()`函数开启

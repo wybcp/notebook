@@ -18,5 +18,4 @@ Redis 提供的各种功能。
 - [集群](cluster.md)
 - [内存](memory.md)
 - [Redis hell](redis-shell.md)
-- [复制](replication.md)
 - [哨兵](sentinel.md)

@@ -1,12 +1,6 @@
 # 配置
 
-这篇文章不会详细叙述某个 ini 配置项的用途，这些在手册上已经讲解的面面俱到。我只是想从某个特定的角度去挖掘 php 的实现机制，会涉及到一些 php 内核方面的知识:-)
-
 使用 php 的同学都知道 php.ini 配置的生效会贯穿整个 SAPI 的生命周期。在一段 php 脚本的执行过程中，如果手动修改 ini 配置，是不会启作用的。此时如果无法重启 apache 或者 nginx 等，那么就只能显式的在 php 代码中调用 ini_set 接口。ini_set 是 php 向我们提供的一个动态修改配置的函数，需要注意的是，利用 ini_set 所设置的配置与 ini 文件中设置的配置，其生效的时间范围并不相同。在 php 脚本执行结束之后，ini_set 的设置便会随即失效。
-
-因此本文打算分两篇，第一篇阐述 php.ini 配置原理，第二篇讲动态修改 php 配置。
-
-php.ini 的配置大致会涉及到三块数据，configuration_hash，EG(ini_directives)以及 PG、BG、PCRE_G、JSON_G、XXX_G 等。如果不清楚这三种数据的含义也没有关系，下文会详细解释。
 
 ## 解析 INI 配置文件
 
@@ -703,7 +697,7 @@ ZEND_API int zend_ini_shutdown(TSRMLS_D)
 }
 ```
 
-# 总结
+## 总结
 
 用一张图大致描述一下和 ini 配置相关的流程：
 
