@@ -1,4 +1,4 @@
-## PHP-FPM
+# PHP-FPM
 
 FPM（FastCGI 进程管理器）用于替换 PHP FastCGI 的大部分附加功能，对于高负载网站是非常有用的。
 
@@ -15,7 +15,7 @@ FPM（FastCGI 进程管理器）用于替换 PHP FastCGI 的大部分附加功�
 - 基本 SAPI 运行状态信息（类似 Apache 的 mod_status）；
 - 基于 php.ini 的配置文件。
 
-### 全局配置选项
+## 全局配置选项
 
 - pid
 
@@ -69,7 +69,7 @@ FPM（FastCGI 进程管理器）用于替换 PHP FastCGI 的大部分附加功�
 
   使用 systemd 集成的 fpm 时，设置间歇秒数
 
-### 运行时配置
+## 运行时配置
 
 - listen
 

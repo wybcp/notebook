@@ -91,3 +91,15 @@ if (!isset($foo{5})) {
 因为`echo`没有返回值，`print`返回一个整型。
 
 注意：`echo`输出大字符串的时候，如果没有调整就会严重影响性能。
+
+## strstr 和 stristr 的用法
+
+strstr: 返回一个从被判断字符开始到结束的字符串,如果没有返回值,则不包含.
+
+stristr: 它和 strstr 的使用方法完全一样.唯一的区别是 stristr 不区分大小写.
+
+```php
+$email = ‘user@emtalk.com’;
+$domain = strstr($email, ‘@’);
+echo $domain;// prints @emtalk.com
+```
