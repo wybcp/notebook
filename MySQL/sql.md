@@ -170,6 +170,14 @@ SELECT *
 FROM `destination_table_name`;
 ```
 
+mysql 查询一个数据库中的所有的表名
+
+```sql
+select table_name
+from information_schema.tables
+where table_schema='当前数据库'
+```
+
 ---
 
 ## 附录：mysql 常用命令
@@ -181,4 +189,4 @@ FROM `destination_table_name`;
 - 使用一个数据库：`USE database_name`;
 - 导入：`source 'file'`;
 - 导出：`mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql`;
-- 查看慢日志：`mysqldumpslow -s [c:按记录次数排序/t:时间/l:锁定时间/r:返回的记录数] -t [n:前 n 条数据] -g "正则"　/path`
+- 查看慢日志：`mysqldumpslow -s [c:按记录次数排序/t:时间/l:锁定时间/r:返回的记录数] -t [n:前 n 条数据] -g "正则" /path`
