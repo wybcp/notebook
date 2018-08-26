@@ -36,6 +36,22 @@ select * from user where name like '%a'
 
 - 很多时候用 exists 代替 in 是一个好的选择：
 
+1、开启查询缓存，优化查询
+
+2、explain 你的 select 查询，这可以帮你分析你的查询语句或是表结构的性能瓶颈。EXPLAIN 的查询结果还会告诉你你的索引主键被如何利用的，你的数据表是如何被搜索和排序的
+
+3、当只要一行数据时使用 limit 1，MySQL 数据库引擎会在找到一条数据后停止搜索，而不是继续往后查少下一条符合记录的数据
+
+4、为搜索字段建索引
+
+5、使用 ENUM 而不是 VARCHAR，如果你有一个字段，比如“性别”，“国家”，“民族”，“状态”或“部门”，你知道这些字段的取值是有限而且固定的，那么，你应该使用 ENUM 而不是 VARCHAR。
+
+6、Prepared StatementsPrepared Statements 很像存储过程，是一种运行在后台的 SQL 语句集合，我们可以从使用 prepared statements 获得很多好处，无论是性能问题还是安全问题。Prepared Statements 可以检查一些你绑定好的变量，这样可以保护你的程序不会受到“SQL 注入式”攻击
+
+7、垂直分表
+
+8、选择正确的存储引擎
+
 ## btree 索引
 
 B-TREE 索引适合全键值、键值范围、前缀查找。
@@ -104,5 +120,47 @@ select * from user where name = '11' order by age desc; //age 没有索引
 - 索引列的第一列是范围条件
 
 - 在索引列上有多个等于条件，这也是一种范围。不能使用索引
+
+
+- 1.对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。
+- 2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：
+
+```
+select id from t where num is null可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：select id from t where num=
+```
+
+- 3.应尽量避免在 where 子句中使用!=或<>操作符，否则引擎将放弃使用索引而进行全表扫描。
+- 4.应尽量避免在 where 子句中使用 or 来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，如：
+
+```
+select id from t where num=10 or num=20可以这样查询：select id from t where num=10 union all select id from t where num=20
+```
+
+- 5.in 和 not in 也要慎用，否则会导致全表扫描，如：
+
+```
+select id from t where num in(1,2,3) 对于连续的数值，能用 between 就不要用 in 了：select id from t where num between 1 and 3
+```
+
+- 6.下面的查询也将导致全表扫描：select id from t where name like ‘%李%’若要提高效率，可以考虑全文检索。
+- \7. 如果在 where 子句中使用参数，也会导致全表扫描。因为 SQL 只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然 而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：
+
+```
+select id from t where num=@num可以改为强制查询使用索引：select id from t with(index(索引名)) where num=@num
+```
+
+- 8.应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：
+
+```
+select id from t where num/2=100应改为:select id from t where num=100*2
+```
+
+- 9.应尽量避免在 where 子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。如：
+
+```
+select id from t where substring(name,1,3)=’abc’ ，name以abc开头的id应改为:select id from t where name like ‘abc%’
+```
+
+- 10.不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。
 
 [原文](https://blog.csdn.net/samjustin1/article/details/52212421)

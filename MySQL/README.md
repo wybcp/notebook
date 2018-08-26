@@ -1,5 +1,21 @@
 # MySQL
 
+## MySQL 的连接和关闭：mysql -u -p -h -P
+
+> -u：指定用户名
+> -p：指定密码
+> -h：主机
+> -P：端口
+
+## 进入 MySQL 命令行后：G、c、q、s、h、d
+
+> G：打印结果垂直显示
+> c：取消当前 MySQL 命令
+> q：退出 MySQL 连接
+> s：显示服务器状态
+> h：帮助信息
+> d：改变执行符
+
 ## 目录
 
 - [事务](https://github.com/xianyunyh/PHP-Interview/blob/master/Mysql/%E4%BA%8B%E5%8A%A1.md)
