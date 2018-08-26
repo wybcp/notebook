@@ -30,7 +30,7 @@ print_r($array);
 
 - [array_values()](http://php.net/manual/zh/function.array-values.php) 函数会以索引数组形式返回数组中的值，
 - [array_keys()](http://php.net/manual/zh/function.array-keys.php) 则会返回给定数组的键名，
-- [array_flip()](http://php.net/manual/zh/function.array-flip.php)  交换数组中的键值和键名。
+- [array_flip()](http://php.net/manual/zh/function.array-flip.php) 交换数组中的键值和键名。
 
 ```php
 <?php
@@ -283,7 +283,7 @@ print_r($fruits);
 
 ### [array_merge()](http://php.net/manual/zh/function.array-merge.php)
 
-在 PHP 中合并数组的最佳方式是使用 `array_merge()` 函数。所有的数组选项会合并到一个数组中，具有相同键名的值会被最后一个值所覆盖：
+在 PHP 中合并数组的最佳方式是使用 `array_merge()` 函数。所有的数组选项会合并到一个数组中，具有相同键名的值会被最后一个值所覆盖；数组使用数字键名，键名相同不会覆盖，且键名会重新索引：
 
 ```php
 <?php
@@ -302,6 +302,8 @@ print_r($merge);
 ```
 
 译注：有关合并数组操作还有一个「+」号运算符，它和 `array_merge()` 函数的功能类似都可以完成合并数组运算，但是结果有所不同，可以查看 PHP 合并数组运算符 + 与 array_merge 函数 了解更多细节。
+
+使用 “+” 运算符合并数组，可以保留数组的键值，如果合并的数组中含有相同的键值，后面的不会覆盖前面的键值（前面的优先）。
 
 ### [array_diff()](http://php.net/manual/zh/function.array-diff.php)
 

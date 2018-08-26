@@ -1,6 +1,6 @@
 # PHP
 
-PHP 缩写最初的来源“Personal Home Page”（个人主页），逐渐成为了现在的“PHP：超文本预处理器”。
+PHP 缩写最初的来源“Personal Home Page”（个人主页），逐渐成为了现在的“PHP：超文本预处理器(Hypertext Preprocessor)”。
 
 2015 年 PHP 发布了里程碑式的版本 PHP 7.0，极大的提升了 Zend 引擎的性能，并降低了 PHP 的整体内存使用率。
 

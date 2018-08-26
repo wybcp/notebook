@@ -4,24 +4,44 @@
 
 Don’t make me think.
 
-### 达标：词法和语法
+- 达标：词法和语法
+  - 正确拼写
+  - 准确用词
+  - 注意单复数
+  - 不要搞错词性
+  - 处理缩写
+  - 用对时态和语态
+- 进阶：语义和可用性
+  - 单一职责
+  - 避免副作用
+  - 合理设计函数参数
+  - 合理运用函数重载
+  - 使返回值可预期
+  - 固化术语表
+  - 遵循一致的 API 风格
+- 卓越：系统性和大局观
+  - 版本控制
+  - 确保向下兼容
+  - 设计扩展机制
+  - 控制 API 的抽象级别
+  - 收敛 API 集
+  - 发散 API 集
+  - 制定 API 的支持策略
 
-#### 正确拼写
+## 达标：词法和语法
 
-#### 准确用词
+### 正确拼写
 
-##### 中文翻译消息的例子。
+### 准确用词
 
 - message：一般指双方通信的消息，是内容载体。而且经常有来有往、成对出现。比如 postMessage() 和 receiveMessage()。
-
 - notification：经常用于那种比较短小的通知，现在甚至专指 iOS / Android 那样的通知消息。比如 new NotificationManager()。
 - news：内容较长的新闻消息，比 notification 更重量级。比如 getTopNews()。
 - feed：自从 RSS 订阅时代出现的一个单词，现在 RSS 已经日薄西山，但是 feed 这个词被用在了更多的地方。其含义只可意会不可言传。比如 fetchWeitaoFeeds()。
 
-##### 正反义词
+成对出现的正反义词不可混用，常见正反义词：
 
 - in & out
-
 - on & off
 - previous & next
 - forward & backward
@@ -29,30 +49,28 @@ Don’t make me think.
 - show & hide
 - open & close
 
-#### 注意单复数
+### 注意单复数
 
 - 数组（Array）、集合（Collection）、列表（List）这样的数据结构，在命名时都要使用复数形式。
 - 在复数的风格上保持一致，要么所有都是 -s，要么所有都是 -list。
 - 字典（Dictionary）、表（Map）的时候，不要使用复数！
 
-#### 不要搞错词性
+### 不要搞错词性
 
 方法命名用动词、属性命名用名词、布尔值类型用形容词（或等价的表语）。
 
 - n. 名词：success, failure
-
 - v. 动词：succeed, fail
 - adj. 形容词：successful, failed（无形容词，以过去分词充当）
+- adv. 副词：successfully, fail to do sth.（无副词，以不定式充当）
 
-#### 处理缩写
+### 处理缩写
 
-我们经常会纠结，首字母缩写词（acronym）如 DOM、SQL 是用大写还是小写，还是仅首字母大写，在驼峰格式中又该怎么办……
+首字母缩写词的所有字母均大写。
 
-对于这个问题，简单不易混淆的做法是，首字母缩写词的所有字母均大写。
+对长单词简写（shortened word），如 btn (button)、chk (checkbox)、tpl (template)。这要视具体的语言规范 / 开发框架规范而定。
 
-另外一种缩写的情况是对长单词简写（shortened word），如 btn (button)、chk (checkbox)、tpl (template)。这要视具体的语言规范 / 开发框架规范而定。
-
-#### 用对时态和语态
+### 用对时态和语态
 
 由于我们在调用 API 时一般类似于「调用一条指令」，所以在语法上，一个函数命名是祈使句式，时态使用一般现在时。
 
@@ -81,46 +99,17 @@ Component.on("afterRender", function() {});
   subject.doSomething(object);
   ```
 
-### 进阶：语义和可用性
+## 进阶：语义和可用性
 
 确保 API 的可用性和语义才使 API 真正「可用」。
 
-#### 单一职责
+### 单一职责
 
 单一职责是软件工程中一条著名的原则。
 
 小到函数级别的 API，大到整个包，保持单一核心的职责都是很重要的一件事。
 
-- ```js
-  // bad
-  component.fetchDataAndRender(url, template);
-  // good
-  var data = component.fetchData(url);
-  component.render(data, template);
-  ```
-
-  如上，将混杂在一个大坨函数中的两件独立事情拆分出去，保证函数（function）级别的职责单一。
-
-  更进一步地，（假设）fetchData 本身更适合用另一个类（class）来封装，则对原来的组件类 Component 再进行拆分，将不属于它的取数据职责也分离出去：
-
-- ```js
-  class DataManager {
-    fetchData(url) {}
-  }
-  class Component {
-    constructor() {
-      this.dataManager = new DataManager();
-    }
-    render(data, template) {}
-  }
-  // more code, less responsibility
-  var data = component.dataManager.fetchData(url);
-  component.render(data, template);
-  ```
-
-  在文件（file）层面同样如此，一个文件只编写一个类，保证文件的职责单一（当然这对很多语言来说是天然的规则）。
-
-#### 避免副作用
+### 避免副作用
 
 避免副作用:
 
@@ -130,7 +119,7 @@ Component.on("afterRender", function() {});
 
 对于无副作用的纯函数而言，输入同样的参数，执行后总能得到同样的结果，这种幂等性使得一个函数无论在什么上下文中运行、运行多少次，最后的结果总是可预期的 。
 
-#### 合理设计函数参数
+### 合理设计函数参数
 
 函数名、参数设置、返回值类型，这三要素构成了完整的函数签名。参数设置对用户来说是接触最频繁，也最为关心的部分。
 
@@ -152,7 +141,7 @@ Component.on("afterRender", function() {});
 
 - 控制参数个数。参数能省略则省略，或更进一步，**合并同类型的参数**。
 
-#### 固化术语表
+### 固化术语表
 
 **产出术语表**包括对缩写词的大小写如何处理、是否有自定义的缩写词等等。一个术语表可以形如：
 
@@ -167,21 +156,9 @@ Component.on("afterRender", function() {});
 
 对于一些创造出来的、业务特色的词汇，如果不能用英语简明地翻译，就直接用拼音。
 
-#### 遵循一致的 API 风格
+### 遵循一致的 API 风格
 
-卓越：系统性和大局观
-
-- 版本控制
-
-#### 确保向下兼容
-
-- 设计扩展机制
-- 控制 API 的抽象级别
-- 收敛 API 集
-- 发散 API 集
-- 制定 API 的支持策略
-
-参考：
+## 参考：
 
 - 阮一峰[《理解 RESTful 架构》](http://www.ruanyifeng.com/blog/2011/09/restful)
 - 法海 [《从达标到卓越 —— API 设计之道》](http://taobaofed.org/blog/2017/02/16/a-guide-to-api-design/)
