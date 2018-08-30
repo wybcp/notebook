@@ -24,6 +24,8 @@ object encoding key
 - ziplist（压缩列表）：当列表的元素个数小于`list-max-ziplist-entries`（默认 512 个），且每个元素的小于`zset-max-ziplist-value`（默认 64byte），使用 ziplist 作为列表内部实现。
 - linkedlist（链表）：非 ziplist 时。
 
+首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是 ziplist，也即是压缩列表。它将所有的元素紧挨着一起存储，分配的是一块连续的内存。当数据量比较多的时候才会改成 quicklist。
+
 ## set 集合
 
 - intset（整数集合）：当集合的元素是整数且个数小于`set-max-intset-entries`（默认 512 个），使用 ziplist 作为列表内部实现。

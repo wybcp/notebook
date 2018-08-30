@@ -192,3 +192,90 @@ InnoDB 通过主键聚簇数据，如果没有定义主键，会选择一个唯�
 - 1）插入速度严重依赖于插入顺序，按照主键的顺序插入是最快的方式，否则将会出现页分裂，严重影响性能。因此，对于 InnoDB 表，我们一般都会定义一个自增的 ID 列为主键。
 - 2）更新主键的代价很高，因为将会导致被更新的行移动。因此，对于 InnoDB 表，我们一般定义主键为不可更新。
 - 3）二级索引访问需要两次索引查找，第一次找到主键值，第二次根据主键值找到行数据。
+
+[数据库两个神器【索引和锁】](https://segmentfault.com/a/1190000015738121)
+
+
+## 概述
+
+索引是存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能
+
+### 索引的优点
+
+1、大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度
+
+2、帮助服务器避免排序和临时表
+
+3、可以将随机 I/O 变为顺序 I/O
+
+### 索引的创建
+
+#### 主键索引
+
+```
+ALTER TABLE 'table_name' ADD PRIMARY KEY 'index_name' ('column');
+```
+
+#### 唯一索引
+
+```
+ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
+```
+
+#### 普通索引
+
+```
+ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column');
+```
+
+#### 全文索引
+
+```
+ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
+```
+
+#### 组合索引
+
+```
+ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
+```
+
+### 选择合适的索引列顺序
+
+在组合索引的创建中索引列的顺序非常重要，正确的索引顺序依赖于使用该索引的查询方式，对于组合索引的索引顺序可以通过经验法则来帮助我们完成：将选择性最高的列放到索引最前列，该法则与前缀索引的选择性方法一致，但并不是说所有的组合索引的顺序都使用该法则就能确定，还需要根据具体的查询场景来确定具体的索引顺序。
+
+### 索引匹配
+
+对于索引的匹配，是从左到右的。即，索引字段的值，只能先完全匹配左边后，才能匹配后边的值。
+
+### 索引排序
+
+当索引的列顺序和 orderby 子句的顺序完全一致，并且所有列的排序方向都一样时，mysql 才能使用索引来对结果做排序，
+
+如果查询需要关联多张表，则只有当 orderby 子句引⽤的字段全部为第一个表时，才能使用索引做排序。
+
+### 索引的限制
+
+创建一个组合索引： ALTER TABLE user_test ADD INDEX idx_user(user_name , city , age);
+
+#### 1、where 查询条件中不包含索引列中的最左索引列，则无法使用到索引查询，如：
+
+```
+SELECT * FROM user_test WHERE city = '广州';
+```
+
+或
+
+```
+SELECT * FROM user_test WHERE age= 26;
+```
+
+或
+
+```
+SELECT * FROM user_test WHERE city = '广州' AND age = '26';
+```
+
+#### 3、如果 where 查询条件中有某个列的范围查询，则其右边的所有列都无法使用索引优化查询，如：
+
+SELECT \* FROM user_test WHERE user_name = 'feinik' AND city LIKE '广州%' AND age = 26;

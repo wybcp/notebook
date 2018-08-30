@@ -1,29 +1,31 @@
 # 优化
-**如何查找查询速度慢的原因**记录慢查询日志，分析查询日志，不要直接打开慢查询日志进行分析，这样比较浪费时间和精力，可以使用 pt-query-digest 工具进行分析
+
+调优分为三个部分：硬件、软件、网络。
+记录慢查询日志，分析查询日志，不要直接打开慢查询日志进行分析，这样比较浪费时间和精力，可以使用 pt-query-digest 工具进行分析
 
 ## 使用 show profile
 
-```
-set profiling=1;开启，服务器上所有执行语句会记录执行时间，存到临时表中show profilesshow profile for query 临时表ID
+```config
+set profiling=1;#开启，服务器上所有执行语句会记录执行时间，存到临时表中show profilesshow profile for query 临时表ID
 ```
 
-###### 使用 show status
+## 尽快关闭连接
+
+一条sql请求处理完之后，需要释放连接，调整`wait_timeout`（默认值为 28800s）调整为 100s，尽快释放连接，可以减小内存消耗，也避免出现连接过多的报错。
+
+## 使用 show status
 
 show status 会返回一些计数器，show global status 会查看所有服务器级别的所有计数有时根据这些计数，可以推测出哪些操作代价较高或者消耗时间多
 
-###### show processlist
+## show processlist
 
 观察是否有大量线程处于不正常的状态或特征
-
-![img]()
 
 最常问的 MySQL 面试题五——每个开发人员都应该知道
 
 ###### 使用 explain
 
 分析单条 SQL 语句
-
-![img]()
 
 **优化查询过程中的数据访问**
 
@@ -88,3 +90,15 @@ show status 会返回一些计数器，show global status 会查看所有服务�
 - UNION ALL 的效率高于 UNION
 
 **优化 WHERE 子句**
+
+## 半同步复制
+
+半同步复制模式必须在主服务器和从服务器同时启用，不然主服务器默认使用异步复制模式。
+
+保证主从数据一致性，等待返回的时间长短决定数据的更新速度。
+
+## 目录
+
+- [表设计](table.md)
+- [字段设计](table.md)
+

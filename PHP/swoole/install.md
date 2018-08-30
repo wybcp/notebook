@@ -1,6 +1,6 @@
 # 安装
 
-MacOS,
+MacOS
 
 ## pecl 方式
 

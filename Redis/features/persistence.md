@@ -48,3 +48,7 @@ appendfsync 参数：
 - 多条写命令合为一条，过大则拆分为多条。
 
 ### 4.重启加载 load
+
+## 参考
+
+- [Redis 持久化（persistence）技术口袋书](https://laravel-china.org/articles/15422/redis-persistence-persistence-technology-pocket-book)

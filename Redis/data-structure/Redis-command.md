@@ -2,6 +2,8 @@
 
 Redis 常用命令参考。
 
+如果一个字符串已经设置了过期时间，然后你调用了 set 方法修改了它，它的过期时间会消失。
+
 ## 一、key
 
 - `keys pattern`:redis 允许模糊查询 key,有 3 个通配符`*、?、[]`。生产环境禁止使用，使用 scan 代替。因为 keys 命令会一次性遍历这个数据库，所以数据库键值对越多，查询越慢。
@@ -32,7 +34,13 @@
 
 在主从复制环境中，由于上述原因存在已经过期但是没有删除的 key，在主 snap shot 时并不包含这些 key，因此在 slave 环境中我们往往看到 dbsize 较 master 是更小的。
 
-## 二、string 字符串类型的操作
+## 二、string 字符串
+
+字符串 string 是 Redis 最简单的数据结构。Redis 所有的数据结构都是以唯一的 key 字符串作为名称，然后通过这个唯一 key 值来获取相应的 value 数据。
+
+Redis 的字符串是动态字符串，是可以修改的字符串，采用预分配冗余空间的方式来减少内存的频繁分配。
+
+字符串最大长度为 512M。
 
 - `set key value [ex seconds][px milliseconds] [nx/xx]`
 
@@ -66,6 +74,8 @@
 - `bitop operation destkey key1 [key2..]`：对 key1 key2 做 opecation 并将结果保存在 destkey 上，opecation 可以是`AND OR NOT XOR`
 - `strlen key`：取指定 key 的 value 值的长度
 
+自增是有范围的，它的范围是 signed long 的最大(9223372036854775807)、最小值
+
 ## 三、list 链表操作
 
 Redis 的 list 类型其实就是一个每个子元素都是 string 类型的双向链表，链表的最大长度是 2^32。list 既可以用做栈，也可以用做队列。
@@ -81,7 +91,7 @@ list 的 pop 操作还有阻塞版本，主要是为了避免轮询
 - `lrem key count value`：从链表中删除 value 值，删除 count 的绝对值个 value 后结束
   count > 0 从表头删除　　 count < 0 从表尾删除　　 count=0 全部删除
 - `ltrim key start stop`：剪切 key 对应的链接，切[start, stop]一段并把改制重新赋给 key
-- `lindex key index`：返回 index 索引上的值
+- `lindex key index`：返回 index 索引上的值，需要对链表进行遍历，性能随着参数index增大而变差。
 - `llen key`：计算链表的元素个数
 - `linsert key after|before search value`：在 key 链表中寻找 search，并在 search 值之前|之后插入 value
 - `rpoplpush source destination`：把 source 的末尾拿出，放到 destination 头部，并返回单元值
@@ -98,6 +108,36 @@ list 的 pop 操作还有阻塞版本，主要是为了避免轮询
   BLPOP/BRPOP 的先到先服务原则
 
   如果有多个客户端同时因为某个列表而被阻塞，那么当有新值被推入到这个列表时，服务器会按照先到先服务（first in first service）原则，优先向最早被阻塞的客户端返回新值。举个例子，假设列表 lst 为空，那么当客户端 X 执行命令 BLPOP lst timeout 时，客户端 X 将被阻塞。在此之后，客户端 Y 也执行命令 BLPOP lst timeout ，也因此被阻塞。如果这时，客户端 Z 执行命令 RPUSH lst "hello" ，将值 "hello" 推入列表 lst ，那么这个 "hello" 将被返回给客户端 X ，而不是客户端 Y ，因为客户端 X 的被阻塞时间要早于客户端 Y 的被阻塞时间。
+
+### 队列
+
+右边进左边出，新进新出：
+
+```bash
+127.0.0.1:6379[8]> rpush books1 python php java
+(integer) 3
+127.0.0.1:6379[8]> lrange books1 0 -1
+1) "python"
+2) "php"
+3) "java"
+127.0.0.1:6379[8]> lpop books1
+"python"
+```
+
+### 栈
+
+右边进右边出
+
+```bash
+127.0.0.1:6379[8]> rpush books2 python php java
+(integer) 3
+127.0.0.1:6379[8]> lrange books2 0 -1
+1) "python"
+2) "php"
+3) "java"
+127.0.0.1:6379[8]> rpop books2
+"java"
+```
 
 ## 四、hash 哈希类型操作
 
@@ -128,6 +168,7 @@ hash_max_zipmap_value 512 #配置value最大为512字节
 
 ## 五、Set 集合结构操作
 
+内部实现相当于一个特殊的字典，字典中所有的 value 都是一个值NULL。
 特点：无序性、确定性、唯一性
 
 - `sadd key value`：往集合里面添加元素
@@ -150,6 +191,8 @@ hash_max_zipmap_value 512 #配置value最大为512字节
 概念：它是在 set 的基础上增加了一个顺序属性，这一属性在添加修改元素的时候可以指定，每次指定后，zset 会自动按新的值调整顺序。
 
 sorted set 是 string 类型元素的集合，不同的是每个元素都会关联一个 double 型的 score。sorted set 的实现是 skip list 和 hash table 的混合体。
+
+内部实现用的是一种叫做「跳跃列表」的数据结构。
 
 当元素被添加到集合中时，一个元素到 score 的映射被添加到 hash table 中，所以给定一个元素获取 score 的开销是 O(1)。另一个 score 到元素的映射被添加的 skip list，并按照 score 排序，所以就可以有序地获取集合中的元素。添加、删除操作开销都是 O(logN)和 skip list 的开销一致，redis 的 skip list 实现是双向链表，这样就可以逆序从尾部去元素。sorted set 最经常使用方式应该就是作为索引来使用，我们可以把要排序的字段作为 score 存储，对象的 ID 当元素存储。
 

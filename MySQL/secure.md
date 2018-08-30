@@ -216,7 +216,7 @@ key /etc/openvpn/client1-key.pem
 
 缺点：需要额外维护 VPN 服务。
 
-##2.3 MySQL SSL##
+## 2.3 MySQL SSL
 
 除了建立加密隧道、加密虚拟网络，还可以直接使用 SSL 进行 MySQL 的访问加密。
 
@@ -388,3 +388,13 @@ MySQL 的数据安全是一个非常大的课题，其中外网间的安全通�
 > 原文来自：<http://www.yunweipai.com/archives/18614.html>
 >
 > 本文地址：<https://www.linuxprobe.com/remote-access-mysql.html>
+
+## 重置密码解决
+
+- 在配置文件[mysqld]后面任意一行添加“skip-grant-tables”用来跳过密码验证的过程
+- 重启 MySQL
+- 重置密码
+  `sql use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
+- 注释“skip-grant-tables”
+- 重新登录
+  [重置密码解决 MySQL for Linux 错误 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)](https://www.cnblogs.com/gumuzi/p/5711495.html)

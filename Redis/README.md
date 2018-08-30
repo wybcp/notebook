@@ -35,3 +35,4 @@ Redis 高性能非关系型数据库。
 
 - [Redis 开发与运维](https://book.douban.com/subject/26971561/)
 - [Redis 开发运维实践指南](https://github.com/gnuhpc/All-About-Redis)
+- [Redis 深度历险：核心原理与应用实践](https://juejin.im/book/5afc2e5f6fb9a07a9b362527)

@@ -1,4 +1,4 @@
-# 数组
+# z数组
 
 数值数组 for，关联数组 foreach
 
@@ -301,7 +301,7 @@ print_r($merge);
 // )
 ```
 
-译注：有关合并数组操作还有一个「+」号运算符，它和 `array_merge()` 函数的功能类似都可以完成合并数组运算，但是结果有所不同，可以查看 PHP 合并数组运算符 + 与 array_merge 函数 了解更多细节。
+译注：有关合并数组操作还有一个「+」号运算符，它和 `array_merge()` 函数的功能类似都可以完成合并数组运算，但是结果有所不同，可以查看 PHP 合并数组运算符 + 与 array_merge 函数。
 
 使用 “+” 运算符合并数组，可以保留数组的键值，如果合并的数组中含有相同的键值，后面的不会覆盖前面的键值（前面的优先）。
 
@@ -400,6 +400,8 @@ print_r($hours); // [0, 1, 2, ..., 23]
 
 ### [array_slice()](http://php.net/manual/zh/function.array-slice.php)
 
+`array array_slice ( array `$array` , int `$offset` [, int `$length` = **NULL** [, bool $preserve_keys= false ]] )`
+
 为了实现获取数组中的部分元素 - 比如，获取前三个元素 - 使用 array_slice() 函数:
 
 ```php
@@ -427,6 +429,38 @@ print_r($top);// [1, 2, 3]
 | ksort  | krsort |
 | arsort | krsort | rsort |
 | uasort |        |       | usort |
+
+### 二维数组排序
+
+```php
+<?php
+function arraySortByAnyRow($array_name, $row_id, $order_type){
+    $array_temp=[];
+    foreach($array_name as $key=>$value){
+        $array_temp[$key]=$value[$row_id];
+    }
+    if($order_type==="ASC"){ //顺序
+        asort($array_temp);
+    } else {
+        arsort($array_temp);
+    }
+    $result_array=[];
+    foreach($array_temp as $key=>$value){
+        $result_array[$key]=$array_name[$key];
+    }
+
+    return $result_array;
+}
+
+$arr = [
+    ['num'=>5, 'value'=>6],
+    ['num'=>2, 'value'=>39],
+    ['num'=>36, 'value'=>29]
+];
+
+$sort_arr = arraySortByAnyRow($arr, 'num', 'DESC');
+print_r($sort_arr);
+```
 
 ## 数组函数的组合使用
 
@@ -486,6 +520,149 @@ $sum = array_sum(array_map(function ($product_row) {
 
 print_r($sum);// 250
 ```
+
+## 例子
+
+```php
+<?php
+/*
+*
+* 拆分、合并、分解、接合的数组函数
+*    1.array_slice()
+*    2.array_splice()//删除
+*    3.array_combine()//合并
+*    4.array_merge();//合并
+ *    5.array_intersect();//多个数组的交集
+ *    6.array_diff();//返回多个数组的差集
+*/
+
+//拆分、合并、分解、接合的数组函数
+
+$data_6 = array("Linux", "Apache", "MySQL", "PHP");
+print_r(array_slice($data_6, 1, 2));//取下标为1、2的元素
+//Array ( [0] => Apache [1] => MySQL ) 下标重置从0开始
+print_r(array_slice($data_6, -2, 1));//从后边的第二个开始取返回一个，不是从0开始的
+//Array ( [0] => MySQL ) 下标重置从0开始
+print_r(array_slice($data_6, 1, 2, true));
+//Array ( [1] => Apache [2] => MySQL )  保留原有的下标
+
+//array_combine()
+$a1 = array("OS", "WebServer", "DataBase", "Language");
+$a2 = array("Linux", "Apache", "MySQL", "PHP");
+print_r(array_combine($a1, $a2));//第一个参数作为键名，第二个作为值来合并
+//Array ( [OS] => Linux [WebServer] => Apache [DataBase] => MySQL [Language] => PHP )
+
+//array_merge()
+$a3 = array("OS", "WebServer", "DataBase", "Language");
+$a4 = array("Linux", "Apache", "MySQL", "PHP");
+$a5 = $a3 + $a4;
+print_r($a5);//因为两个数组下标重复所以显示这样
+//Array ( [0] => OS [1] => WebServer [2] => DataBase [3] => Language )
+print_r(array_merge($a3, $a4));//合并并重新索引
+//Array ( [0] => OS [1] => WebServer [2] => DataBase [3] => Language [4] => Linux [5] => Apache [6] => MySQL [7] => PHP )
+
+//array_intersect()
+$a7 = array("OS", "WebServer", "DataBase", "Language", 1, 2, 3);
+$a8 = array("Linux", "Apache", "MySQL", "PHP", 2, 3, 4);
+print_r(array_intersect($a7, $a8));//Array ( [5] => 2 [6] => 3 )
+
+//array_diff()
+$a9 = array(1, 2, 3, 4);
+$a10 = array(3, 4, 5, 6);
+print_r(array_diff($a9, $a10));//Array ( [0] => 1 [1] => 2 )
+//返回第一个数组跟第二个相差的元素
+
+/*
+ *  数组与数据结构的函数
+*   1.使用数组实现堆栈 //先进后出
+*    array_push() array_pop()
+*   2.使用数组实现队列 //先进先出
+*    array_unshift() array_shift() unset()
+ *
+ */
+//使用数组实现堆栈
+$b = array(1, 2, 3, 4);
+$b[] = "a";//入栈
+//在数组的尾部添加数组元素array_push($arr,$v,$v1...)
+array_push($b, "b", "c");//使用函数入栈
+print_r($b);//Array ( [0] => 1 [1] => 2 [2] => 3 [3] => 4 [4] => a [5] => b [6] => c )
+//在数组的尾部删除元素array_pop($arr)
+$value = array_pop($b);//使用函数出栈
+print_r($b);//Array ( [0] => 1 [1] => 2 [2] => 3 [3] => 4 [4] => a [5] => b )
+echo $value . PHP_EOL;//显示出栈的元素的值 c
+
+//使用数组实现队列
+//在数组的开头插入一个元素array_unshift($arr,$v)
+$c = array(1, 2, 3);
+print_r($c);//Array ( [0] => 1 [1] => 2 [2] => 3 )
+array_unshift($c, "abc", "bcd");//入队
+print_r($c);//Array ( [0] => abc [1] => bcd [2] => 1 [3] => 2 [4] => 3 )
+//将数组的第一个元素移出，并返回此元素array_shift($arr)
+$values = array_shift($c);//出队
+print_r($c);// Array ( [0] => bcd [1] => 1 [2] => 2 [3] => 3 )
+
+unset($c[2]);//删除指定位置元素
+print_r($c);//Array ( [0] => bcd [1] => 1 [3] => 3 )
+
+/*
+ * 其他与数组操作有关的函数
+*    array_rand()
+*    shuffle()
+*    array_sum()
+*    range()
+ */
+//array_rand()  随机返回数组下标
+$arr = array(1, 3, 4, 5, 76, 7, 99, 6, 2, 3);
+echo array_rand($arr) . PHP_EOL;//返回的是随机的数组元素的下标
+echo $arr[array_rand($arr)];//随机显示数组元素的值
+
+//shuffle()  随机重新排列数组
+$arr2 = array(32, 35, 33);
+shuffle($arr2);
+print_r($arr2);//数组元素位置随机变换
+
+//array_sum()  求和
+$arr3 = array(1, 3, 5);
+echo array_sum($arr3) . PHP_EOL; //返回9
+print_r($arr3);//Array ( [0] => 1 [1] => 3 [2] => 5 )
+
+//range(最小值，最大值，步长)
+$arr4 = range(0, 100, 10);
+print_r($arr4);//Array ( [0] => 0 [1] => 10 [2] => 20 [3] => 30 [4] => 40 [5] => 50 [6] => 60 [7] => 70 [8] => 80 [9] => 90 [10] => 100 )
+//将数组用$separator连接成一个字符串implode($a,$arr)
+print_r(implode('-', $arr4));
+//检测变量是否是数组is_array($arr)
+echo PHP_EOL;
+print_r(is_array($arr4));
+//检索$value是否在$arr中，返回布尔值in_array($v,$arr)
+echo PHP_EOL;
+print_r(in_array(10, $arr4));
+//获得数组的键名array_keys($arr)
+echo PHP_EOL;
+print_r(array_keys($arr4));
+//获得数组的值array_values($arr)
+echo PHP_EOL;
+print_r(array_values($arr4));
+//检索数组$arr中，是否有$key这个键名array_key_exists($k,$arr)
+echo PHP_EOL;
+var_dump(array_key_exists(16, $arr4));
+//检索$value是否在$arr中，若存在返回键名Array_search($value, $arr)
+var_dump(array_search(20, $arr4));
+//将一个数组逆向排序，如果第二个参数为true，则保持键名Array_reverse($arr, true)
+var_dump(array_reverse($arr4));
+var_dump(array_reverse($arr4, true));
+//交换数组的键和值 Array_flip($arr)
+var_dump(array_flip($arr4));
+//统计数组元素的个数 Count($arr)
+var_dump(count($arr4));
+//统计数组中所有值的出现次数 Array_count_values($arr)
+array_unshift($arr4, 10);
+var_dump(array_count_values($arr4));
+//移除数组中的重复值 Array_unique($arr)
+var_dump(array_unique($arr4));
+```
+
+
 
 ## 参考
 

@@ -1,43 +1,13 @@
 # 数据类型
 
-四种标量类型：
+## 四种标量类型
 
 - [boolean](http://php.net/manual/zh/language.types.boolean.php)（布尔型）
 - [integer](http://php.net/manual/zh/language.types.integer.php)（整型）
 - [float](http://php.net/manual/zh/language.types.float.php)（浮点型，也称作  [double](http://php.net/manual/zh/language.types.float.php))
 - [string](http://php.net/manual/zh/language.types.string.php)（字符串）
 
-三种复合类型：
-
-- [array](http://php.net/manual/zh/language.types.array.php)（数组）
-- [object](http://php.net/manual/zh/language.types.object.php)（对象）
-- [callable](http://php.net/manual/zh/language.types.callable.php)（可调用）
-
-最后是两种特殊类型：
-
-- [resource](http://php.net/manual/zh/language.types.resource.php)（资源）
-- [NULL](http://php.net/manual/zh/language.types.null.php)（无类型）
-
-## 布尔类型 Boolean
-
-布尔类型只有 true 和 false 两个值
-
-以下的值会认为是 false。其他之外的都是 true
-
-- [布尔值](http://php.net/manual/zh/language.types.boolean.php)  **FALSE**  本身
-- [整型值](http://php.net/manual/zh/language.types.integer.php) 0（零）
-- [浮点型值](http://php.net/manual/zh/language.types.float.php) 0.0（零）
-- [空字符串](http://php.net/manual/zh/language.types.string.php)，以及[字符串](http://php.net/manual/zh/language.types.string.php) "0"
-- [空数组](http://php.net/manual/zh/language.types.array.php)
-- 特殊类型  [NULL](http://php.net/manual/zh/language.types.null.php)（包括尚未赋值的变量）
-- 从空标记生成的  [SimpleXML](http://php.net/manual/zh/ref.simplexml.php)  对象
-
-```php
-var_dump((bool)'false') //true #字符串false
-var_dump((bool) false) //false #布尔值false
-```
-
-## 整型 int
+### 整型 int
 
 整型值可以使用十进制，十六进制，八进制或二进制表示，前面可以加上可选的符号（- 或者 +）
 
@@ -55,11 +25,8 @@ var_dump((bool) false) //false #布尔值false
 从其他类型转换成整型
 
 - 布尔值转整型 **false** 产生 0 **true** 产生 1
-
 - 从浮点型转换 向下取整 0.5 转换成 0
-
 - 字符串转整型
-
   > 如果该字符串没有包含 '.'，'e' 或 'E' 并且其数字值在整型的范围之内（由  **PHP_INT_MAX**  所定义），该字符串将被当成  [integer](http://php.net/manual/zh/language.types.integer.php)  来取值。其它所有情况下都被作为  [float](http://php.net/manual/zh/language.types.float.php)  来取值。该字符串的开始部分决定了它的值。如果该字符串以合法的数值开始，则使用该数值。否则其值为 0（零）。合法数值由可选的正负号，后面跟着一个或多个数字（可能有小数点），再跟着可选的指数部分。指数部分由 'e' 或 'E' 后面跟着一个或多个数字构成
 
 ## 浮点数 float
@@ -68,9 +35,11 @@ var_dump((bool) false) //false #布尔值false
 
     **永远不要比较两个浮点数的值**
 
-## 4.字符串 string
+## 字符串 string
 
-字符串由一些字符组成。字符串有四种表示方法
+字符串由一些字符组成。
+
+字符串有四种表示方法
 
 - 单引号
 
@@ -100,11 +69,7 @@ var_dump((bool) false) //false #布尔值false
    任意字符
    SF
   START
-
-   ?>
   ```
-
-  ​
 
 - nowdoc
 
@@ -119,23 +84,44 @@ var_dump((bool) false) //false #布尔值false
   EOD;
   ```
 
-  ​
-
   string 中的字符可以通过一个从 0 开始的下标，用类似  array 结构中的方括号包含对应的数字来访问和修改
 
   **字符串的链接**
 
-  字符串的连接使用.（点）
-
-  转成字符串
+  字符串的连接使用.（点）转成字符串
 
   布尔值 true 转成 1 。false 转成 “”
 
-  数组 array 转成 "array".object 总是被转换成字符串  *"Object"*，
+  数组 array 转成 "array"
 
-  ​
+  object 总是被转换成字符串  *"Object"*，
 
-## 5. 数组 array
+### 布尔类型 Boolean
+
+布尔类型只有 true 和 false 两个值
+
+以下的值会认为是 false。其他之外的都是 true
+
+- [布尔值](http://php.net/manual/zh/language.types.boolean.php)  **FALSE**  本身
+- [整型值](http://php.net/manual/zh/language.types.integer.php) 0（零）
+- [浮点型值](http://php.net/manual/zh/language.types.float.php) 0.0（零）
+- [空字符串](http://php.net/manual/zh/language.types.string.php)，以及[字符串](http://php.net/manual/zh/language.types.string.php) "0"
+- [空数组](http://php.net/manual/zh/language.types.array.php)
+- 特殊类型  [NULL](http://php.net/manual/zh/language.types.null.php)（包括尚未赋值的变量）
+- 从空标记生成的  [SimpleXML](http://php.net/manual/zh/ref.simplexml.php)  对象
+
+```php
+var_dump((bool)'false') //true #字符串false
+var_dump((bool) false) //false #布尔值false
+```
+
+## 三种复合类型
+
+- [array](http://php.net/manual/zh/language.types.array.php)（数组）
+- [object](http://php.net/manual/zh/language.types.object.php)（对象）
+- [callable](http://php.net/manual/zh/language.types.callable.php)（可调用）
+
+### 数组 array
 
 php 中的数组和 C 语言中的数组还有区别。它是一种 hash 的类型。通过 key=>value.通过数组可以实现丰富的数据类型，如字典、列表、集合、栈等。
 
@@ -153,7 +139,7 @@ $arr3["key"];
 
 PHP 将自动使用之前用过的最大  INT 键名加上 1 作为新的键名.PHP 实际并不区分索引数组和关联数组。
 
-## 6. 对象 object
+### 对象 object
 
 创建一个新的对象的时候，使用 new 关键字
 
@@ -162,7 +148,21 @@ class obj {}
 $a = new obj();
 ```
 
-## 7.资源类型 resource
+### 回调 callback
+
+```php
+function test(){
+  echo "echo";
+}
+call_user_function('test');
+```
+
+## 两种特殊类型
+
+- [resource](http://php.net/manual/zh/language.types.resource.php)（资源）
+- [NULL](http://php.net/manual/zh/language.types.null.php)（无类型）
+
+### 资源类型 resource
 
 资源类型是保持外部的一个引用。如数据库的链接，文件的句柄等。
 
@@ -170,7 +170,7 @@ $a = new obj();
 $fp = fopen("./a.log");//resource
 ```
 
-## 8. NULL 类型
+### NULL 类型
 
 当一个变量没有被赋值，那么该变量的值就是 null。以下的情况是一个变量被认为是 null
 
@@ -185,15 +185,6 @@ $c = 1;
 unset($c);//var_dump($c); null
 ```
 
-## 9. 回调 callback
-
-```php
-function test(){
-  echo "echo";
-}
-call_user_function('test');
-```
-
 ## 变量
 
 php 中的变量是以 `$` 开头的。变量名区分大小写。合法的变量名是字母或者下划线开头，后面跟着任意数量的字母，数字，或者下划线
@@ -206,7 +197,7 @@ php 中的变量是以 `$` 开头的。变量名区分大小写。合法的变�
 $a $_a $张三 // 合法的
 $2aaa //非法的
 $a = 123;
-```
+````
 
 ### 变量的作用域
 
@@ -255,7 +246,7 @@ IS_DEBUG;
 define("IS_DEBUG",0);
 ```
 
-#### 魔术常量
+### 魔术常量
 
 魔术常量是 php 内置的。可能跟着代码的变化而变化。一般魔术常量 以双下划线开始 双下划线结束。
 
@@ -266,15 +257,3 @@ __FILE__
 __CLASS__
 ```
 
-## 表达式
-
-最精确的定义一个表达式的方式就是“任何有值的东西”。最简单的表达式。常量和变量。
-
-```php
-$a;
-;// 空表达式
-$a = 1;//赋值表达式
-
-function f(){} //函数表达式
-$a>1 //比较表达式
-```
