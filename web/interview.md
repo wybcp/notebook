@@ -1,10 +1,8 @@
-# 一、计算机网络
-
-**基础部分**
+# 面试题
 
 1. TCP 报头格式
 
-   ![TCP](http://img.blog.csdn.net/20170227111849763?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTWFyeTE5OTIwNDEw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+   ![TCP](https://s3.51cto.com/wyfs02/M01/A2/E8/wKioL1mj0WziKSfvAAAN7VFLQug968.gif-wh_651x-s_1378032355.gif)
 
    端口号用来标识不同的应用程序。
 
@@ -31,6 +29,8 @@
 
    TCP 报头中的源端口号和目的端口号同 IP 数据报中的源 IP 与目的 IP 唯一确定一条 TCP 连接。
 
+   [TCP 详解](https://github.com/xianyunyh/tcp-ip-protocal)
+
 2. UDP 报头格式
 
    ![udp-1](https://github.com/xianyunyh/tcp-ip-protocal/raw/master/udp-1.png)
@@ -42,13 +42,13 @@
    - 5、首部长度：首部中 32bit 字的数目，可表示 15\*32bit=60 字节的首部。一般首部长度为 20 字节。
    - 6、数据
 
-3. TCP/UDP 区别（不仅是宏观上的，最好能根据各自的机制讲解清楚）
+3. TCP/UDP 区别
 
    TCP 存在三次握手。能进行流量控制，保证数据的完整。
 
    UDP 不存在握手。会导致丢包。传输比较快。
 
-4. HTTP 状态码（最好结合使用场景，比如在缓存命中时使用哪个）
+4. HTTP 状态码
 
    2xx 标识正常
 
@@ -58,41 +58,27 @@
 
    5xx 服务器内部错误
 
-8) TCP 三次握手、四次挥手（这个问题真的要回答吐了，不过真的是面试官最喜欢问的，建议每天手撸一遍，而且不只是每次请求的过程，各种 FIN_WAIT、TIME_WAIT 状态也要掌握）。
-
-   [TCP 详解](https://github.com/xianyunyh/tcp-ip-protocal)
-
-   **三次握手**
+5. 三次握手
 
    - 客户端将标志位置 SYN 置 1，发送序号为 K 的数据。客户端进入 SYN_SEND 状态
    - 服务端收到数据包后，先确认这个数据[ack=K+1],将自己的标志位 SYN 置 1，发送序号为 M 的数据。服务端进入 SYN_RECV
    - 客户端收到后。将自己标志位置 SYN 置 1.确认序号为 M 的数据。[ack=M+1]. ESTABLISHED
 
-   **四次挥手**
+6. 四次挥手
 
    - 客户端发送将自己的标识 FIN 置 1.发送序号为 M 的数据包 客户端进入 FIN_WAIT_1
    - 服务器收到 M，先确认 ack=M+1。发送 ack
    - 服务器再发送 FIN,序号为 N 的数据包 进入 LAST_ACK
    - 客户端收到后，进入 TIME_WAIT,再发送 ACK=1.ack=N+1 的数据包 服务端进入 CLOSED
 
-9) 打开网页到页面显示之间的过（涵盖了各个方面，DNS 解析过程，Nginx 请求转发、连接建立和保持过程、浏览器内容渲染过程，考虑的越详细越好）。
-10) http 和 https 区别，https 在请求时额外的过程，https 是如何保证数据安全的
-11) IP 地址子网划分
-12) POST 和 GET 区别
-13) DNS 解析过程
-
-**深入部分**
-
-13. TCP 如何保证数据的可靠传输的（这个问题可以引申出很多子问题，拥塞控制慢开始、拥塞避免、快重传、滑动窗口协议、停止等待协议、超时重传机制，最好都能掌握）
-
-8) 聚集索引和非聚集索引区别。
+7. 聚集索引和非聚集索引区别。
 
    [聚集索引和非聚集索引区别](https://blog.csdn.net/zc474235918/article/details/50580639)
 
-9) 有哪些锁（乐观锁悲观锁），select 时怎么加排它锁
+8. 有哪些锁（乐观锁悲观锁），select 时怎么加排它锁
 
-   select \* from for update; 排它锁
+   `select * from for update;` 排它锁
 
-   select \* from user lock in share mode 共享锁
+   `select \* from user lock in share mode` 共享锁
 
    [mysql 共享锁与排他锁](http://www.cnblogs.com/boblogsbo/p/5602122.html)

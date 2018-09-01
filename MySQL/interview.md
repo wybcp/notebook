@@ -431,6 +431,15 @@ MySQL InnoDB 存储引擎，实现的是基于多版本的并发控制协议—�
 - 慎重选择数字类型；
 - 给文本字段留足余量；
 
+1. **Myisam 和 innodb 的差别**
+
+存储结构。myisam 一个表，三个文件。结构、数据、索引
+
+innodb 两个文件。索引、数据保持在一个文件。
+
+innodb 支持事务、myiam 不支持
+
+innodb 支持外键、支持行锁
 ## 参考
 
 - [企业面试题｜最常问的 MySQL 面试题集合（一）](https://mp.weixin.qq.com/s?__biz=MzI0MDQ4MTM5NQ==&mid=2247486211&idx=1&sn=c8bbf47e3dd892443142ba9b33c37321&chksm=e91b6e1fde6ce7095709efd81614c72fcde19b00524e680a65458b25a181c73b227daa150506&scene=21#wechat_redirect)

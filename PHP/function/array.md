@@ -400,7 +400,7 @@ print_r($hours); // [0, 1, 2, ..., 23]
 
 ### [array_slice()](http://php.net/manual/zh/function.array-slice.php)
 
-`array array_slice ( array `$array` , int `$offset` [, int `$length` = **NULL** [, bool $preserve_keys= false ]] )`
+`array array_slice ( array $array , int $offset [, int $length = **NULL** [, bool $preserve_keys= false ]] )`
 
 为了实现获取数组中的部分元素 - 比如，获取前三个元素 - 使用 array_slice() 函数:
 

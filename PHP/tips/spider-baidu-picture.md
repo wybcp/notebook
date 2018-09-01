@@ -51,6 +51,7 @@ echo $response;
 
 采集
 
+```js
 var list = {
 "graph.baidu.com": "http://graph.baidu.com",
 "t1.baidu.com":"http://t1.baidu.com",
@@ -63,8 +64,11 @@ var list = {
 "i8.baidu.com":"http://i8.baidu.com",
 "i9.baidu.com":"http://i9.baidu.com",
 };
+```
+
 正常搜寻
 
+```php
 var list = {
 "graph.baidu.com": "https://sp0.baidu.com/-aYHfD0a2gU2pMbgoY3K",
 "t1.baidu.com":"https://ss0.baidu.com/6ON1bjeh1BF3odCf",
@@ -77,12 +81,14 @@ var list = {
 "i8.baidu.com":"https://ss0.baidu.com/73x1bjeh1BF3odCf",
 "i9.baidu.com":"https://ss0.baidu.com/73t1bjeh1BF3odCf",
 };
+```
+
 因此可以断定是，百度根据来源地址、IP、header 等参数，判断如果是采集的，则返回不同的 js。
 
 3.采集后图片不显示的解决方法
 把采集到的 html，根据定义的域名做一次批量转换即可。
 
-```
+```php
 <?php
 function doCurl($url, $data=array(), $header=array(), $timeout=30){
     $ch = curl_init();

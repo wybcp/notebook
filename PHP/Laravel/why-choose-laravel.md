@@ -50,4 +50,4 @@ Laravel 提供的这些东西，对团队开发很有用。
 
 ## 其他
 
-当然还有其他很重要的特性，比如 `Query Builder & ORM`, `Middleware`, `Blade
+当然还有其他很重要的特性，比如 `Query Builder & ORM`, `Middleware`, `Blade`

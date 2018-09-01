@@ -42,3 +42,7 @@ import (
 ```
 
 我知道这看起来像一个 URL，实际上，它只是希望导入在 `$GOPATH/src/github.com/mattn/go-sqlite3` 找到的 `go-sqlite3` 包。
+
+## 常见的包
+
+- [fmt](fmt.md)

@@ -4,7 +4,7 @@
 
 fopen() 函数用于在 PHP 中打开文件。
 此函数的第一个参数含有要打开的文件的名称，第二个参数规定了使用哪种模式来打开文件：
-http://www.runoob.com/php/php-file.html
+`http://www.runoob.com/php/php-file.html`
 
 ## 关闭文件
 

@@ -6,17 +6,19 @@
 
 ## 问题：什么是 MVC？
 
-回答：MVC 由 Model（模型）, View（视图）和 Controller（控制器）组成，PHP MVC 可以更高效地管理好 3 个不同层的 PHP 代码。
-Model：数据信息存取层。
-View：view 层负责将应用的数据以特定的方式展现在界面上。
-Controller：通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。
+回答：MVC 由 Model（模型）， View（视图）和 Controller（控制器）组成，PHP MVC 可以更高效地管理好 3 个不同层的 PHP 代码。
+
+- Model：数据信息存取层。
+- View：view 层负责将应用的数据以特定的方式展现在界面上。
+- Controller：通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。
 
 ## 问题：在页面中引用 CSS 有几种方式？
 
 回答：在页面中使用 CSS 有 3 中方式：
-引用外部 CSS 文件
-内部定义 Style 样式
-内联样式
+
+- 引用外部 CSS 文件
+- 内部定义 Style 样式
+- 内联样式
 
 ## 问题：PHP 支持多继承吗？
 
@@ -32,34 +34,35 @@ Controller：通常控制器负责从视图读取数据，控制用户输入，�
 
 ## 问题：PHP 中获取图像尺寸大小的方法是什么？
 
-回答：getimagesize () 获取图片的尺寸
-Imagesx () 获取图片的宽度
-Imagesy () 获取图片的高度
+- getimagesize () 获取图片的尺寸
+- Imagesx () 获取图片的宽度
+- Imagesy () 获取图片的高度
 
 ## 问题：PHP 中的 PEAR 是什么？
 
-回答：PEAR 也就是为 PHP 扩展与应用库（PHP Extension and Application Repository），它是一个 PHP 扩展及应用的一个代码仓库。
+PEAR 也就是为 PHP 扩展与应用库（PHP Extension and Application Repository），它是一个 PHP 扩展及应用的一个代码仓库。
 
 ## 问题：如何用 PHP 和 MySQL 上传视频？
 
-回答：我们可以在数据库中存放视频的地址，而不需要将真正的视频数据存在数据库中。可以将视频数据存放在服务器的指定文件夹下，上传的默认大小是 2MB，但是我们也可以在 php.ini 文件中修改 max_file size 选项来改变。
+我们可以在数据库中存放视频的地址，而不需要将真正的视频数据存在数据库中。可以将视频数据存放在服务器的指定文件夹下，上传的默认大小是 2MB，但是我们也可以在 php.ini 文件中修改 max_file size 选项来改变。
 
 ## 问题：PHP 中的错误类型有哪些？
 
-回答：PHP 中遇到的错误类型大致有 3 类。
-提示：这都是一些非常正常的信息，而非重大的错误，有些甚至不会展示给用户。比如访问不存在的变量。
-警告：这是有点严重的错误，将会把警告信息展示给用户，但不会影响代码的输出，比如包含一些不存在的文件。
-错误：这是真正的严重错误，比如访问不存在的 PHP 类。
+PHP 中遇到的错误类型大致有 3 类。
+
+- 提示：这都是一些非常正常的信息，而非重大的错误，有些甚至不会展示给用户。比如访问不存在的变量。
+- 警告：这是有点严重的错误，将会把警告信息展示给用户，但不会影响代码的输出，比如包含一些不存在的文件。
+- 错误：这是真正的严重错误，比如访问不存在的 PHP 类。
 
 ## 问题：如何在 PHP 中定义常量？
 
-回答：PHP 中使用 Define () 来定义常量。
-define (“Newconstant”, 30);
+PHP 中使用 Define () 来定义常量。
+define (“Newconstant”， 30);
 
 ## 问题：如何不使用 submit 按钮来提交表单？
 
 如果我们不想用 submit 按钮来提交表单，我们也可以用超链接来提交，我们可以这样写代码：
-<a href=”javascript: document.myform.submit();”>Submit Me</a>
+`<a href=”javascript: document.myform.submit();”>Submit Me</a>`
 
 ## 什么是 CGI？
 
@@ -67,11 +70,11 @@ CGI 是一种通用网关协议。为了解决不同的语言解释器(如 php�
 
 ## 什么是 FastCGI
 
-是一种对 CGI 协议升华的一种协议。FastCGI 像是一个常驻(long-live)型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次(这是 CGI 最为人诟病的 fork-and-execute 模式)。它还支持分布式的运算, 即 FastCGI 程序可以在网站服务器以外的主机上执行并且接受来自其它网站服务器来的请求。。
+是一种对 CGI 协议升华的一种协议。FastCGI 像是一个常驻(long-live)型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次(这是 CGI 最为人诟病的 fork-and-execute 模式)。它还支持分布式的运算， 即 FastCGI 程序可以在网站服务器以外的主机上执行并且接受来自其它网站服务器来的请求。
 
 ## 什么是 PHP-FPM
 
-(PHP FastCGI Process Manager)，PHP-FPM 是一个实现了 Fastcgi 协议的程序,用来管理 Fastcgi 起的进程的,即能够调度 php-cgi 进程的程序。并提供了进程管理的功能。进程包含 master 进程和 worker 进程两种进程。master 进程只有一个，负责监听端口(默认 9000)，接收来自 WebServer 的请求，而 worker 进程则一般有多个(具体数量根据实际需要配置)，每个进程内部都嵌入了一个 PHP 解释器，是 PHP 代码真正执行的地方。
+(PHP FastCGI Process Manager)，PHP-FPM 是一个实现了 Fastcgi 协议的程序，用来管理 Fastcgi 的进程的，即能够调度 php-cgi 进程的程序，并提供了进程管理的功能。进程包含 master 进程和 worker 进程两种进程。master 进程只有一个，负责监听端口(默认 9000)，接收来自 WebServer 的请求，而 worker 进程则一般有多个(具体数量根据实际需要配置)，每个进程内部都嵌入了一个 PHP 解释器，是 PHP 代码真正执行的地方。
 
 ## FastCGI 好在哪里？
 
@@ -84,7 +87,7 @@ Fastcgi 则会先 fork 一个 master，解析配置文件，初始化执行环�
 1. 用户请求 index.php 时，首先到 Nginx
 1. Nginx 流程步骤：
    - 根据配置查找路由
-   - 加载 nginx 的 fast-cgi 模块(FastCGI 的 Client),将根据 fastcgi.conf 文件中 fastcgi\_\*配置参数值也一并加入转发任务中
+   - 加载 nginx 的 fast-cgi 模块(FastCGI 的 Client)，将根据 fastcgi.conf 文件中 fastcgi\_\*配置参数值也一并加入转发任务中
    - 根据 nginx.conf 文件 fastcgi_pass 配置将请求转发到 127.0.0.1:9000。
 1. PHP-FPM 操作：
    - PHP-FPM 的 master 进程监听 9000 端口。
@@ -92,7 +95,7 @@ Fastcgi 则会先 fork 一个 master，解析配置文件，初始化执行环�
 1. Nginx 操作：
    将响应返回给用户
 
-### 访问权限修饰符
+## 访问权限修饰符
 
 - public 公开的。任何地方都能访问
 - protected 保护的、只能在本类和子类中访问
@@ -100,13 +103,13 @@ Fastcgi 则会先 fork 一个 master，解析配置文件，初始化执行环�
 - final 最终的。被修饰的方法或者类，不能被继承或者重写
 - static 静态
 
-### 接口和抽象类区别
+## 接口和抽象类区别
 
 - 接口使用 interface 声明，抽象类使用 abstract
 - 抽象类可以包含属性方法。接口不能包含成员属性、
 - 接口不能包含非抽象方法
 
-### CGI、FastCGI、FPM
+## CGI、FastCGI、FPM
 
 CGI 全称是“公共网关接口”(Common Gateway Interface)，HTTP 服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
 
@@ -114,16 +117,16 @@ CGI 是 HTTP Server 和一个独立的进程之间的协议，把**HTTP Request 
 
 FastCGI 像是一个常驻(long-live)型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次（这是 CGI 最为人诟病的 fork-and-execute 模式）。它还支持分布式的运算，即 FastCGI 程序可以在网站服务器以外的主机上执行并且接受来自其它网站服务器来的请求。
 
-Fpm 是一个实现了 Fastcgi 协议的程序,用来管理 Fastcgi 起的进程的,即能够调度 php-cgi 进程的程序。
+Fpm 是一个实现了 Fastcgi 协议的程序，用来管理 Fastcgi 起的进程的，即能够调度 php-cgi 进程的程序。
 
-#### FastCGI 特点
+### FastCGI 特点
 
 1. FastCGI 具有语言无关性。
 2. FastCGI 在进程中的应用程序，独立于核心 web 服务器运行，提供了一个比 API 更安全的环境。APIs 把应用程序的代码与核心的 web 服务器链接在一起，这意味着在一个错误的 API 的应用程序可能会损坏其他应用程序或核心服务器。 恶意的 API 的应用程序代码甚至可以窃取另一个应用程序或核心服务器的密钥。
-3. FastCGI 技术目前支持语言有：C/C++、Java、Perl、Tcl、Python、SmallTalk、Ruby 等。相关模块在 Apache, ISS, Lighttpd 等流行的服务器上也是可用的。
-4. FastCGI 的不依赖于任何 Web 服务器的内部架构，因此即使服务器技术的变化, FastCGI 依然稳定不变。
+3. FastCGI 技术目前支持语言有：C/C++、Java、Perl、Tcl、Python、SmallTalk、Ruby 等。相关模块在 Apache， ISS， Lighttpd 等流行的服务器上也是可用的。
+4. FastCGI 的不依赖于任何 Web 服务器的内部架构，因此即使服务器技术的变化， FastCGI 依然稳定不变。
 
-#### FastCGI 的工作原理
+### FastCGI 的工作原理
 
 1. Web Server 启动时载入 FastCGI 进程管理器（IIS ISAPI 或 Apache Module)
 2. FastCGI 进程管理器自身初始化，启动多个 CGI 解释器进程(可见多个 php-cgi)并等待来自 Web Server 的连接。
@@ -132,7 +135,7 @@ Fpm 是一个实现了 Fastcgi 协议的程序,用来管理 Fastcgi 起的进程
 
 ## Include 与 require 的区别，require 和 require_once 的效率哪个高？
 
-Php 在遇到 include 时就解释一次，如果页面中出现 10 次 include，php 就解释 10 次，而 php 遇到 require 时只解释一次，即使页面出现多次 require 也只解释一次，因此 require 的执行表率比 include 高。
+Php 在遇到 include 时就解释一次，如果页面中出现 10 次 include，php 就解释 10 次，而 php 遇到 require 时只解释一次，即使页面出现多次 require 也只解释一次，因此 require 的执行效率比 include 高。
 
 Php 使用 require 包含文件时将被包含的文件当成当前文件的一个组成部分，如果被包含的文件中有语法错误或者被包含的文件不存在，则 php 脚本将不再执行，并提示错误。
 
@@ -149,6 +152,7 @@ COOKIE 保存在客户端，用户通过手段可以进行修改，不安全，�
 Session 的缺点：保存在服务器端，每次读取都从服务器进行读取，对服务器有资源消耗。
 
 Session 保存在服务器端的文件或数据库中，默认保存在文件中，文件路径由 php 配置文件的 session.save_path 指定。
+
 Session 文件是公有的。
 
 ## cookie、session 的联系和区别，多台 web 服务器如何共享 session？
@@ -168,11 +172,11 @@ session 存储在服务器端，服务器用一种散列表类型的结构存储
 
 4） cookie 有大小限制，为 3K
 
-多服务器共享 session 可以尝试将 session 存储在 memcache 中
+多服务器共享 session 可以尝试将 session 存储在 redis 中
 
 ## php 中 web 上传文件的原理是什么，如何限制上传文件的大小？
 
-PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_max_filesize,post_max_size 设置一次，POST 中 PHP 能接收的最大数据量，应该比 upload_max_filesize 大。
+PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_max_filesize，post_max_size 设置一次，POST 中 PHP 能接收的最大数据量，应该比 upload_max_filesize 大。
 
 ## http 协议中的 post 和 get 有何区别？
 
@@ -186,15 +190,15 @@ PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_ma
 
 5）SERVER 端接收：因为在 submit 提交的时候是按不同方式进行编码的，所以服务端在接受的时候会按照不同的方式进行接收。
 
-6）编码方式：如果传递数据是非-ASCII,那么 GET 一般是不适应的，所以在传递的时候会做编码处理！
+6）编码方式：如果传递数据是非-ASCII，那么 GET 一般是不适应的，所以在传递的时候会做编码处理！
 
 ## 怎么防止 sql 注入
 
-1. 过滤掉一些常见的数据库操作关键字：select,insert,update,delete,and,\*等
+1. 过滤掉一些常见的数据库操作关键字：select，insert，update，delete，and，\*等
    或者通过系统函数：addslashes(需要被过滤的内容)来进行过滤。
 1. 在 PHP 配置文件中
    Register_globals=off;设置为关闭状态 //作用将注册全局变量关闭。
-   比如：接收 POST 表单的值使用$\_POST['user'],如果将 register_globals=on;直接使用$user 可以接收表单的值。
+   比如：接收 POST 表单的值使用$\_POST['user']，如果将 register_globals=on;直接使用$user 可以接收表单的值。
 1. SQL 语句书写的时候尽量不要省略小引号(tab 键上面那个)和单引号
 1. 提高数据库命名技巧，对于一些重要的字段根据程序的特点命名，取不易被猜到的
 1. 对于常用的方法加以封装，避免直接暴漏 SQL 语句
@@ -203,7 +207,8 @@ PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_ma
    Magic_quotes_gpc=off;默认是关闭的，它打开后将自动把用户提交的 sql 语句的查询进行转换，把'转为\'，这对防止 sql 注入有重大作用。
    因此开启：magic_quotes_gpc=on;
 1. 控制错误信息
-   关闭错误提示信息，将错误信息写到系统日志。 1.使用 mysqli 或 pdo 预处理。
+   关闭错误提示信息，将错误信息写到系统日志。
+1. 使用 mysqli 或 pdo 预处理。
 
 ## 数据库索引有几类
 
@@ -255,7 +260,7 @@ PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_ma
 
 ## magic_quotes_gpc()、magic_quotes_runtime()的意思是什么？
 
-Magic_quotes_gpc()是 php 配置文件中的，如果设置为 on 则会自动 POST,GET,COOKIE 中的字符串进行转义，在'之前加\
+Magic_quotes_gpc()是 php 配置文件中的，如果设置为 on 则会自动 POST，GET，COOKIE 中的字符串进行转义，在'之前加\
 
 Magic_quotes_runtime()是 php 中的函数，如果参数为 true 则会数据库中取出来的单引号、双引号、反斜线自动加上反斜杠进行转义。
 
@@ -266,8 +271,11 @@ Magic_quotes_runtime()是 php 中的函数，如果参数为 true 则会数据�
 - Print_r() 是 php 函数，可以打印出复杂类型变量的值，如数组，对象。
 
 echo（）可以一次输出多个值，多个值之间用逗号分隔。echo 是语言结构，而不是真正的函数，因此不能作为表达式的一部分使用。
+
 print()是一个函数，用来打印一个值，如果字符串成功显示则返回 true，否则返回 false
+
 print_r()是一个函数，用来打印一个值，值为字符串或数字进行简单打印，而数组则以括起来的键和值列表形式显示，并以 Array 开头。
+
 拓展：var_dump()是一个函数，用来显示关于一个或多个表达式的结果信息，包括表达式的类型与值。数组将递归展开值，通过缩进显示其结构。
 
 ## MVC
@@ -294,7 +302,7 @@ MVC 的缺点：没有明确的定义，完全理解并不容易。小型项目�
 
 ## 打印一个用‘.’链接的字符串时候，还可以用什么代替‘.’链接效率更高些
 
-可以用,代替.,效率更高。
+可以用，代替.，效率更高。
 
 ## 提示类型 200、404、502 是什么意思
 
@@ -305,14 +313,14 @@ MVC 的缺点：没有明确的定义，完全理解并不容易。小型项目�
 ```php
 function geturltype($url){
     $info=parse_url($url);
-   // return end(explode('.',$info['path']));
-    //return explode('.',$info['path']);
+   // return end(explode('.'，$info['path']));
+    //return explode('.'，$info['path']);
     return $info;
 }
 var_dump(geturltype("Www/hello/test.php.html?a=3&b=4"));
 ```
 
-## Memcach 的理解
+## Memcache 的理解
 
 Memcache 是一种缓存技术，在一定的时间内将动态网页经过解析之后保存到文件，下次访问时动态网页就直接调用这个文件，而不必在重新访问数据库。使用 memcache 做缓存的好处是：提高网站的访问速度，减轻高并发时服务器的压力。
 
@@ -324,31 +332,31 @@ Memcache 的优点：稳定、配置简单、多机分布式存储、速度快
 $mail = file_get_contents('mail.log');
 $pattern = "/\S+sina\.com/";
 $rpattern = "/\\n/";
-preg_filter($rpattern,"",$mail);
-if(preg_match_all($pattern,$mail,$matches))
+preg_filter($rpattern，""，$mail);
+if(preg_match_all($pattern，$mail，$matches))
 {
     print_r($matches);
 }
 ```
 
-## const 的含义及实现机制，比如：const int i,是怎么做到 i 只可读的
+## const 的含义及实现机制，比如：const int i，是怎么做到 i 只可读的
 
-分析及答案：
 含义：const 用来说明所定义的变量是只读的。
+
 实现机制：这些在编译期间完成，编译器使用常数直接替换掉对此变量的引用。
 
 ## tcp 三次握手的过程，accept 发生在三次握手哪个阶段
 
-分析及答案：
 accept 发生在三次握手之后。
-第一次握手：客户端发送 syn 包(syn=j)到服务器。
-第二次握手：服务器收到 syn 包，必须确认客户的 SYN(ack=j+1)，同时自己也发送一个 ASK 包(ask=k)。
-第三次握手：客户端收到服务器的 SYN+ACK 包，向服务器发送确认包 ACK(ack=k+1)。
+
+- 第一次握手：客户端发送 syn 包(syn=j)到服务器。
+- 第二次握手：服务器收到 syn 包，必须确认客户的 SYN(ack=j+1)，同时自己也发送一个 ASK 包(ask=k)。
+- 第三次握手：客户端收到服务器的 SYN+ACK 包，向服务器发送确认包 ACK(ack=k+1)。
+
 三次握手完成后，客户端和服务器就建立了 tcp 连接。这时可以调用 accept 函数获得此连接。
 
-## 4.用 UDP 协议通讯时怎样得知目标机是否获得了数据包？
+## 用 UDP 协议通讯时怎样得知目标机是否获得了数据包？
 
-分析及答案：
 可以在每个数据包中插入一个唯一的 ID，比如 timestamp 或者递增的 int。
 发送方在发送数据时将此 ID 和发送时间记录在本地。
 接收方在收到数据后将 ID 再发给发送方作为回应。
@@ -368,9 +376,7 @@ accept 发生在三次握手之后。
 ## 状态码 200 301 304 403 404 500 的含义
 
 - 200 - 服务器成功返回网页
-
-1. 301(永久移动)请求的网页已永久移动到新位置。
-
+- 301(永久移动)请求的网页已永久移动到新位置。
 - 304(未修改)自从上次请求后，请求的网页未修改过
 - 403(禁止)服务器拒绝请求
 - 404 - 请求的网页不存在
@@ -381,39 +387,39 @@ accept 发生在三次握手之后。
 属于 OOP 面向对象语言中的类中访问控制模式
 
 - Public 可以外部访问
-- Protected,private 只可以内部访问
-- Public,protected 可以被继承
+- Protected，private 只可以内部访问
+- Public，protected 可以被继承
 - Private 不可以被继承
 
-## 请描述 PHP(或其他语言) Session 的运行机制,大型网站中 Session 方面应注意什么？
+## 请描述 PHP(或其他语言) Session 的运行机制，大型网站中 Session 方面应注意什么？
 
 运行机制:客户端将 session id 传递到服务器，服务器根据 session id 找到对应的文件，读取的时候对文件内容进行反序列化就得到 session 的值，保存的时候先序列化再写入
 
 注意:
 
-1. session 在大访问量网站上确实影响系统性能，影响性能的原因之一由文件系统设计造成，在同一个目录下超过 10000 个文件时，文件的定位将非常耗时,可以通过修改 php.ini 中 session.save_path 设置两级子目录 ,session 将存储在两级子目录中，每个目录有 16 个子目录[0~f]，不过好像 PHP session 不支持创建目录，你需要事先把那么些目录创建好 。
-2. 还有一个问题就是小文件的效率问题,可以通过存储方式中的 memcache 来解决 I/O 效率低下的问题
-3. session 同步问题,session 同步有很多种，如果你是存储在 memcached 或者 MySQL 中，那就很容易了，指定到同样的位置即可,还有一种方法就是在负载均衡那一层保持会话，把访问者绑定在某个服务器上，他的所有访问都在那个服务器上就不需要 session 同步了
+1. session 在大访问量网站上确实影响系统性能，影响性能的原因之一由文件系统设计造成，在同一个目录下超过 10000 个文件时，文件的定位将非常耗时，可以通过修改 php.ini 中 session.save_path 设置两级子目录 ，session 将存储在两级子目录中，每个目录有 16 个子目录[0~f]，不过好像 PHP session 不支持创建目录，你需要事先把那么些目录创建好 。
+2. 还有一个问题就是小文件的效率问题，可以通过存储方式中的 redis 来解决 I/O 效率低下的问题
+3. session 同步问题，session 同步有很多种，如果你是存储在 memcached 或者 MySQL 中，那就很容易了，指定到同样的位置即可，还有一种方法就是在负载均衡那一层保持会话，把访问者绑定在某个服务器上，他的所有访问都在那个服务器上就不需要 session 同步了
 
 ## 简单描述 mysql 中，索引，主键，唯一索引，联合索引的区别，对数据库的性能有什么影响(从读写两方面)
 
-- 索引就相当于对指定的列进行排序,排序有利于对该列的查询，可以大大增加查询效率
-  建立索引也是要消耗系统资源,所以索引会降低写操作的效率
-- 主键,唯一,联合都属于索引
-- 主键属于唯一索引,且一个表只能有一个主键,主键列不允许空值
-- 唯一索引可以一个表中可以有多个,而且允许为空,列中的值唯一
+- 索引就相当于对指定的列进行排序，排序有利于对该列的查询，可以大大增加查询效率
+  建立索引也是要消耗系统资源，所以索引会降低写操作的效率
+- 主键，唯一，联合都属于索引
+- 主键属于唯一索引，且一个表只能有一个主键，主键列不允许空值
+- 唯一索引可以一个表中可以有多个，而且允许为空，列中的值唯一
 - 多个字段的多条件查询多使用联合索引
 
 ## 解释 MySQL 外连接、内连接与自连接的区别
 
-- Mysql 外连接分为左连接(left join....on)和右连接(right join.... on),左连接是以左表作为条件查询关联右表数据,无对应数据则补空,右连接则相反
-- Mysql 内连接(inner join.....on)是做关联查询时,内连接的特性是只显示符合连接条件的记录
+- Mysql 外连接分为左连接(left join....on)和右连接(right join.... on)，左连接是以左表作为条件查询关联右表数据，无对应数据则补空，右连接则相反
+- Mysql 内连接(inner join.....on)是做关联查询时，内连接的特性是只显示符合连接条件的记录
 - Mysql 自连接:在 FROM clause（子句）中我们可以给这个表取不同的别名， 然后在语句的其它需要使用到该别名的地方用 dot（点）来连接该别名和字段名
 
 ## count()
 
 count — 计算数组中的单元数目或对象中的属性个数
-`int count ( mixed $var [, int $mode ] )`, 如果 var 不是数组类型或者实现了 Countable 接口的对象，将返回 1，有一个例外，如果 var 是 NULL 则结果是 0。
+`int count ( mixed $var [， int $mode ] )`， 如果 var 不是数组类型或者实现了 Countable 接口的对象，将返回 1，有一个例外，如果 var 是 NULL 则结果是 0。
 
 ## error_reporting(2047)什么作用？
 
@@ -421,7 +427,7 @@ count — 计算数组中的单元数目或对象中的属性个数
 
 ## 打开 php.ini 中的 Safe_mode，会影响哪些函数？至少说出 6 个。
 
-答：1:用户输入输出函数(fopen() file() require(),只能用于调用这些函数有相同脚本的拥有者)
+答：1:用户输入输出函数(fopen() file() require()，只能用于调用这些函数有相同脚本的拥有者)
 2:创建新文件(限制用户只在该用户拥有目录下创建文件)
 3:用户调用 popen() systen() exec()等脚本，只有脚本处在 safe_mode_exec_dir 配置指令指定的目 录中才可能
 4:加强 HTTP 认证，认证脚本拥有者的 UID 的划入认证领域范围内，此外启用安全模式下，不会设置 PHP_AUTH
@@ -435,7 +441,7 @@ chown()、chgrp()、chdir()、fopen()、rmdir()、copy()、link()、exec()等 �
 
 ## 写个函数来解决多线程同时读写一个文件的问题。
 
-答：flock($hander,LOCK_EX);
+答：flock($hander，LOCK_EX);
 
 ## 设置当前内容的 Content-Type
 
@@ -481,3 +487,74 @@ header(‘Content-type:text/plain’);
 - datetime 保留日期和时分秒，MySQL 检索且以‘YYYY-MM-DD HH:MM:SS’格式显示 datetime 值，支持的范围是‘1000-01-01 00:00:00’到‘9999-12-31 23:59:59’。
 - timestamp 的格式与 datetime 相同，但其取值范围小于 datetime，使用 timestamp 可以自动地用当前的日期和时间标记 INSERT 或 UPDATE 的操作，如果有多个 timestamp 列，只有第一个自动更新。
 - show processlist;
+
+## 写一段代码保证多个进程同时写入成功
+
+```php
+#加锁
+function write($filepath，$data) {
+     $fp = fopen( $filepath， 'a' );   //以追加的方式打开文件，返回的是指针
+ do{
+ 　　 usleep( 100 ); 　　　　　　//暂停执行程序，参数是以微秒为单位的
+ }while( !flock( $fp， LOCK_EX ) );　　//以独享写入的方式锁定文件，成功则返回TRUE，否则FALSE
+}
+ $res = fwrite( $fp， $data."/n" );　　// 以追加的方式写入数据到打开的文件
+ flock( $fp， LOCK_UN );　　　　　　//解锁，以让别的进程进行锁定
+ fcloce( $fp );　　　　　　　　　　　//关闭打开的文件指针
+ return $res;　　　　　　　　　　　　//返回写入结果
+}
+```
+
+[https://www.cnblogs.com/gengyi/p/6399206.html](https://www.cnblogs.com/gengyi/p/6399206.html)
+
+## 打出前一天的时间
+
+```php
+date('Y-m-d H:i:s'， strtotime('-1 day'))
+```
+
+## 翻转字符【包含中文】
+
+```php
+ function strRev($str，$encoding='utf-8'){
+        $result = '';
+        $len = mb_strlen($str);
+        for($i=$len-1; $i>=0; $i--){
+            $result .= mb_substr($str，$i，1，$encoding);
+        }
+        return $result;
+    }
+```
+
+## 遍历一个文件夹下的所有文件和子文件
+
+```php
+function my_dir($dir) {
+    $files = array();
+    if(@$handle = opendir($dir)) { //注意这里要加一个@，不然会有warning错误提示：）
+        while(($file = readdir($handle)) != = false) {
+            if($file != ".." && $file != ".") { //排除根目录；
+                if(is_dir($dir."/".$file)) { //如果是子文件夹，就进行递归
+                    $files[$file] = my_dir($dir."/".$file);
+                } else { //不然就将文件的名字存入数组；
+                    $files[] = $file;
+                }
+
+            }
+        }
+        closedir($handle);
+        return $files;
+    }
+}
+```
+
+## 不适用第三个变量交换两个变量的值
+
+```php
+function swap (int &$a， int &$b){
+     // 20 10
+    $a = $a+$b; // 30
+    $b = $a-$b; //20 a
+    $a = $a-$b;
+}
+```
