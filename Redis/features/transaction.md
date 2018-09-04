@@ -458,3 +458,11 @@ Redis 事务并没有提供任何的持久性功能，所以事务的持久性�
 ● 其他 AOF 模式也和 always 模式类似，所以它们都是不持久的。
 
 结论：Redis 的事务满足原子性、一致性和隔离性，但是不满足持久性。
+
+```python
+pipe = redis.pipeline(transaction=true)
+pipe.multi()
+pipe.incr("books")
+pipe.incr("books")
+values = pipe.execute()
+```

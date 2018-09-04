@@ -5,3 +5,5 @@
 ## 参考
 
 - [关于 Python 的面试题](https://github.com/taizilongxu/interview_python)
+- [learn-python](https://github.com/trekhleb/learn-python)
+

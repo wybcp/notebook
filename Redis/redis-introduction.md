@@ -2,6 +2,8 @@
 
 Redis 全称是 REmote DIctionary Server，是一个高性能的 key-value 非关系型数据库，由于其具有高性能的特性，支持高可用、持久化、多种数据结构、集群等，使其脱颖而出，成为常用的非关系型数据库。
 
+RESP(Redis Serialization Protocol)是 Redis 序列化协议的简写。它是一种直观的文本协议，优势在于实现异常简单，解析性能极好。
+
 ## 速度快
 
 - 数据存放在内存，最主要的原因
@@ -31,3 +33,8 @@ Reids 提供 list 和 set 操作，这使得 Redis 能作为一个很好的消�
 6. 计数器应用
 
 计数器在网站中作用重大，例如视频播放数、网站浏览数，为保证数据的实时性，每进行一次操作都将加 1。Redis 支持计数且性能很好。
+
+## 参考
+
+- [原理 2：交头接耳 —— 通信协议](https://juejin.im/book/5afc2e5f6fb9a07a9b362527/section/5afc39496fb9a07ab458d0f1)
+
