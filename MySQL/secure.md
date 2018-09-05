@@ -4,13 +4,13 @@
 
 一方面需要配置防火墙白名单
 
-```
+```bash
 iptables -A INPUT -s 1.2.3.4 -p tcp -m tcp –dport 3306 -j ACCEPT
 ```
 
 另一方面创建 MySQL 用户时限制访问 IP
 
-```
+```bash
 mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’;
 ```
 
@@ -24,7 +24,7 @@ mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’;
 
 实施 MySQL 主从通信的监听时， 无论是监听主库还是从库效果都类似，这里测试监听主库的情况。
 
-##1.1 确定要监听的端口##
+### 1.1 确定要监听的端口
 
 如果不知道这两台机器对应交换机哪个端口，可以先登录交换机，ping 然后通过 arp 缓存查看。
 
@@ -36,7 +36,7 @@ ping 之后就能通过 arp 缓存确定端口
 
 最后，确定 xxx.xxx.xxx.83 即镜像源端口为 g0/15，xxx.xxx.xxx.109 即镜像目标端口为 g0/1。
 
-##1.2 配置端口镜像##
+### 1.2 配置端口镜像
 
 登录交换机，开始没有配置镜像
 
@@ -72,7 +72,7 @@ Please wait for a while...
 Current configuration saved to EEPROM memory successfully
 ```
 
-##1.3 监听明文的主从通信##
+### 1.3 监听明文的主从通信
 
 在主动监听的机器 xxx.xxx.xxx.109 执行
 
@@ -96,11 +96,11 @@ xxx.xxx.xxx.83 配置了 MySQL 主库，另外的一台外网机器 xxx.xxx.xxx.
 
 这里采用的交换机端口镜像需要获得交换机权限，有一定的实施难度。但在外网通信中，实际的网络环境非常复杂且不受我们控制，明文通信仍然有潜在的安全风险。
 
-##2 服务器间安全访问##
+## 2 服务器间安全访问
 
 那么如何在服务器之间的外网通信中确保 MySQL 的安全访问呢？这里介绍几种常用方案。
 
-##2.1 加密隧道##
+### 2.1 加密隧道
 
 加密隧道可以将客户端的网络数据进行加密，然后安全地传输到服务端后进行解密还原。以 stunnel 为例：
 
@@ -216,7 +216,7 @@ key /etc/openvpn/client1-key.pem
 
 缺点：需要额外维护 VPN 服务。
 
-## 2.3 MySQL SSL
+### 2.3 MySQL SSL
 
 除了建立加密隧道、加密虚拟网络，还可以直接使用 SSL 进行 MySQL 的访问加密。
 
@@ -354,7 +354,7 @@ bundled (use yassl), yes (prefer os library if present, otherwise use bundled), 
 
 ![如何让远程访问Mysql更安全！如何让远程访问Mysql更安全！](https://www.linuxprobe.com/wp-content/uploads/2018/02/11.jpg)
 
-##3.2 phpmyadmin+HTTPS##
+### 3.2 phpmyadmin+HTTPS
 
 如果习惯使用 phpmyadmin 的 web 方式访问 MySQL，那么只需要将访问方式统一为 HTTPS：
 
@@ -381,7 +381,7 @@ ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 }
 ```
 
-##4 总结##
+## 4 总结
 
 MySQL 的数据安全是一个非常大的课题，其中外网间的安全通信往往容易被忽略。而当前随着 HTTPS /SMTPS/POP3S/IMAPS 的逐步流行，各种基于 TCP、UDP 的加密通信方案也会越来越多地应用到线上业务中。本文针对服务器间/本地到服务器的一些访问 MySQL 的场景介绍了几种加密通信方案，希望能给到大家一些思路，并结合自己实际需要来使用 MySQL 的加密访问。
 

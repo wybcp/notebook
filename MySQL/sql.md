@@ -218,7 +218,6 @@ DROP INDEX your_index_name(your_column_name);
 - 导出：`mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql`;
 - 查看慢日志：`mysqldumpslow -s [c:按记录次数排序/t:时间/l:锁定时间/r:返回的记录数] -t [n:前 n 条数据] -g "正则" /path`
 
-
 ```
 use 数据库;
 //创建数据表
@@ -232,41 +231,77 @@ show columns from sys_country;
 //insert table () values();
 ```
 
-+ select version():显示服务器版本号
-+ select database();//查看当前数据库
-+ select now():当前时间
-+ select user():当前用户
-+ show tables;//查看数据表列表
-+ SHOW DATABASES; 显示所有数据库
-+ SHOW index from table; 显示表的索引，
-+ SHOW WARNINGS:
-+ SHOW CREATE DATABASE X:查看数据库表基本信息
-+ SHOW CREATE table X:查看表基本信息
+- select version():显示服务器版本号
+- select database();//查看当前数据库
+- select now():当前时间
+- select user():当前用户
+- show tables;//查看数据表列表
+- SHOW DATABASES; 显示所有数据库
+- SHOW index from table; 显示表的索引，
+- SHOW WARNINGS:
+- SHOW CREATE DATABASE X:查看数据库表基本信息
+- SHOW CREATE table X:查看表基本信息
+
 ```
 select * from information_schema.TABLES where information_schema.TABLES.TABLE_SCHEMA = '数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
 ```
 
-+ 去重显示数据
-select distinct a,b from test;
+- 去重显示数据
+  select distinct a,b from test;
 
-+ 查看MySQL数据库大小
+- 查看 MySQL 数据库大小
+
 ```
 SELECT sum(DATA_LENGTH)+sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='数据库名';
 ```
-得到的结果是以字节为单位，除1024为K，除1048576(=1024*1024)为M。
 
-+ 查看表的最后mysql修改时间
+得到的结果是以字节为单位，除 1024 为 K，除 1048576(=1024\*1024)为 M。
+
+- 查看表的最后 mysql 修改时间
+
 ```
-select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' order by UPDATE_TIME desc limit 1; 
-select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' and information_schema.TABLES.TABLE_NAME = '表名'; 
+select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' order by UPDATE_TIME desc limit 1;
+select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
 ```
+
 ## group by
-## having 
-HAVING 分组过滤条件： HAVING 后的字段必须是SELECT后出现过的（如“SELECT sex，age FROM users GROUP BY age HAVING age>20"，age就出现在SELECT后），或放在聚合函数（包括COUNT：计算行的数量，MAX：计算列的最大值，MIN：计算列的最小值，SUM：获取单个列的合计值，AVG：计算某个列的平均值等）中
-## 将查询结果写入数据表：
-将表格users中age大于30的数据行放入数据表test中的username数据行
 
+## having
+
+HAVING 分组过滤条件： HAVING 后的字段必须是 SELECT 后出现过的（如“SELECT sex，age FROM users GROUP BY age HAVING age>20"，age 就出现在 SELECT 后），或放在聚合函数（包括 COUNT：计算行的数量，MAX：计算列的最大值，MIN：计算列的最小值，SUM：获取单个列的合计值，AVG：计算某个列的平均值等）中
+
+## 将查询结果写入数据表：
+
+将表格 users 中 age 大于 30 的数据行放入数据表 test 中的 username 数据行
 
 ```
 INSERT test(username) SELECT username FROM users WHERE age>=30;
 ```
+
+## 查询重复记录
+
+1. 查找表中多余的重复记录，重复记录是根据单个字段（peopleId）来判断
+
+   ```sql
+   select * from people
+   where peopleId in (select peopleId from people group by peopleId having count(peopleId) > 1)
+   ```
+
+2. 删除表中多余的重复记录，重复记录是根据单个字段（peopleId）来判断，只留有 rowid 最小的记录
+
+   ```sql
+   delete from people
+   where peopleId in (select peopleId from people group by peopleId   having count(peopleId) > 1)
+   and rowid not in (select min(rowid) from people group by peopleId having count(peopleId )>1)
+   ```
+
+3. 查找表中多余的重复记录（多个字段）
+
+   ```sql
+   select * from vitae a
+   where (a.peopleId,a.seq) in (select peopleId,seq from vitae group by peopleId,seq having count(*) > 1)
+   ```
+
+## 参考
+
+- [MYSQL 查询重复记录的方法](http://database.51cto.com/art/201011/235159.htm)

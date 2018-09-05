@@ -1,5 +1,7 @@
 # 索引
 
+索引是存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。
+
 索引是要占磁盘空间的。
 
 - 索引类似于书籍的目录，要想找到一本数的某个特定主题，需要先查找书的目录，定位对应的页码
@@ -7,11 +9,19 @@
 
 ## why
 
-1、数据索引的存储是有序的
+1. 数据索引的存储是有序的
 
-2、在有序的情况下，通过索引查询一个数据是无需遍历索引记录的
+2. 在有序的情况下，通过索引查询一个数据是无需遍历索引记录的
 
-3、极端情况下，数据索引的查询效率为二分法查询效率，趋近于 log2(N)
+3. 极端情况下，数据索引的查询效率为二分法查询效率，趋近于 log2(N)
+
+### 索引的优点
+
+1. 大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度
+
+2. 帮助服务器避免排序和临时表
+
+3. 可以将随机 I/O 变为顺序 I/O
 
 ## Mysql 索引结构
 
@@ -24,7 +34,7 @@ b+tree 是 mysql 使用最频繁的一个索引数据结构，数据结构以平
 
 ### hash
 
-hsah 索引在 mysql 比较少用，数据的索引以 hash 形式组织起来，因此当查找某一条记录的时候，速度非常快。因为是 hash 结构，每个键只对应一个值，而且是散列的方式分布，所以他并不支持范围查找和排序等功能。
+hash 索引在 mysql 比较少用，数据的索引以 hash 形式组织起来，因此当查找某一条记录的时候，速度非常快。因为是 hash 结构，每个键只对应一个值，而且是散列的方式分布，所以他并不支持范围查找和排序等功能。
 
 #### 优势
 
@@ -48,10 +58,10 @@ select id,name from table where name='李明'; — 仅等值查询
 
 而常用的 InnoDB 引擎中默认使用的是 B+树索引，它会实时监控表上索引的使用情况，如果认为建立哈希索引可以提高查询效率，则自动在内存中的“自适应哈希索引缓冲区”建立哈希索引（在 InnoDB 中默认开启自适应哈希索引），通过观察搜索模式，MySQL 会利用 index key 的前缀建立哈希索引，如果一个表几乎大部分都在缓冲池中，那么建立一个哈希索引能够加快等值查询。
 
-## 主键唯一索引 PRIMARY KEY
+## 主键索引 PRIMARY KEY
 
 ```sql
-ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` );
+ALTER TABLE `table_name` ADD PRIMARY KEY 'index_name' (`column`);
 ```
 
 一种特殊的唯一索引，不允许有空值。
@@ -59,7 +69,7 @@ ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` );
 ## 唯一索引 UNIQUE
 
 ```sql
-ALTER TABLE `table_name` ADD UNIQUE (`column`);
+ALTER TABLE `table_name` ADD UNIQUE 'index_name' (`column`);
 ```
 
 索引列的值必须唯一，但允许有空值。
@@ -67,7 +77,7 @@ ALTER TABLE `table_name` ADD UNIQUE (`column`);
 ## 普通索引 INDEX
 
 ```sql
-ALTER TABLE `table_name` ADD INDEX index_name ( `column` );
+ALTER TABLE `table_name` ADD INDEX 'index_name' ( `column` );
 ```
 
 最基本的索引，没有任何限制。
@@ -80,17 +90,17 @@ ALTER TABLE `table_name` ADD INDEX index_name ( `column` );
 
 为了更多的提高 mysql 效率可建立组合索引，遵循”最左前缀“原则。
 
-## 聚簇索引
-
-## 非聚簇索引
-
-## 全文索引 FULLTEXT
+## 全文索引
 
 ```sql
-ALTER TABLE `table_name` ADD FULLTEXT ( `column` );
+ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
 ```
 
 仅可用于 MyISAM 表，针对较大的数据，生成全文索引很耗时好空间。
+
+## 聚簇索引
+
+## 非聚簇索引
 
 ## 聚集索引和辅助索引、覆盖索引
 
@@ -112,32 +122,11 @@ ALTER TABLE `table_name` ADD FULLTEXT ( `column` );
 
 使用 explain，可以通过输出的 extra 列来判断，对于一个索引覆盖查询，显示为**using index**，MySQL 查询优化器在执行查询前会决定是否有索引覆盖查询
 
-## 创建索引的语法
-
-- 首先创建一个表：create table t1 (id int primary key,username varchar(20),password varchar(20));
-- 创建单个索引的语法：CREATE INDEX 索引名 on 表名（字段名）
-- 索引名一般是：表名\_字段名
-- 给 id 创建索引：CREATE INDEX t1_id on t1(id);
-- 创建联合索引的语法：CREATE INDEX 索引名 on 表名（字段名 1，字段名 2）
-- 给 username 和 password 创建联合索引：CREATE index t1_username_password ON t1(username,password)
-- 其中 index 还可以替换成 unique，primary key，分别代表唯一索引和主键索引
-- 删除索引：DROP INDEX t1_username_password ON t1
-
-## 索引对性能的影响
-
-- 大大减少服务器需要扫描的数据量。
-- 帮助服务器避免排序和临时表。
-- 将随机 I/O 变顺序 I/O。
-- 大大提高查询速度。
-- 降低写的速度（不良影响）。
-- 磁盘占用（不良影响）。
-
 ## 索引的使用场景
 
 - 对于非常小的表，大部分情况下全表扫描效率更高。
 - 中到大型表，索引非常有效。
 - 特大型的表，建立和使用索引的代价会随之增大，可以使用分区技术来解决。
-
 - 主键索引一定是唯一索引，唯一索引不是主键索引。
 - 主键可以与外键构成参照完整性约束，防止数据不一致。
 - 联合索引：将多个列组合在一起创建索引，可以覆盖多个列。（也叫复合索引，组合索引）
@@ -195,87 +184,46 @@ InnoDB 通过主键聚簇数据，如果没有定义主键，会选择一个唯�
 
 [数据库两个神器【索引和锁】](https://segmentfault.com/a/1190000015738121)
 
+## 不能使用索引的情况
 
-## 概述
+1. 查询使用了两种排序方向
 
-索引是存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能
+   ```sql
+   select * from user where login_time > '2018-01-01' order by id des ,username asc;
+   ```
 
-### 索引的优点
+2. order by 中含有了一个没有索引的列
 
-1、大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度
+   ```sql
+   select * from user where name = '11' order by age desc; //age 没有索引
+   ```
 
-2、帮助服务器避免排序和临时表
+3. where 和 order by 无法形成最左前缀
 
-3、可以将随机 I/O 变为顺序 I/O
+4. 索引列的第一列是范围条件
 
-### 索引的创建
+5. 在索引列上有多个等于条件，这也是一种范围。不能使用索引
 
-#### 主键索引
+创建一个组合索引： `ALTER TABLE user_test ADD INDEX idx_user(user_name , city , age);`
 
-```
-ALTER TABLE 'table_name' ADD PRIMARY KEY 'index_name' ('column');
-```
+1、where 查询条件中不包含索引列中的最左索引列，则无法使用到索引查询，如：
 
-#### 唯一索引
-
-```
-ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
-```
-
-#### 普通索引
-
-```
-ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column');
-```
-
-#### 全文索引
-
-```
-ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
-```
-
-#### 组合索引
-
-```
-ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
-```
-
-### 选择合适的索引列顺序
-
-在组合索引的创建中索引列的顺序非常重要，正确的索引顺序依赖于使用该索引的查询方式，对于组合索引的索引顺序可以通过经验法则来帮助我们完成：将选择性最高的列放到索引最前列，该法则与前缀索引的选择性方法一致，但并不是说所有的组合索引的顺序都使用该法则就能确定，还需要根据具体的查询场景来确定具体的索引顺序。
-
-### 索引匹配
-
-对于索引的匹配，是从左到右的。即，索引字段的值，只能先完全匹配左边后，才能匹配后边的值。
-
-### 索引排序
-
-当索引的列顺序和 orderby 子句的顺序完全一致，并且所有列的排序方向都一样时，mysql 才能使用索引来对结果做排序，
-
-如果查询需要关联多张表，则只有当 orderby 子句引⽤的字段全部为第一个表时，才能使用索引做排序。
-
-### 索引的限制
-
-创建一个组合索引： ALTER TABLE user_test ADD INDEX idx_user(user_name , city , age);
-
-#### 1、where 查询条件中不包含索引列中的最左索引列，则无法使用到索引查询，如：
-
-```
+```sql
 SELECT * FROM user_test WHERE city = '广州';
 ```
 
 或
 
-```
+```sql
 SELECT * FROM user_test WHERE age= 26;
 ```
 
 或
 
-```
+```sql
 SELECT * FROM user_test WHERE city = '广州' AND age = '26';
 ```
 
-#### 3、如果 where 查询条件中有某个列的范围查询，则其右边的所有列都无法使用索引优化查询，如：
+2、如果 where 查询条件中有某个列的范围查询，则其右边的所有列都无法使用索引优化查询，如：
 
-SELECT \* FROM user_test WHERE user_name = 'feinik' AND city LIKE '广州%' AND age = 26;
+`SELECT \* FROM user_test WHERE user_name = 'feinik' AND city LIKE '广州%' AND age = 26;`
