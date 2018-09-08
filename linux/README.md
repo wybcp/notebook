@@ -35,3 +35,6 @@ GNU的全称为**GNU's not unix**，意思是"GNU不是UNIX"，GNU计划，又�
 ​    到1991年Linux内核发布的时候，GNU项目已经完成了除系统内核之外的各种必备软件的开发。在Linux Torvalds和其他开发人员的努力下，GNU项目的部分组件又运行到了Linux内核之上，例如：GNU项目里的Emacs、gcc、bash、gawk等，至今都是Linux系统中很重要的基础软件。所以linux 又叫**GNU/Linux**
 
 GPL全称为General Public License，中文名为通用公共许可，是一个最著名的开源许可协议，开源社区最著名的Linux内核就是在GPL许可下发布的。GPL许可是由自由软件基金会（Free Software foundation）创建的。
+
+- ~ 符号代表的是“使用者的主文件夹”
+- 提示字符方面，在Linux当中，默认root的提示字符为 # ，而一般身份使用者的提示字符为 $ 。

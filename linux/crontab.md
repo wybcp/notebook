@@ -13,7 +13,7 @@
 - 第 5 列星期 0 ～ 7（0 和 7 表示星期天）
 - 第 6 列要运行的命令
 
-![crontab](crontab.png)
+![crontab](images/crontab.png)
 
 ### 实例
 
