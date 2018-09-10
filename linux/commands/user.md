@@ -1,3 +1,5 @@
+# 用户管理
+
 ## useradd
 
     [root@study ~]# useradd [-u UID] [-g 初始群组] [-G 次要群组] [-mM]\
@@ -19,16 +21,19 @@
     -f  ：后面接 shadow 的第七字段项目，指定密码是否会失效。0为立刻失效，
           -1 为永远不失效（密码只会过期而强制于登陆时重新设置而已。）
 
-    范例一：完全参考默认值创建一个使用者，名称为 vbird1
-    [root@study ~]# useradd vbird1
-    [root@study ~]# ll -d /home/vbird1
-    drwx------. 3 vbird1 vbird1 74 Jul 20 21:50 /home/vbird1
-    # 默认会创建使用者主文件夹，且权限为 700 ！这是重点！
+范例一：完全参考默认值创建一个使用者，名称为 vbird1
 
-    [root@study ~]# grep vbird1 /etc/passwd /etc/shadow /etc/group
-    /etc/passwd:vbird1:x:1003:1004::/home/vbird1:/bin/bash
-    /etc/shadow:vbird1:!!:16636:0:99999:7:::
-    /etc/group:vbird1:x:1004:     &lt;==默认会创建一个与帐号一模一样的群组名
+```bash
+[root@study ~]# useradd vbird1
+[root@study ~]# ll -d /home/vbird1
+drwx------. 3 vbird1 vbird1 74 Jul 20 21:50 /home/vbird1
+# 默认会创建使用者主文件夹，且权限为 700 ！这是重点！
+
+[root@study ~]# grep vbird1 /etc/passwd /etc/shadow /etc/group
+/etc/passwd:vbird1:x:1003:1004::/home/vbird1:/bin/bash
+/etc/shadow:vbird1:!!:16636:0:99999:7:::
+/etc/group:vbird1:x:1004:     &lt;==默认会创建一个与帐号一模一样的群组名
+```
 
 ## passwd
 

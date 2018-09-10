@@ -1,8 +1,5 @@
 # 面试
 
-
-# Python 语言特性
-
 ## 1 Python 的函数参数传递
 
 看两个例子:
@@ -58,11 +55,11 @@ print a  # [1]
 
 当一个引用传递给函数的时候,函数自动复制一份引用,这个函数里的引用和外边的引用没有半毛关系了.所以第一个例子里函数把引用指向了一个不可变对象,当函数返回的时候,外面的引用没半毛感觉.而第二个例子就不一样了,函数内的引用指向的是可变对象,对它的操作就和定位了指针地址一样,在内存里进行修改.
 
-如果还不明白的话,这里有更好的解释: http://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference
+如果还不明白的话,这里有更好的解释: ，<http://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference>
 
 ## 2 Python 中的元类(metaclass)
 
-这个非常的不常用,但是像 ORM 这种复杂的结构还是会需要的,详情请看:http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python
+这个非常的不常用,但是像 ORM 这种复杂的结构还是会需要的,详情请看:<http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python>
 
 ## 3 @staticmethod 和@classmethod
 
@@ -98,8 +95,8 @@ a=A()
 
 更多关于这个问题:
 
-1. http://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod-in-python
-2. https://realpython.com/blog/python/instance-class-and-static-methods-demystified/
+1. <http://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod-in-python>
+2. <https://realpython.com/blog/python/instance-class-and-static-methods-demystified/>
 
 ## 4 类变量和实例变量
 
@@ -845,7 +842,7 @@ InnoDB 的趋势会是一个非常复杂的存储引擎，对于一些小的应�
 mysql 数据库引擎: http://www.cnblogs.com/0201zcr/p/5296843.html
 MySQL 存储引擎－－MyISAM 与 InnoDB 区别: https://segmentfault.com/a/1190000008227211
 
-# 网络
+
 
 ## 1 三次握手
 

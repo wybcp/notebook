@@ -2,6 +2,8 @@
 
 ## 更新 packages
 
+`pipdate`
+
 ```python
 import pip
 from subprocess import call
