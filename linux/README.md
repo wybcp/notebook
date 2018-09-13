@@ -6,7 +6,7 @@
 - [Linux(磁盘网络相关命令)](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/Linux%E5%91%BD%E4%BB%A42.md)
 - [Crontab计划任务](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/crontab.md)
 - [shell](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/shell.md)
-- [进程和线程](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/shell.md)
+
 - [AWK命令](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/AWK%E7%BB%83%E4%B9%A0.md)
 - [SED命令](https://github.com/xianyunyh/PHP-Interview/blob/master/Linux/Sed%E7%BB%83%E4%B9%A0.md)
 

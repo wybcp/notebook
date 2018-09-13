@@ -20,7 +20,7 @@ fun(a)
 print a  # [1]
 ```
 
-所有的变量都可以理解是内存中一个对象的“引用”，或者，也可以看似 c 中 void\*的感觉。
+所有的变量都可以理解是内存中一个对象的“引用”，或者，也可以看似 c 中 void \*的感觉。
 
 通过`id`来看引用`a`的内存地址可以比较理解：
 
@@ -100,11 +100,11 @@ a=A()
 
 ## 4 类变量和实例变量
 
-**类变量：**
+### 类变量
 
 > ​ 是可在类的所有实例之间共享的值（也就是说，它们不是单独分配给每个实例的）。例如下例中，num_of_instance 就是类变量，用于跟踪存在着多少个 Test 的实例。
 
-**实例变量：**
+### 实例变量
 
 > 实例化之后，每个实例单独拥有的变量。
 
@@ -154,7 +154,7 @@ print p2.name  # [1]
 print Person.name  # [1]
 ```
 
-参考:http://stackoverflow.com/questions/6470428/catch-multiple-exceptions-in-one-line-except-block
+参考:<http://stackoverflow.com/questions/6470428/catch-multiple-exceptions-in-one-line-except-block>
 
 ## 5 Python 自省
 
@@ -203,21 +203,21 @@ AttributeError: myClass instance has no attribute '__superprivate'
 
 `__foo`:这个有真正的意义:解析器用`_classname__foo`来代替这个名字,以区别和其他类相同的命名,它无法直接像公有成员一样随便访问,通过对象名.\_类名\_\_xxx 这样的方式可以访问.
 
-详情见:http://stackoverflow.com/questions/1301346/the-meaning-of-a-single-and-a-double-underscore-before-an-object-name-in-python
+详情见:<http://stackoverflow.com/questions/1301346/the-meaning-of-a-single-and-a-double-underscore-before-an-object-name-in-python>
 
-或者: http://www.zhihu.com/question/19754941
+或者: <http://www.zhihu.com/question/19754941>
 
 ## 8 字符串格式化:%和.format
 
 .format 在许多方面看起来更便利.对于`%`最烦人的是它无法同时传递一个变量和元组.你可能会想下面的代码不会有什么问题:
 
-```
+```python
 "hi there %s" % name
 ```
 
 但是,如果 name 恰好是(1,2,3),它将会抛出一个 TypeError 异常.为了保证它总是正确的,你必须这样做:
 
-```
+```python
 "hi there %s" % (name,)   # 提供一个单元素的数组而不是一个参数
 ```
 
@@ -228,13 +228,13 @@ AttributeError: myClass instance has no attribute '__superprivate'
 - 不知道它(在读这个之前)
 - 为了和 Python2.5 兼容(譬如 logging 库建议使用`%`([issue #4](https://github.com/taizilongxu/interview_python/issues/4)))
 
-http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
+<http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format>
 
 ## 9 迭代器和生成器
 
-这个是 stackoverflow 里 python 排名第一的问题,值得一看: http://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do-in-python
+这个是 stackoverflow 里 python 排名第一的问题,值得一看: <http://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do-in-python>
 
-这是中文版: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/1/README.html
+这是中文版: <http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/1/README.html>
 
 这里有个关于生成器的创建问题面试官有考：
 问： 将列表生成式中[]改成() 之后数据结构是否改变？
@@ -282,7 +282,7 @@ apple = fruit
 
 你也可以混着用.命名参数首先获得参数值然后所有的其他参数都传递给`*args`和`**kwargs`.命名参数在列表的最前端.例如:
 
-```
+```python
 def table_things(titlestring, **kwargs)
 ```
 
@@ -302,7 +302,7 @@ a = aardvark, b = baboon, c = cat
 
 就像你看到的一样,它可以传递列表(或者元组)的每一项并把它们解包.注意必须与它们在函数里的参数相吻合.当然,你也可以在函数定义或者函数调用时用\*.
 
-http://stackoverflow.com/questions/3394835/args-and-kwargs
+<http://stackoverflow.com/questions/3394835/args-and-kwargs>
 
 ## 11 面向切面编程 AOP 和装饰器
 
@@ -310,9 +310,9 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 装饰器是一个很著名的设计模式，经常被用于有切面需求的场景，较为经典的有插入日志、性能测试、事务处理等。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量函数中与函数功能本身无关的雷同代码并继续重用。概括的讲，**装饰器的作用就是为已经存在的对象添加额外的功能。**
 
-这个问题比较大,推荐: http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python
+这个问题比较大,推荐: <http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python>
 
-中文: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/3/README.html
+中文: <http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/3/README.html>
 
 ## 12 鸭子类型
 
@@ -328,7 +328,7 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 ## 13 Python 中重载
 
-引自知乎:http://www.zhihu.com/question/20053359
+引自知乎:<http://www.zhihu.com/question/20053359>
 
 函数重载主要是为了解决两个问题。
 
@@ -349,7 +349,7 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 [stackoverflow](http://stackoverflow.com/questions/54867/what-is-the-difference-between-old-style-and-new-style-classes-in-python)
 
-这篇文章很好的介绍了新式类的特性: http://www.cnblogs.com/btchenguang/archive/2012/09/17/2689146.html
+这篇文章很好的介绍了新式类的特性: <http://www.cnblogs.com/btchenguang/archive/2012/09/17/2689146.html>
 
 新式类很早在 2.2 就出现了,所以旧式类完全是兼容的问题,Python3 里的类全部都是新式类.这里有一个 MRO 问题可以了解下(新式类是广度优先,旧式类是深度优先),<Python 核心编程>里讲的也很多.
 
@@ -600,7 +600,7 @@ Python 默认定义了三代对象集合，索引数越大，对象存活时间�
 
 ## 25 Python 的 List
 
-推荐: http://www.jianshu.com/p/J4U6rR
+推荐: <http://www.jianshu.com/p/J4U6rR>
 
 ## 26 Python 的 is
 
@@ -622,7 +622,7 @@ super() lets you avoid referring to the base class explicitly, which can be nice
 
 Note that the syntax changed in Python 3.0: you can just say super().`__init__`() instead of super(ChildB, self).`__init__`() which IMO is quite a bit nicer.
 
-http://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods
+<http://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods>
 
 [Python2.7 中的 super 方法浅见](http://blog.csdn.net/mrlevo520/article/details/51712440)
 
@@ -635,172 +635,20 @@ What is the difference between range and xrange functions in Python 2.X?
 range creates a list, so if you do range(1, 10000000) it creates a list in memory with 9999999 elements.
 xrange is a sequence object that evaluates lazily.
 
-http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x
-
-# 操作系统
-
-## 1 select,poll 和 epoll
-
-其实所有的 I/O 都是轮询的方法,只不过实现的层面不同罢了.
-
-这个问题可能有点深入了,但相信能回答出这个问题是对 I/O 多路复用有很好的了解了.其中 tornado 使用的就是 epoll 的.
-
-[selec,poll 和 epoll 区别总结](http://www.cnblogs.com/Anker/p/3265058.html)
-
-基本上 select 有 3 个缺点:
-
-1. 连接数受限
-2. 查找配对速度慢
-3. 数据由内核拷贝到用户态
-
-poll 改善了第一个缺点
-
-epoll 改了三个缺点.
-
-关于 epoll 的: http://www.cnblogs.com/my_life/articles/3968782.html
-
-## 2 调度算法
-
-1. 先来先服务(FCFS, First Come First Serve)
-2. 短作业优先(SJF, Shortest Job First)
-3. 最高优先权调度(Priority Scheduling)
-4. 时间片轮转(RR, Round Robin)
-5. 多级反馈队列调度(multilevel feedback queue scheduling)
-
-常见的调度算法总结:http://www.jianshu.com/p/6edf8174c1eb
-
-实时调度算法:
-
-1. 最早截至时间优先 EDF
-2. 最低松弛度优先 LLF
-
-## 3 死锁
-
-原因:
-
-1. 竞争资源
-2. 程序推进顺序不当
-
-必要条件:
-
-1. 互斥条件
-2. 请求和保持条件
-3. 不剥夺条件
-4. 环路等待条件
-
-处理死锁基本方法:
-
-1. 预防死锁(摒弃除 1 以外的条件)
-2. 避免死锁(银行家算法)
-3. 检测死锁(资源分配图)
-4. 解除死锁
-   1. 剥夺资源
-   2. 撤销进程
-
-死锁概念处理策略详细介绍:https://wizardforcel.gitbooks.io/wangdaokaoyan-os/content/10.html
-
-## 4 程序编译与链接
-
-推荐: http://www.ruanyifeng.com/blog/2014/11/compiler.html
-
-Bulid 过程可以分解为 4 个步骤:预处理(Prepressing), 编译(Compilation)、汇编(Assembly)、链接(Linking)
-
-以 c 语言为例:
-
-### 1 预处理
-
-预编译过程主要处理那些源文件中的以“#”开始的预编译指令，主要处理规则有：
-
-1. 将所有的“#define”删除，并展开所用的宏定义
-2. 处理所有条件预编译指令，比如“#if”、“#ifdef”、 “#elif”、“#endif”
-3. 处理“#include”预编译指令，将被包含的文件插入到该编译指令的位置，注：此过程是递归进行的
-4. 删除所有注释
-5. 添加行号和文件名标识，以便于编译时编译器产生调试用的行号信息以及用于编译时产生编译错误或警告时可显示行号
-6. 保留所有的#pragma 编译器指令。
-
-### 2 编译
-
-编译过程就是把预处理完的文件进行一系列的词法分析、语法分析、语义分析及优化后生成相应的汇编代码文件。这个过程是整个程序构建的核心部分。
-
-### 3 汇编
-
-汇编器是将汇编代码转化成机器可以执行的指令，每一条汇编语句几乎都是一条机器指令。经过编译、链接、汇编输出的文件成为目标文件(Object File)
-
-### 4 链接
-
-链接的主要内容就是把各个模块之间相互引用的部分处理好，使各个模块可以正确的拼接。
-链接的主要过程包块 地址和空间的分配（Address and Storage Allocation）、符号决议(Symbol Resolution)和重定位(Relocation)等步骤。
-
-## 5 静态链接和动态链接
-
-静态链接方法：静态链接的时候，载入代码就会把程序会用到的动态代码或动态代码的地址确定下来
-静态库的链接可以使用静态链接，动态链接库也可以使用这种方法链接导入库
-
-动态链接方法：使用这种方式的程序并不在一开始就完成动态链接，而是直到真正调用动态库代码时，载入程序才计算(被调用的那部分)动态代码的逻辑地址，然后等到某个时候，程序又需要调用另外某块动态代码时，载入程序又去计算这部分代码的逻辑地址，所以，这种方式使程序初始化时间较短，但运行期间的性能比不上静态链接的程序
-
-## 6 虚拟内存技术
-
-虚拟存储器是指具有请求调入功能和置换功能,能从逻辑上对内存容量加以扩充的一种存储系统.
-
-## 7 分页和分段
-
-分页: 用户程序的地址空间被划分成若干固定大小的区域，称为“页”，相应地，内存空间分成若干个物理块，页和块的大小相等。可将用户程序的任一页放在内存的任一块中，实现了离散分配。
-
-分段: 将用户程序地址空间分成若干个大小不等的段，每段可以定义一组相对完整的逻辑信息。存储分配时，以段为单位，段与段在内存中可以不相邻接，也实现了离散分配。
-
-### 分页与分段的主要区别
-
-1. 页是信息的物理单位,分页是为了实现非连续分配,以便解决内存碎片问题,或者说分页是由于系统管理的需要.段是信息的逻辑单位,它含有一组意义相对完整的信息,分段的目的是为了更好地实现共享,满足用户的需要.
-2. 页的大小固定,由系统确定,将逻辑地址划分为页号和页内地址是由机器硬件实现的.而段的长度却不固定,决定于用户所编写的程序,通常由编译程序在对源程序进行编译时根据信息的性质来划分.
-3. 分页的作业地址空间是一维的.分段的地址空间是二维的.
-
-## 8 页面置换算法
-
-1. 最佳置换算法 OPT:不可能实现
-2. 先进先出 FIFO
-3. 最近最久未使用算法 LRU:最近一段时间里最久没有使用过的页面予以置换.
-4. clock 算法
-
-## 9 边沿触发和水平触发
-
-边缘触发是指每当状态变化时发生一个 io 事件，条件触发是只要满足条件就发生一个 io 事件
-
-# 数据库
+<http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x>
 
 ## 1 事务
 
 数据库事务(Database Transaction) ，是指作为单个逻辑工作单元执行的一系列操作，要么完全地执行，要么完全地不执行。
-彻底理解数据库事务: http://www.hollischuang.com/archives/898
+彻底理解数据库事务: <http://www.hollischuang.com/archives/898>
 
 ## 2 数据库索引
 
-推荐: http://tech.meituan.com/mysql-index.html
+推荐: <http://tech.meituan.com/mysql-index.html>
 
 [MySQL 索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
 
 聚集索引,非聚集索引,B-Tree,B+Tree,最左前缀原理
-
-## 3 Redis 原理
-
-### Redis 是什么？
-
-1. 是一个完全开源免费的 key-value 内存数据库
-2. 通常被认为是一个数据结构服务器，主要是因为其有着丰富的数据结构 strings、map、 list、sets、 sorted sets
-
-### Redis 数据库
-
-> ​ 通常局限点来说，Redis 也以消息队列的形式存在，作为内嵌的 List 存在，满足实时的高并发需求。在使用缓存的时候，redis 比 memcached 具有更多的优势，并且支持更多的数据类型，把 redis 当作一个中间存储系统，用来处理高并发的数据库操作
-
-- 速度快：使用标准 C 写，所有数据都在内存中完成，读写速度分别达到 10 万/20 万
-- 持久化：对数据的更新采用 Copy-on-write 技术，可以异步地保存到磁盘上，主要有两种策略，一是根据时间，更新次数的快照（save 300 10 ）二是基于语句追加方式(Append-only file，aof)
-- 自动操作：对不同数据类型的操作都是自动的，很安全
-- 快速的主--从复制，官方提供了一个数据，Slave 在 21 秒即完成了对 Amazon 网站 10G key set 的复制。
-- Sharding 技术： 很容易将数据分布到多个 Redis 实例中，数据库的扩展是个永恒的话题，在关系型数据库中，主要是以添加硬件、以分区为主要技术形式的纵向扩展解决了很多的应用场景，但随着 web2.0、移动互联网、云计算等应用的兴起，这种扩展模式已经不太适合了，所以近年来，像采用主从配置、数据库复制形式的，Sharding 这种技术把负载分布到多个特理节点上去的横向扩展方式用处越来越多。
-
-### Redis 缺点
-
-- 是数据库容量受到物理内存的限制,不能用作海量数据的高性能读写,因此 Redis 适合的场景主要局限在较小数据量的高性能操作和运算上。
-- Redis 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂。为避免这一问题，运维人员在系统上线时必须确保有足够的空间，这对资源造成了很大的浪费。
 
 ## 4 乐观锁和悲观锁
 
@@ -808,7 +656,7 @@ Bulid 过程可以分解为 4 个步骤:预处理(Prepressing), 编译(Compilati
 
 乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。
 
-乐观锁与悲观锁的具体区别: http://www.cnblogs.com/Bob-FD/p/3352216.html
+乐观锁与悲观锁的具体区别: <http://www.cnblogs.com/Bob-FD/p/3352216.html>
 
 ## 5 MVCC
 
@@ -839,10 +687,8 @@ MyISAM 适合于一些需要大量查询的应用，但其对于有大量写操�
 
 InnoDB 的趋势会是一个非常复杂的存储引擎，对于一些小的应用，它会比 MyISAM 还慢。他是它支持“行锁” ，于是在写操作比较多的时候，会更优秀。并且，他还支持更多的高级应用，比如：事务。
 
-mysql 数据库引擎: http://www.cnblogs.com/0201zcr/p/5296843.html
-MySQL 存储引擎－－MyISAM 与 InnoDB 区别: https://segmentfault.com/a/1190000008227211
-
-
+mysql 数据库引擎: <http://www.cnblogs.com/0201zcr/p/5296843.html>
+MySQL 存储引擎－－MyISAM 与 InnoDB 区别: <https://segmentfault.com/a/1190000008227211>
 
 ## 1 三次握手
 
@@ -859,7 +705,7 @@ _注意: 中断连接端可以是客户端，也可以是服务器端. 下面仅
 3. 服务器等到所有数据传输结束, 向客户端发送一个带有 FIN = 1 的数据分段, 并进入 CLOSE-WAIT 状态, 等待客户端发来带有 ACK = 1 的确认报文.
 4. 客户端收到服务器发来带有 FIN = 1 的报文, 返回 ACK = 1 的报文确认, 为了防止服务器端未收到需要重发, 进入 TIME-WAIT 状态. 服务器接收到报文后关闭连接. 客户端等待 2MSL 后未收到回复, 则认为服务器成功关闭, 客户端关闭连接.
 
-图解: http://blog.csdn.net/whuslei/article/details/6667471
+图解: <http://blog.csdn.net/whuslei/article/details/6667471>
 
 ## 3 ARP 协议
 

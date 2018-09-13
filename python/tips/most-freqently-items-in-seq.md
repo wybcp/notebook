@@ -1,6 +1,6 @@
+# [序列中出现次数最多的元素](https://python3-cookbook.readthedocs.io/zh_CN/latest/c01/p12_determine_most_freqently_items_in_seq.html)
 
-https://python3-cookbook.readthedocs.io/zh_CN/latest/c01/p12_determine_most_freqently_items_in_seq.html
-```
+```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
