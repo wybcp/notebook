@@ -1,6 +1,6 @@
 # Python 设计模式
 
-代码直戳: https://github.com/faif/python-patterns
+代码直戳: <https://github.com/faif/python-patterns>
 
 ## 工厂方法
 
@@ -17,8 +17,6 @@
 这个 Python 里可以使用@property 实现,就是当调用的时候才生成.
 
 ## 生成器 Builder
-
-![](img/builder.png)
 
 Builder 模式主要用于构建一个复杂的对象，但这个对象构建的算法是稳定的，对象中的各个部分经常变化。Builder 模式主要在于应对复杂对象各个部分的频繁需求变动。但是难以应对算法的需求变动。这点一定要注意，如果用错了，会带来很多不必要的麻烦。
 
