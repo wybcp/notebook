@@ -50,7 +50,14 @@ print(favs)
 ##     'Arham': 1,
 ##     'Ahmed': 1
 ##  })
+
+# 出现频率最高的2个单词
+top_three = favs.most_common(2)
+print(top_three)
+# [('Yasoob', 2), ('Ali', 2)]
 ```
+
+一个 `Counter` 对象就是一个字典，将元素映射到它出现的次数上。
 
 ## deque
 

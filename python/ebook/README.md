@@ -15,3 +15,7 @@
 <http://book.pythontips.com/en/latest/index.html>
 
 python 的一些小知识点
+
+## [Data Mining (Second Edition)](https://www-users.cs.umn.edu/~kumar001/dmbook/index.php)
+
+数据挖掘

@@ -29,6 +29,8 @@ expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
 print(cheap)
 ```
 
-当要查找的元素个数相对比较小的时候，函数 nlargest() 和 nsmallest() 是很合适的。 如果你仅仅想查找唯一的最小或最大（N=1）的元素的话，那么使用 min() 和 max() 函数会更快些。
+当要查找的元素个数相对比较小的时候，函数 nlargest() 和 nsmallest() 是很合适的。
+
+如果你仅仅想查找唯一的最小或最大（N=1）的元素的话，那么使用 min() 和 max() 函数会更快些。
 
 类似的，如果 N 的大小和集合大小接近的时候，通常先排序这个集合然后再使用切片操作会更快点 （ `sorted(items)[:N]` 或者是 `sorted(items)[-N:]` ）。

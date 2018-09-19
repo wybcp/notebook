@@ -25,7 +25,7 @@
 | str.isupper()                                 |                                                             |
 | str.join(iterable)                            |                                                             |
 | str.ljust(width[, fillchar])                  | 左对齐                                                      |
-| str.lstrip([chars])                           | 删除前导空格                                                |
+| str.lstrip([chars])                           | 删除前导空格，可以设置删除的字符                            |
 | str.partition(sep)                            |                                                             |
 | str.replace(old, new[, count])                | 替换                                                        |
 | str.rfind(sub[, start[, end]])                |                                                             |
@@ -64,3 +64,14 @@ print('b', end='')
 ```
 
 如果你需要指定一些未经过特殊处理的字符串，比如转义序列，那么你需要在字符串前增加 r 或 R 来指定一个原始（Raw） 字符串
+
+## 多个界定符分割字符串
+
+string 对象的 split() 方法只适应于非常简单的字符串分割情形， 它并不允许有多个分隔符或者是分隔符周围不确定的空格。 当你需要更加灵活的切割字符串的时候，最好使用 re.split() 方法：
+
+```bash
+>>> line = 'asdf fjdk; afed, fjek,asdf, foo'
+>>> import re
+>>> re.split(r'[;,\s]\s*', line)
+['asdf', 'fjdk', 'afed', 'fjek', 'asdf', 'foo']
+```
