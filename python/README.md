@@ -2,14 +2,6 @@
 
 Python 3.6
 
-## mirror
-
-阿里云镜像下载
-
-```bash
-pip install -i https://mirrors.aliyun.com/pypi/simple/ numpy
-```
-
 ## [语言规范](https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules/)
 
 google python 风格指南

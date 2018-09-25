@@ -19,3 +19,5 @@ python 的一些小知识点
 ## [Data Mining (Second Edition)](https://www-users.cs.umn.edu/~kumar001/dmbook/index.php)
 
 数据挖掘
+
+## [Python Linux系统管理与自动化运维](https://book.douban.com/subject/27149544/)
