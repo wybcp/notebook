@@ -1,5 +1,7 @@
 # [Ansible](https://github.com/ansible/ansible)
 
+ansible 2.6
+
 Ansible 是一个极其简单的 IT 自动化系统。它处理配置管理，应用程序部署，云配置，临时任务执行和多节点编排 – 包括通过负载平衡器轻松实现零停机滚动更新等操作。
 
 [Ansible 中文权威指南](https://ansible-tran.readthedocs.io/en/latest/)
@@ -24,7 +26,9 @@ Ansible 的编排引擎由 Inventory、 API、 Modules (模块)和 Plugins 组�
 127.0.0.1 ansible_user=test ansible_port=22
 ```
 
-Ansible 默认使用 `/etc/ansible/ansible.cfg` 文件，可以在 `ansible.cfg` 中设定一些默认值，这样就不需要对同样的内容输入多次。
+## 配置文件
+
+Ansible 默认使用 `/etc/ansible/ansible.cfg` 文件，可以在 `ansible.cfg` 中[设定一些默认值](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings-locations)，这样就不需要对同样的内容输入多次。
 
 ```cfg
 [defaults]
@@ -33,31 +37,16 @@ remote_user = test
 inventory = /home/test/hosts
 ```
 
-## hosts 文件
+[ansible.cfg](https://raw.github.com/ansible/ansible/devel/examples/ansible.cfg)例子。
 
-默认情况下， Ansible 读取`/etc/ansible/hosts`文件中的服务器配置，获取需要操作的服务器列表。
+[ansible-config](https://docs.ansible.com/ansible/latest/cli/ansible-config.html#ansible-config)命令：
 
-在 Ansible 中，有三种方式指定 hosts 文件，分别是:
-
-- 默认读取 `/etc/ansible/hosts` 文件;
-- 通过命令行参数的`-i` 指定 hosts 文件;
-- 通过 `ansible.cfg` 文件中的 inventory 选项指定 hosts 文件。
-
-ansible 命令的`--list-hosts`选项用来显示匹配的服务器列表。 `$ ansible test --list-hosts`
-
-在 hosts 文件中定义变量时，使用的是`var= value`格式定义。将变量保存在一个独立的文件时，使用的是`var: value`格式定义。
-
-## Inventory 管理
-
-在 Ansible 中，将可管理的服务器集合称为 Inventory，即服务器管理。
-
-| 名称                         | 默认值          | 描述                               |
-| ---------------------------- | --------------- | ---------------------------------- |
-| ansible_ssh_host             | 主机的名字      | SSH 目的主机名或 IP                |
-| ansible_ssh_port             | 22              | SSH 目的端口                       |
-| ansible_ssh_user             | root            | SSH 登录使用的用户名               |
-| ansible_ssh_pass             | none            | SSH 认证所使用的密码               |
-| ansible_connection           | smart           | ansible 使用何种连接模式连接到主机 |
-| ansible_ssh_private_key_file | none            | SSH 认证所使用的私钥               |
-| ansible_shell_type           | sh              | 命令所使用的 shell                 |
-| ansible_python_interpreter   | /usr/bin/python | 主机上的 python 解释器             |
+```bash
+$ ansible-config --version
+ansible-config 2.6.4
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/Users/riverside/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/ansible
+  executable location = /Users/riverside/bin/ansible-config
+  python version = 3.6.5 (v3.6.5:f59c0932b4, Mar 28 2018, 03:03:55) [GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]
+```

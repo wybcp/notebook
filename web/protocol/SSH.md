@@ -19,7 +19,7 @@ ssh-keygen 是用来生成密钥对的工具。
 将公钥保存到远程服务器的`~/.ssh/authorized_key` 文件中。
 
 ```bash
-ssh user@host 'mkdir -p .ssh && cat > .ssh/authorized_keys ’ < ~ / .ssh/id_rsa.pub
+ssh root@120.78.62.106 'mkdir -p .ssh && cat > .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 ```
 
 OpenSSH 专门提供了一个名为 ssh-copy-id 的工具。我们可以使用该工具将公钥保存到远程服务器中， 这种方式比前面 Shell 脚本的方式更加方便。

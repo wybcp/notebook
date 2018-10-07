@@ -15,6 +15,10 @@
 - DRY（Don't repeat yourself）不要重复自己，提倡代码重用；
 - 重视「编码愉悦性」。
 
+## 开源项目
+
+- [基于Laravel开发的在线点播系统](https://github.com/Qsnh/meedu)
+
 ## 目录
 
 - [laravel-china 的 Laravel 项目开发规范](https://laravel-china.org/docs/laravel-specification/5.5)

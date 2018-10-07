@@ -1,0 +1,18 @@
+# mongo.conf
+smallfiles=true
+
+#where to log
+logpath=/var/log/mongodb/mongodb-{{ ansible_hostname }}.log
+
+logappend=true
+
+# fork and run in background
+fork = true
+
+port = {{ mongodb_port }}
+
+dbpath={{ mongodb_datadir_prefix }}mongodb-{{ ansible_hostname }}
+keyFile={{ mongodb_datadir_prefix }}/secret
+
+# location of pidfile
+pidfilepath=/var/run/mongodb-{{ ansible_hostname }}.pid
