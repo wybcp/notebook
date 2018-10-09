@@ -20,6 +20,6 @@ SQL 语句主要可以划分为以下 4 个类别。
 
 ## 参考资料：
 
-SQL92 http://owen.sj.ca.us/rkowen/howto/sql92F.html
+[SQL92](http://owen.sj.ca.us/rkowen/howto/sql92F.html)
 
-MySql 文档 https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html
+[MySql 文档](https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html)

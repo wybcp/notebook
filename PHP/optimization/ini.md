@@ -1,6 +1,12 @@
-# 配置
+# php配置
 
 使用 php 的同学都知道 php.ini 配置的生效会贯穿整个 SAPI 的生命周期。在一段 php 脚本的执行过程中，如果手动修改 ini 配置，是不会启作用的。此时如果无法重启 apache 或者 nginx 等，那么就只能显式的在 php 代码中调用 ini_set 接口。ini_set 是 php 向我们提供的一个动态修改配置的函数，需要注意的是，利用 ini_set 所设置的配置与 ini 文件中设置的配置，其生效的时间范围并不相同。在 php 脚本执行结束之后，ini_set 的设置便会随即失效。
+
+## 参数
+
+- max_execution_time：设置了脚本被解析器中止之前允许的最大执行时间，单位秒。 这有助于防止写得不好的脚本占尽服务器资源。 默认设置为 30。 从命令行运行 PHP 时，默认设置为 0。set_time_limit() 函数就是通过 ini_set() 调整 max_execution_time 这个配置项的值的。
+- upload_max_filesize：一个表单中上传文件的大小。
+- post_max_size：一个 post 请求，以表单为例，表单各个字段（包含文件）的总大小。
 
 ## 解析 INI 配置文件
 

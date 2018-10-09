@@ -558,3 +558,5 @@ function swap (int &$a， int &$b){
     $a = $a-$b;
 }
 ```
+
+<https://blog.tanteng.me/2018/04/php-interview-2/#more-12086>

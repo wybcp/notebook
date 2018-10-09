@@ -16,6 +16,17 @@ datadir=C:/ProgramData/MySQL/MySQL Server 5.7\Data
 character-set-server=utf8
 ```
 
+## Mac
+
+Mac 手动创建：`sudo vim /etc/my.cnf`
+
+On macOS Sierra & OS to start/stop/restart MySQL post 5.7 from the command line:
+
+```bash
+sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+```
+
 ## innodb_buffer_pool_size
 
 配置 Innodb 的缓冲池，如果数据库中只有 Innodb 表，推荐配置为总内存的 75%。
@@ -60,14 +71,14 @@ mysql> show global variables like '%lower_case%';
 
 - lower_case_table_names = 0 时，mysql 会根据表名直接操作，大小写敏感。
 - lower_case_table_names = 1 时，mysql 会先把表名转为小写，再执行操作。
-- lower_case_table_names = 1 时，表名和数据库名在硬盘上使用CREATE TABLE或CREATE DATABASE语句指定的大小写字母进行保存，但MySQL将它们转换为小写在查找表上。名称比较对大小写不敏感，即按照大小写来保存，按照小写来比较。注释：只在对大小写不敏感的文件系统上适用! innodb表名用小写保存。
+- lower_case_table_names = 1 时，表名和数据库名在硬盘上使用 CREATE TABLE 或 CREATE DATABASE 语句指定的大小写字母进行保存，但 MySQL 将它们转换为小写在查找表上。名称比较对大小写不敏感，即按照大小写来保存，按照小写来比较。注释：只在对大小写不敏感的文件系统上适用! innodb 表名用小写保存。
 
 ### 设置 lower_case_table_names 的值
 
 打开 my.cnf 文件，加入以下语句后重启。
 
 ```config
-lower_case_table_names = 0 
+lower_case_table_names = 0
 ```
 
 ### 设置 lower_case_table_names=1 时，原来在 lower_case_table_names=0 时创建的表提示不存在的解决方法

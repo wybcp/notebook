@@ -2,28 +2,34 @@
 
 ## 1. 增
 
+- 增加数据库
+
+  ```sql
+  create database test;
+  ```
+
 - 增加一张表
 
-```sql
-CREATE TABLE `table_name`(
-  ...
-  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-```
+  ```sql
+  CREATE TABLE `table_name`(
+    ...
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ```
 
 - 增加记录
 
-```sql
-INSERT INTO `table_name`(`column_name`)
-VALUES ('your_value_one'),('your_value_two');
-```
+  ```sql
+  INSERT INTO `table_name`(`column_name`)
+  VALUES ('your_value_one'),('your_value_two');
+  ```
 
 - 增加字段
 
-```sql
-ALTER TABLE `table_name`
-ADD `your_column_name` ...
-AFTER `column_name`;
-```
+  ```sql
+  ALTER TABLE `table_name`
+  ADD `column_name` <数据类型>
+  AFTER `column_name`;
+  ```
 
 - 增加索引
 
@@ -54,38 +60,63 @@ AFTER `column_name`;
 
 - 逐行删除
 
-```sql
-DELETE FORM `table_name`
-WHERE ...;
-```
+  ```sql
+  DELETE FORM `table_name`
+  WHERE ...;
+  ```
 
 - 清空整张表
 
-```sql
-TRUNCATE TABLE `table_name`;
-```
+  ```sql
+  TRUNCATE TABLE `table_name`;
+  ```
+
+- 删除数据库
+
+  ```sql
+  DROP DATABASE `database_name`;
+  ```
 
 - 删除表
 
-```sql
-DROP TABLE `table_name`;
-```
+  ```sql
+  DROP TABLE [if exists]`table_name`;
+  ```
 
 - 删除字段
 
-```sql
-ALTER TABLE `table_name`
-DROP `column_name`;
-```
+  ```sql
+  ALTER TABLE `table_name`
+  DROP `column_name`;
+  ```
 
 - 删除索引
 
-```sql
-ALTER TABLE `table_name`
-DROP INDEX your_index_name(your_column_name);
-```
+  ```sql
+  ALTER TABLE `table_name`
+  DROP INDEX your_index_name(your_column_name);
+  ```
+
+- 删除外键约束
+
+  ```sql
+  ALTER TABLE `table_name`
+  DROP foreign key foreign_key_name;
+  ```
 
 ## 3. 改
+
+- 更改表名
+
+  ```sql
+  alter table table_name rename user_2;
+  ```
+
+- 更改存储引擎
+
+  ```sql
+  alter table table_name engine= engine_name;
+  ```
 
 - 变更数据
 
@@ -95,11 +126,17 @@ DROP INDEX your_index_name(your_column_name);
   WHERE ...;
   ```
 
-- 变更字段
+- 改变字段数据类型
+
+  ```sql
+  alter table table_name modify column_name <数据类型>;
+  ```
+
+- 变更字段名
 
   ```sql
   ALTER TABLE `table_name`
-  CHANGE `your_column_name` `your_column_name` ...(变更);
+  CHANGE `old_column_name` `new_column_name` <数据类型>;
   ```
 
 - 变更字段值为另一张表的某个值
@@ -107,7 +144,7 @@ DROP INDEX your_index_name(your_column_name);
   ```sql
   UPDATE `table_name`
   AS a
-  JOIN `anther_table_name`
+  JOIN `another_table_name`
   AS b
   SET a.column = b.anther_column
   WHERE a.id = b.a_id...;
@@ -218,15 +255,15 @@ DROP INDEX your_index_name(your_column_name);
 - 导出：`mysqldump -h 127.0.0.1 -u root -p "database_name" "table_name" --where="condition" > file_name.sql`;
 - 查看慢日志：`mysqldumpslow -s [c:按记录次数排序/t:时间/l:锁定时间/r:返回的记录数] -t [n:前 n 条数据] -g "正则" /path`
 
-```
-use 数据库;
+```sql
+use database_name;
 //创建数据表
 create table table_name(
 column_name data_type,
 ...
 );
 //查看表结构
-show columns from sys_country;
+show columns from table_name;
 
 //insert table () values();
 ```
@@ -240,9 +277,9 @@ show columns from sys_country;
 - SHOW index from table; 显示表的索引，
 - SHOW WARNINGS:
 - SHOW CREATE DATABASE X:查看数据库表基本信息
-- SHOW CREATE table X:查看表基本信息
+- SHOW CREATE table X:查看创建表基本信息
 
-```
+```sql
 select * from information_schema.TABLES where information_schema.TABLES.TABLE_SCHEMA = '数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
 ```
 
@@ -251,18 +288,18 @@ select * from information_schema.TABLES where information_schema.TABLES.TABLE_SC
 
 - 查看 MySQL 数据库大小
 
-```
-SELECT sum(DATA_LENGTH)+sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='数据库名';
-```
+  ```sql
+  SELECT sum(DATA_LENGTH)+sum(INDEX_LENGTH) FROM information_schema.TABLES where TABLE_SCHEMA='数据库名';
+  ```
 
-得到的结果是以字节为单位，除 1024 为 K，除 1048576(=1024\*1024)为 M。
+  得到的结果是以字节为单位，除 1024 为 K，除 1048576(=1024\*1024)为 M。
 
 - 查看表的最后 mysql 修改时间
 
-```
-select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' order by UPDATE_TIME desc limit 1;
-select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
-```
+  ```sql
+  select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' order by UPDATE_TIME desc limit 1;
+  select TABLE_NAME,UPDATE_TIME from information_schema.TABLES where TABLE_SCHEMA='数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
+  ```
 
 ## group by
 
@@ -274,7 +311,7 @@ HAVING 分组过滤条件： HAVING 后的字段必须是 SELECT 后出现过的
 
 将表格 users 中 age 大于 30 的数据行放入数据表 test 中的 username 数据行
 
-```
+```sql
 INSERT test(username) SELECT username FROM users WHERE age>=30;
 ```
 
