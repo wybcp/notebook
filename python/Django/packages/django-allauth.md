@@ -1,0 +1,3 @@
+# 用户注册和认证：django-allauth
+
+[django-allauth](https://django-allauth.readthedocs.io/en/latest/) 是一个 Django 应用，它为用户注册、登录/注销、密码重置，还有第三方用户认证（比如 GitHub 或 Twitter）提供了视图、表单和 URL，支持邮件地址作为用户名的认证方式，而且有大量的文档记录。第一次用的时候，它的配置可能会让人有点晕头转向；请仔细阅读[安装说明](https://django-allauth.readthedocs.io/en/latest/installation.html)，在[自定义你的配置](https://django-allauth.readthedocs.io/en/latest/configuration.html)时要专注，确保启用某个功能的所有配置都用对了。

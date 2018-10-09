@@ -18,4 +18,4 @@
 
 ## 参考
 
-https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens
+<https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens>

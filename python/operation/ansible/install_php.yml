@@ -1,0 +1,11 @@
+# - hosts: webservers
+- hosts: aliyun
+  # gather_facts: no
+  remote_user: root
+  become: yes
+  become_method: sudo
+  vars:
+    php_packages_state: latest
+    php_date_timezone: "Asian/Chongqing"
+  roles:
+    - role: geerlingguy.php

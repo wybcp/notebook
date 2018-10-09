@@ -1,0 +1,16 @@
+# - hosts: webservers
+- hosts: aliyun
+  # gather_facts: no
+  remote_user: root
+  become: yes
+  become_method: sudo
+  vars:
+    # worker_processes: 4
+    # worker_connections: 768
+    # max_open_files: 65506
+    nginx_branch: stable
+    # nginx_modules:
+      # njs: true
+      # geoip: true
+  roles:
+    - role: nginxinc.nginx

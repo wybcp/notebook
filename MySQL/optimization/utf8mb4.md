@@ -46,13 +46,25 @@ characterEncoding=utf8 会被自动识别为 utf8mb4，也可以不加这个参�
 更改数据库编码：
 
 ```sql
-ALTER DATABASE caitu99 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER DATABASE Database_Name CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
 更改表编码：
 
 ```sql
-ALTER TABLE TABLE_NAME CONVERT TO CHARACTER SET utf8mb4 COLLATEutf8mb4_general_ci;
+ALTER TABLE
+    TABLE_NAME
+    CONVERT TO CHARACTER SET utf8mb4
+    COLLATE utf8mb4_general_ci;
 ```
 
 如有必要，还可以更改列的编码
+
+```sql
+ALTER TABLE
+    table_name
+    CHANGE column_name column_name
+    VARCHAR(191)
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+```

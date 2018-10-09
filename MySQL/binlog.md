@@ -102,12 +102,10 @@ Binlog 的文件结构大致由如下几个方面组成。
 
 用 ASCII Diagram 表示如下：
 
-```
-+---------+---------+---------+------------+-------------+-------+
-|timestamp|type code|server_id|event_length|next_position|flags  |
-|4 bytes  |1 byte   |4 bytes  |4 bytes     |4 bytes      |2 bytes|
-+---------+---------+---------+------------+-------------+-------+
-```
+    +---------+---------+---------+------------+-------------+-------+
+    |timestamp|type code|server_id|event_length|next_position|flags  |
+    |4 bytes  |1 byte   |4 bytes  |4 bytes     |4 bytes      |2 bytes|
+    +---------+---------+---------+------------+-------------+-------+
 
 也可以字节编造一个结构体来解读这个头：
 
@@ -126,10 +124,10 @@ struct BinlogEventHeader
 > 如果你要直接用这个结构体来读取数据的话，需要加点手脚。
 >
 > 因为默认情况下 GCC 或者 G++ 编译器会对结构体进行字节对齐，这样读进来的数据就不对了，因为 Binlog 并不是对齐的。为了统一我们需要取消这个结构体的字节对齐，一个方法是使用`#pragma pack(n)`，一个方法是使用`__attribute__((__packed__))`，还有一种情况是在编译器编译的时候强制把所有的结构体对其取消，即在编译的时候使用 `fpack-struct` 参数，如：
->
-> ```sh
-> $ g++ temp.cpp -o a -fpack-struct=1
-> ```
+
+```sh
+g++ temp.cpp -o a -fpack-struct=1
+```
 
 根据上述的结构我们可以明确得到各变量在结构体里面的偏移量，所以在 MySQL 源码里面（[libbinlogevents/include/binlog_event.h](https://github.com/mysql/mysql-server/blob/5.7/libbinlogevents/include/binlog_event.h#L353)）有下面几个常量以快速标记偏移：
 
@@ -155,13 +153,11 @@ struct BinlogEventHeader
 
 所以实际上一个真正的事件体由两部分组成，用 ASCII Diagram 表示就像这样：
 
-```
-+=====================================+
-| event  | fixed part (post-header)   |
-| data   +----------------------------+
-|        | variable part (payload)    |
-+=====================================+
-```
+    +=====================================+
+    | event  | fixed part (post-header)   |
+    | data   +----------------------------+
+    |        | variable part (payload)    |
+    +=====================================+
 
 而这个 `post-header` 对于不同类型的事件来说长度是不一样的，同种类型来说是一样的，而这个长度的预先规定将会在一个“格式描述事件”中定好。
 
@@ -171,33 +167,31 @@ struct BinlogEventHeader
 
 在 v4 版本中这个事件的结构如下面的 ASCII Diagram 所示。
 
-```
-+=====================================+
-| event  | timestamp         0 : 4    |
-| header +----------------------------+
-|        | type_code         4 : 1    | = FORMAT_DESCRIPTION_EVENT = 15
-|        +----------------------------+
-|        | server_id         5 : 4    |
-|        +----------------------------+
-|        | event_length      9 : 4    | >= 91
-|        +----------------------------+
-|        | next_position    13 : 4    |
-|        +----------------------------+
-|        | flags            17 : 2    |
-+=====================================+
-| event  | binlog_version   19 : 2    | = 4
-| data   +----------------------------+
-|        | server_version   21 : 50   |
-|        +----------------------------+
-|        | create_timestamp 71 : 4    |
-|        +----------------------------+
-|        | header_length    75 : 1    |
-|        +----------------------------+
-|        | post-header      76 : n    | = array of n bytes, one byte per event
-|        | lengths for all            |   type that the server knows about
-|        | event types                |
-+=====================================+
-```
+    +=====================================+
+    | event  | timestamp         0 : 4    |
+    | header +----------------------------+
+    |        | type_code         4 : 1    | = FORMAT_DESCRIPTION_EVENT = 15
+    |        +----------------------------+
+    |        | server_id         5 : 4    |
+    |        +----------------------------+
+    |        | event_length      9 : 4    | >= 91
+    |        +----------------------------+
+    |        | next_position    13 : 4    |
+    |        +----------------------------+
+    |        | flags            17 : 2    |
+    +=====================================+
+    | event  | binlog_version   19 : 2    | = 4
+    | data   +----------------------------+
+    |        | server_version   21 : 50   |
+    |        +----------------------------+
+    |        | create_timestamp 71 : 4    |
+    |        +----------------------------+
+    |        | header_length    75 : 1    |
+    |        +----------------------------+
+    |        | post-header      76 : n    | = array of n bytes, one byte per event
+    |        | lengths for all            |   type that the server knows about
+    |        | event types                |
+    +=====================================+
 
 这个事件的 `type_code` 是 15，然后 `event_length` 是大于等于 91 的值的，这个主要取决于所有事件类型数。
 
@@ -271,29 +265,27 @@ int main()
 
 这个时候你得到的结果有可能就是这样的了：
 
-```
-1852400382 - �binpz�
-BinlogEventHeader
-{
-    timestamp: 1439186734
-    type_code: 15
-    server_id: 1
-    event_length: 116
-    next_position: 120
-    flags[]: 1
-}
-binlog_version: 4
-server_version: 5.6.24-log
-create_timestamp: 1439186734
-header_length: 19
-  - type 1: 56
-  - type 2: 13
-  - type 3: 0
-  - type 4: 8
-  - type 5: 0
-  - type 6: 18
-  - ...
-```
+    1852400382 - �binpz�
+    BinlogEventHeader
+    {
+        timestamp: 1439186734
+        type_code: 15
+        server_id: 1
+        event_length: 116
+        next_position: 120
+        flags[]: 1
+    }
+    binlog_version: 4
+    server_version: 5.6.24-log
+    create_timestamp: 1439186734
+    header_length: 19
+    - type 1: 56
+    - type 2: 13
+    - type 3: 0
+    - type 4: 8
+    - type 5: 0
+    - type 6: 18
+    - ...
 
 一共会输出 40 种类型（从 1 到 40），如官方文档所说，这个数组从 `START_EVENT_V3` 事件开始（`type_code` 是 1）。
 
