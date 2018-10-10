@@ -278,6 +278,8 @@ show columns from table_name;
 - SHOW WARNINGS:
 - SHOW CREATE DATABASE X:查看数据库表基本信息
 - SHOW CREATE table X:查看创建表基本信息
+- select least(value_1...value_n)：选取最小值
+- select greatest(value_1...value_n)：选取最大值
 
 ```sql
 select * from information_schema.TABLES where information_schema.TABLES.TABLE_SCHEMA = '数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
