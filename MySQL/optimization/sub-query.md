@@ -12,6 +12,9 @@ MySQL 通过内部的优化器将子查询改写成关联查询，支持 select�
 - 子查询返回多条记录，ANY ,SOME, ALL 修饰的比较运算符
   ![image](http://img.mukewang.com/590bd62c000103e912800720.jpg)
 - IN 、 NOT IN
+
   IN 等价于 =ANY \ =SOME
+
   NOT IN 等价于 !=ALL \ <>ALL
 - 如果子查询返回任何行，EXISTS 将返回 TRUE,否则为 FALSE.
+- exists   关键词，对子查询判断是否返回行`select * from table_name where exists (子查询)`

@@ -1,59 +1,21 @@
-# 多表更新
+# 连接查询
 
-在更新时如果遇到两表字段一样无法进行操作时可在更新同时更改别名
-
-```sql
-UPDATE tdb_goods AS g INNER JOIN tdb_goods_brands AS b ON g.brand_name=b.brand_name SET g.brand_name=b.brand_id;
-```
-
-```sql
-UPDATE tb1 JOIN INNER tb2  ON  SET
-```
-
-多表更新后，应该为数据表进行降维，即更改数据的数据类型。
-
-```sql
-CREATE TABLE tdb_goods
-CHANGE goods_cate cate_id SMALLINT UNSIGNED NOT NULL,
-CHANGE goods_brand brand_id SMALLINT UNSINED NOT NULL;
-```
-
-即把表中字段名 goods_cate 改为 cate_id，
-
-goods_brand 改为 brand_id，并更改其数据类型。
-
-## CREATE...SELECT
-
-创建数据表并且同时写入记录
-
-```sql
-CREATE TABLE tdb_goods_brands (
-
-    brand_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-
-    brand_name VARCHAR(40) NOT NULL
-
-  ) SELECT brand_name FROM tdb_goods GROUP BY brand_name;
-```
-
-## 连接语法结构
-
-### inner join 内连接
+## inner join 内连接
 
 在 MySQL 中 JOIN,INNER JOIN,CROSS JOIN 是等价的
 
 交集 仅显示 A、B 两表符合连接条件的记录。不符合连接条件的记录不显示。类似于取 AB 的交集。
 ![image](http://img.mukewang.com/58e371d60001e9b512800720.jpg)
 
-### left join
+## left join
 
 LEFT JOIN：显示左表全部和左右符合连接条件的记录
 
-### RIGHT JOIN
+## RIGHT JOIN
 
 显示左右符合连接条件的记录和右表全部记录
 
-### 自身连接
+## 自身连接
 
 实现无限极分类表设计框架：
 字段 1：类型 id

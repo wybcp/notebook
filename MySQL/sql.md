@@ -305,6 +305,21 @@ select * from information_schema.TABLES where information_schema.TABLES.TABLE_SC
 
 ## group by
 
+group_concat()将每个分组中各个字段显示出来。
+
+```sql
+SELECT
+DATE( created_at ) AS created_date,
+GROUP_CONCAT( `name` ) AS NAMES,
+COUNT( * ) AS total
+FROM
+users
+GROUP BY
+created_date WITH ROLLUP;
+```
+
+`WITH ROLLUP` 子语句输出上面的数据之和
+
 ## having
 
 HAVING 分组过滤条件： HAVING 后的字段必须是 SELECT 后出现过的（如“SELECT sex，age FROM users GROUP BY age HAVING age>20"，age 就出现在 SELECT 后），或放在聚合函数（包括 COUNT：计算行的数量，MAX：计算列的最大值，MIN：计算列的最小值，SUM：获取单个列的合计值，AVG：计算某个列的平均值等）中
@@ -340,6 +355,50 @@ INSERT test(username) SELECT username FROM users WHERE age>=30;
    select * from vitae a
    where (a.peopleId,a.seq) in (select peopleId,seq from vitae group by peopleId,seq having count(*) > 1)
    ```
+
+## 多表更新
+
+在更新时如果遇到两表字段一样无法进行操作时可在更新同时更改别名
+
+```sql
+UPDATE tdb_goods AS g INNER JOIN tdb_goods_brands AS b ON g.brand_name=b.brand_name SET g.brand_name=b.brand_id;
+```
+
+```sql
+UPDATE tb1 JOIN INNER tb2  ON  SET
+```
+
+多表更新后，应该为数据表进行降维，即更改数据的数据类型。
+
+```sql
+CREATE TABLE tdb_goods
+CHANGE goods_cate cate_id SMALLINT UNSIGNED NOT NULL,
+CHANGE goods_brand brand_id SMALLINT UNSINED NOT NULL;
+```
+
+即把表中字段名 goods_cate 改为 cate_id，
+
+goods_brand 改为 brand_id，并更改其数据类型。
+
+## CREATE...SELECT
+
+创建数据表并且同时写入记录
+
+```sql
+CREATE TABLE tdb_goods_brands (
+
+    brand_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+
+    brand_name VARCHAR(40) NOT NULL
+
+  ) SELECT brand_name FROM tdb_goods GROUP BY brand_name;
+```
+
+## 正则表达式
+
+![regexp](regexp.png)
+
+与`like`（无法匹配文本中出现的数据）不同的是，`regexp`在文本内进行匹配
 
 ## 参考
 

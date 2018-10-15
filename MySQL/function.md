@@ -7,8 +7,8 @@
 - `select LAST_INSERT_ID();` 当天最后插入几次记录的就是 ID 号
 - `select USER();` 当前用户，如 root
 - `select VERSION();` 版本信息
-- select MD5()：信息摘要算法，为以后的 Web 页面做准备，尽量使用 MD5()
-- select PASSWORD()：密码算法，通过 PASSWORD()修改当前用户和其他用户的密码，修改客户端自己的密码
+- `select MD5()`：信息摘要算法，为以后的 Web 页面做准备，尽量使用 MD5()
+- `select PASSWORD()`：密码算法，通过 PASSWORD()修改当前用户和其他用户的密码，修改客户端自己的密码
 - `show processlist;`查看哪些线程在运行
 
 ## 时间函数
@@ -19,6 +19,16 @@
 - `SELECT DATE_ADD('2017-4-21',INTERVAL 365 DAY);` 日期变化；2018-4-21 与（1 YEAR）等价
 - `SELECT DATEDIFF('2013-2-12','2014-2-12')` 日期之差：-365
 - `SELECT DATE_FORMAT(NOW(),'%m/%d/%Y');` 定义时间格式
+- `TIMESTAMPDIFF(unit,begin,end);`begin 和 end 是 DATE 或 DATETIME 表达式。unit 参数是确定(end-begin)的结果的单位，表示为整数。
+  - MICROSECOND
+  - SECOND
+  - MINUTE
+  - HOUR
+  - DAY
+  - WEEK
+  - MONTH
+  - QUARTER
+  - YEAR
 
 ## 比较运算符函数
 
@@ -71,14 +81,23 @@
 - trim() 删除全部空格
 - `select insert(str1,x,len,str2);`替换字符串
 - `select reverse(str);`字符串逆转
-- `select inet_aton(ip);`ip点地址转化为数值网络地址
-- `select inet_ntoa(expr);`ip数值网络地址转化为点地址
+- `select inet_aton(ip);`ip 点  地址转化为数值网络地址
+- `select inet_ntoa(expr);`ip 数值网络地址转化为点  地址
 - `select locate(str1,str);`返回子字符串在字符串中的开始位置
 - `SELECT REPLACE('??MySQL???','?','');` 替换字符串中的某些字符:
 - `SELECT SUBSTRING('MySQL',1,2);` 利用 SUBSTRING()截取字符串中的一部分字符串
 - `SELECT * FROM test WHERE first_name LIKE '%1%%' ESCAPE '1';` 利用 LIKE 查找含特定字符的字符串
 
 意思是查找字段 first_name 中含字符%的记录
+
+## 聚合函数
+
+- `count()`：
+  - `count(*)`：表中所有行数
+  - `count(column_name)`：指定列的行数，忽略空值的行
+- `sum()`：求和
+- `min()`
+- `avg()`
 
 ## 自定义函数
 
