@@ -10,13 +10,6 @@ binlog 是 Mysql sever 层维护的一种二进制日志，其主要是用来记
 - 数据恢复：通过 mysqlbinlog 工具恢复数据
 - 增量备份
 
-MySQL Server 有四种类型的日志：
-
-- Error Log：错误日志，记录 mysqld 的一些错误
-- General Query Log：一般查询日志，记录 mysqld 正在做的事情，非常影响性能
-- Binary Log：包含了一些事件，这些事件描述了数据库的改动，如建表、数据改动等，也包括一些潜在改动，比如`DELETE FROM ran WHERE bing = luan`，然而一条数据都没被删掉的这种情况。除非使用 Row-based logging，否则会包含所有改动数据的 SQL Statement。
-- Slow Query Log：慢查询日志，记录一些查询比较慢的 SQL 语句
-
 ## 启用 Binlog
 
 通常情况 MySQL 是默认关闭 Binlog 的，所以你得配置一下以启用它。
@@ -28,9 +21,14 @@ MySQL Server 有四种类型的日志：
 ```ini
 log-bin=master-bin
 log-bin-index=master-bin.index
+expire_logs_days=10
+max_binlog_size=100M
 ```
 
-这里的 `log-bin` 是指以后生成各 Binlog 文件的前缀，比如上述使用`master-bin`，那么文件就将会是`master-bin.000001`。而这里的 `log-bin-index` 则指 binlog index 文件的名称，这里我们设置为`master-bin.index`。默认使用主机名命名。
+- `log-bin` 是指以后生成各 Binlog 文件的前缀，比如上述使用`master-bin`，那么文件就将会是`master-bin.000001`
+- `log-bin-index` 则指 binlog index 文件的名称，这里我们设置为`master-bin.index`。默认使用主机名命名。
+- `expire_logs_days`清除过期日志的时间
+- `max_binlog_size`单个文件大小限制，4096B~1GB，默认 1G
 
 做完之后重启 MySQL 服务，验证一下：
 
@@ -51,10 +49,20 @@ SHOW VARIABLES LIKE '%log_bin%';
 | log_bin_use_v1_row_events       | OFF                                   |
 | sql_log_bin                     | ON                                    |
 +---------------------------------+---------------------------------------+
-6 rows in set (0.00 sec)
 ```
 
-更多的一些相关配置可以参考这篇《[MySQL 的 binary log 初探](http://blog.csdn.net/jolly10/article/details/13998761)》。
+可以参考这篇《[MySQL 的 binary log 初探](http://blog.csdn.net/jolly10/article/details/13998761)》。
+
+## 查看
+
+查看 binary log 文件个数和文件名
+`mysql>show binary logs;`
+
+查看二进制日志`mysqlbinlog log-file`
+
+## 删除
+
+除了配置自动删除binlog文件外，可以使用`msyql>reset master;`删除所有二进制文件，`purge master logs`删除指定文件。
 
 ## 结构解析
 

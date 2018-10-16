@@ -286,8 +286,7 @@ SELECT * FROM users WHERE id >= ((SELECT MAX(id) FROM users)-(SELECT MIN(id) FRO
 - 优化长难的查询语句
 - 优化特定类型的查询语句
 
-
-## B+树索引和哈希索引的区别**
+## B+树索引和哈希索引的区别\*\*
 
 B+树是一个平衡的多叉树，从根节点到每个叶子节点的高度差值不超过 1，而且同层级的节点间有指针相互链接，是有序的
 
@@ -296,8 +295,6 @@ B+树是一个平衡的多叉树，从根节点到每个叶子节点的高度差
 哈希索引就是采用一定的哈希算法，把键值换算成新的哈希值，检索时不需要类似 B+树那样从根节点到叶子节点逐级查找，只需一次哈希算法即可,是无序的
 
 ![img](https://mmbiz.qpic.cn/mmbiz_jpg/UtWdDgynLdYnMu5lfXNAYzW0PPSOB8PsAdicCricepbjicRIBIOlKdDPWlHroEiaYVgdDgicMMWbsuIlmmA4kOEVVog/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1)
-
-
 
 ## B 树和 B+树的区别
 
@@ -308,7 +305,6 @@ B+树是一个平衡的多叉树，从根节点到每个叶子节点的高度差
 2、B+树，所有的叶子结点中包含了全部关键字的信息，及指向含有这些关键字记录的指针，且叶子结点本身依关键字的大小自小而大的顺序链接，所有的非终端结点可以看成是索引部分，结点中仅含有其子树根结点中最大（或最小）关键字。 (而 B 树的非终节点也包含需要查找的有效信息)
 
 ![img](https://mmbiz.qpic.cn/mmbiz_jpg/UtWdDgynLdYnMu5lfXNAYzW0PPSOB8Psxxd09tVHZfEOicOXwrxzGFt5JibH6j44pxIpSC1ZePOFC0stO2rpBvyw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1)
-
 
 ## 什么情况下应不建或少建索引
 
@@ -397,7 +393,6 @@ MySQL InnoDB 存储引擎，实现的是基于多版本的并发控制协议—�
 
 2、当前读 (current read)：读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录。
 
-
 ## Mysql 中 MyISAM 和 InnoDB 的区别有哪些？
 
 1、InnoDB 支持事务，MyISAM 不支持，对于 InnoDB 每一条 SQL 语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条 SQL 语言放在 begin 和 commit 之间，组成一个事务；
@@ -440,6 +435,7 @@ innodb 两个文件。索引、数据保持在一个文件。
 innodb 支持事务、myiam 不支持
 
 innodb 支持外键、支持行锁
+
 ## 参考
 
 - [企业面试题｜最常问的 MySQL 面试题集合（一）](https://mp.weixin.qq.com/s?__biz=MzI0MDQ4MTM5NQ==&mid=2247486211&idx=1&sn=c8bbf47e3dd892443142ba9b33c37321&chksm=e91b6e1fde6ce7095709efd81614c72fcde19b00524e680a65458b25a181c73b227daa150506&scene=21#wechat_redirect)

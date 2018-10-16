@@ -14,7 +14,7 @@ iptables -A INPUT -s 1.2.3.4 -p tcp -m tcp –dport 3306 -j ACCEPT
 mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’;
 ```
 
-那么，做到这一步就可以高枕无忧了吗？如果是的话，文章到此就可以结束了。但是很遗憾，实际上仍然存在安全隐患。MySQL 的访问默认是明文的，与明文的 HTTP 的容易受到监听、劫持类似，暴露在外网的 MySQL 通信也有可能受到监听、中间人攻击等。下面以一个具体例子进行说明。
+MySQL 的访问默认是明文的，与明文的 HTTP 的容易受到监听、劫持类似，暴露在外网的 MySQL 通信也有可能受到监听、中间人攻击等。下面以一个具体例子进行说明。
 
 ## 1 监听 MySQL 主从的明文通信
 
@@ -22,7 +22,7 @@ mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’;
 
 准备监听的机器为 xxx.xxx.xxx.83，发起攻击的机器为 xxx.xxx.xxx.109。
 
-实施 MySQL 主从通信的监听时， 无论是监听主库还是从库效果都类似，这里测试监听主库的情况。
+实施 MySQL 主从通信的监听时，无论是监听主库还是从库效果都类似，这里测试监听主库的情况。
 
 ### 1.1 确定要监听的端口
 
@@ -40,7 +40,7 @@ ping 之后就能通过 arp 缓存确定端口
 
 登录交换机，开始没有配置镜像
 
-```
+```config
 <H3C>dis mir
 
 The monitor port has not been configured! <H3C>sys
@@ -52,7 +52,7 @@ Enter system view, return to user view with Ctrl+Z.
 
 分别配置镜像目标和镜像源端口
 
-```
+```config
 [H3C]monitor-port g0/1
 Succeed! the monitor port has been specified to be Trunk port  and the pvid
 changed.
@@ -106,11 +106,9 @@ xxx.xxx.xxx.83 配置了 MySQL 主库，另外的一台外网机器 xxx.xxx.xxx.
 
 首先在客户端监听 3306 端口，并建立加密通信，连接到远程的 1.2.4.5:8000
 
-```
-/usr/local/stunnel/etc/stunnelclient.conf
-```
+`/usr/local/stunnel/etc/stunnelclient.conf`
 
-```
+```config
 sslVersion = TLSv1
 
 CAfile = /usr/local/stunnel/etc/ca-cert.pem
@@ -128,10 +126,9 @@ connect =1.2.4.5:8000
 
 服务端监听 8000 端口，并将数据解密后转发到本机的 3306 端口
 
-```
-/usr/local/stunnel/etc/stunnelserver.conf
-```
+`/usr/local/stunnel/etc/stunnelserver.conf`
 
+```sql
 sslVersion = TLSv1
 
 CAfile = /usr/local/stunnel/etc/ca-cert.pem
@@ -145,6 +142,7 @@ key = /usr/local/stunnel/etc/serverkey.pem
 accept=8000
 
 connect=127.0.0.1:3306
+```
 
 这样，客户端访问本地 3306 端口实际会访问到远程 1.2.4.5 机器的 3306 端口，实现了通过加密隧道访问远程的 MySQL。
 
@@ -152,17 +150,15 @@ connect=127.0.0.1:3306
 
 缺点：只能实现从客户端到服务端的加密访问，需要额外维护加密隧道服务。
 
-##2.2 VPN##
+## 2.2 VPN
 
 VPN 可以将外网通信转化为虚拟的内网通信，直接解决外网访问的安全问题。以 OPENVPN 为例：
 
 在其中一边的服务器搭建服务端，配置内网网段
 
-```
-/etc/openvpn/server.conf
-```
+`/etc/openvpn/server.conf`
 
-```
+```config
 port 1194
 
 proto tcp-server
@@ -190,9 +186,9 @@ client-config-dir /etc/openvpn/ccd
 
 在另一边的服务器搭建客户端，发起 VPN 链接
 
-```
-/etc/openvpn/client.conf
+`/etc/openvpn/client.conf`
 
+```sql
 client
 
 dev tap
@@ -224,7 +220,7 @@ key /etc/openvpn/client1-key.pem
 
 首先检查 MySQL 是否支持 SSL。
 
-```
+```bash
 mysql> SHOW VARIABLES LIKE ‘have_ssl’;
 
 +—————+———-+ | Variable_name | Value
@@ -238,7 +234,7 @@ mysql> SHOW VARIABLES LIKE ‘have_ssl’;
 
 SSL 证书分多种类型，实际中要根据不同用途来使用服务端或客户端的证书。
 
-```
+```config
 [mysqld]
 
 # 服务端类型SSL证书，用于服务端，或者主从关系中的主库
@@ -250,7 +246,7 @@ ssl-key=/home/mysql/certs/server-key.pem
 
 ![如何让远程访问Mysql更安全！如何让远程访问Mysql更安全！](https://www.linuxprobe.com/wp-content/uploads/2018/02/5.jpg)
 
-```
+```config
 [client]
 
 # 客户端类型SSL证书，用于客户端（如命令行工具），或者主从关系中的从库
@@ -268,9 +264,10 @@ ssl-key=/home/mysql/certs/client-key.pem
 
 配置完毕后，检查下 SSL 是否已启用
 
+```bash
 mysql> SHOW VARIABLES LIKE ‘%ssl%’;
 
-```
+
 +—————+———————–+
 
 | Variable_name | Value                 |
@@ -302,7 +299,7 @@ mysql> SHOW VARIABLES LIKE ‘%ssl%’;
 
 为了确保外网访问的 MySQL 用户使用了 SSL 加密，在生成用户时可以强制要求 REQUIRE SSL 或 REQUIRE X509：
 
-```
+```bash
 mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’ REQUIRE SSL;
 
 mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’ REQUIRE X509;
@@ -314,7 +311,7 @@ mysql> CREATE USER ‘testuser’@’1.2.3.4’ IDENTIFIED BY ‘testpass’ REQ
 
 MySQL 可以使用自带的 yaSSL 库进行加密通信，也可以使用 OpenSSL 进行加密通信。具体使用哪种，需要在编译时指定 WITH_SSL:STRING 的参数：
 
-```
+```bash
 bundled (use yassl), yes (prefer os library if present, otherwise use bundled), system
 
 (use os library), </path/to/custom/installation>
@@ -340,9 +337,9 @@ bundled (use yassl), yes (prefer os library if present, otherwise use bundled), 
 
 可以看到，在 MySQL 主从经过 SSL 加密的情况下，无法实现有效窃听。
 
-##3 本地安全访问##
+## 3 本地安全访问
 
-##3.1 SSH 隧道##
+## 3.1 SSH 隧道
 
 一般我们都需要 SSH 方式从本地访问远程服务器，这时可以建立 SSH 隧道来访问远程服务器的特定端口。
 
@@ -358,7 +355,7 @@ bundled (use yassl), yes (prefer os library if present, otherwise use bundled), 
 
 如果习惯使用 phpmyadmin 的 web 方式访问 MySQL，那么只需要将访问方式统一为 HTTPS：
 
-```
+```config
 server
 {
 listen 80;
@@ -388,13 +385,3 @@ MySQL 的数据安全是一个非常大的课题，其中外网间的安全通�
 > 原文来自：<http://www.yunweipai.com/archives/18614.html>
 >
 > 本文地址：<https://www.linuxprobe.com/remote-access-mysql.html>
-
-## 重置密码解决
-
-- 在配置文件[mysqld]后面任意一行添加“skip-grant-tables”用来跳过密码验证的过程
-- 重启 MySQL
-- 重置密码
-  `sql use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
-- 注释“skip-grant-tables”
-- 重新登录
-  [重置密码解决 MySQL for Linux 错误 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)](https://www.cnblogs.com/gumuzi/p/5711495.html)

@@ -65,7 +65,7 @@
   WHERE ...;
   ```
 
-- 清空整张表
+- 删除整张表，然后新建该表（删除表），速度比 delete 数据（删除记录）快
 
   ```sql
   TRUNCATE TABLE `table_name`;
@@ -90,11 +90,19 @@
   DROP `column_name`;
   ```
 
+  如果删除的列为索引的组成部分，则该列从索引中删除
+
 - 删除索引
 
   ```sql
   ALTER TABLE `table_name`
-  DROP INDEX your_index_name(your_column_name);
+  DROP INDEX your_index_name;
+  ```
+
+  or
+
+  ```sql
+  drop index index_name on table_name;
   ```
 
 - 删除外键约束
@@ -122,7 +130,7 @@
 
   ```sql
   UPDATE `table_name`
-  SET column_name=your_value
+  SET column_name=your_value,column_name2=your_value2...
   WHERE ...;
   ```
 
@@ -326,11 +334,13 @@ HAVING 分组过滤条件： HAVING 后的字段必须是 SELECT 后出现过的
 
 ## 将查询结果写入数据表：
 
-将表格 users 中 age 大于 30 的数据行放入数据表 test 中的 username 数据行
+将表格 users 中 age 大于 30 的数据行放入数据表 test 中的 username 数据行:
 
 ```sql
 INSERT test(username) SELECT username FROM users WHERE age>=30;
 ```
+
+查询结果的字段和插入表的字段个数相同，数据类型相同
 
 ## 查询重复记录
 

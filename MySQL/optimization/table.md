@@ -29,6 +29,47 @@
 
 没有冗余的数据库未必是最好的数据库，有时为了提高运行效率，提高读性能，就必须降低范式标准，适当保留冗余数据。具体做法是： 在概念数据模型设计时遵守第三范式，降低范式标准的工作放到物理数据模型设计时考虑。降低范式就是增加字段，减少了查询时的关联，提高查询效率，因为在数据库的操作中查询的比例要远远大于 DML 的比例。但是反范式化一定要适度，并且在原本已满足三范式的基础上再做调整的
 
+## [分析表](https://mp.weixin.qq.com/s/1MsyxhtG6Zk3Q9gIV2QVbA)
+
+### ANALYZE TABLE 作用
+
+- ANALYZE TABLE 会统计索引分布信息，并将结果持久化存储；
+- 对于 MyISAM 表，相当于执行了一次 myisamchk –analyze；
+- 支持 InnoDB、NDB、MyISAM 等存储引擎，但不支持 **视图**（view）；
+- ANALYZE TABLE 也可以用在表分区上；
+- 对 InnoDB、MyISAM 表执行 ANALYZE TABLE 时，会加上**读锁**（read lock）；
+- 执行 ANALYZE TABLE 会记录 binlog。（这是合理的，因为索引分析这个操作，在 MASTER 端执行完后，SLAVE 端也是需要的）
+
+### 关于 innodb_stats_persistent 选项
+
+我们可以通过设定该选项，决定索引分析结果**是否要持久化存储到磁盘中**。
+
+不持久化存储的话，可能需要频繁更新统计信息，并由此引发执行计划反复变化。
+
+这个设置在每个表创建（或后期 ALTER 修改）时都可以自行指定 **STATS_PERSISTENT** 选项，也可以设置全局选项 **innodb_stats_persistent**（这个选项设置为 1 时，则表统计信息将持久化存储）。
+
+### 关于 innodb_stats_persistent_sample_pages 选项
+
+该选项决定了每次统计索引及其他信息时要采集多少个 data page，默认值是 20。
+
+增加这个值，可以提高统计信息的精确度，同样也能提高执行计划的准确性，不过也相应增加了在 InnoDB 表上分析的 I/O 开销。
+
+- 增加 innodb_stats_persistent_sample_pages 的值可能导致 ANALYZE TABLE 的耗时增加。可以参考下方公式估算执行 ANALYZE TABLE 的代价。
+- 只有在 innodb_stats_persistent 选项启用后，innodb_stats_persistent_sample_pages 也才能跟着生效，否则的话，只有选项 innodb_stats_transient_sample_pages 才能生效。
+- 选项 innodb_stats_transient_sample_pages 设定的是 **动态** 统计信息采集的 data page 数量，默认值是 8。
+
+选项 innodb_stats_persistent_sample_pages 是全局作用的，但如果某个表想单独定义采集的 page 数目，可以在 DDL 时自行设定：
+
+```sql
+CREATE TABLE ... STATS_SAMPLE_PAGES = 30;
+```
+
+或
+
+```sql
+ALTER TABLE ... STATS_SAMPLE_PAGES = 30;
+```
+
 ## 大表优化
 
 当 MySQL 单表记录数过大时，数据库的 CRUD 性能会明显下降，一些常见的优化措施如下：
@@ -36,7 +77,7 @@
 1. 限定数据的范围： 务必禁止不带任何限制数据范围条件的查询语句。
 2. 读/写分离： 经典的数据库拆分方案，主库负责写，从库负责读；
 3. 缓存： 使用 MySQL 的缓存，另外对重量级、更新少的数据可以考虑使用应用级别的缓存；
-4. 垂直分区：根据数据库里面数据表的相关性进行拆分。 例如，用户表中既有用户的登录信息又有用户的基本信息，可以将用户表拆分成两个单独的表，甚至放到单独的库做分库。
+4. 垂直分区：根据数据库里面数据表的相关性进行拆分。 例如，用户表中既有用户的登录信息又有用户的基本信息，可以将用户表拆分成两个单独的表（连接查询信息），甚至放到单独的库做分库。
 
 ## 垂直拆分
 

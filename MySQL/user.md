@@ -90,3 +90,24 @@ REVOKE SELECT ON _._ FROM 'pig'@'%';
 ```sql
 DROP USER 'username'@'host';
 ```
+
+## 重置密码解决
+
+### windows
+
+- 在配置文件[mysqld]后面任意一行添加`--skip-grant-tables`用来跳过密码验证的过程
+- 重启 MySQL
+- 重置密码
+  `use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
+- 注释“skip-grant-tables”
+- 重新登录
+
+### linux
+
+- `mysql_safe --skip-grant-tables user=mysql`or`/etc/init.d/mysql start-mysqld --skip-grant-tables`
+- 重启 MySQL
+- 重置密码
+  `use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
+- `msyql>flush privileges;`
+
+[重置密码解决 MySQL for Linux 错误 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)](https://www.cnblogs.com/gumuzi/p/5711495.html)

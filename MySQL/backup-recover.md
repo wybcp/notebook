@@ -1,4 +1,4 @@
-# 备份
+# [备份](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)
 
 MySQL 备份恢复数据的一般步骤：
 
@@ -46,3 +46,19 @@ mysqldump -uroot -p -t laravel_shop admin_menu admin_permissions admin_role_menu
 ```bash
 mysql laravel-shop < database/admin.sql
 ```
+
+or
+
+```bash
+msyql>source database/admin.sql
+```
+
+## 迁移
+
+### 相同版本 MySQL 数据库迁移
+
+```bash
+mysqldump -h source_host -uroot -ppassword dbname|mysql -h desitation-host uroot -ppassword
+```
+
+管道符号`|`
