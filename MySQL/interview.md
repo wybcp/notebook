@@ -179,24 +179,24 @@ UPDATE A INNER JOIN B ON A.id = B.id set A.c1 = B.c1,A.c2 = B.c2 WHERE B.age > 5
 - 全连接（FULL JOIN）
 - 交叉连接（CROSS JOIN）
 
-```
+```sql
 SELECT * FROM A,B(,C)或者SELECT * FROM A CROSS JOIN B (CROSS JOIN C)#没有任何关联条件，结果是笛卡尔积，结果集会很大，没有意义，很少使用内连接（INNER JOIN）SELECT * FROM A,B WHERE A.id=B.id或者SELECT * FROM A INNER JOIN B ON A.id=B.id多表中同时符合某种条件的数据记录的集合，INNER JOIN可以缩写为JOIN
 ```
 
-**内连接分为三类**
+内连接分为三类
 
 - 等值连接：ON A.id=B.id
 - 不等值连接：ON A.id > B.id
 - 自连接：SELECT \* FROM A T1 INNER JOIN A T2 ON T1.id=T2.pid
 
-**外连接（LEFT JOIN/RIGHT JOIN）**
+外连接（LEFT JOIN/RIGHT JOIN）
 
 - 左外连接：LEFT OUTER JOIN, 以左表为主，先查询出左表，按照 ON 后的关联条件匹配右表，没有匹配到的用 NULL 填充，可以简写成 LEFT JOIN
 - 右外连接：RIGHT OUTER JOIN, 以右表为主，先查询出右表，按照 ON 后的关联条件匹配左表，没有匹配到的用 NULL 填充，可以简写成 RIGHT JOIN
 
-**联合查询（UNION 与 UNION ALL）**
+联合查询（UNION 与 UNION ALL）
 
-```
+```sql
 SELECT * FROM A UNION SELECT * FROM B UNION ...
 ```
 
@@ -204,12 +204,12 @@ SELECT * FROM A UNION SELECT * FROM B UNION ...
 - 如果使用 UNION ALL，不会合并重复的记录行
 - 效率 UNION 高于 UNION ALL
 
-**全连接（FULL JOIN）**
+全连接（FULL JOIN）
 
 - MySQL 不支持全连接
 - 可以使用 LEFT JOIN 和 UNION 和 RIGHT JOIN 联合使用
 
-```
+```sql
 SELECT * FROM A LEFT JOIN B ON A.id=B.id UNIONSELECT * FROM A RIGHT JOIN B ON A.id=B.id
 ```
 
@@ -217,7 +217,7 @@ SELECT * FROM A LEFT JOIN B ON A.id=B.id UNIONSELECT * FROM A RIGHT JOIN B ON A.
 
 ## 20：为了记录足球比赛的结果，设计表如下：team：参赛队伍表 match：赛程表其中，match 赛程表中的 hostTeamID 与 guestTeamID 都和 team 表中的 teamID 关联，查询 2006-6-1 到 2006-7-1 之间举行的所有比赛，并且用以下形式列出：拜仁 2:0 不莱梅 2006-6-21
 
-##### 首先列出需要查询的列：
+### 首先列出需要查询的列：
 
 - 表 team
 - teamID teamName
@@ -227,19 +227,19 @@ SELECT * FROM A LEFT JOIN B ON A.id=B.id UNIONSELECT * FROM A RIGHT JOIN B ON A.
 - guestTeamID
 - matchTime matchResult
 
-##### 其次列出结果列：
+### 其次列出结果列：
 
 - 主队 结果 客对 时间
 
 初步写一个基础的 SQL：
 
-```
+```sql
 SELECT hostTeamID,matchResult,matchTime guestTeamID from match where matchTime between "2006-6-1" and "2006-7-1";
 ```
 
 通过外键联表，完成最终 SQL：
 
-```
+```sql
 select t1.teamName,m.matchResult,t2.teamName,m.matchTime from match as m left join team as t1 on m.hostTeamID = t1.teamID, left join team t2 on m.guestTeamID=t2.guestTeamID where m.matchTime between "2006-6-1" and "2006-7-1"
 ```
 
@@ -252,25 +252,25 @@ select t1.teamName,m.matchResult,t2.teamName,m.matchTime from match as m left jo
 
 - 1、如果 A 表 TID 是自增长,并且是连续的,B 表的 ID 为索引
 
-```
+```sql
 select * from a,b where a.tid = b.id and a.tid>50000 limit 200;
 ```
 
 - 2、如果 A 表的 TID 不是连续的,那么就需要使用覆盖索引.TID 要么是主键,要么是辅助索引,B 表 ID 也需要有索引。
 
-```
+```sql
 select * from b , (select tid from a limit 50000,200) a where b.id = a .tid;
 ```
 
 ## 23：拷贝表( 拷贝数据, 源表名：a 目标表名：b)
 
-```
+```sql
 insert into b(a, b, c) select d,e,f from a;
 ```
 
 ## 24： Student(S#,Sname,Sage,Ssex) 学生表 Course(C#,Cname,T#) 课程表 SC(S#,C#,score) 成绩表 Teacher(T#,Tname) 教师表 查询没学过“叶平”老师课的同学的学号、姓名
 
-```
+```sql
 select Student.S#,Student.Snamefrom Studentwhere S# not in (select distinct( SC.S#) from SC,Course,Teacher where SC.C#=Course.C# and Teacher.T#=Course.T# and Teacher.Tname=’叶平’);
 ```
 

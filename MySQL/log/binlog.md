@@ -62,7 +62,7 @@ SHOW VARIABLES LIKE '%log_bin%';
 
 ## 删除
 
-除了配置自动删除binlog文件外，可以使用`msyql>reset master;`删除所有二进制文件，`purge master logs`删除指定文件。
+除了配置自动删除 binlog 文件外，可以使用`msyql>reset master;`删除所有二进制文件，`purge master logs`删除指定文件。
 
 ## 结构解析
 
@@ -168,134 +168,6 @@ g++ temp.cpp -o a -fpack-struct=1
     +=====================================+
 
 而这个 `post-header` 对于不同类型的事件来说长度是不一样的，同种类型来说是一样的，而这个长度的预先规定将会在一个“格式描述事件”中定好。
-
-##### 格式描述事件
-
-在上文我们有提到过，在 Magic Number 之后跟着的是一个格式描述事件（Format Description Event），其实这只是在 v4 版本中的称呼，在以前的版本里面叫起始事件（Start Event）。
-
-在 v4 版本中这个事件的结构如下面的 ASCII Diagram 所示。
-
-    +=====================================+
-    | event  | timestamp         0 : 4    |
-    | header +----------------------------+
-    |        | type_code         4 : 1    | = FORMAT_DESCRIPTION_EVENT = 15
-    |        +----------------------------+
-    |        | server_id         5 : 4    |
-    |        +----------------------------+
-    |        | event_length      9 : 4    | >= 91
-    |        +----------------------------+
-    |        | next_position    13 : 4    |
-    |        +----------------------------+
-    |        | flags            17 : 2    |
-    +=====================================+
-    | event  | binlog_version   19 : 2    | = 4
-    | data   +----------------------------+
-    |        | server_version   21 : 50   |
-    |        +----------------------------+
-    |        | create_timestamp 71 : 4    |
-    |        +----------------------------+
-    |        | header_length    75 : 1    |
-    |        +----------------------------+
-    |        | post-header      76 : n    | = array of n bytes, one byte per event
-    |        | lengths for all            |   type that the server knows about
-    |        | event types                |
-    +=====================================+
-
-这个事件的 `type_code` 是 15，然后 `event_length` 是大于等于 91 的值的，这个主要取决于所有事件类型数。
-
-因为从第 76 字节开始后面的二进制就代表一个字节类型的数组了，一个字节代表一个事件类型的 `post-header` 长度，即每个事件类型固定数据的长度。
-
-那么按照上述的一些线索来看，我们能非常快地写出一个简单的解读 Binlog 格式描述事件的代码。
-
-> 如上文所述，如果需要正常解读 Binlog 文件的话，下面的代码编译时候需要加上 `-fpack-struct=1` 这个参数。
-
-```c++
-#include <cstdio>
-#include <cstdlib>
-
-struct BinlogEventHeader
-{
-    int  timestamp;
-    unsigned char type_code;
-    int  server_id;
-    int  event_length;
-    int  next_position;
-    short flags;
-};
-
-int main()
-{
-    FILE* fp = fopen("/usr/local/var/mysql/master-bin.000001", "rb");
-    int magic_number;
-    fread(&magic_number, 4, 1, fp);
-
-    printf("%d - %s\n", magic_number, (char*)(&magic_number));
-
-    struct BinlogEventHeader format_description_event_header;
-    fread(&format_description_event_header, 19, 1, fp);
-
-    printf("BinlogEventHeader\n{\n");
-    printf("    timestamp: %d\n", format_description_event_header.timestamp);
-    printf("    type_code: %d\n", format_description_event_header.type_code);
-    printf("    server_id: %d\n", format_description_event_header.server_id);
-    printf("    event_length: %d\n", format_description_event_header.event_length);
-    printf("    next_position: %d\n", format_description_event_header.next_position);
-    printf("    flags[]: %d\n}\n", format_description_event_header.flags);
-
-    short binlog_version;
-    fread(&binlog_version, 2, 1, fp);
-    printf("binlog_version: %d\n", binlog_version);
-
-    char server_version[51];
-    fread(server_version, 50, 1, fp);
-    server_version[50] = '\0';
-    printf("server_version: %s\n", server_version);
-
-    int create_timestamp;
-    fread(&create_timestamp, 4, 1, fp);
-    printf("create_timestamp: %d\n", create_timestamp);
-
-    char header_length;
-    fread(&header_length, 1, 1, fp);
-    printf("header_length: %d\n", header_length);
-
-    int type_count = format_description_event_header.event_length - 76;
-    unsigned char post_header_length[type_count];
-    fread(post_header_length, 1, type_count, fp);
-    for(int i = 0; i < type_count; i++)
-    {
-        printf("  - type %d: %d\n", i + 1, post_header_length[i]);
-    }
-
-    return 0;
-}
-```
-
-这个时候你得到的结果有可能就是这样的了：
-
-    1852400382 - �binpz�
-    BinlogEventHeader
-    {
-        timestamp: 1439186734
-        type_code: 15
-        server_id: 1
-        event_length: 116
-        next_position: 120
-        flags[]: 1
-    }
-    binlog_version: 4
-    server_version: 5.6.24-log
-    create_timestamp: 1439186734
-    header_length: 19
-    - type 1: 56
-    - type 2: 13
-    - type 3: 0
-    - type 4: 8
-    - type 5: 0
-    - type 6: 18
-    - ...
-
-一共会输出 40 种类型（从 1 到 40），如官方文档所说，这个数组从 `START_EVENT_V3` 事件开始（`type_code` 是 1）。
 
 ##### 跳转事件
 

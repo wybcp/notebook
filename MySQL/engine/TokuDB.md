@@ -1,6 +1,6 @@
 # TokuDB
 
-TokuDB 是一个支持事务的“新”引擎，有着出色的数据压缩功能，由美国 TokuTek 公司(http://www.tokutek.com/) 研发，该公司于 2015 年 4 月份被 Percona 收购。
+TokuDB 是一个支持事务的“新”引擎，有着出色的数据压缩功能，由美国 [TokuTek 公司](http://www.tokutek.com/) 研发，该公司于 2015 年 4 月份被 Percona 收购。
 
 ## 优点
 
@@ -17,7 +17,7 @@ TokuDB 是一个支持事务的“新”引擎，有着出色的数据压缩功�
 
 不支持外键(foreign key)功能，如果您的表有外键，切换到 TokuDB 引擎后，此约束将被忽略!!!
 
-##压缩算法
+## 压缩算法
 
 tokudb_zlib:表启用 zlib 压缩，压缩效果偏中，CPU 消耗偏中，建议使用(默认)；
 tokudb_quicklz:表启用 quicklz 压缩，压缩效果差，CPU 消耗低；
