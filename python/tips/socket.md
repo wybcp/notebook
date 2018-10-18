@@ -14,12 +14,6 @@
 
 所有的例子程序都使用 Python 3.6 编写，你可以在 Github 上找到 [源代码](https://github.com/realpython/materials/tree/master/python-sockets-tutorial)
 
-网络和 Socket 是个很大的话题。网上已经有了关于它们的字面解释，如果你还不是很了解 Socket 和网络。当你你读到那些解释的时候会感到不知所措，这是非常正常的。因为我也是这样过来的
-
-尽管如此也不要气馁。 我已经为你写了这个教程。 就像学习 Python 一样，我们可以一次学习一点。用你的浏览器保存本页面到书签，以便你学习下一部分时能找到
-
-让我们开始吧！
-
 ## 背景
 
 Socket 有一段很长的历史，最初是在 [1971 年被用于 ARPANET](https://en.wikipedia.org/wiki/Network_socket#History)，随后就成了 1983 年发布的 Berkeley Software Distribution (BSD) 操作系统的 API，并且被命名为 [Berkeleysocket](https://en.wikipedia.org/wiki/Berkeley_sockets)
@@ -32,7 +26,7 @@ Socket 应用最常见的类型就是 **客户端/服务器** 应用，服务器
 
 ## Socket API 概览
 
-Python 的 socket 模块提供了使用 Berkeley sockets API 的接口。这将会在我们这个教程里使用和讨论到
+Python 的 socket 模块提供了使用 Berkeley sockets API 的接口。
 
 主要的用到的 Socket API 函数和方法有下面这些：
 
@@ -46,13 +40,13 @@ Python 的 socket 模块提供了使用 Berkeley sockets API 的接口。这将�
 - `recv()`
 - `close()`
 
-Python 提供了和 C 语言一致且方便的 API。我们将在下面一节中用到它们
+Python 提供了和 C 语言一致且方便的 API。
 
-作为标准库的一部分，Python 也有一些类可以让我们方便的调用这些底层 Socket 函数。尽管这个教程中并没有涉及这部分内容，你也可以通过[socketserver 模块](https://docs.python.org/3/library/socketserver.html) 中找到文档。当然还有很多实现了高层网络协议（比如：HTTP, SMTP）的的模块，可以在下面的链接中查到 [Internet Protocols and Support](https://docs.python.org/3/library/internet.html)
+作为标准库的一部分，Python 也有一些类可以让我们方便的调用这些底层 Socket 函数，也可以通过[socketserver 模块](https://docs.python.org/3/library/socketserver.html) 中找到文档。当然还有很多实现了高层网络协议（比如：HTTP, SMTP）的的模块，可以在下面的链接中查到 [Internet Protocols and Support](https://docs.python.org/3/library/internet.html)
 
 ## TCP Sockets
 
-就如你马上要看到的，我们将使用 `socket.socket()` 创建一个类型为 `socket.SOCK_STREAM` 的 socket 对象，默认将使用 [Transmission Control Protocol(TCP) 协议](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)，这基本上就是你想使用的默认值
+使用 `socket.socket()` 创建一个类型为 `socket.SOCK_STREAM` 的 socket 对象，默认将使用 [Transmission Control Protocol(TCP) 协议](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)，这基本上就是你想使用的默认值
 
 为什么应该使用 TCP 协议？
 
@@ -94,28 +88,50 @@ Python 提供了和 C 语言一致且方便的 API。我们将在下面一节中
 
 下面就是服务器代码，`echo-server.py`：
 
-| 123456789101112131415161718 | #!/usr/bin/env python3 import socket HOST = '127.0.0.1' # 标准的回环地址 (localhost)PORT = 65432 # 监听的端口 (非系统级的端口: 大于 1023) with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: s.bind((HOST, PORT)) s.listen() conn, addr = s.accept() with conn: print('Connected by', addr) while True: data = conn.recv(1024) if not data: break conn.sendall(data) |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|                             |                                                                                                                                                                                                                                                                                                                                                                                |
+````python
+#!/usr/bin/env python3
 
-> 注意：上面的代码你可能还没法完全理解，但是不用担心。这几行代码做了很多事情，这 只是一个起点，帮你看见这个简单的服务器是如何运行的 教程后面有引用部分，里面有很多额外的引用资源链接，这个教程中我将把链接放在那儿
+import socket
+
+HOST = '127.0.0.1'  # 标准的回环地址 (localhost)
+PORT = 65432        # 监听的端口 (非系统级的端口: 大于 1023)
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print('Connected by', addr)
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(data)
+```
+
+> 注意：上面的代码你可能还没法完全理解，但是不用担心。这几行代码做了很多事情，这只是一个起点，帮你看见这个简单的服务器是如何运行的 教程后面有引用部分，里面有很多额外的引用资源链接，这个教程中我将把链接放在那儿
 
 让我们一起来看一下 API 调用以及发生了什么
 
 `socket.socket()` 创建了一个 socket 对象，并且支持 [context manager type](https://docs.python.org/3/reference/datamodel.html#context-managers)，你可以使用 [with 语句](https://docs.python.org/3/reference/compound_stmts.html#with)，这样你就不用再手动调用 `s.close()` 来关闭 socket 了
 
-| 12  | with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: pass # Use the socket object without calling s.close(). |
-| --- | -------------------------------------------------------------------------------------------------------------------- |
-|     |                                                                                                                      |
+```python
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    pass  # Use the socket object without calling s.close().
+```
 
 调用 `socket()` 时传入的 socket 地址族参数 `socket.AF_INET` 表示因特网 IPv4 [地址族](https://realpython.com/python-sockets/#socket-address-families)，`SOCK_STREAM` 表示使用 TCP 的 socket 类型，协议将被用来在网络中传输消息
 
 `bind()` 用来关联 socket 到指定的网络接口（IP 地址）和端口号：
 
-| 123456 | HOST = '127.0.0.1'PORT = 65432 # ... s.bind((HOST, PORT)) |
-| ------ | --------------------------------------------------------- |
-|        |                                                           |
+```python
+HOST = '127.0.0.1'
+PORT = 65432
 
+# ...
+
+s.bind((HOST, PORT))
+```
 `bind()` 方法的入参取决于 socket 的地址族，在这个例子中我们使用了 `socket.AF_INET`(IPv4)，它将返回两个元素的元组：(host, port)
 
 host 可以是主机名称、IP 地址、空字符串，如果使用 IP 地址，host 就应该是 IPv4 格式的字符串，`127.0.0.1` 是标准的 IPv4 回环地址，只有主机上的进程可以连接到服务器，如果你传了空字符串，服务器将接受本机所有可用的 IPv4 地址
@@ -132,9 +148,10 @@ host 可以是主机名称、IP 地址、空字符串，如果使用 IP 地址�
 
 继续看上面的服务器代码示例，`listen()` 方法调用使服务器可以接受连接请求，这使它成为一个「监听中」的 socket
 
-| 12  | s.listen()conn, addr = s.accept() |
-| --- | --------------------------------- |
-|     |                                   |
+```python
+s.listen()
+conn, addr = s.accept()
+```
 
 `listen()` 方法有一个 `backlog` 参数。它指定在拒绝新的连接之前系统将允许使用的 _未接受的连接_ 数量。从 Python 3.5 开始，这是可选参数。如果不指定，Python 将取一个默认值
 
@@ -144,9 +161,16 @@ host 可以是主机名称、IP 地址、空字符串，如果使用 IP 地址�
 
 这里必须要明白我们通过调用 `accept()` 方法拥有了一个新的 socket 对象。这非常重要，因为你将用这个 socket 对象和客户端进行通信。和监听一个 socket 不同的是后者只用来授受新的连接请求
 
-| 12345678 | conn, addr = s.accept()with conn: print('Connected by', addr) while True: data = conn.recv(1024) if not data: break conn.sendall(data) |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-|          |                                                                                                                                        |
+```python
+conn, addr = s.accept()
+with conn:
+    print('Connected by', addr)
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+        conn.sendall(data)
+```
 
 从 `accept()` 获取客户端 socket 连接对象 conn 后，使用一个无限 while 循环来阻塞调用 `conn.recv()`，无论客户端传过来什么数据都会使用 `conn.sendall()` 打印出来
 
@@ -155,11 +179,21 @@ host 可以是主机名称、IP 地址、空字符串，如果使用 IP 地址�
 ### 打印程序客户端
 
 现在我们来看下客户端的程序，`echo-client.py`：
+```python
+#!/usr/bin/env python3
 
-| 12345678910111213 | #!/usr/bin/env python3 import socket HOST = '127.0.0.1' # 服务器的主机名或者 IP 地址 PORT = 65432 # 服务器使用的端口 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: s.connect((HOST, PORT)) s.sendall(b'Hello, world') data = s.recv(1024) print('Received', repr(data)) |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                   |                                                                                                                                                                                                                                                                                        |
+import socket
 
+HOST = '127.0.0.1'  # 服务器的主机名或者 IP 地址
+PORT = 65432        # 服务器使用的端口
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.sendall(b'Hello, world')
+    data = s.recv(1024)
+
+print('Received', repr(data))
+```
 与服务器程序相比，客户端程序简单很多。它创建了一个 socket 对象，连接到服务器并且调用 `s.sendall()` 方法发送消息，然后再调用 `s.recv()` 方法读取服务器返回的内容并打印出来
 
 ### 运行打印程序的客户端和服务端
@@ -170,21 +204,17 @@ host 可以是主机名称、IP 地址、空字符串，如果使用 IP 地址�
 
 打开命令行程序，进入你的代码所在的目录，运行打印程序的服务端：
 
-| 1   | $ ./echo-server.py |
-| --- | ------------------ |
-|     |                    |
+`$ ./echo-server.py `
 
 你的命令行将被挂起，因为程序有一个阻塞调用
 
-| 1   | conn, addr = s.accept() |
-| --- | ----------------------- |
-|     |                         |
-
+`conn, addr = s.accept()`
 它将等待客户端的连接，现在再打开一个命令行窗口运行打印程序的客户端：
 
-| 12  | $ ./echo-client.pyReceived b'Hello, world' |
-| --- | ------------------------------------------ |
-|     |                                            |
+```
+$ ./echo-client.py
+Received b'Hello, world'
+```
 
 在服务端的窗口你将看见：
 
@@ -971,11 +1001,11 @@ ICMP 类型 | ICMP 代码 | 说明 – | – | – 8 | 0 | 打印请求 0 | 0 | 
 异常 | `errno` 常量 | 说明 BlockingIOError | EWOULDBLOCK | 资源暂不可用，比如在非阻塞模式下调用 `send()` 方法，对方太繁忙面没有读取，发送队列满了，或者网络有问题 OSError | EADDRINUSE | 端口被战用，确保没有其它的进程与当前的程序运行在同一地址/端口上，你的服务器设置了 `SO_REUSEADDR` 参数 ConnectionResetError | ECONNRESET | 连接被重置，远端的进程崩溃，或者 socket 意外关闭，或是有防火墙或链路上的设配有问题 TimeoutError | ETIMEDOUT | 操作超时，对方没有响应 ConnectionRefusedError | ECONNREFUSED | 连接被拒绝，没有程序监听指定的端口
 
 ### socket 地址族
+````
+
+socket.AF_INET`和`socket.AF_INET6`是`socket.socket()`方法调用的第一个参数 ，表示地址协议族，API 使用了一个期望传入指定格式参数的地址，这取决于是`AF_INET`还是`AF_INET6
 
 ```
-socket.AF_INET` 和 `socket.AF_INET6` 是 `socket.socket()` 方法调用的第一个参数 ，表示地址协议族，API 使用了一个期望传入指定格式参数的地址，这取决于是 `AF_INET` 还是 `AF_INET6
-```
-
 地址族 | 协议 | 地址元组 | 说明 – | – | – | – socket.AF_INET | IPv4 | (host, port) | host 参数是个如 `www.example.com` 的主机名称，或者如 `10.1.2.3` 的 IPv4 地址 socket.AF_INET6 | IPv6 | (host, port, flowinfo, scopeid) | 主机名同上，IPv6 地址 如：`fe80::6203:7ab:fe88:9c23`，flowinfo 和 scopeid 分别表示 C 语言结构体 `sockaddr_in6` 中的 `sin6_flowinfo` 和 `sin6_scope_id` 成员
 
 注意下面这段 python socket 模块中关于 host 值和地址元组文档
@@ -1074,3 +1104,4 @@ TCP/IP 使用的字节顺序是 [big-endian](https://en.wikipedia.org/wiki/Endia
 我们看过了 python socket 模块中底层的一些 API，并了解了如何使用它们创建客户端服务器应用程序。我们也创建了一个自定义类来做为应用层的协议，并用它在不同的端点之间交换数据，你可以使用这个类并在些基础上快速且简单地构建出一个你自己的 socket 应用程序
 
 你可以在 Github 上找到 [源代码](https://github.com/realpython/materials/tree/master/python-sockets-tutorial)
+
