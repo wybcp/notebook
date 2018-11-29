@@ -1,4 +1,4 @@
-# 字符串
+# [字符串](https://golang.org/pkg/strings/)
 
 字符串是不可修改的
 
