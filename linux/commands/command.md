@@ -1,5 +1,6 @@
 # linux 常用命令
 
+- 查看系统版本信息： `lsb_release -a`
 - 查看当前目录文件：ls -a[查看所有文件包括隐藏]/-l[查看文件显示权限和所属]
 - 查看当前所在路径: pwd(Print Working Directory)
 - 复制文件或者文件夹：cp [filename/-r folder]
@@ -16,15 +17,11 @@
 
 - 变更文件所属用户或用户组： chown owner:group [file/folder]
 - 新建文件：
-
   - touch [filename]
   - vi/vim [filename]
-
 - 查看文件：
-
   - 输出文件内容：cat [filename]
   - tail [-f:实时输出文件内容][filename]
-
 - 查找内容：
 
   - grep [正则]
@@ -86,7 +83,7 @@
 
 ### 创建和删除
 
-- 删除日志 rm *log (等价: $find ./ -name “*log” -exec rm {} ;)
+- 删除日志 rm *log (等价: \$find ./ -name “*log” -exec rm {} ;)
 - 移动：mv
 - 复制：cp (复制目录：cp -r )
 - 创建文件 touch
@@ -227,11 +224,11 @@ NR:表示记录数量，在执行过程中对应当前行号；
 
 NF:表示字段数量，在执行过程总对应当前行的字段数；
 
-$0:这个变量包含执行过程中当前行的文本内容；
+\$0:这个变量包含执行过程中当前行的文本内容；
 
-$1:第一个字段的文本内容；
+\$1:第一个字段的文本内容；
 
-$2:第二个字段的文本内容；
+\$2:第二个字段的文本内容；
 
 ```shell
 awk '{print $2, $3}' file
