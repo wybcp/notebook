@@ -44,7 +44,7 @@ godoc -http=:6060
 - [defer 延迟](defer.md)
 - [函数](func.md)
 - [go 程](goroutine.md)
-- [流程控制](loop-control.md)
+- [流程控制](loop-control.md)`6
 - [包](package/README.md)
 - [指针](pointer.md)
 - [切片](slice.md)

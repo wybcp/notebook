@@ -9,3 +9,5 @@
 - [GopherCon 2018 - Demystifying Binary Search Tree Algorithms](https://about.sourcegraph.com/go/gophercon-2018-binary-search-tree-algorithms/)
 - [标准库的详细说明和示例](https://github.com/astaxie/gopkg)
 - [pkg](https://golang.org/pkg/)
+- [煎鱼的迷之博客](https://github.com/EDDYCJY/blog)
+- [Effective Go](https://golang.org/doc/effective_go.html) [实效 GO 编程](https://bingohuang.gitbooks.io/effective-go-zh-en/content/)
