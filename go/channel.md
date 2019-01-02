@@ -17,6 +17,8 @@ Go 语言的主要创造者之一的 Rob Pike 的至理名言，体现了 Go 语
 
 一个通道相当于一个先进先出（FIFO）的队列。
 
+若在关闭 Channel 后继续从中接收数据，接收者就会收到该 Channel 返回的零值。
+
 ## [单向通道](https://time.geekbang.org/column/article/14664)
 
 只能发不能收，或者只能收不能发的通道。
