@@ -19,6 +19,23 @@ Go 语言的主要创造者之一的 Rob Pike 的至理名言，体现了 Go 语
 
 若在关闭 Channel 后继续从中接收数据，接收者就会收到该 Channel 返回的零值。
 
+```go
+type hchan struct {
+  qcount uint  // 通道有效元素个数
+  dataqsize uint   // 通道容量，循环数组总长度
+  buf unsafe.Pointer // 数组地址
+  elemsize uint16 // 内部元素的大小
+  closed uint32 // 是否已关闭 0或者1
+  elemtype *_type // 内部元素类型信息
+  sendx uint // 循环数组的写偏移量
+  recvx uint // 循环数组的读偏移量
+  recvq waitq // 阻塞在读操作上的协程队列
+  sendq waitq // 阻塞在写操作上的协程队列
+
+  lock mutex // 全局锁
+}
+```
+
 ## [单向通道](https://time.geekbang.org/column/article/14664)
 
 只能发不能收，或者只能收不能发的通道。
@@ -36,3 +53,59 @@ select 语句的分支分为两种，一种叫做候选分支，另一种叫做�
 默认分支其实就是 default case，因为，当且仅当没有候选分支被选中时它才会被执行，所以它以关键字 default 开头并直接后跟一个冒号。同样的，我们可以在 default:的下一行写入要执行的语句。
 
 由于 select 语句是专为通道而设计的，所以每个 case 表达式中都只能包含操作通道的表达式，比如接收表达式。
+
+## 关闭通道
+
+读取一个已经关闭的通道会立即返回通道类型的「零值」（通道数据已读取完毕之后），而写一个已经关闭的通道会抛异常。如果通道里的元素是整型的，读操作是不能通过返回值来确定通道是否关闭的。
+
+确保通道写安全的最好方式是由负责写通道的协程自己来关闭通道，读通道的协程不要去关闭通道。多写单读的场合该怎么办呢？
+
+使用到内置 sync 包提供的 WaitGroup 对象，它使用计数来等待指定事件完成。
+
+```go
+package main
+
+import "fmt"
+import "time"
+import "sync"
+
+func send(ch chan int, wg *sync.WaitGroup) {
+	defer wg.Done() // 计数值减一
+	i := 0
+	for i < 4 {
+		i++
+		ch <- i
+	}
+}
+
+func recv(ch chan int) {
+	for v := range ch {
+		fmt.Println(v)
+	}
+}
+
+func main() {
+	var ch = make(chan int, 4)
+	var wg = new(sync.WaitGroup)
+	wg.Add(2)       // 增加计数值
+	go send(ch, wg) // 写
+	go send(ch, wg) // 写
+	go recv(ch)
+	// Wait() 阻塞等待所有的写通道协程结束
+	// 待计数值变成零，Wait() 才会返回
+	wg.Wait()
+	// 关闭通道
+	close(ch)
+	time.Sleep(time.Second)
+}
+
+---------
+1
+2
+3
+4
+1
+2
+3
+4
+```

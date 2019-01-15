@@ -80,6 +80,10 @@ func equal(x, y map[string]int) bool {
 }
 ```
 
+## delete
+
+`delete(names,"bobo")`
+
 ## 并发操作
 
 非原子操作需要加锁， map 并发读写需要加锁，map 操作不是并发安全的，判断一个操作是否是原子的可以使用 `go run race` 命令做数据的竞争检测
