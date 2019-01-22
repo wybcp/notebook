@@ -58,6 +58,31 @@ func main() {
 
 Go 语言中，如果以切片为参数调用函数时，有时候会给人一种参数采用了传引用的方式的假象：因为在被调用函数内部可以修改传入的切片的元素。其实，任何可以通过函数参数修改调用参数的情形，都是因为函数参数中显式或隐式传入了指针参数。函数参数传值的规范更准确说是只针对数据结构中固定的部分传值，例如字符串或切片对应结构体中的指针和字符串长度结构体传值，但是并不包含指针间接指向的内容。
 
+### 使用闭包调试
+
+当您在分析和调试复杂的程序时，无数个函数在不同的代码文件中相互调用，如果这时候能够准确地知道哪个文件中的具体哪个函数正在执行，对于调试是十分有帮助的。您可以使用 runtime 或 log 包中的特殊函数来实现这样的功能。包 runtime 中的函数 Caller() 提供了相应的信息，因此可以在需要的时候实现一个 where() 闭包函数来打印函数执行的位置：
+
+```go
+where := func() {
+    _, file, line, _ := runtime.Caller(1)
+    log.Printf("%s:%d", file, line)
+}
+where()
+// some code
+where()
+// some more code
+where()
+```
+
+您也可以设置 log 包中的 flag 参数来实现：
+
+```go
+func where(){
+    log.SetFlags(log.Llongfile)
+    log.Print("")
+}
+```
+
 ## [方法](https://chai2010.gitbooks.io/advanced-go-programming-book/content/ch1-basic/ch1-04-func-method-interface.html)
 
 方法是由函数演变而来，只是将函数的第一个对象参数移动到了函数名前面。通过叫方法表达式的特性可以将方法还原为普通类型的函数：
@@ -66,4 +91,16 @@ Go 语言中，如果以切片为参数调用函数时，有时候会给人一�
 // 不依赖具体的文件对象
 // func CloseFile(f *File) error
 var CloseFile = (*File).Close
+```
+
+## 计算函数执行时间
+
+使用 time 包中的 Now() 和 Sub 函数：
+
+```go
+start := time.Now()
+longCalculation()
+end := time.Now()
+delta := end.Sub(start)
+fmt.Printf("longCalculation took this amount of time: %s\n", delta)
 ```

@@ -38,6 +38,10 @@ godoc -http=:6060
 
 用 [go get](https://go-zh.org/cmd/go/) 命令来安装[gotour](https://go-zh.org/x/tour/): `go get github.com/Go-zh/tour/gotour` 最后运行产生的 `gotour` 可执行文件。 如果要运行本教程的英文版，首先请[下载并安装 Go](https://golang.org/dl/)，接着从命令行启动教程： `go tool tour`
 
+## vscode
+
+[VS Code 中的代码自动补全和自动导入包](https://maiyang.me/post/2018-09-14-tips-vscode/)
+
 ## 目录
 
 - [常量](const.md)
@@ -54,5 +58,5 @@ godoc -http=:6060
 ## 参考
 
 - [Go 指南](https://tour.go-zh.org/list)
-- [Go语言核心36讲](https://time.geekbang.org/column/112)
-- [Golang微服务框架 micro](https://micro.mu/docs/)
+- [Go 语言核心 36 讲](https://time.geekbang.org/column/112)
+- [Golang 微服务框架 micro](https://micro.mu/docs/)
