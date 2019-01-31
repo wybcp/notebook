@@ -22,6 +22,7 @@ defer func() {
 f, err := os.Open("filename.ext")
 if err != nil {
 	// 失败的情形, 马上返回错误
+	panic("ERROR occurred: " + err.Error())
 }
 
 // 正常的处理流程
