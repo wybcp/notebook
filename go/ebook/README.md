@@ -24,3 +24,5 @@
 - [go-internals](https://github.com/teh-cmc/go-internals)go-internals is a work-in-progress book about the internals of the Go (1.10+) programming language.
 
 Go 程序设计语言（The Go Programming Language）、Go 语言实战(Go in Action)、Go web 编程(Go Web Programming)。
+
+- [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)Go Web 编程
