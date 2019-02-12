@@ -104,3 +104,5 @@ end := time.Now()
 delta := end.Sub(start)
 fmt.Printf("longCalculation took this amount of time: %s\n", delta)
 ```
+
+## [可变参数函数](https://studygolang.com/articles/11965)

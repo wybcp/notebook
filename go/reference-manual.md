@@ -18,7 +18,7 @@ Go 编程语言规范
 
 MixedCaps or mixedCaps
 
-- 包名规则：小写单词
+- 包名规则：小写单词，单数
 - 变量 owner，getter：Owner；setter：SetOwner
 - interface：one-method interfaces are named by the method name plus an -er suffix or similar modification to construct an agent noun: Reader, Writer, Formatter, CloseNotifier etc.
 
@@ -33,3 +33,7 @@ MixedCaps or mixedCaps
 ## make
 
 只用于创建 slices, maps, and channels，返回一个初始化的 `type T (not *T)`。因为这三种类型的数据在使用前必须初始化
+
+## interface
+
+如果接口类型只包含一个方法，那么这个类型的名字以 er 结尾。

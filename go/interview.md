@@ -12,3 +12,5 @@ Go 语言的类型推断可以明显提升程序的灵活性，使得代码重�
 
 - 切片、映射和通道，使用 make
 - 数组、结构体和所有的值类型，使用 new
+
+## [Awesome Go Interview Questions and Answers](https://goquiz.github.io/)

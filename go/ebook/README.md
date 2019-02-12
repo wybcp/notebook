@@ -23,6 +23,6 @@
 - [深入解析 Go](https://tiancaiamao.gitbooks.io/go-internals/content/zh/index.html)本书是关于 Go 程序设计语言内部实现原理的阐释
 - [go-internals](https://github.com/teh-cmc/go-internals)go-internals is a work-in-progress book about the internals of the Go (1.10+) programming language.
 
-Go 程序设计语言（The Go Programming Language）、Go 语言实战(Go in Action)、Go web 编程(Go Web Programming)。
-
 - [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)Go Web 编程
+- [Go in action](https://book.douban.com/subject/25858023/)Go 语言实践
+- [面向信仰编程](https://draveness.me/)
