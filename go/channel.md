@@ -36,6 +36,8 @@ type hchan struct {
 }
 ```
 
+channel 中的一个元素最大可高达 64 KiB
+
 ## [单向通道](https://time.geekbang.org/column/article/14664)
 
 只能发不能收，或者只能收不能发的通道。
