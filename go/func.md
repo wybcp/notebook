@@ -106,3 +106,17 @@ fmt.Printf("longCalculation took this amount of time: %s\n", delta)
 ```
 
 ## [可变参数函数](https://studygolang.com/articles/11965)
+
+## method
+
+一个方法只是一个函数，它有一个特殊的接收者（receiver）类型，该接收者放在 func 关键字和函数名之间。接收者可以是结构体类型或非结构体类型。可以在方法内部访问接收者。
+一般语法为：
+
+```go
+func (t receiver_type) methodName(parameter list) {}
+```
+
+- 参数 receiver 类型可以是 T 或 `*T`。以指针为接收者也是可以的。
+
+    两者的区别在于， 以`*T` 为接收者时，方法内部对其的修改对于外部有效，而以 T 作为接受者时，对于外部无效。
+- Go 不允许同名函数，但是同名方法可以定义在不同的类型上

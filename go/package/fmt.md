@@ -28,3 +28,5 @@ fmt.Printf("%#v\n", timeZone)
 ```
 
 `%T`，它会打印某个值的类型.
+
+[Golang 源码剖析：fmt 标准库 --- Print\* 是怎么样输出的？](https://github.com/EDDYCJY/blog/blob/master/golang/pkg/2018-12-04-Golang-%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-fmt-%E6%A0%87%E5%87%86%E5%BA%93.md)

@@ -39,9 +39,9 @@ func main() {
  // 读取默认的线程数
     fmt.Println(runtime.GOMAXPROCS(0))
     // 设置线程数为 10
- runtime.GOMAXPROCS(10)
+    runtime.GOMAXPROCS(10)
     // 读取当前的线程数
- fmt.Println(runtime.GOMAXPROCS(0))
+    fmt.Println(runtime.GOMAXPROCS(0))
 }
 
 --------
@@ -131,3 +131,29 @@ _还要注意：_ 信道与文件不同，通常情况下无需关闭它们。�
 在消息推送系统中，客户端的链接寿命很长，大部分时间这个链接都是空闲状态，客户端会每隔几十秒周期性使用心跳来告知服务器你不要断开我。在服务器端，每一个来自客户端链接的维持都需要单独一个协程。因为消息推送系统维持的链接普遍很闲，单台服务器往往可以轻松撑起百万链接，这些维持链接的协程只有在推送消息或者心跳消息到来时才会变成就绪态被调度运行。
 
 聊天系统也是长链接系统，它内部来往的消息要比消息推送系统频繁很多，限于 CPU 和 网卡的压力，它能撑住的连接数要比推送系统少很多。不过原理是类似的，都是一个链接由一个协程长期维持，连接断开协程也就消亡。
+
+## select 功能
+
+在多个通道上进行读或写操作，让函数可以处理多个事情，但 1 次只处理 1 个。以下特性也都必须熟记于心：
+
+- 每次执行 select，都会只执行其中 1 个 case 或者执行 default 语句。
+- 当没有 case 或者 default 可以执行时，select 则阻塞，等待直到有 1 个 case 可以执行。
+- 当有多个 case 可以执行时，则随机选择 1 个 case 执行。
+- case 后面跟的必须是读或者写通道的操作，否则编译出错。
+
+[Golang 并发模型：轻松入门 select](http://lessisbetter.site/2018/12/13/golang-slect/)
+
+[Golang 并发模型：select 进阶](http://lessisbetter.site/2018/12/17/golang-selete-advance/)
+
+[Golang 并发模型：轻松入门协程池](http://lessisbetter.site/2018/12/20/golang-simple-goroutine-pool/)
+
+## [使用 race 检测数据竞争](http://lessisbetter.site/2018/11/17/Golang-detecting-date-racing/)
+
+[Golang 并发模型：并发协程的优雅退出](http://lessisbetter.site/2018/12/02/golang-exit-goroutine-in-3-ways/)
+
+- 发送协程主动关闭通道，接收协程不关闭通道。技巧：把接收方的通道入参声明为只读，如果接收协程关闭只读协程，编译时就会报错。
+- 协程处理 1 个通道，并且是读时，协程优先使用 for-range，因为 range 可以关闭通道的关闭自动退出协程。
+- `,ok`可以处理多个读通道关闭，需要关闭当前使用 for-select 的协程。
+  显式关闭通道 stopCh 可以处理主动通知协程退出的场景。
+
+[Golang 并发：再也不愁选 channel 还是选锁](http://lessisbetter.site/2019/01/14/golang-channel-and-mutex/)

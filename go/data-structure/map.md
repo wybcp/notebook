@@ -87,3 +87,10 @@ func equal(x, y map[string]int) bool {
 ## 并发操作
 
 非原子操作需要加锁， map 并发读写需要加锁，map 操作不是并发安全的，判断一个操作是否是原子的可以使用 `go run race` 命令做数据的竞争检测
+
+## 参考
+
+- [Go 的 map 中删除子 map，内存会自动释放吗？](http://lessisbetter.site/2018/09/29/go-map-delete/)
+
+  在 Go 中，map 中存放 map，上层 map 执行 delete，子层 map 占用的内存会释放，无需手动先释放子 map 内存，再在上层 map 执行删除。
+  普通的 map，执行 delete 删除 map 的每一项，执行垃圾回收，内存不被回收，map 设置为 nil，内存被回收。
