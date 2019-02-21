@@ -5,3 +5,5 @@ RPC 是远程过程调用的缩写（Remote Procedure Call），通俗地说就�
 Go 语言的 RPC 规则：方法只能有两个可序列化的参数，其中第二个参数是指针类型，并且返回一个 error 类型，同时必须是公开的方法。
 
 ## [Go RPC 开发指南](https://books.studygolang.com/go-rpc-programming-guide/)
+
+[带入 gRPC](https://github.com/EDDYCJY/blog)
