@@ -10,7 +10,7 @@ function quickSort($data)
     if ($length <= 1) {
         return $data;
     }
-    //如果没有返回，说明数组内的元素个数 多余1个，需要排序
+    //如果没有返回，说明数组内的元素个数多余1个，需要排序
     //选择一个标尺
     //选择第一个元素
     $base_num = $data[0];
@@ -25,7 +25,7 @@ function quickSort($data)
             array_push($right_array,$data[$i]);
         }
     }
-    //再分别对 左边 和 右边的数组进行相同的排序处理方式
+    //再分别对左边和右边的数组进行相同的排序处理方式
     //递归调用这个函数,并记录结果
     $left_array = quickSort($left_array);
     $right_array = quickSort($right_array);
