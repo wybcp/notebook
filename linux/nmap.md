@@ -69,7 +69,7 @@ Host is up (0.11s latency).
 Nmap done: 1 IP address (1 host up) scanned in 0.21 seconds
 ```
 
-##  版本检测
+## 版本检测
 
 ```bash
 $ nmap -sV www.mycodon.com

@@ -1,26 +1,26 @@
-## 清理下载的软件包
+# 清理下载的软件包
 
 查看安装包大小
 
-```
+```sh
 du /var/cache/apt/archives
 ```
 
 删除已经卸载掉的软件包的命令为
 
-```
+```sh
 sudo　apt-get autoclean
 ```
 
 若你想清理出更多的空间，而且网速又比较快的话，那你大可以把电脑上存储的安装包全部卸载咯，命令为
 
-```
+```sh
 sudo　apt-get clean
 ```
 
 已经卸载，但是一些只有它依赖而别的软件包都不需要的软件包还留在你的系统里。卸载这些孤立包的命令为
 
-```
+```sh
 sudo　apt-get autoremove
 ```
 
@@ -32,12 +32,12 @@ sudo　apt-get autoremove
 
 删除老内核，命令
 
-```
+```sh
 dpkg --get-selections | grep linux
 ```
 
 然后将不用的内核文件 image、头文件 headers 删除掉就可以咯。在终端中输入命令
 
-```
+```sh
 sudo apt-get purge  内核文件名  头文件名
 ```

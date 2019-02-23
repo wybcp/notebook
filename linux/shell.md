@@ -1,7 +1,6 @@
-## shell 入门教程
+# shell 入门教程
 
-> Linux 中的 shell 有多种类型，其中最常用的几种是 Bourne shell（sh）、C shell（csh）和 Korn shell（ksh）。三种 shell 各有优缺点。
-> Bourne shell 是 UNIX 最初使用的 shell，并且在每种 UNIX 上都可以使用。Bourne shell 在 shell 编程方面相当优秀，但在处理与用户的交互方面做得不如其他几种 shell。Linux 操作系统缺省的 shell 是 Bourne Again shell，它是 Bourne shell 的扩展，简称 Bash，与 Bourne shell 完全向后兼容，并且在 Bourne shell 的基础上增加、增强了很多特性。Bash 放在/bin/bash 中，它有许多特色，可以提供如命令补全、命令编辑和命令历史表等功能，它还包含了很多 C shell 和 Korn shell 中的优点，有灵活和强大的编程接口，同时又有很友好的用户界面。
+> Linux 中的 shell 有多种类型，其中最常用的几种是 Bourne shell（sh）、C shell（csh）和 Korn shell（ksh）。三种 shell 各有优缺点。 Bourne shell 是 UNIX 最初使用的 shell，并且在每种 UNIX 上都可以使用。Bourne shell 在 shell 编程方面相当优秀，但在处理与用户的交互方面做得不如其他几种 shell。Linux 操作系统缺省的 shell 是 Bourne Again shell，它是 Bourne shell 的扩展，简称 Bash，与 Bourne shell 完全向后兼容，并且在 Bourne shell 的基础上增加、增强了很多特性。Bash 放在/bin/bash 中，它有许多特色，可以提供如命令补全、命令编辑和命令历史表等功能，它还包含了很多 C shell 和 Korn shell 中的优点，有灵活和强大的编程接口，同时又有很友好的用户界面。
 
 可以使用 `cat /etc/shells` 查看支持的 shell 类型。我们最常用的就是 bash。兼容 sh
 
@@ -13,7 +12,7 @@ shell 脚本第一行必须以 #！开头，它表示该脚本使用后面的解
 #!/bin/bash
 ```
 
-### shell 变量
+## shell 变量
 
 **shell 变量中间不能有空格，合法的标识符（字母、数字、\_）,不能使用关键字。首字母必须是字母**
 
@@ -29,7 +28,7 @@ name = "hello" //错误
 
 2. 使用变量
 
-定义过的变量直接使用$来访问这个变量
+定义过的变量直接使用\$来访问这个变量
 
 ```shell
 name="test"
@@ -57,7 +56,7 @@ unset $name
 
 变量的类型。有局部变量、环境变量、shell 变量
 
-### 字符串
+## 字符串
 
 字符串和 php 类似。可以由双引号和单引号括起来
 
@@ -152,7 +151,7 @@ echo ${str/l/test}//heltesto
 echo ${str//l/test} //hetesttesto
 ```
 
-### 数组
+## 数组
 
 shell 数组支持一维数组。和 php 类似。不需要指定数组的大小。
 
@@ -414,7 +413,7 @@ test #调用函数
 
 函数的参数定义不需要在()中定义形参 只需要在调用使用传入即可
 
-`$n n代表整数` $1 是第一个参数 以此类推
+`$n n代表整数` \$1 是第一个参数 以此类推
 
 ```shell
 function test()
@@ -445,7 +444,7 @@ source  ./a.sh
 
 ## 命令行接收参数
 
-在执行 Shell 脚本时，向脚本传递参数，脚本内获取参数的格式为：$n。n 代表一个数字，1 为执行脚本的第一个参数，2 为执行脚本的第二个参数。
+在执行 Shell 脚本时，向脚本传递参数，脚本内获取参数的格式为：\$n。n 代表一个数字，1 为执行脚本的第一个参数，2 为执行脚本的第二个参数。
 
 ```shell
 $ bash test.sh test test2

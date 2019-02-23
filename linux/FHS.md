@@ -1,6 +1,8 @@
-Filesystem Hierarchy Standard （FHS）标准
+# Filesystem Hierarchy Standard （FHS）标准
 
-https://www.kancloud.cn/wizardforcel/vbird-linux-basic-4e/152235
+Linux 目录配置的依据
+
+<https://www.kancloud.cn/wizardforcel/vbird-linux-basic-4e/152235>
 
 ## 目录树架构
 
@@ -28,7 +30,6 @@ usr 是 Unix Software Resource 的缩写
 
 - 绝对路径：由根目录（/）开始写起的文件名或目录名称；
 - 相对路径：相对于目前路径的文件名写法。反正开头不是 / 就属于相对路径的写法
--
 
 特别注意这两个特殊的目录：
 
