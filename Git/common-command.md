@@ -31,8 +31,7 @@ git revert -m 1 xxxx
 
 `git rebase –interactive ID^`
 
-将需要修改的记录的 pick 改成 edit
-执行更改
+将需要修改的记录的 pick 改成 edit 执行更改
 
 ```shell
 git commit –all –amend

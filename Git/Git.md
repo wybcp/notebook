@@ -90,8 +90,7 @@ git branch  //命令会列出所有分支
 git checkout -b dev //创建并切换到dev分支
 ```
 
-HEAD 指针指向了 dev
-![image](https://www.liaoxuefeng.com/files/attachments/00138490883510324231a837e5d4aee844d3e4692ba50f5000/0)
+HEAD 指针指向了 dev ![image](https://www.liaoxuefeng.com/files/attachments/00138490883510324231a837e5d4aee844d3e4692ba50f5000/0)
 
 - 合并分支
 

@@ -1,6 +1,6 @@
 # 安装
 
-## macos
+## Macos
 
 ```bash
 brew install kubernetes-cli

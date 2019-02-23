@@ -1,17 +1,17 @@
 # Markdown
 
-分割线非常简单，直接在一个空行里打上三个星号(***)。
+分割线非常简单，直接在一个空行里打上三个星号(\*\*\*)。
 
-l 在你想要加粗的文字前后加上两个星号(*)或者两个下划线(_)。
+l 在你想要加粗的文字前后加上两个星号(\*)或者两个下划线(\_)。
 
-在需要用到斜体的地方前后加上一个星号(*)或者一个下划线(_)。
+在需要用到斜体的地方前后加上一个星号(\*)或者一个下划线(\_)。
 
 表格对齐方式|:--------|---------:|:-------:|
 
 Reference-style links
 
 Reference-style links allow you to refer to your links by names, which you define elsewhere in your document:
-  
+
 <pre>
 I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].
 
@@ -26,7 +26,7 @@ I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].
 
 流程图
 
- 示例
+示例
 
 ```flow
 st=>start: Start:>https://www.zybuluo.com

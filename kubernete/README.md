@@ -6,4 +6,4 @@
 
 ## Ebook
 
-### [Kubernetes 权威指南：从 Docker 到 Kubernetes 实践全接触（纪念版）](http://www.broadview.com.cn/book/5019)
+- [Kubernetes 权威指南：从 Docker 到 Kubernetes 实践全接触（纪念版）](http://www.broadview.com.cn/book/5019)

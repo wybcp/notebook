@@ -149,7 +149,7 @@ nothing to commit, working tree clean
 
 我们可以使用暂存（stash）的一个地方是，如果我们发现在上次提交中忘记了某些内容，并且已经开始在同一分支中处理下一个提交了：
 
-````shell
+```shell
 # Assume the latest commit was already done
 # start working on the next patch, and discovered I was missing something
 # stash away the current mess I made
@@ -159,7 +159,8 @@ $ git stash save
 $ git add -u
 $ git commit --ammend
 # back to work!
-$ git stash pop```
+$ git stash pop
+```
 
 🔗**来源：** [atlassian.com](https://www.atlassian.com/git/tutorials/saving-changes/git-stash)
 
@@ -221,4 +222,3 @@ echo filename >> .gitingore # add it to .gitignore to avoid re-adding it
 ## 参考
 
 - [泪流满面的 11 个 Git 面试题](http://blog.jobbole.com/114297/)
-````
