@@ -1,4 +1,4 @@
-# 不安全
+# 不安全检查
 
 之前在 Sec-News 中推荐了一个开源程序 <https://github.com/yandex/gixy> ，作用是来检测 Nginx 配置文件中存在的问题。正好 Pwnhub 上周的比赛也出现了一道题，包含由 Nginx 配置错误导致的漏洞。
 

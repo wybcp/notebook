@@ -1,20 +1,21 @@
+# nginx conf
 
-```
+```nginx
 #定义Nginx运行的用户和用户组
 user www www;
- 
+
 #nginx进程数，建议设置为等于CPU总核心数。或设置为auto
 worker_processes 8;
- 
+
 #全局错误日志定义类型，[ debug | info | notice | warn | error | crit ]
 error_log /var/log/nginx/error.log info;
- 
+
 #进程文件
 pid /var/run/nginx.pid;
- 
+
 #一个nginx进程打开的最多文件描述符数目，理论值应该是最多打开文件数（系统的值ulimit -n）与nginx进程数相除，但是nginx分配请求并不均匀，所以建议与ulimit -n的值保持一致。
 worker_rlimit_nofile 65535;
- 
+
 #工作模式与连接数上限
 events
 {
@@ -23,7 +24,7 @@ use epoll;
 #单个进程最大连接数（最大连接数=连接数*进程数）
 worker_connections 65535;
 }
- 
+
 #设定http服务器
 http
 {
@@ -39,7 +40,7 @@ http
     tcp_nopush on; #防止网络阻塞
     tcp_nodelay on; #防止网络阻塞
     keepalive_timeout 120; #长连接超时时间，单位是秒
-     
+
     #FastCGI相关参数是为了改善网站的性能：减少资源占用，提高访问速度。下面参数看字面意思都能理解。
     fastcgi_connect_timeout 300;
     fastcgi_send_timeout 300;
@@ -48,7 +49,7 @@ http
     fastcgi_buffers 4 64k;
     fastcgi_busy_buffers_size 128k;
     fastcgi_temp_file_write_size 128k;
-     
+
     #gzip模块设置
     gzip on; #开启gzip压缩输出
     gzip_min_length 1k; #最小压缩文件大小
@@ -59,14 +60,14 @@ http
     #压缩类型，默认就已经包含text/html，所以下面就不用再写了，写上去也不会有问题，但是会有一个warn。
     gzip_vary on;
     #limit_zone crawler $binary_remote_addr 10m; #开启限制IP连接数的时候需要使用
- 
+
     upstream blog.ha97.com {
         #upstream的负载均衡，weight是权重，可以根据机器配置定义权重。weigth参数表示权值，权值越高被分配到的几率越大。
         server 192.168.80.121:80 weight=3;
         server 192.168.80.122:80 weight=2;
         server 192.168.80.123:80 weight=3;
     }
- 
+
 #虚拟主机的配置
 server
 {
@@ -97,8 +98,8 @@ server
     }
 
     #如果被代理服务器返回的状态码为400或者大于400，设置的error_page配置起作用。默认为off。
-     #   proxy_intercept_errors on;    
-    
+     #   proxy_intercept_errors on;
+
     #图片缓存时间设置
     location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
     {
@@ -115,7 +116,7 @@ server
     '"$http_user_agent" $http_x_forwarded_for';
     #定义本虚拟主机的访问日志
     access_log /var/log/nginx/ha97access.log access;
- 
+
     #对 "/" 启用反向代理
     location / {
         proxy_pass http://127.0.0.1:88;
@@ -136,7 +137,7 @@ server
         proxy_temp_file_write_size 64k;
         #设定缓存文件夹大小，大于这个值，将从upstream服务器传
     }
- 
+
     #设定查看Nginx状态的地址
     location /NginxStatus {
         stub_status on;
@@ -145,7 +146,7 @@ server
         auth_basic_user_file conf/htpasswd;
         #htpasswd文件的内容可以用apache提供的htpasswd工具来产生。
     }
- 
+
     #本地动静分离反向代理配置
     #所有jsp的页面均交由tomcat或resin处理
     location ~ .(jsp|jspx|do)?$ {
@@ -161,6 +162,4 @@ server
     { expires 1h; }
 }
 }
-
-
 ```
