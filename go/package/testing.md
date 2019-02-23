@@ -43,6 +43,11 @@ func BenchmarkGenShortIdTimeConsuming(b *testing.B) {
 
 ## 测试覆盖率
 
+由单元测试的代码，触发运行到的被测试代码的代码行数占所有代码行数的比例，被称为测试覆盖率，代码覆盖率不一定完全精准，但是可以作为参考，可以帮我们测量和我们预计的覆盖率之间的差距
+
 `go test -coverprofile=cover.out`：在测试文件目录下运行测试并统计测试覆盖率
 
 `go tool cover -func=cover.out`：分析覆盖率文件，可以看出哪些函数没有测试，哪些函数内部的分支没有测试完全，cover 工具会通过执行代码的行数与总行数的比例表示出覆盖率
+
+[Go 语言实战笔记（二十一）| Go 单元测试](https://www.flysnow.org/2017/05/16/go-in-action-go-unit-test.html)
+[Go语言实战笔记（二十二）| Go 基准测试](https://www.flysnow.org/2017/05/21/go-in-action-go-benchmark-test.html)

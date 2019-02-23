@@ -147,7 +147,7 @@ for {
 - 信号广播
 - 事件订阅与广播
 - 请求、响应转发
-- 任务分发
+- 任务分发 [Go语言实战笔记（十五）| Go 并发示例-Runner](https://www.flysnow.org/2017/04/29/go-in-action-go-runner.html)
 - 结果汇总
 - 并发控制
 - 同步与异步

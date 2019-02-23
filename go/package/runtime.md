@@ -1,6 +1,12 @@
-# runtime
+# [runtime](https://golang.org/pkg/runtime/)
 
-## untime.Gosched()
+## runtime.GOMAXPROCS()
+
+设置逻辑处理器个数`runtime.GOMAXPROCS(1)`
+
+设置运行的电脑的物理处理器的核数`runtime.GOMAXPROCS(runtime.NumCPU())`
+
+## [runtime.Gosched()](https://golang.org/pkg/runtime/#Gosched)
 
 untime.Gosched()用于让出 CPU 时间片。
 

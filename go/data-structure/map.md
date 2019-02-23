@@ -14,13 +14,30 @@ for key, value := range lookup {
 
 map 中所有的 key 都有相同的类型，所有的 value 也有着相同的类型，但是 key 和 value 之间可以是不同的数据类型。
 
-内置的 make 函数可以创建一个 map：
+## 创建
+
+- 内置的 make 函数可以创建一个 map：
 
 ```Go
 ages := make(map[string]int) // mapping from strings to ints
 ```
 
-另一种创建空的 map 的表达式是`map[string]int{}`
+- 创建空的 map 的表达式是`map[string]int{}`
+- 创建一个 nil 的 Map：`var dict map[string]int`,不能操作存储键值对的，必须要初始化后才可以，比如使用 make 函数,为其开启一块可以存储数据的内存。
+
+```go
+var test map[string]int
+//test["hi"]=3
+//panic: assignment to entry in nil map
+spew.Dump(test)
+test=make(map[string]int)
+test["hi"]=3
+spew.Dump(test)
+// (map[string]int) <nil>
+// (map[string]int) (len=1) {
+//  (string) (len=2) "hi": (int) 3
+// }
+```
 
 禁止对 map 元素取址的原因是 map 可能随着元素数量的增长而重新分配更大的内存空间，从而可能导致之前的地址无效。
 
@@ -83,6 +100,8 @@ func equal(x, y map[string]int) bool {
 ## delete
 
 `delete(names,"bobo")`
+
+delete 函数删除不存在的键也是可以的，只是没有任何作用。
 
 ## 并发操作
 

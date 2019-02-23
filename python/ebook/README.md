@@ -20,6 +20,8 @@ python 的一些小知识点
 
 数据挖掘
 
-## [Python Linux系统管理与自动化运维](https://book.douban.com/subject/27149544/)
+## [Python Linux 系统管理与自动化运维](https://book.douban.com/subject/27149544/)
 
-## [Python全栈之路](https://blog.ansheng.me/article/python-full-stack-way/)
+## [Python 全栈之路](https://blog.ansheng.me/article/python-full-stack-way/)
+
+- [让你的 Python 代码优雅又地道](http://www.lightxue.com/transforming-code-into-beautiful-idiomatic-python)

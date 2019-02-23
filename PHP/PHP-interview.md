@@ -155,6 +155,8 @@ Session 保存在服务器端的文件或数据库中，默认保存在文件中
 
 Session 文件是公有的。
 
+[都 9102 年了，还问 Session 和 Cookie 的区别](https://segmentfault.com/a/1190000018058541)
+
 ## cookie、session 的联系和区别，多台 web 服务器如何共享 session？
 
 cookie 在客户端保存状态，session 在服务器端保存状态。但是由于在服务器端保存状态的时候，在客户端也需要一个标识，所以 session 也可能要借助 cookie 来实现保存标识位的作用。
@@ -243,12 +245,12 @@ PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_ma
 
 它们都是 PHP 预定义变量。
 
-- $\_REQUEST 用来获取 post 或 get 方式提交的值
-- $\_POST 用来获取 post 方式提交的值
-- $\_GET 用来获取 get 方式提交的值
-- $\_COOKIE 用来获取 cookie 存储的值
-- $\_SESSION 用来获取 session 存储的值
-- $\_FILE 用来获取上传文件表单的值
+- \$\_REQUEST 用来获取 post 或 get 方式提交的值
+- \$\_POST 用来获取 post 方式提交的值
+- \$\_GET 用来获取 get 方式提交的值
+- \$\_COOKIE 用来获取 cookie 存储的值
+- \$\_SESSION 用来获取 session 存储的值
+- \$\_FILE 用来获取上传文件表单的值
 
 ## 数组中下标最好是什么类型的
 
@@ -441,7 +443,7 @@ chown()、chgrp()、chdir()、fopen()、rmdir()、copy()、link()、exec()等 �
 
 ## 写个函数来解决多线程同时读写一个文件的问题。
 
-答：flock($hander，LOCK_EX);
+答：flock(\$hander，LOCK_EX);
 
 ## 设置当前内容的 Content-Type
 

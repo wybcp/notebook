@@ -30,3 +30,46 @@ func main() {
 ```
 
 如果数组的长度很大，那么拷贝操作是有一定的开销的，使用的时候一定需要注意。
+
+## 指针数组
+
+指针数组和数组本身差不多，只不过元素类型是指针。
+
+```go
+array := [5]*int{1: new(int), 3:new(int)}
+spew.Dump(array)
+// ([5]*int) (len=5 cap=5) {
+//  (*int)(<nil>),
+//  (*int)(0xc00009c160)(0),
+//  (*int)(<nil>),
+//  (*int)(0xc00009c168)(0),
+//  (*int)(<nil>)
+// }
+```
+
+这样就创建了一个指针数组，并且为索引 1 和 3 都创建了内存空间，其他索引是指针的零值 nil,这时候我们要修改指针变量的值也很简单，如下即可：
+
+```go
+array := [5]*int{1: new(int), 3:new(int)}
+*array[1] = 1
+```
+
+以上需要注意的是，只可以给索引 1 和 3 赋值，因为只有它们分配了内存，才可以赋值，如果我们给索引 0 赋值，运行的时候，会提示无效内存或者是一个 nil 指针引用。
+
+panic: runtime error: invalid memory address or nil pointer dereference
+
+要解决这个问题，我们要先给索引 0 分配内存，然后再进行赋值修改。
+
+```go
+array := [5]*int{1: new(int), 3:new(int)}
+array[0] =new(int)
+*array[0] = 2
+spew.Dump(array)
+// ([5]*int) (len=5 cap=5) {
+//  (*int)(0xc0000161f0)(2),
+//  (*int)(0xc0000161e0)(0),
+//  (*int)(<nil>),
+//  (*int)(0xc0000161e8)(0),
+//  (*int)(<nil>)
+// }
+```

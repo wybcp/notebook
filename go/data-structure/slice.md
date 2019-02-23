@@ -2,6 +2,8 @@
 
 切片是轻量的包含并表示数组的一部分的结构。
 
+## 创建
+
 有四种方式初始化一个切片：
 
 ```go
@@ -25,6 +27,27 @@ a[low : high]
 ```
 
 它会选择一个半开区间，包括第一个元素，但排除最后一个元素。
+
+第 3 个用来限定新切片的容量，其用法为 slice[i:j:k]。
+
+```go
+slice := []int{1, 2, 3, 4, 5}
+//长度为2-1=1，容量为3-1=2
+newSlice := slice[1:2:3]
+spew.Dump(slice,newSlice)
+// ([]int) (len=5 cap=5) {
+//  (int) 1,
+//  (int) 2,
+//  (int) 3,
+//  (int) 4,
+//  (int) 5
+// }
+// ([]int) (len=1 cap=2) {
+//  (int) 2
+// }
+```
+
+这样我们就创建了一个长度为 2-1=1，容量为 3-1=2 的新切片,不过第三个索引，不能超过原切片的最大索引值 5。
 
 ## 切片的结构
 
@@ -101,12 +124,14 @@ package main
 import "fmt"
 
 func main() {
- var s1 []int
- var s2 []int = []int{}
- var s3 []int = make([]int, 0)
- fmt.Println(s1, s2, s3)
- fmt.Println(len(s1), len(s2), len(s3))
- fmt.Println(cap(s1), cap(s2), cap(s3))
+    // nil 切片
+    var s1 []int
+    // 空切片
+    var s2 []int = []int{}
+    var s3 []int = make([]int, 0)
+    fmt.Println(s1, s2, s3)
+    fmt.Println(len(s1), len(s2), len(s3))
+    fmt.Println(cap(s1), cap(s2), cap(s3))
 }
 
 -----------
@@ -134,6 +159,31 @@ func append(s []T, vs ...T) []T
 `append` 的结果是一个包含原切片所有元素加上新添加元素的切片。
 
 如果在创建切片时设置切片的容量和长度一样，就可以强制让新切片的第一个 append 操作创建新的底层数组，与原有的底层数组分离。新切片与原有的底层数组分离后，可以安全地进行后续修改。
+
+- 可变参数
+
+```go
+//内置的append也是一个可变参数的函数，可以同时追加好几个值。
+newSlice=append(newSlice,10,20,30)
+```
+
+- `...`操作符
+
+```go
+//通过...操作符，把一个切片追加到另一个切片里。
+slice := []int{1, 2, 3, 4, 5}
+newSlice := slice[1:2:3]
+newSlice=append(newSlice,slice...)
+spew.Dump(newSlice)
+// ([]int) (len=6 cap=6) {
+//  (int) 2,
+//  (int) 1,
+//  (int) 2,
+//  (int) 3,
+//  (int) 4,
+//  (int) 5
+// }
+```
 
 ## 切片的赋值
 
