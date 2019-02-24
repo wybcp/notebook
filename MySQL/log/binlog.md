@@ -18,7 +18,7 @@ binlog 是 Mysql sever 层维护的一种二进制日志，其主要是用来记
 
 紧接着配置 `log-bin` 和 `log-bin-index` 的值，如果没有则自行加上去。
 
-```ini
+```conf
 log-bin=master-bin
 log-bin-index=master-bin.index
 expire_logs_days=10
@@ -55,8 +55,7 @@ SHOW VARIABLES LIKE '%log_bin%';
 
 ## 查看
 
-查看 binary log 文件个数和文件名
-`mysql>show binary logs;`
+查看 binary log 文件个数和文件名 `mysql>show binary logs;`
 
 查看二进制日志`mysqlbinlog log-file`
 

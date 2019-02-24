@@ -13,7 +13,7 @@
 
 InnoDB 通过给索引上的索引项加锁实现，所以只有通过索引条件检索数据才使用行级锁，否则使用表级锁。
 
-设置合适的锁等待超时阈值参数innodb_lock_wait_timeout=100，避免并发高的情况下出问题。
+设置合适的锁等待超时阈值参数 innodb_lock_wait_timeout=100，避免并发高的情况下出问题。
 
 ### 行级锁定的优点
 
@@ -35,7 +35,7 @@ InnoDB 通过给索引上的索引项加锁实现，所以只有通过索引条�
 
 ## 乐观锁
 
-```mysql
+```sql
 update table table_name
 set column_name = value, version=version+1
 where version = version;
@@ -43,7 +43,7 @@ where version = version;
 
 ## 悲观锁
 
-```mysql
+```sql
 update table table_name set column_name = value for update;
 ```
 

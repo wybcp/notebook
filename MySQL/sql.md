@@ -41,16 +41,21 @@
     ```
 
   - 唯一索引
+
     ```sql
     ALTER TABLE `table_name`
     ADD UNIQUE your_index_name(your_column_name);
     ```
+
   - 普通索引
+
     ```sql
     ALTER TABLE `table_name`
     ADD INDEX your_index_name(your_column_name);
     ```
+
   - 全文索引
+
     ```sql
     ALTER TABLE `table_name`
     ADD FULLTEXT your_index_name(your_column_name);
@@ -80,7 +85,7 @@
 - 删除表
 
   ```sql
-  DROP TABLE [if exists]`table_name`;
+  DROP TABLE [if exists] `table_name`;
   ```
 
 - 删除字段
@@ -219,8 +224,7 @@
 
 - 特定顺序
 
-  ORDER BY 关键词用于对记录集中的数据进行排序,默认对记录进行升序排序。
-  如果降序排序，使用 DESC 关键字。
+  ORDER BY 关键词用于对记录集中的数据进行排序，默认对记录进行升序排序。如果降序排序，使用 DESC 关键字。
 
   ```sql
   SELECT column_name(s)
@@ -277,7 +281,7 @@ show columns from table_name;
 ```
 
 - select version():显示服务器版本号
-- select database();//查看当前数据库
+- select database();查看当前数据库
 - select now():当前时间
 - select user():当前用户
 - show tables;//查看数据表列表
@@ -289,12 +293,11 @@ show columns from table_name;
 - select least(value_1...value_n)：选取最小值
 - select greatest(value_1...value_n)：选取最大值
 
-```sql
-select * from information_schema.TABLES where information_schema.TABLES.TABLE_SCHEMA = '数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
-```
+  ```sql
+  select * from information_schema.TABLES where information_schema.TABLES.TABLE_SCHEMA = '数据库名' and information_schema.TABLES.TABLE_NAME = '表名';
+  ```
 
-- 去重显示数据
-  select distinct a,b from test;
+- 去重显示数据 select distinct a,b from test;
 
 - 查看 MySQL 数据库大小
 

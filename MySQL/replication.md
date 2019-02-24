@@ -66,7 +66,7 @@ mysql>start slave;
 STATEMENT（记录操作的 SQL 语句）
 
 - 优点 减少了 binlog 日志量，节约 IO，提高性能，易于理解
-- 缺点 不是所有的 DML 语句都能被复制，有些函数 UUID() 、FOUND_ROWS()、USER() 也无法被复制
+- 缺点 不是所有的 DML 语句都能被复制，有些函数 UUID()、FOUND_ROWS()、USER() 也无法被复制
 
 ROW（记录操作的每一行数据的变化信息，RC 隔离级别，必须是 row 格式）
 
@@ -80,7 +80,7 @@ MIXED （混合模式）
 
 ## binlog Events
 
-我们都知道　 binlog 日志用于记录所有对 MySQL 的操作的变更，而这每一个变更都会对应的事件，也就是 Event，index 文件记录了所有的 binlog 位置，每个 binlog 会有 header event，rotate 三个 event，binlog 的结构如下。
+我们都知道 binlog 日志用于记录所有对 MySQL 的操作的变更，而这每一个变更都会对应的事件，也就是 Event，index 文件记录了所有的 binlog 位置，每个 binlog 会有 header event，rotate 三个 event，binlog 的结构如下。
 
 ![img](https://user-gold-cdn.xitu.io/2017/3/29/4a6a030e217be904de9bbe4cbb4c9f9c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
@@ -197,7 +197,7 @@ sync_binlog （binlog）
 
 master：
 
-```config
+```conf
 binlog_format = ROW
 transaction-isolation = READ-COMMITTE
 Dexpire_logs_days = 30
@@ -219,7 +219,7 @@ binlog-ignore-db=test
 
 slave：
 
-```config
+```conf
 log_slave_updates=1
 server-id = 328
 relay_log_recover = 1
@@ -252,7 +252,7 @@ MySQL 5.6 版本中还引入了 GTID，不但降低了主从 failover 时，寻�
 
 Multi-Threaded Slave 相关参数
 
-```config
+```conf
 slave-parallel-type= DATABASE /LOGICAL_CLOCK
 -- DATABASE -- 基于库级别的并行复制 与5.6相同
 -- LOGICAL_CLOCK -- 逻辑时钟，主上怎么并行执行，从上怎么回放。
@@ -272,7 +272,7 @@ slave_preserve_commit_order=1
 
 在半同步中，至少有一个 Slave 节点收到 binlog 后再返回，不能完全避免数据丢失，超时后，切回异步复制。在事物提交的过程中，在 InnoDB 层的 commit log 阶段后，Master 节点需要收到至少一个 Slave 节点回复的 ACK 后，才能继续下一个事物。
 
-### **无损复制**
+### 无损复制
 
 ![img](https://user-gold-cdn.xitu.io/2017/3/29/87359d8129296fe3cca0adea3de41901?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
@@ -292,7 +292,7 @@ ACK 的时间点不同
 
 ### 半同步相关参数
 
-```config
+```conf
 rpl_semi_sync_master_enabled=1
 rpl_semi_sync_slave_enabled=1
 rpl_semi_sync_master_timeout=1000
@@ -303,7 +303,7 @@ rpl_semi_sync_master_wait_for_slave_count=1
 
 ### 半同步相关事件统计
 
-```config
+```conf
 Rpl_semi_sync_master_tx_avg_wait_time
 --开启Semi_sync，平均需要额外等待的时间
 Rpl_semi_sync_master_net_avg_wait_time
@@ -314,7 +314,7 @@ Rpl_semi_sync_master_no_times
 --可以知道一段时间内，Semi-sync是否有超时失败过，记录了失败次数。
 ```
 
-### **multi-source**
+### multi-source
 
 然而在 MySQL 5.7 版本中，提供了多源复制，多源复制的出现对于分库分表的业务提供了极大的便利，目前我们已经部署了多套多源复制供统计使用。
 
@@ -322,7 +322,7 @@ Rpl_semi_sync_master_no_times
 
 如上图，多源复制采用多通道的模式，和普通的复制相比，就是使用 FOR CHANNEL 进行了分离。
 
-```
+```sql
 CHANGE MASTER TO .... FOR CHANNEL ‘m1';
 CHANGE MASTER TO .... FOR CHANNEL ‘m2';
 ```
@@ -335,7 +335,7 @@ CHANGE MASTER TO .... FOR CHANNEL ‘m2';
 
 如上图的分库分表架构，可以使用以下参数实现奇偶插入的方式去解决。
 
-```
+```conf
 auto_increment_offset=1…n
 auto_increment_increment=n
 ```

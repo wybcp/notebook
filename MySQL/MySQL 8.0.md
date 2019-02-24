@@ -4,7 +4,7 @@
 
 将默认的字符集从 latin-1 转为 utf8mb4。 MySQL 支持最新的 Unicode 9.0 基于 DUCET 的新分类。
 
-## 3. **JSON 强化**
+## 3. JSON 强化
 
 MySQL 带来了一些新的 JSON 相关变更：
 

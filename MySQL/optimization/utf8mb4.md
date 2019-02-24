@@ -4,7 +4,7 @@
 
 my.cnf 一般在 etc/mysql/my.cnf 位置。找到后请在以下三部分里添加如下内容：
 
-```config
+```conf
 [client]
 default-character-set = utf8mb4
 [mysql]
@@ -38,8 +38,7 @@ SHOW VARIABLES LIKE ‘character_set_%’
 
 数据库连接参数中:
 
-characterEncoding=utf8 会被自动识别为 utf8mb4，也可以不加这个参数，会自动检测。
-而 autoReconnect=true 是必须加上的。
+characterEncoding=utf8 会被自动识别为 utf8mb4，也可以不加这个参数，会自动检测。而 autoReconnect=true 是必须加上的。
 
 ## 将数据库和已经建好的表也转换成 utf8mb4
 

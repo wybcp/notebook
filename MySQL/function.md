@@ -75,14 +75,14 @@
 - `SELECT LEFT('ABCEF',3);` 在左边获取几个字符：ABC
 - `SELECT RIGHT('ABCEF',3);` 在右边获取几个字符：ECF
 - `select length(str);`：字节长度 `length('你'): 3`
-- `select char_length(str);`：字符个数`char_length('你'): 1`
+- `select char_length(str);`：字符个数`char_length('你'): 1`
 - ltrim() 删除前导空格
 - rtrim()删除后导空格
 - trim() 删除全部空格
 - `select insert(str1,x,len,str2);`替换字符串
 - `select reverse(str);`字符串逆转
-- `select inet_aton(ip);`ip 点  地址转化为数值网络地址
-- `select inet_ntoa(expr);`ip 数值网络地址转化为点  地址
+- `select inet_aton(ip);`ip 点地址转化为数值网络地址
+- `select inet_ntoa(expr);`ip 数值网络地址转化为点地址
 - `select locate(str1,str);`返回子字符串在字符串中的开始位置
 - `SELECT REPLACE('??MySQL???','?','');` 替换字符串中的某些字符:
 - `SELECT SUBSTRING('MySQL',1,2);` 利用 SUBSTRING()截取字符串中的一部分字符串
@@ -105,8 +105,7 @@
 
 必要条件：返回值（必须），参数（非必须）
 
-MySQL 中参数的数量不能超过 1024 个
-创建自定义函数：
+MySQL 中参数的数量不能超过 1024 个创建自定义函数：
 
 ```sql
 CREATE FUNCTION function_name(参数) RETURNS 返回值类型
@@ -131,14 +130,4 @@ DROP FUNCTION [IF EXISTS] function_name;
 
 ---
 
-CREATE FUNCTION 函数名称(参数列表)
-　　 RETURNS 返回值类型
-　　函数体
-删除自定义函数:
-　　 DROP FUNCTION function_name
-调用自定义函数语法:
-　　 SELECT function_name(parameter_value,...)
-自定义函数中定义局部变量语法:
-DECLARE 变量 1[,变量 2,... ]变量类型 [DEFAULT 默认值];
-为变量赋值语法:
-SET parameter_name = value[,parameter_name = value...];
+CREATE FUNCTION 函数名称(参数列表) 　　 RETURNS 返回值类型　　函数体删除自定义函数: 　　 DROP FUNCTION function_name 调用自定义函数语法: 　　 SELECT function_name(parameter_value,...) 自定义函数中定义局部变量语法: DECLARE 变量 1[,变量 2,... ]变量类型 [DEFAULT 默认值]; 为变量赋值语法: SET parameter_name = value[,parameter_name = value...];

@@ -59,6 +59,16 @@ print(top_three)
 
 一个 `Counter` 对象就是一个字典，将元素映射到它出现的次数上。
 
+```python
+from collections import Counter
+c = Counter('hello world')
+print(c)
+# Counter({'l': 3, 'o': 2, ' ': 1, 'e': 1, 'd': 1, 'h': 1, 'r': 1, 'w': 1})
+
+print(c.most_common(2))
+# [('l', 3), ('o', 2)]
+```
+
 ## deque
 
 deque 提供了一个双端队列，你可以从头/尾两端添加或删除元素。

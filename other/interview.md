@@ -73,86 +73,79 @@ if($ip > $begin && $ip < $end) {
 
 ## csrf 和 xss 的区别
 
-csrf 跨站请求攻击。验证码、token、检测 refer
-xss 跨站脚本攻击，过滤用户输入。
+- csrf 跨站请求攻击。验证码、token、检测 refer
+- xss 跨站脚本攻击，过滤用户输入。
 
 ## 应用中我们经常会遇到在 user 表随机调取 10 条数据来展示的情况，简述你如何实现该功能。
 
-    ```shell
-    function get_random_array($min,$max,$number)
-    {
+```php
+function get_random_array($min,$max,$number)
+{
     $data = [];
     for($i = 0;$i<$number;$i++;)
     {
         $d = mt_rand($min,$max);
         if(in_array($d,$data)) {
-        $i--;
+            $i--;
         }else{
-        $data[] = $d;
+            $data[] = $d;
         }
     }
     return $data;
-    }
+}
 
-    $sql = 'select * from user where user_id in (' .join(",",get_random_array($min,$max,$number)). ')'
-    ```
+$sql = 'select * from user where user_id in (' .join(",",get_random_array($min,$max,$number)). ')'
+```
 
 ## 从扑克牌中随机抽 5 张牌，判断是不是一个顺子，即这 5 张牌是连续的
 
-    - [思路解析](https://blog.csdn.net/Jarvan_Song/article/details/52416039)
-    - [PHP 代码实现](https://github.com/xianyunyh/arithmetic-php/blob/master/package/Other/Judge.php)
+- [思路解析](https://blog.csdn.net/Jarvan_Song/article/details/52416039)
+- [PHP 代码实现](https://github.com/xianyunyh/arithmetic-php/blob/master/package/Other/Judge.php)
 
 ## linux 的内存分配和多线程原理
 
-    [Linux 内存分配](https://blog.csdn.net/haiross/article/details/38921135)
+- [Linux 内存分配](https://blog.csdn.net/haiross/article/details/38921135)
+- [Linux 线程和进程关系](https://my.oschina.net/cnyinlinux/blog/367910)
 
-    [Linux 线程和进程关系](https://my.oschina.net/cnyinlinux/blog/367910)
+## MYSQL 中主键与唯一索引的区别
 
-## **MYSQL 中主键与唯一索引的区别**
+- 主键唯一不能为空
+- 唯一索引可以为空
+- 一个表可以有多个唯一索引，但是只能有一个主键
 
-    ​ 主键唯一不能为空
+## http 和 https 区别
 
-    ​ 唯一索引可以为空
+- https 是在 http 的基础上加 ssl 层。进行了数据加密。保证传输过程中，数据加密，默认端口是 443
+- http 在传输中数据是明文，默认端口 80
 
-    一个表可以有多个唯一索引，但是只能有一个主键
+## http 状态码及其含意
 
-## **http 和 https 区别**
+- 2xx 表示成功 比如 200
+- 3xx 资源转移 301 永久转移 304 Not Modified
+- 4xx 资源没找到或禁止访问 404、403
+- 5xx 服务器错误
 
-    ​ https 是在 http 的基础上加 ssl 层。进行了数据加密。保证传输过程中，数据加密，默认端口是 443
+## linux 中怎么查看系统资源占用情况
 
-    ​ http 在传输中数据是明文 ，默认端口 80
+top 、free、iostat、vmstat
 
-## **http 状态码及其含意**
+## SQL 注入的原理是什么？如何防止 SQL 注入
 
-    ​ 2xx 表示成功 比如 200
+用户传入的数据没有过滤。不要相信用户的输入
 
-    ​ 3xx 资源转移 301 永久转移 304 Not Modified
+## isset(null) isset(false) empty(null) empty(false)输出
 
-    ​ 4xx 资源没找到或禁止访问 404、403
+false,false,true,true
 
-    ​ 5xx 服务器错误
-
-## **linux 中怎么查看系统资源占用情况**
-
-    ​ top 、free、iostat、vmstat
-
-## **SQL 注入的原理是什么？如何防止 SQL 注入**
-
-    ​ 用户传入的数据没有过滤。不要相信用户的输入
-
-## **isset(null) isset(false) empty(null) empty(false)输出**
-
-    ​ false,false,true,true
-
-## **优化 MYSQL 的方法**
+## 优化 MYSQL 的方法
 
 ​ 数据库字段冗余，增添索引、优化 sql、分库分表
 
 ## 数据库中的事务是什么？
 
-​ 是指一些操作要么同时执行成功，要么同时失败的一个过程，事务具 有 acid 四个特性。
+​ 是指一些操作要么同时执行成功，要么同时失败的一个过程，事务具有 acid 四个特性。
 
-## **写一个函数，尽可能高效的从一个标准 URL 中取出文件的扩展名**
+## 写一个函数，尽可能高效的从一个标准 URL 中取出文件的扩展名
 
 ```php
 $arr = parse_url('http://www.sina.com.cn/abc/de/fg.php?id=1');
@@ -182,7 +175,9 @@ function ($timeArray,$now) {
 
 ## echo、print、print_r 的区别
 
-    echo 是一个语法结构，print是一个函数 有返回值##print_r 是一个函数，用于打印复合类型变量。
+- echo 是一个语法结构
+- print 是一个函数,有返回值
+- print_r 是一个函数，用于打印复合类型变量。
 
 ## http 协议的 header 中有哪些 key 及含义
 
@@ -190,7 +185,7 @@ function ($timeArray,$now) {
 
 [HTTP Header](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers)
 
-## **聚簇索引，聚集索引的区别？**
+## 聚簇索引，聚集索引的区别？
 
 聚簇索引：数据行的物理顺序与列值（一般是主键的那一列）的逻辑顺序相同，一个表中只能拥有一个聚集索引。
 
@@ -202,7 +197,7 @@ function ($timeArray,$now) {
 
 ```php
 /**
-    对于对称的结构第i个跟第n-i个相反。
+*  对于对称的结构第i个跟第n-i个相反。
 */
 function close($string)
 {
@@ -248,7 +243,6 @@ function find($array)
     $data = [];
 
     foreach ($array as $key=>$value) {
-
         if(isset($data[$value])) {
             $data[$value]++;
         }else{
@@ -262,7 +256,6 @@ function find($array)
         }else{
             $result[] = $k;
         }
-
     }
     return $result;
 }
@@ -296,13 +289,14 @@ basename expload() strpos
 
 ## ping 一个服务器 ping 不通，用哪个命令跟踪路由包？
 
-linux:traceroute,windows:tracert
+- linux:traceroute,
+- windows:tracert
 
 ## php-fpm 各配置含义，fpm 的 daemonize 模式
 
-    static - 子进程的数量是固定的（pm.max_children）
-    ondemand - 进程在有需求时才产生（当请求时，与 dynamic 相反，pm.start_servers 在服务启动时即启动
-    dynamic - 子进程的数量在下面配置的基础上动态设置：pm.max_children，pm.start_servers，pm.min_spare_servers，pm.max_spare_servers
+- static - 子进程的数量是固定的（pm.max_children）
+- ondemand - 进程在有需求时才产生（当请求时，与 dynamic 相反，pm.start_servers 在服务启动时即启动
+- dynamic - 子进程的数量在下面配置的基础上动态设置：pm.max_children，pm.start_serverspm.min_spare_servers，pm.max_spare_servers
 
 ## 断开 TCP 连接时，timewait 状态会出现在发起分手的一端还是被分手的一端
 

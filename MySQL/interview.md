@@ -1,4 +1,4 @@
-#  常见面试题
+# 常见面试题
 
 ## 1：char、varchar 的区别是什么？
 
@@ -46,13 +46,13 @@ SELECT DISTINCT(salary) from employee ORDER BY salary DESC LIMIT n-1,1
 
 ## 7：请写出下面 MySQL 数据类型表达的意义（int(0)、char(16)、varchar(16)、datetime、text）
 
-- `1、整数类型，`包括 TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT，分别表示 1 字节、2 字节、3 字节、4 字节、8 字节整数。任何整数类型都可以加上 UNSIGNED 属性，表示数据是无符号的，即非负整数。
+- 1、整数类型，包括 TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT，分别表示 1 字节、2 字节、3 字节、4 字节、8 字节整数。任何整数类型都可以加上 UNSIGNED 属性，表示数据是无符号的，即非负整数。
 
-  `长度：`整数类型可以被指定长度，例如：INT(11)表示长度为 11 的 INT 类型。长度在大多数场景是没有意义的，它不会限制值的合法范围，只会影响显示字符的个数，而且需要和 UNSIGNED ZEROFILL 属性配合使用才有意义。
+  长度：整数类型可以被指定长度，例如：INT(11)表示长度为 11 的 INT 类型。长度在大多数场景是没有意义的，它不会限制值的合法范围，只会影响显示字符的个数，而且需要和 UNSIGNED ZEROFILL 属性配合使用才有意义。
 
-  `例子，`假定类型设定为 INT(5)，属性为 UNSIGNED ZEROFILL，如果用户插入的数据为 12 的话，那么数据库实际存储数据为 00012。
+  例子，假定类型设定为 INT(5)，属性为 UNSIGNED ZEROFILL，如果用户插入的数据为 12 的话，那么数据库实际存储数据为 00012。
 
-- `2、实数类型，`包括 FLOAT、DOUBLE、DECIMAL。
+- 2、实数类型，包括 FLOAT、DOUBLE、DECIMAL。
 
   DECIMAL 可以用于存储比 BIGINT 还大的整型，能存储精确的小数。
 
@@ -60,7 +60,7 @@ SELECT DISTINCT(salary) from employee ORDER BY salary DESC LIMIT n-1,1
 
   计算时 FLOAT 和 DOUBLE 相比 DECIMAL 效率更高一些，DECIMAL 你可以理解成是用字符串进行处理。
 
-- `3、字符串类型，`包括 VARCHAR、CHAR、TEXT、BLOB
+- 3、字符串类型，包括 VARCHAR、CHAR、TEXT、BLOB
 
   VARCHAR 用于存储可变长字符串，它比定长类型更节省空间。VARCHAR 使用额外 1 或 2 个字节存储字符串长度。列长度小于 255 字节时，使用 1 字节表示，否则使用 2 字节表示。VARCHAR 存储的内容超出设置的长度时，内容会被截断。
 
@@ -76,7 +76,7 @@ SELECT DISTINCT(salary) from employee ORDER BY salary DESC LIMIT n-1,1
 
   尽量避免使用 TEXT/BLOB 类型，查询时会使用临时表，导致严重的性能开销。
 
-- `4、枚举类型（ENUM），`把不重复的数据存储为一个预定义的集合。
+- 4、枚举类型（ENUM），把不重复的数据存储为一个预定义的集合。
 
   有时可以使用 ENUM 代替常用的字符串类型。
 
@@ -88,13 +88,11 @@ SELECT DISTINCT(salary) from employee ORDER BY salary DESC LIMIT n-1,1
 
   排序是按照内部存储的整数
 
-- `5、日期和时间类型，`尽量使用 timestamp，空间效率高于 datetime，
+- 5、日期和时间类型，尽量使用 timestamp，空间效率高于 datetime，
 
-  用整数保存时间戳通常不方便处理。
-  如果需要存储微妙，可以使用 bigint 存储。
-  看到这里，这道真题是不是就比较容易回答了。
+  用整数保存时间戳通常不方便处理。如果需要存储微妙，可以使用 bigint 存储。
 
-答：int(0)表示数据是 INT 类型，长度是 0、char(16)表示固定长度字符串，长度为 16、varchar(16)表示可变长度字符串，长度为 16、datetime 表示时间类型、text 表示字符串类型，能存储大字符串，最多存储 65535 字节数据）
+答：int(0)表示数据是 INT 类型，长度是 0；char(16)表示固定长度字符串，长度为 16；varchar(16)表示可变长度字符串，长度为 16；datetime 表示时间类型、text 表示字符串类型，能存储大字符串，最多存储 65535 字节数据
 
 ## 8：请说明 InnoDB 和 MyISAM 的区别
 
@@ -234,7 +232,7 @@ SELECT * FROM A LEFT JOIN B ON A.id=B.id UNIONSELECT * FROM A RIGHT JOIN B ON A.
 初步写一个基础的 SQL：
 
 ```sql
-SELECT hostTeamID,matchResult,matchTime guestTeamID from match where matchTime between "2006-6-1" and "2006-7-1";
+SELECT hostTeamID,matchResult,matchTime,guestTeamID from match where matchTime between "2006-6-1" and "2006-7-1";
 ```
 
 通过外键联表，完成最终 SQL：

@@ -10,10 +10,9 @@ CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 
 说明：
 
-- username：你将创建的用户名
+- username：创建的用户名
 - host：指定该用户在哪个主机上可以登陆，如果是本地用户可用 localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符%
 - password：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器
-  例子：
 
 ```sql
 CREATE USER 'dog'@'localhost' IDENTIFIED BY '123456';
@@ -33,8 +32,7 @@ GRANT privileges ON databasename.tablename TO 'username'@'host'
 
 - privileges：用户的操作权限，如 SELECT，INSERT，UPDATE 等，如果要授予所的权限则使用 ALL
 - databasename：数据库名
-- tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.\*
-  例子:
+- tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用`*`表示，如\*.\* 例子:
 
 ```sql
 GRANT SELECT, INSERT ON test.user TO 'pig'@'%';
@@ -97,8 +95,7 @@ DROP USER 'username'@'host';
 
 - 在配置文件[mysqld]后面任意一行添加`--skip-grant-tables`用来跳过密码验证的过程
 - 重启 MySQL
-- 重置密码
-  `use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
+- 重置密码 `use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
 - 注释“skip-grant-tables”
 - 重新登录
 
@@ -106,8 +103,7 @@ DROP USER 'username'@'host';
 
 - `mysql_safe --skip-grant-tables user=mysql`or`/etc/init.d/mysql start-mysqld --skip-grant-tables`
 - 重启 MySQL
-- 重置密码
-  `use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
+- 重置密码 `use mysql; update mysql.user set authentication_string=password('123qwe') where user='root' and Host ='localhost‘;`
 - `msyql>flush privileges;`
 
 [重置密码解决 MySQL for Linux 错误 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)](https://www.cnblogs.com/gumuzi/p/5711495.html)

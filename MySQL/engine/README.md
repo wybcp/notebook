@@ -6,7 +6,10 @@
 
 存储过程是 SQL 语句和控制语句的预编译集合，以一个名称存储并作为一个单元处理.
 
-存储过程的优点：第一，增强 SQL 语句的功能和灵活性； 第二，实现较快的执行的速度；第三，减少网络流量
+存储过程的优点：
+
+- 第一，增强 SQL 语句的功能和灵活性；
+- 第二，实现较快的执行的速度；第三，减少网络流量
 
 MySQL5.5 以后默认使用 InnoDB 存储引擎，其中 InnoDB 和 BDB 提供事务安全表，其它存储引擎都是非事务安全表。
 
@@ -16,7 +19,7 @@ MySQL5.5 以后默认使用 InnoDB 存储引擎，其中 InnoDB 和 BDB 提供�
 
 `show engines`和`show variables like 'have%'`可以列出当前数据库所支持到引擎。其中 Value 显示为 disabled 的记录表示数据库支持此引擎，而在数据库启动时被禁用。
 
-```mysql
+```sql
 mysql> show engines \G;
 *************************** 1. row ***************************
       Engine: InnoDB
@@ -88,6 +91,7 @@ No query specified
 ```
 
 在 MySQL5.1 以后，INFORMATION_SCHEMA 数据库中存在一个 ENGINES 的表，它提供的信息与 show engines;语句完全一样，可以使用下面语句来查询哪些存储引擎支持事物处理：`select engine from information_chema.engines where transactions = 'yes';`
+
 可以通过 engine 关键字在创建或修改数据库时指定所使用到引擎。
 
 在创建表到时候通过 engine=...或 type=...来指定所要使用到引擎。

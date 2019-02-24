@@ -1,10 +1,10 @@
 # MySQL 安全
 
-## **操作系统相关的安全问题**
+## 操作系统相关的安全问题
 
 常见的操作系统安全问题主要出现在 MySQL 的安装和启动过程中.
 
-### **1.严格控制操作系统账号和权限**
+### 1.严格控制操作系统账号和权限
 
 在数据库服务器上要严格控制操作系统的账号和权限，比如：
 
@@ -12,23 +12,23 @@
 - 其他任何用户都采取独立的账号登录，管理员通过 mysql 专有用户管理 MySQL，或者通过 root su 到 mysql 用户下进行管理。
 - mysql 用户目录下，除了数据文件目录，其他文件和目录属主都改为 root
 
-### **2.尽量避免以 root 权限运行 MySQL**
+### 2.尽量避免以 root 权限运行 MySQL
 
 MySQL 安装完毕后，一般会将数据目录属主设置为 mysql 用户，而将 MySQL 软件目录的属主设置为 root，这样做的目的是当使用 mysql 启动数据库时，可以防止任何具有 FILE 权限的用户能够用 root 创建文件。而如果使用 root 用户启动数据库，则任何具有 FILE 权限的用户都可以读写 root 用户的文件，这样会给系统造成严重的安全隐患。
 
-### **3.防止 DNS 欺骗**
+### 3.防止 DNS 欺骗
 
 创建用户时，host 可以指定域名或者 IP 地址。但是，如果指定域名，就可能带来如下安全隐患： 如果域名对应的 IP 地址被恶意修改，则数据库就会被恶意的 IP 地址进行访问，导致安全隐患。
 
-## **数据库相关的安全问题**
+## 数据库相关的安全问题
 
 常见的数据库问题大多数是由于账号的管理不当造成的。应该加强对账号管理的安全意识。
 
-### **1.删除匿名账号**
+### 1.删除匿名账号
 
 在某些版本的中，安装完毕 MySQL 后，会自动安装一个空账号，此账号具有对 test 数据库的全部权限，普通用户只需要执行 mysql 命令即可登录 MySQL 数据库，这个时候默认使用了空用户，可以在 test 数据库里面做各种操作，比如可以创建一个大表，占用大量磁盘空间，这样给系统造成了安全隐患。
 
-### **2.给 root 账号设置口令**
+### 2.给 root 账号设置口令
 
 MySQL 安装完毕后，root 默认口令为空，需要马上修改口令
 
@@ -36,24 +36,24 @@ MySQL 安装完毕后，root 默认口令为空，需要马上修改口令
 set password=password('newpassword');
 ```
 
-### **3.设置安全密码**
+### 3.设置安全密码
 
 密码的安全体现在以下两个方面：
 
 - 设置安全的密码，建议使用 6 位以上字母、数字、下划线和一些特殊字符组合的而成的字符串；
 - 使用上的安全，使用密码期间尽量保证使用过程安全，不会被别人窃取。
 
-**（1）**直接将密码写在命令行中。
+（1）直接将密码写在命令行中。
 
 `mysql -uroot -p123`
 
-**（2）**交互式方式输入密码。
+（2）交互式方式输入密码。
 
 `mysql -uroot -p`
 
-**（3）**将用户名和密码写在配置文件里面，连接的时候自动读取，比如应用连接数据库或者执行一些批处理脚本。对于这种方式，MySQL 供了一种方法，在 my.cnf 里面写入连接信息。
+（3）将用户名和密码写在配置文件里面，连接的时候自动读取，比如应用连接数据库或者执行一些批处理脚本。对于这种方式，MySQL 供了一种方法，在 my.cnf 里面写入连接信息。
 
-```config
+```conf
 [client]
 user=username
 password=password
@@ -65,13 +65,13 @@ password=password
 
 以上是 3 种常见的密码使用方式。很显然，第 1 种最不安全，因为它将密码写成为明文；第 2 种比较安全，但是只能使用在交互的界面下；第 3 种比较方便，但是需要将配置文件设置严格的存取权限，而且任何只要可以登录操作系统的用户都可能自动登录，存在一定的安全隐患。
 
-### **4.只授予账号必须的权限**
+### 4.只授予账号必须的权限
 
-### **5.除 root 外，任何用户不应有 mysql 库 user 表的存取权限**
+### 5.除 root 外，任何用户不应有 mysql 库 user 表的存取权限
 
 由于 MySQL 中可以通过更改 mysql 数据库的 user 表进行权限的增加、删除、变更等操作，因此，除了 root 以外，任何用户都不应该拥有对 user 表的存取权限（SELECT、UPDATE、INSERT、DELETE 等），造成系统的安全隐患。
 
-### **6.不要把 FILE、PROCESS 或 SUPER 权限授予管理员以外的账号**
+### 6.不要把 FILE、PROCESS 或 SUPER 权限授予管理员以外的账号
 
 FILE 权限主要以下作用：
 
@@ -83,7 +83,7 @@ ROCESS 权限能被用来执行“show processlist”命令，查看当前所有
 
 SUPER 权限能够执行 kill 命令，终止其他用户进程。
 
-### **7.LOAD DATA LOCAL 带来的安全问题**
+### 7.LOAD DATA LOCAL 带来的安全问题
 
 LOAD DATA 默认读的是服务器上的文件，但是加上 LOCAL 参数后，就可以将本地具有访问权限的文件加载到数据库中。这在在带来方便的同时，可带来了以下安全问题。
 
@@ -95,11 +95,11 @@ LOAD DATA 默认读的是服务器上的文件，但是加上 LOCAL 参数后，
 
 对于 mysql 命令行客户端，可以通过指定--local-infile[=1]选项启用 LOAD DATA LOCAL，或通过--local-infile=0 选项禁用。类似地，对于 mysqlimport，--local or -L 选项启用本地文件装载。在任何情况下，成功进行本地装载需要服务器启用相关选项。
 
-### **8.DROP TABLE 命令并不收回以前的相关访问权限**
+### 8.DROP TABLE 命令并不收回以前的相关访问权限
 
 DROP 表的时候，其他用户对此表的权限并没有被收回，这样导致重新创建同名的表时，以前其他用户对此表的权限会自动自动赋予，进而产生权限外流。因此，在删除表时，要同时取消其他用户在此表上的相应权限。
 
-### **9.使用 SSL**
+### 9.使用 SSL
 
 SSL（Secure Socket Layer，安全套接字层）是一种安全传输的协议，最初 Netscape 公司所开发，用以保障在 Internet 上数据传输之安全，利用 数据加密（Encryption）技术，可确保数据在网络上传输过程中不会被截取及窃听。
 
@@ -127,9 +127,9 @@ mysql>grant select on *.* to cqh identified by '123' REQUIRE ssl;
 - --ssl-cert=file_name SSL 证书文件名，用于建立安全连接
 - --ssl-key=file_name SSL 密钥文件名，用于建立 安全连接
 
-### **10.如果可能，给所有用户加上访问 IP 限制**
+### 10.如果可能，给所有用户加上访问 IP 限制
 
-### **11.REVOKE 命令的漏洞**
+### 11.REVOKE 命令的漏洞
 
 当用户多次赋予权限后，由于各种原因，需要将此用户的权限全部取消，此时，REVOKE 命令可能并不会按照我们的意愿执行，来看看下面的例子。
 
@@ -177,7 +177,7 @@ ping 之后就能通过 arp 缓存确定端口
 
 登录交换机，开始没有配置镜像
 
-```config
+```conf
 <H3C>dis mir
 
 The monitor port has not been configured! <H3C>sys
@@ -189,7 +189,7 @@ Enter system view, return to user view with Ctrl+Z.
 
 分别配置镜像目标和镜像源端口
 
-```config
+```conf
 [H3C]monitor-port g0/1
 Succeed! the monitor port has been specified to be Trunk port  and the pvid
 changed.
@@ -245,7 +245,7 @@ xxx.xxx.xxx.83 配置了 MySQL 主库，另外的一台外网机器 xxx.xxx.xxx.
 
 `/usr/local/stunnel/etc/stunnelclient.conf`
 
-```config
+```conf
 sslVersion = TLSv1
 
 CAfile = /usr/local/stunnel/etc/ca-cert.pem
@@ -265,7 +265,7 @@ connect =1.2.4.5:8000
 
 `/usr/local/stunnel/etc/stunnelserver.conf`
 
-```sql
+```conf
 sslVersion = TLSv1
 
 CAfile = /usr/local/stunnel/etc/ca-cert.pem
@@ -295,7 +295,7 @@ VPN 可以将外网通信转化为虚拟的内网通信，直接解决外网访�
 
 `/etc/openvpn/server.conf`
 
-```config
+```conf
 port 1194
 
 proto tcp-server
@@ -325,7 +325,7 @@ client-config-dir /etc/openvpn/ccd
 
 `/etc/openvpn/client.conf`
 
-```sql
+```conf
 client
 
 dev tap
@@ -371,7 +371,7 @@ mysql> SHOW VARIABLES LIKE ‘have_ssl’;
 
 SSL 证书分多种类型，实际中要根据不同用途来使用服务端或客户端的证书。
 
-```config
+```conf
 [mysqld]
 
 # 服务端类型SSL证书，用于服务端，或者主从关系中的主库
@@ -383,7 +383,7 @@ ssl-key=/home/mysql/certs/server-key.pem
 
 ![如何让远程访问Mysql更安全！如何让远程访问Mysql更安全！](https://www.linuxprobe.com/wp-content/uploads/2018/02/5.jpg)
 
-```config
+```conf
 [client]
 
 # 客户端类型SSL证书，用于客户端（如命令行工具），或者主从关系中的从库
@@ -492,7 +492,7 @@ bundled (use yassl), yes (prefer os library if present, otherwise use bundled), 
 
 如果习惯使用 phpmyadmin 的 web 方式访问 MySQL，那么只需要将访问方式统一为 HTTPS：
 
-```config
+```conf
 server
 {
 listen 80;

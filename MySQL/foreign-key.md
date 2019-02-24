@@ -12,8 +12,9 @@ FOREIGN KEY (pid)REFERENCES 父表名(id)
 ```
 
 也就是 users 表中有两个索引（id pid）
-外键列：pid （可自定义）
-参照列：id （可自定义）
+
+- 外键列：pid （可自定义）
+- 参照列：id （可自定义）
 
 查看索引：
 
@@ -23,6 +24,6 @@ SHOW INDEXES FROM table_name;
 
 以网格方式来查看索引：
 
-```
+```sql
 SHOW INDEXES FROM table_name\G;
 ```

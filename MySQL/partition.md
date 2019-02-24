@@ -22,7 +22,7 @@
 
 基于属于一个给定连续区间的列值，把多行分配给分区。这些区间要连续且不能相互重叠，使用 VALUES LESS THAN 操作符来进行定义。
 
-```
+```sql
 CREATE TABLE employees (
     id INT NOT NULL,
     fname VARCHAR(30),
@@ -42,12 +42,9 @@ partition BY RANGE (store_id) (
 
 每个分区都是按顺序进行定义，从最低到最高。这是 PARTITION BY RANGE 语法的要求。
 
-改进
-`
-PARTITION p3 VALUES LESS THAN MAXVALUE
+改进 ` PARTITION p3 VALUES LESS THAN MAXVALUE
 
-`
-MAXVALUE 表示最大的可能的整数值。
+` MAXVALUE 表示最大的可能的整数值。
 
 RANGE 分区应用：
 
@@ -61,7 +58,7 @@ LIST 分区是基于列值匹配一个离散值集合中的某个值来进行选
 
 LIST 分区通过使用“PARTITION BY LIST(expr)”来实现，其中“expr” 是某列值或一个基于某个列值、并返回一个整数值的表达式，然后通过“VALUES IN (value_list)”的方式来定义每个分区，其中“value_list”是一个通过逗号分隔的整数列表。
 
-```
+```sql
 CREATE TABLE employees (
     id INT NOT NULL,
     fname VARCHAR(30),
@@ -89,7 +86,7 @@ LIST 分区除了能和 RANGE 分区结合起来生成一个复合的子分区�
 
 要使用 HASH 分区来分割一个表，要在 CREATE TABLE 语句上添加一个“PARTITION BY HASH (expr)”子句，其中“expr”是一个返回一个整数的表达式。它可以仅仅是字段类型为 MySQL 整型的一列的名字。此外，你很可能需要在后面再添加一个“PARTITIONS num”子句，其中 num 是一个非负的整数，它表示表将要被分割成分区的数量。
 
-```
+```sql
 CREATE TABLE employees (
     id INT NOT NULL,
     fname VARCHAR(30),
@@ -111,7 +108,7 @@ MySQL 还支持线性哈希功能，线性哈希功能使用的一个线性的 2
 
 线性哈希分区和常规哈希分区在语法上的唯一区别在于，在“PARTITION BY” 子句中添加“LINEAR”关键字。
 
-```
+```sql
 CREATE TABLE employees (
     id INT NOT NULL,
     fname VARCHAR(30),
@@ -134,7 +131,7 @@ PARTITIONS 4；
 
 类似于按 HASH 分区，区别在于 KEY 分区只支持计算一列或多列，且 MySQL 服务器提供其自身的哈希函数。必须有一列或多列包含整数值。
 
-```
+```sql
 CREATE TABLE tk (
     col1 INT NOT NULL,
     col2 CHAR(5),

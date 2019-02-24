@@ -10,7 +10,7 @@
 
 之前使用触发器实现相关功能。
 
-```mysql
+```sql
 col_name data_type [GENERATED ALWAYS] AS (expression)
   [VIRTUAL | STORED] [UNIQUE [KEY]] [COMMENT comment]
   [[NOT] NULL] [[PRIMARY] KEY]
@@ -25,9 +25,7 @@ json 列类型
 ## Replication 增强
 
 - 支持多源复制
-
 - 基于库或逻辑的多线程复制
-
 - 在线变更复制模式
 
 ## Innodb 增强

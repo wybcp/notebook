@@ -4,7 +4,7 @@
 
 InnoDB 存储引擎的特点：支持自动增长列，支持外键约束，支持事务。
 
-InnoDB 中，创建的表的表结构存储在*.frm*文件中。数据和索引存储在 innodb_data_home_dir 和 innodb_data_file_path 定义的表空间中
+InnoDB 中，创建的表的表结构存储在`.frm`文件中。数据和索引存储在 innodb_data_home_dir 和 innodb_data_file_path 定义的表空间中
 
 InnoDB：支持事务和行级锁，是 innodb 的最大特色。行锁大幅度提高了多用户并发操作的新能。
 
@@ -24,5 +24,4 @@ InnoDB 不创建目录，MySQL 在 MySQL 数据目录下面创建一个名为 ib
 - 磁盘 I/O:
   - 可以使用 SSD 提升性能
   - innodb_io_capacity 加大每秒刷新脏页的数量。
-- 内存
-  buffer_pool 缓存池，innodb_buffer_pool_size 尽可能最大，
+- 内存 buffer_pool 缓存池，innodb_buffer_pool_size 尽可能最大，
