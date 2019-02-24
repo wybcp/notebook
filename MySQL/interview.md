@@ -260,7 +260,7 @@ select * from a,b where a.tid = b.id and a.tid>50000 limit 200;
 select * from b , (select tid from a limit 50000,200) a where b.id = a .tid;
 ```
 
-## 23：拷贝表( 拷贝数据, 源表名：a 目标表名：b)
+## 23：拷贝表(拷贝数据, 源表名：a 目标表名：b)
 
 ```sql
 insert into b(a, b, c) select d,e,f from a;
@@ -275,16 +275,17 @@ select Student.S#,Student.Snamefrom Studentwhere S# not in (select distinct( SC.
 ## 25：随机取出 10 条数据
 
 ```sql
-SELECT * FROM users WHERE id >= ((SELECT MAX(id) FROM users)-(SELECT MIN(id) FROM users)) * RAND() + (SELECT MIN(id) FROM users) LIMIT 10#此方法效率比直接用SELECT * FROM users order by rand() LIMIT 10高很多
+SELECT * FROM users WHERE id >= ((SELECT MAX(id) FROM users)-(SELECT MIN(id) FROM users)) * RAND() + (SELECT MIN(id) FROM users) LIMIT 10
+#此方法效率比直接用SELECT * FROM users order by rand() LIMIT 10高很多
 ```
 
-## 26：请简述项目中优化 SQL 语句执行效率的方法，从哪些方面，SQL 语句性能如何分析？ **考点分析：**这道题主要考察的是查找分析 SQL 语句查询速度慢的方法**延伸考点：**
+## 26：请简述项目中优化 SQL 语句执行效率的方法，从哪些方面，SQL 语句性能如何分析？
 
 - 优化查询过程中的数据访问
 - 优化长难的查询语句
 - 优化特定类型的查询语句
 
-## B+树索引和哈希索引的区别\*\*
+## B+树索引和哈希索引的区别
 
 B+树是一个平衡的多叉树，从根节点到每个叶子节点的高度差值不超过 1，而且同层级的节点间有指针相互链接，是有序的
 
@@ -326,13 +327,10 @@ B+树是一个平衡的多叉树，从根节点到每个叶子节点的高度差
 
 ### 表分区好处
 
-1、分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备。 和单个磁盘或者文件系统相比，可以存储更多数据
-
-2、优化查询。在 where 语句中包含分区条件时，可以只扫描一个或多个分区表来提高查询效率；涉及 sum 和 count 语句时，也可以在多个分区上并行处理，最后汇总结果。
-
-3、分区表更容易维护。例如：想批量删除大量数据可以清除整个分区。
-
-4、可以使用分区表来避免某些特殊的瓶颈，例如 InnoDB 的单个索引的互斥访问，ext3 问价你系统的 inode 锁竞争等。
+1. 分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备。和单个磁盘或者文件系统相比，可以存储更多数据
+2. 优化查询。在 where 语句中包含分区条件时，可以只扫描一个或多个分区表来提高查询效率；涉及 sum 和 count 语句时，也可以在多个分区上并行处理，最后汇总结果。
+3. 分区表更容易维护。例如：想批量删除大量数据可以清除整个分区。
+4. 可以使用分区表来避免某些特殊的瓶颈，例如 InnoDB 的单个索引的互斥访问，ext3 问价你系统的 inode 锁竞争等。
 
 ### 分区表的限制因素
 

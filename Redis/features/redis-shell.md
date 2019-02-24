@@ -10,11 +10,11 @@ Redis 提供的 shell 工具。
 - `redis-cli --bigkeys`：对 redis 中的 key 进行采样，寻找较大的 keys。不用担心会阻塞 redis 很长时间不能处理其他的请求。执行的结果可以用于分析 redis 的内存的使用状态，每种类型 key 的平均大小。
 - `redis-cli --latency`：测试客户端到目标 Redis 的网络延迟`redis-cli -h 127.0.0.1 -p 6379 --latency`,执行一次，取平均
 - `redis-cli --latency-history`：测试客户端到目标 Redis 的网络延迟`redis-cli -h 127.0.0.1 -p 6379 --latency-history`,分时段执行多次，取平均
-  ```
-  min: 0, max: 1, avg: 0.17 (1344 samples) -- 15.00 seconds range
-  min: 0, max: 1, avg: 0.16 (1337 samples) -- 15.01 seconds range
-  min: 0, max: 2, avg: 0.13 (1341 samples) -- 15.01 seconds range
-  ```
+
+    min: 0, max: 1, avg: 0.17 (1344 samples) -- 15.00 seconds range
+    min: 0, max: 1, avg: 0.16 (1337 samples) -- 15.01 seconds range
+    min: 0, max: 2, avg: 0.13 (1341 samples) -- 15.01 seconds range
+
 - `redis-cli --latency-dist`：测试客户端到目标 Redis 的网络延迟`redis-cli -h 127.0.0.1 -p 6379 --latency-dist`,分时段执行多次，取平均,输出统计图表。
 
 ## redis-server

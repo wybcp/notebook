@@ -58,10 +58,9 @@ Redis 的字符串是动态字符串，是可以修改的字符串，采用预�
 - `mget key1 key2`：一次获取多个值
 - `setrange key offset value`：把字符串的 offset 偏移字节改成 value。如果偏移量 > 字符串长度，该字符自动补 0x00。不存在的 key 当作空白字符串处理，可以用作 append。
 - `append key value` ：把 value 追加到 key 的原值上，返回新字符串值的长度。
-- `getrange key start stop`：获取字符串中[start, stop]范围的值
-  对于字符串的下标，左数从 0 开始，右数从-1 开始
+- `getrange key start stop`：获取字符串中[start, stop]范围的值,对于字符串的下标，左数从 0 开始，右数从-1 开始
 
-注意：当 start>length，则返回空字符串；当 stop>=length，则截取至字符串尾；如果 start 所处位置在 stop 右边，则返回空字符串
+  注意：当 start>length，则返回空字符串；当 stop>=length，则截取至字符串尾；如果 start 所处位置在 stop 右边，则返回空字符串
 
 - `getset key new_value`：获取并返回旧值，在设置新值，可配合`setnx`可实现分布式锁。
 - `incr key`：自增，返回新值，如果 incr 一个不是 int 的 value 则返回错误，incr 一个不存在的 key，则设置 key 为 1
@@ -91,7 +90,7 @@ list 的 pop 操作还有阻塞版本，主要是为了避免轮询
 - `lrem key count value`：从链表中删除 value 值，删除 count 的绝对值个 value 后结束
   count > 0 从表头删除　　 count < 0 从表尾删除　　 count=0 全部删除
 - `ltrim key start stop`：剪切 key 对应的链接，切[start, stop]一段并把改制重新赋给 key
-- `lindex key index`：返回 index 索引上的值，需要对链表进行遍历，性能随着参数index增大而变差。
+- `lindex key index`：返回 index 索引上的值，需要对链表进行遍历，性能随着参数 index 增大而变差。
 - `llen key`：计算链表的元素个数
 - `linsert key after|before search value`：在 key 链表中寻找 search，并在 search 值之前|之后插入 value
 - `rpoplpush source destination`：把 source 的末尾拿出，放到 destination 头部，并返回单元值
@@ -146,7 +145,7 @@ hash 特别适用于存储对象，将一个对象存储在 hash 类型中会占
 
 配置：
 
-```config
+```conf
 hash_max_zipmap_entries 64 #配置字段最多64个
 hash_max_zipmap_value 512 #配置value最大为512字节
 ```
@@ -168,7 +167,7 @@ hash_max_zipmap_value 512 #配置value最大为512字节
 
 ## 五、Set 集合结构操作
 
-内部实现相当于一个特殊的字典，字典中所有的 value 都是一个值NULL。
+内部实现相当于一个特殊的字典，字典中所有的 value 都是一个值 NULL。
 特点：无序性、确定性、唯一性
 
 - `sadd key value`：往集合里面添加元素
@@ -218,9 +217,9 @@ sorted set 是 string 类型元素的集合，不同的是每个元素都会关�
 
 - `zunionstore destination numkeys key [key ...][weights weight] [aggregate SUM|MIN|MAX]`：并集计算
 
-注意：weights,aggregate 如何理解？
+    注意：weights,aggregate 如何理解？
 
-答：如果有交集，交集元素又有 score，score 怎么处理？aggregate num->score 相加，min 最小 score，max 最大 score，另外可以通过 weights 设置不同的 key 的权重，交集时 score\*weight
+    答：如果有交集，交集元素又有 score，score 怎么处理？aggregate num->score 相加，min 最小 score，max 最大 score，另外可以通过 weights 设置不同的 key 的权重，交集时 score\*weight
 
 ## 七、Bitmaps
 

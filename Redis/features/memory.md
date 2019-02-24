@@ -10,7 +10,7 @@ info memory
 
 查看内存相关指标。
 
-```shell
+```conf
 # redis分配器分配的内存总量
 used_memory:2101184
 used_memory_human:2.00M

@@ -1,4 +1,4 @@
-#部署
+# 部署
 
 ## 启动
 
@@ -106,7 +106,7 @@ redis 参数设置技巧列表：
 
 Supervisord 是一个优秀的进程管理工具，一般在部署 redis 时采用它来进行 redis、sentinel 等进程的管理，一个已经在生产环境采用的 supervisord 配置文件如下：
 
-```
+```conf
 ; Sample supervisor config file.
 ;
 ; For more information on the config file, please see:
@@ -308,7 +308,7 @@ pdsh -R ssh -w MSMSRED[1-3],PSMSRED1,PSMSAPP1 "/usr/local/bin/supervisorctl -c /
 
 前提是你这些机器已经建立了 ssh 互信。建立互信可以用下边这个脚本
 
-```
+```shell
 #!/bin/bash
 #2015-12-08
 #author gnuhpc
@@ -350,7 +350,7 @@ done
 指定一个 ip.cfg，里面的格式为：IP（主机名也行，只要能解析）:用户名:密码
 例如：
 
-```
+```conf
 xxxx.139:username:password
 xxxx.140:username:password
 xxxx.141:username:password

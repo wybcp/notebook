@@ -84,7 +84,7 @@ Redis 的事务始于`multi`命令，那么就从`multi`命令的源代码开始
 
 当 Redis 接收到客户端发送过来的命令之后会执行`multiCommand()`这个方法，这个方法在`multi.c`文件中。
 
-```
+```c
 void multiCommand(client *c) {
     // 1. 如果检测到flags里面已经包含了CLIENT_MULTI
     // 表示对应client已经处于事务的上下文中，返回错误
@@ -113,7 +113,7 @@ void multiCommand(client *c) {
 
 Redis 调用 queueMultiCommand()方法把加入事务的命令加入 Redis 队列中，queueMultiCommand()方法主要是把要加入事务的命令封装在 multiCmd 结构的变量，然后放置到 client->mstate.commands 数组中去，multiCmd 的定义如下:
 
-```
+```c
 typedef struct multiCmd {
     robj **argv; // 命令的参数数组
     int argc; // 命令的参数个数
@@ -123,7 +123,7 @@ typedef struct multiCmd {
 
 而 mstate 字段定义为:
 
-```
+```c
 typedef struct client {
     // 其他省略代码
     multiState mstate;      /* MULTI/EXEC state */
@@ -132,7 +132,7 @@ typedef struct client {
 
 multiState 的结构为:
 
-```
+```c
 typedef struct multiState {
     multiCmd *commands;     /* Array of MULTI commands */
     int count;              /* Total number of MULTI commands */
@@ -153,7 +153,7 @@ typedef struct multiState {
 
 前面说了，Redis 接收到的所有的命令都是执行到 processCommand()这个方法，在实际执行对应的命令前，processCommand()方法都会对将要执行的命令进行一系列的检查，如果有任何一项检测失败都会调用 flagTransaction()函数然后返回对应的信息给客户端，flagTransaction()实现如下:
 
-```
+```c
 void flagTransaction(client *c) {
     if (c->flags & CLIENT_MULTI)
         // 如果flags包含CLIENT_MULTI标志位，表示已经处于事务上下文中
@@ -168,7 +168,7 @@ void flagTransaction(client *c) {
 
 当 client 处于事务的上下文中时，watch 命令属于可以被立即执行的几个命令之一,watch 命令对应的代码为 watchCommand()函数，实现如下:
 
-```
+```c
 void watchCommand(client *c) {
     int j;
 
@@ -215,7 +215,7 @@ watch 命令的作用就是用在事务中检测被监视的 key 是否被其他
 
 在 T4 的时候 client_B 执行了 set 命令修改了 name,Redis 收到 set 命令之后会执行 setCommand 方法，实现如下:
 
-```
+```c
 void setCommand(client *c) {
     // 其他省略代码
     setGenericCommand(c,flags,c->argv[1],c->argv[2],expire,unit,NULL,NULL);
@@ -224,7 +224,7 @@ void setCommand(client *c) {
 
 在 setCommand()最后会调用 setGenericCommand()方法，改方法实现如下:
 
-```
+```c
 void setGenericCommand(client *c, int flags, robj *key, robj *val, robj *expire, int unit, robj *ok_reply, robj *abort_reply) {
     // 其他省略代码
     setKey(c->db,key,val);
@@ -234,7 +234,7 @@ void setGenericCommand(client *c, int flags, robj *key, robj *val, robj *expire,
 
 在 setGenericCommand()方法中会调用 setKey()这个方法，接着看下 setKey()这个方法:
 
-```
+```c
 void setKey(redisDb *db, robj *key, robj *val) {
     if (lookupKeyWrite(db,key) == NULL) {
         dbAdd(db,key,val);
@@ -250,7 +250,7 @@ void setKey(redisDb *db, robj *key, robj *val) {
 
 在 setKey()方法最后会调用 signaleModifiedKey()通知 redis 数据库中有数据被修改,signaleModifiedKey()方法实现如下:
 
-```
+```c
 void signalModifiedKey(redisDb *db, robj *key) {
     touchWatchedKey(db,key);
 }
@@ -258,7 +258,7 @@ void signalModifiedKey(redisDb *db, robj *key) {
 
 可以看到 signalModifiedKey()也仅仅是调用 touchWatchedKey()方法，代码如下:
 
-```
+```c
 void touchWatchedKey(redisDb *db, robj *key) {
     list *clients;
     listIter li;
@@ -293,7 +293,7 @@ exec 命令
 
 exec 命令用来执行事务，对应的代码为 execCommand()这个方法，实现如下:
 
-```
+```c
 void execCommand(client *c) {
     int j;
     robj **orig_argv;
@@ -385,7 +385,7 @@ discard
 
 使用 discard 命令可以取消一个事务，对应的方法为 discardCommand(),实现如下:
 
-```
+```c
 void discardCommand(client *c) {
     // 1. 检查对应的client是否处于事务中
     if (!(c->flags & CLIENT_MULTI)) {
@@ -400,7 +400,7 @@ void discardCommand(client *c) {
 
 discardCommand()方法首先判断对应的 client 是否处于事务中，如果不是则直接返回错误，否则的话会调用 discardTransaction()方法取消事务，该方法实现如下:
 
-```
+```c
 void discardTransaction(client *c) {
     // 1. 释放所有跟MULTI/EXEC状态相关的资源
     freeClientMultiState(c);

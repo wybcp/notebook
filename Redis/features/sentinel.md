@@ -12,7 +12,7 @@ sentinel 节点是独立的 Redis 节点，只不过不存储数据，只能执�
 
 `redis-6379.conf`:
 
-```config
+```conf
 port 6379
 logfile '6379.log'
 dirfilename 'dump-6379.rdb'
@@ -26,7 +26,7 @@ daemonize yes # 是否以进程守护的方式启动redis
 
 `redis-6380.conf`:
 
-```config
+```conf
 port 6380
 logfile '6380.log'
 dirfilename 'dump-6380.rdb'
@@ -43,7 +43,7 @@ slaveof 127.0.0.1 6379
 
 `redis-sentinel-26379.conf`:
 
-```config
+```conf
 port 26379
 dir "/private/tmp"
 sentinel monitor mymaster 127.0.0.1 6379 2
@@ -95,7 +95,7 @@ sentinel failover-timeout mymaster 180000
 
 `monitor`：定期监控主节点，quorum 参数用于发现故障和判断，一般设置为 sentinel 节点的一半加 1。
 
-`down-after-milliseconds`：sentinel 会向 master 发送心跳 PING 来确认 master 是否存活，如果 master 在“一定时间范围”内不回应 PONG 或者是回复了一个错误消息，那么这个 sentinel 会主观地(单方面地)认为这个 master 已经不可用了(subjectively down， 也简称为 SDOWN)。而这个 down-after-milliseconds 就是用来指定这个“一定时间范围”的，单位是毫秒。
+`down-after-milliseconds`：sentinel 会向 master 发送心跳 PING 来确认 master 是否存活，如果 master 在“一定时间范围”内不回应 PONG 或者是回复了一个错误消息，那么这个 sentinel 会主观地(单方面地)认为这个 master 已经不可用了(subjectively down，也简称为 SDOWN)。而这个 down-after-milliseconds 就是用来指定这个“一定时间范围”的，单位是毫秒。
 
 `parallel-syncs`：当新 master 产生时，同时进行“slaveof”到新 master 并进行“SYNC”的 slave 个数，默认为 1，建议保持默认值，在 salve 执行 salveof 与同步时，将会终止客户端请求。
 

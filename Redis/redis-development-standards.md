@@ -54,14 +54,14 @@ user:username:bobo:uid 9
 
 2. 如果将 redis 作为 cache 进行频繁读写和超时删除等，此时应该避免设置较大的 k-v，因为这样会导致 redis 的内存碎片增加，导致 rss 占用较大，最后被操作系统 OOM killer 干掉。
 
-如果采用序列化考虑通用性，请采用 json 相关的库进行处理，如果对内存大小和速度都很关注的，推荐使用 messagepack 进行序列化和反序列化
+    如果采用序列化考虑通用性，请采用 json 相关的库进行处理，如果对内存大小和速度都很关注的，推荐使用 messagepack 进行序列化和反序列化
 
-如果需要计数器，请将计数器的 key 通过天或者小时分割，比如下边的设计
-![一般设计](https://raw.githubusercontent.com/gnuhpc/All-About-Redis/master/CodeDesignRule/mem1.png)
+    如果需要计数器，请将计数器的 key 通过天或者小时分割，比如下边的设计
+    ![一般设计](https://raw.githubusercontent.com/gnuhpc/All-About-Redis/master/CodeDesignRule/mem1.png)
 
-更好的一个设计是采用 hash：
+    更好的一个设计是采用 hash：
 
-![hash设计](https://raw.githubusercontent.com/gnuhpc/All-About-Redis/master/CodeDesignRule/mem3.png)
+    ![hash设计](https://raw.githubusercontent.com/gnuhpc/All-About-Redis/master/CodeDesignRule/mem3.png)
 
 3. 各种数据结构及其占用内存的 benchmark 测试
 

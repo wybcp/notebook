@@ -11,9 +11,8 @@ Redis 执行一条命令的过程：
 
 ## 参数
 
-`slowlog-log-slower-than`：预设阈值，单位微秒，默认值 10000，如果值为 0，记录所有命令，小于 0，所有的都不记录。
-
-`slowlog-max-len`：慢日志最多存储的条数，列表结构。
+- `slowlog-log-slower-than`：预设阈值，单位微秒，默认值 10000，如果值为 0，记录所有命令，小于 0，所有的都不记录。
+- `slowlog-max-len`：慢日志最多存储的条数，列表结构。
 
 ## 修改配置
 
@@ -39,11 +38,10 @@ OK
 
 ## 查询慢日志
 
-`slowlog get [n]`：返回当前 redis 的慢查询
+- `slowlog get [n]`：返回当前 redis 的慢查询
+- `slowlog len`：返回当前 redis 的慢日志的长度
+- `slowlog reset`：重置慢查询日志
 
-`slowlog len`：返回当前 redis 的慢日志的长度
-
-`slowlog reset`：重置慢查询日志
 慢查询日志由 id、发生时间、耗时、执行命令、客户端等组成。
 
 ```shell

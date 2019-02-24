@@ -24,7 +24,7 @@ Redis Cluster 采用虚拟槽分区，所有的键根据哈希函数映射到 0~
 
 集群配置文件示例：
 
-```config
+```conf
 port 7000
 cluster-enabled yes
 cluster-config-file nodes.conf
