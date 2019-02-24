@@ -9,7 +9,7 @@ a = 1
 def fun(a):
     a = 2
 fun(a)
-print a  # 1
+print(a)  # 1
 ```
 
 ```python
@@ -17,22 +17,22 @@ a = []
 def fun(a):
     a.append(1)
 fun(a)
-print a  # [1]
+print(a)  # [1]
 ```
 
-所有的变量都可以理解是内存中一个对象的“引用”，或者，也可以看似 c 中 void \*的感觉。
+所有的变量都可以理解是内存中一个对象的“引用”，或者，也可以看似 c 中 void 的感觉。
 
 通过`id`来看引用`a`的内存地址可以比较理解：
 
 ```python
 a = 1
 def fun(a):
-    print "func_in",id(a)   # func_in 41322472
+    print("func_in",id(a))  # func_in 41322472
     a = 2
-    print "re-point",id(a), id(2)   # re-point 41322448 41322448
-print "func_out",id(a), id(1)  # func_out 41322472 41322472
+    print("re-point",id(a), id(2))   # re-point 41322448 41322448
+print("func_out",id(a), id(1)) # func_out 41322472 41322472
 fun(a)
-print a  # 1
+print(a)  # 1
 ```
 
 注：具体的值在不同电脑上运行时可能不同。
@@ -44,18 +44,18 @@ print a  # 1
 ```python
 a = []
 def fun(a):
-    print "func_in",id(a)  # func_in 53629256
+    print("func_in",id(a))  # func_in 53629256
     a.append(1)
-print "func_out",id(a)     # func_out 53629256
+print("func_out",id(a))    # func_out 53629256
 fun(a)
-print a  # [1]
+print(a)  # [1]
 ```
 
 这里记住的是类型是属于对象的，而不是变量。而对象有两种,“可更改”（mutable）与“不可更改”（immutable）对象。在 python 中，strings, tuples, 和 numbers 是不可更改的对象，而 list, dict, set 等则是可以修改的对象。(这就是这个问题的重点)
 
 当一个引用传递给函数的时候,函数自动复制一份引用,这个函数里的引用和外边的引用没有半毛关系了.所以第一个例子里函数把引用指向了一个不可变对象,当函数返回的时候,外面的引用没半毛感觉.而第二个例子就不一样了,函数内的引用指向的是可变对象,对它的操作就和定位了指针地址一样,在内存里进行修改.
 
-如果还不明白的话,这里有更好的解释: ，<http://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference>
+如果还不明白的话,这里有更好的解释: <http://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference>
 
 ## 2 Python 中的元类(metaclass)
 
@@ -67,7 +67,7 @@ Python 其实有 3 个方法,即静态方法(staticmethod),类方法(classmethod
 
 ```python
 def foo(x):
-    print "executing foo(%s)"%(x)
+    print("executing foo(%s)"%(x))
 
 class A(object):
     def foo(self,x):
@@ -102,7 +102,7 @@ a=A()
 
 ### 类变量
 
-> ​ 是可在类的所有实例之间共享的值（也就是说，它们不是单独分配给每个实例的）。例如下例中，num_of_instance 就是类变量，用于跟踪存在着多少个 Test 的实例。
+> ​ 是可在类的所有实例之间共享的值
 
 ### 实例变量
 
@@ -172,8 +172,6 @@ print isinstance(a,list)  # True
 
 ## 6 字典推导式
 
-可能你见过列表推导时,却没有见过字典推导式,在 2.7 中才加入的:
-
 ```python
 d = {key: value for (key, value) in iterable}
 ```
@@ -209,7 +207,7 @@ AttributeError: myClass instance has no attribute '__superprivate'
 
 ## 8 字符串格式化:%和.format
 
-.format 在许多方面看起来更便利.对于`%`最烦人的是它无法同时传递一个变量和元组.你可能会想下面的代码不会有什么问题:
+`.format` 在许多方面看起来更便利.对于`%`最烦人的是它无法同时传递一个变量和元组:
 
 ```python
 "hi there %s" % name
@@ -221,7 +219,7 @@ AttributeError: myClass instance has no attribute '__superprivate'
 "hi there %s" % (name,)   # 提供一个单元素的数组而不是一个参数
 ```
 
-但是有点丑..format 就没有这些问题.你给的第二个问题也是这样,.format 好看多了.
+但是有点丑.`.format` 就没有这些问题.你给的第二个问题也是这样,`.format` 好看多了.
 
 你为什么不用它?
 
@@ -305,8 +303,6 @@ a = aardvark, b = baboon, c = cat
 <http://stackoverflow.com/questions/3394835/args-and-kwargs>
 
 ## 11 面向切面编程 AOP 和装饰器
-
-这个 AOP 一听起来有点懵,同学面阿里的时候就被问懵了...
 
 装饰器是一个很著名的设计模式，经常被用于有切面需求的场景，较为经典的有插入日志、性能测试、事务处理等。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量函数中与函数功能本身无关的雷同代码并继续重用。概括的讲，**装饰器的作用就是为已经存在的对象添加额外的功能。**
 
@@ -480,11 +476,9 @@ Python 中，一个变量的作用域总是由在代码中被赋值的地方所�
 
 ## 19 协程
 
-知乎被问到了,呵呵哒,跪了
-
 简单点说协程是进程和线程的升级版,进程和线程都面临着内核态和用户态的切换问题而耗费许多切换时间,而协程就是用户自己控制切换的时机,不再需要陷入系统的内核态.
 
-Python 里最常见的 yield 就是协程的思想!可以查看第九个问题.
+Python 里最常见的 yield 就是协程的思想!
 
 ## 20 闭包
 
@@ -496,11 +490,7 @@ Python 里最常见的 yield 就是协程的思想!可以查看第九个问题.
 2. 内嵌函数必须引用外部函数中的变量
 3. 外部函数的返回值必须是内嵌函数
 
-感觉闭包还是有难度的,几句话是说不明白的,还是查查相关资料.
-
-重点是函数运行后并不会被撤销,就像 16 题的 instance 字典一样,当函数运行完后,instance 并不被销毁,而是继续留在内存空间里.这个功能类似类里的类变量,只不过迁移到了函数上.
-
-闭包就像个空心球一样,你知道外面和里面,但你不知道中间是什么样.
+重点是函数运行后并不会被撤销
 
 ## 21 lambda 函数
 
@@ -637,50 +627,6 @@ xrange is a sequence object that evaluates lazily.
 
 <http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x>
 
-## 1 事务
-
-数据库事务(Database Transaction) ，是指作为单个逻辑工作单元执行的一系列操作，要么完全地执行，要么完全地不执行。
-彻底理解数据库事务: <http://www.hollischuang.com/archives/898>
-
-## 2 数据库索引
-
-推荐: <http://tech.meituan.com/mysql-index.html>
-
-[MySQL 索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
-
-聚集索引,非聚集索引,B-Tree,B+Tree,最左前缀原理
-
-## 4 乐观锁和悲观锁
-
-悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作
-
-乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。
-
-乐观锁与悲观锁的具体区别: <http://www.cnblogs.com/Bob-FD/p/3352216.html>
-
-## 5 MVCC
-
-> ​ 全称是 Multi-Version Concurrent Control，即多版本并发控制，在 MVCC 协议下，每个读操作会看到一个一致性的 snapshot，并且可以实现非阻塞的读。MVCC 允许数据具有多个版本，这个版本可以是时间戳或者是全局递增的事务 ID，在同一个时间点，不同的事务看到的数据是不同的。
-
-### [MySQL](http://lib.csdn.net/base/mysql)的 innodb 引擎是如何实现 MVCC 的
-
-innodb 会为每一行添加两个字段，分别表示该行**创建的版本**和**删除的版本**，填入的是事务的版本号，这个版本号随着事务的创建不断递增。在 repeated read 的隔离级别（[事务的隔离级别请看这篇文章](http://blog.csdn.net/chosen0ne/article/details/10036775)）下，具体各种数据库操作的实现：
-
-- select：满足以下两个条件 innodb 会返回该行数据：
-  - 该行的创建版本号小于等于当前版本号，用于保证在 select 操作之前所有的操作已经执行落地。
-  - 该行的删除版本号大于当前版本或者为空。删除版本号大于当前版本意味着有一个并发事务将该行删除了。
-- insert：将新插入的行的创建版本号设置为当前系统的版本号。
-- delete：将要删除的行的删除版本号设置为当前系统的版本号。
-- update：不执行原地 update，而是转换成 insert + delete。将旧行的删除版本号设置为当前版本号，并将新行 insert 同时设置创建版本号为当前版本号。
-
-其中，写操作（insert、delete 和 update）执行时，需要将系统版本号递增。
-
-​ 由于旧数据并不真正的删除，所以必须对这些数据进行清理，innodb 会开启一个后台线程执行清理工作，具体的规则是将删除版本号小于当前系统版本的行删除，这个过程叫做 purge。
-
-通过 MVCC 很好的实现了事务的隔离性，可以达到 repeated read 级别，要实现 serializable 还必须加锁。
-
-> 参考：[MVCC 浅析](http://blog.csdn.net/chosen0ne/article/details/18093187)
-
 ## 6 MyISAM 和 InnoDB
 
 MyISAM 适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至你只是需要 update 一个字段，整个表都会被锁起来，而别的进程，就算是读进程都无法操作直到读操作完成。另外，MyISAM 对于 SELECT COUNT(\*) 这类的计算是超快无比的。
@@ -710,13 +656,6 @@ _注意: 中断连接端可以是客户端，也可以是服务器端. 下面仅
 ## 3 ARP 协议
 
 地址解析协议(Address Resolution Protocol)，其基本功能为透过目标设备的 IP 地址，查询目标的 MAC 地址，以保证通信的顺利进行。它是 IPv4 网络层必不可少的协议，不过在 IPv6 中已不再适用，并被邻居发现协议（NDP）所替代。
-
-## 4 urllib 和 urllib2 的区别
-
-这个面试官确实问过,当时答的 urllib2 可以 Post 而 urllib 不可以.
-
-1. urllib 提供 urlencode 方法用来 GET 查询字符串的产生，而 urllib2 没有。这是为何 urllib 常和 urllib2 一起使用的原因。
-2. urllib2 可以接受一个 Request 类的实例来设置 URL 请求的 headers，urllib 仅可以接受 URL。这意味着，你不可以伪装你的 User Agent 字符串等。
 
 ## 5 Post 和 Get
 
@@ -750,7 +689,6 @@ apache 相对 nginx 的优点：
 
 - rewrite ，比 nginx 的 rewrite 强大
 - 模块超多，基本想到的都可以找到
-- 少 bug ，nginx 的 bug 相对较多
 - 超稳定
 
 ## 8 网站用户密码保存
@@ -772,8 +710,6 @@ apache 相对 nginx 的优点：
 
 403: Forbidden
 404: Not Found
-
-HTTPS 握手,对称加密,非对称加密,TLS/SSL,RSA
 
 ## 10 XSRF 和 XSS
 
@@ -821,8 +757,6 @@ WSGI, Web Server Gateway Interface，是 Python 应用程序或框架和 Web 服
 
 ## 16 中间人攻击
 
-在 GFW 里屡见不鲜的,呵呵.
-
 中间人攻击（Man-in-the-middle attack，通常缩写为 MITM）是指攻击者与通讯的两端分别创建独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。
 
 ## 17 c10k 问题
@@ -854,56 +788,54 @@ Socket=Ip address+ TCP/UDP + port
 HTTP 请求 8 种方法介绍
 HTTP/1.1 协议中共定义了 8 种 HTTP 请求方法，HTTP 请求方法也被叫做“请求动作”，不同的方法规定了不同的操作指定的资源方式。服务端也会根据不同的请求方法做不同的响应。
 
-GET
+- GET
 
-GET 请求会显示请求指定的资源。一般来说 GET 方法应该只用于数据的读取，而不应当用于会产生副作用的非幂等的操作中。
+  GET 请求会显示请求指定的资源。一般来说 GET 方法应该只用于数据的读取，而不应当用于会产生副作用的非幂等的操作中。
 
-GET 会方法请求指定的页面信息，并返回响应主体，GET 被认为是不安全的方法，因为 GET 方法会被网络蜘蛛等任意的访问。
+  GET 会方法请求指定的页面信息，并返回响应主体，GET 被认为是不安全的方法，因为 GET 方法会被网络蜘蛛等任意的访问。
 
-HEAD
+- HEAD
 
-HEAD 方法与 GET 方法一样，都是向服务器发出指定资源的请求。但是，服务器在响应 HEAD 请求时不会回传资源的内容部分，即：响应主体。这样，我们可以不传输全部内容的情况下，就可以获取服务器的响应头信息。HEAD 方法常被用于客户端查看服务器的性能。
+  HEAD 方法与 GET 方法一样，都是向服务器发出指定资源的请求。但是，服务器在响应 HEAD 请求时不会回传资源的内容部分，即：响应主体。这样，我们可以不传输全部内容的情况下，就可以获取服务器的响应头信息。HEAD 方法常被用于客户端查看服务器的性能。
 
-POST
+- POST
 
-POST 请求会 向指定资源提交数据，请求服务器进行处理，如：表单数据提交、文件上传等，请求数据会被包含在请求体中。POST 方法是非幂等的方法，因为这个请求可能会创建新的资源或/和修改现有资源。
+  POST 请求会向指定资源提交数据，请求服务器进行处理，如：表单数据提交、文件上传等，请求数据会被包含在请求体中。POST 方法是非幂等的方法，因为这个请求可能会创建新的资源或/和修改现有资源。
 
-PUT
+- PUT
 
-PUT 请求会身向指定资源位置上传其最新内容，PUT 方法是幂等的方法。通过该方法客户端可以将指定资源的最新数据传送给服务器取代指定的资源的内容。
+  PUT 请求会身向指定资源位置上传其最新内容，PUT 方法是幂等的方法。通过该方法客户端可以将指定资源的最新数据传送给服务器取代指定的资源的内容。
 
-DELETE
+- DELETE
 
-DELETE 请求用于请求服务器删除所请求 URI（统一资源标识符，Uniform Resource Identifier）所标识的资源。DELETE 请求后指定资源会被删除，DELETE 方法也是幂等的。
+  DELETE 请求用于请求服务器删除所请求 URI（统一资源标识符，Uniform Resource Identifier）所标识的资源。DELETE 请求后指定资源会被删除，DELETE 方法也是幂等的。
 
-CONNECT
+- CONNECT
 
-CONNECT 方法是 HTTP/1.1 协议预留的，能够将连接改为管道方式的代理服务器。通常用于 SSL 加密服务器的链接与非加密的 HTTP 代理服务器的通信。
+  CONNECT 方法是 HTTP/1.1 协议预留的，能够将连接改为管道方式的代理服务器。通常用于 SSL 加密服务器的链接与非加密的 HTTP 代理服务器的通信。
 
-OPTIONS
+- OPTIONS
 
-OPTIONS 请求与 HEAD 类似，一般也是用于客户端查看服务器的性能。 这个方法会请求服务器返回该资源所支持的所有 HTTP 请求方法，该方法会用’\*’来代替资源名称，向服务器发送 OPTIONS 请求，可以测试服务器功能是否正常。JavaScript 的 XMLHttpRequest 对象进行 CORS 跨域资源共享时，就是使用 OPTIONS 方法发送嗅探请求，以判断是否有对指定资源的访问权限。 允许
+  OPTIONS 请求与 HEAD 类似，一般也是用于客户端查看服务器的性能。 这个方法会请求服务器返回该资源所支持的所有 HTTP 请求方法，该方法会用’\*’来代替资源名称，向服务器发送 OPTIONS 请求，可以测试服务器功能是否正常。JavaScript 的 XMLHttpRequest 对象进行 CORS 跨域资源共享时，就是使用 OPTIONS 方法发送嗅探请求，以判断是否有对指定资源的访问权限。 允许
 
-TRACE
+- TRACE
 
-TRACE 请求服务器回显其收到的请求信息，该方法主要用于 HTTP 请求的测试或诊断。
+  TRACE 请求服务器回显其收到的请求信息，该方法主要用于 HTTP 请求的测试或诊断。
 
 HTTP/1.1 之后增加的方法
 
 在 HTTP/1.1 标准制定之后，又陆续扩展了一些方法。其中使用中较多的是 PATCH 方法：
 
-PATCH
+- PATCH
 
-PATCH 方法出现的较晚，它在 2010 年的 RFC 5789 标准中被定义。PATCH 请求与 PUT 请求类似，同样用于资源的更新。二者有以下两点不同：
+  PATCH 方法出现的较晚，它在 2010 年的 RFC 5789 标准中被定义。PATCH 请求与 PUT 请求类似，同样用于资源的更新。二者有以下两点不同：
 
-但 PATCH 一般用于资源的部分更新，而 PUT 一般用于资源的整体更新。
-当资源不存在时，PATCH 会创建一个新的资源，而 PUT 只会对已在资源进行更新。
+  - 但 PATCH 一般用于资源的部分更新，而 PUT 一般用于资源的整体更新。
+  - 当资源不存在时，PATCH 会创建一个新的资源，而 PUT 只会对已在资源进行更新。
 
 ## 21 Ajax
 
 AJAX,Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）, 是与在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页的技术。
-
-# \*NIX
 
 ## unix 进程间通信方式(IPC)
 
@@ -915,8 +847,6 @@ AJAX,Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）, 是与�
 6. 内存映射（mapped memory）：内存映射允许任何多个进程间通信，每一个使用该机制的进程通过把一个共享的文件映射到自己的进程地址空间来实现它。
 7. 信号量（semaphore）：主要作为进程间以及同一进程不同线程之间的同步手段。
 8. 套接口（Socket）：更为一般的进程间通信机制，可用于不同机器之间的进程间通信。起初是由 Unix 系统的 BSD 分支开发出来的，但现在一般可以移植到其它类 Unix 系统上：Linux 和 System V 的变种都支持套接字。
-
-# 数据结构
 
 ## 1 红黑树
 
@@ -931,8 +861,6 @@ AVL 是严格平衡树，因此在增加或者删除节点的时候，根据不�
 红黑树详解: https://xieguanglei.github.io/blog/post/red-black-tree.html
 
 教你透彻了解红黑树: https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md
-
-# 编程题
 
 ## 1 台阶问题/斐波那契
 
@@ -1141,7 +1069,7 @@ def recursion_merge_sort2(l1, l2):
 
 再把旧列表加到新列表后面
 
-```pyhton
+```python
 def loop_merge_sort(l1, l2):
     tmp = []
     while len(l1) > 0 and len(l2) > 0:
@@ -1158,7 +1086,7 @@ def loop_merge_sort(l1, l2):
 
 > pop 弹出
 
-```Python
+```python
 a = [1,2,3,7]
 b = [3,4,5]
 

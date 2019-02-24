@@ -26,7 +26,7 @@
 pip install -i https://mirrors.aliyun.com/pypi/simple/ numpy
 ```
 
-修改 pip 的配置文件，将镜像源 写入 配置文件中 。
+修改 pip 的配置文件，将镜像源写入配置文件中 。
 
 ```bash
 ⚡ cat ~/.pip/pip.conf

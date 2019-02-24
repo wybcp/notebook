@@ -1,6 +1,6 @@
 # settings.py
 
-```config
+```conf
 LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Chongqing'

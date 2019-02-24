@@ -11,8 +11,8 @@
 
 通过以下命令打开 Python 命令行：
 
-```shell
-$ python manage.py shell
+```sh
+python manage.py shell
 ```
 
 因为 manage.py 会设置 DJANGO_SETTINGS_MODULE 环境变量，这个变量会让 Django 根据 mysite/settings.py 文件来设置 Python 包的导入路径。
