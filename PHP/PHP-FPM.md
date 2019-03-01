@@ -186,15 +186,13 @@ source /etc/profile
   >
   > rlimit_files = 1024; 增加 php-fpm 打开文件描述符的限制
 
-**一般来说一台服务器正常情况下每一个 php-cgi 所耗费的内存在 20M 左右 。**
+一般来说一台服务器正常情况下每一个 php-cgi 所耗费的内存在 20M 左右 。
 
 用内存/20 就大概算出最大的进程数。
 
 一般初始化的进程有一个类似的公式
 
-```
-start_servers = min_spare_servers + (max_spare_servers - min_spare_servers) / 2；
-```
+`start_servers = min_spare_servers + (max_spare_servers - min_spare_servers) / 2；`
 
 如果长时间没有得到处理的请求就会出现 504 Gateway Time-out 这个错误，而正在处理的很累的那几个 php-cgi 如果遇到了问题就会出现 502 Bad gateway 这个错误
 

@@ -10,7 +10,13 @@ Go 语言的类型推断可以明显提升程序的灵活性，使得代码重�
 
 ## [使用 new()和 make()](https://go.fdos.me/16.4.html)
 
-- 切片、映射和通道，使用 make
-- 数组、结构体和所有的值类型，使用 new
+- 切片、映射和通道，使用 make，返回的类型就是这三个类型本身，而不是他们的指针类型，因为这三种类型就是引用类型
+- 数组、结构体和所有的值类型，使用 new ，返回的是类型的指针，指向分配类型的内存地址。
+
+二者都是内存的分配（堆上），但是 make 只用于 slice、map 以及 channel 的初始化（非零值）；而 new 用于类型的内存分配，并且内存置为零。
 
 ## [Awesome Go Interview Questions and Answers](https://goquiz.github.io/)
+
+## [Go 语言参数传递是传值还是传引用](https://www.flysnow.org/2018/02/24/golang-function-parameters-passed-by-value.html)
+
+Go 语言中所有的传参都是值传递（传值），都是一个副本，一个拷贝。因为拷贝的内容有时候是非引用类型（int、string、struct 等这些），这样就在函数中就无法修改原内容数据；有的是引用类型（指针、map、slice、chan 等这些），这样就可以修改原内容数据。

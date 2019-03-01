@@ -63,7 +63,7 @@ import (
 ## 常见的包
 
 - [fmt](fmt.md)
-- [runtime](runtime.md) go系统运行时的操作相关
+- [runtime](runtime.md) go 系统运行时的操作相关
 
 ## 著名三方包
 
@@ -71,3 +71,7 @@ import (
 - [Pholcus（幽灵蛛）爬出工具](pholcus.md)
 - [logrus 日志系统](logrus.md)
 - [go-spew 打印数据的结构](go-spew.md)
+- [Web 中间件](negroni.md)
+- [生成二维码](go-qrcode.md)
+- [gometalinter 静态代码检查](gometalinter.md)本身不做代码检查，而是集成了各种 linter
+- [httprouter高性能路由](httprouter.md)

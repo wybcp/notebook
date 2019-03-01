@@ -60,3 +60,4 @@ godoc -http=:6060
 - [Go 指南](https://tour.go-zh.org/list)
 - [Go 语言核心 36 讲](https://time.geekbang.org/column/112)
 - [Golang 微服务框架 micro](https://micro.mu/docs/)
+- [正则参考](https://github.com/google/re2/wiki/Syntax)

@@ -18,7 +18,7 @@
 
   - step1:nginx 接收到一条 http 请求，会把环境变量，请求参数转变成 php 能懂的 php 变量
 
-    ```cinfig
+    ```conf
     // nginx 配置资料
     location ~ \.php$ {
           include snippets/fastcgi-php.conf; //step1
@@ -28,7 +28,7 @@
 
   - step2:nginx 匹配到.php 结尾的访问通过 fastcgi_pass 命令传递给 php-fpm.sock 文件，其实这里的 ngnix 发挥的是反向代理的角色，把 http 协议请求转到 fastcgi 协议请求
 
-    ```config
+    ```conf
     // nginx 配置资料
     location ~ \.php$ {
           include snippets/fastcgi-php.conf;

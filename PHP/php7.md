@@ -1,6 +1,6 @@
 # php7
 
-php7 发布已经升级到 7.2，里面发生了很多的变化。本文整理 php7.0 至 php7.2 的新特性和一些变化。
+本文整理 php7.0 至 php7.2 的新特性和一些变化。
 
 ## PHP7.0
 
@@ -34,7 +34,7 @@ $a = isset($_GET['a']) ?? 'none';
 
 #### 4. 变量类型声明
 
-变量类型声明有两种模式。一种是强制的，和严格的。允许使用下列类型参数 **int**、**string**、**float**、**bool**。
+变量类型声明有两种模式。一种是强制的和严格的。允许使用下列类型参数 **int**、**string**、**float**、**bool**。
 
 同时不能再使用 int、string、float、bool 作为类的名字了
 
@@ -93,7 +93,7 @@ $util->setLogger(new class {
 
 #### 7. Unicode codepoint 转译语法
 
-这接受一个以 16 进制形式的 Unicode codepoint，并打印出一个双引号或 heredoc 包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
+这接受一个以 16 进制形式的 Unicode codepoint，并打印出一个双引号或 heredoc 包围的 UTF-8 编码格式的字符串。可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
 
 ```PHP
 echo "\u{aa}";// ª
