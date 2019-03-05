@@ -11,7 +11,7 @@ nginx 日志主要有两条指令：
 log_format name（格式名字） 格式样式（即想要得到什么样的日志内容）
 示例：
 
-```nginx
+```conf
 log_format   main
 '$remote_addr - $remote_user [$time_local] "$request" '
 '$status $body_bytes_s ent "$http_referer" '
@@ -47,7 +47,7 @@ buffer 满 32k 才刷盘；假如 buffer 不满 5s 钟强制刷盘。
 _注_：一般 log_format 在全局设置，可以设置多个。access_log 可以在全局设置，但往往是定义在虚拟主机（server）中的 location 中。
 例如：
 
-```nginx
+```conf
 http {
     log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
                    '"$status" $body_bytes_sent "$http_referer" '

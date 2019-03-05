@@ -13,7 +13,7 @@
 
 其他和 http 反向代理基本一样，只是在 Server 部分配置有些不同。
 
-```nginx
+```conf
 #HTTP服务器
 server {
     #监听443端口。443为知名端口号，主要用于HTTPS协议

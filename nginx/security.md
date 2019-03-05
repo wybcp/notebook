@@ -81,7 +81,7 @@ Strict-Transport-Security，简称 HSTS。该响应头用于标识浏览器用 H
 add_header strict-transport-security: max-age=16070400; includeSubDomains;
 ```
 
-当用户第一次访问后，将返回一个包含了 strict-transport-security 响应头的字段。他将告诉浏览器，在接下来的 16070400 秒内，当前网站的所有请求都强制使用 HTTPS 的方式访问。即使用户手动输入 http://，浏览器也会强制使用 HTTPS 方式访问。
+当用户第一次访问后，将返回一个包含了 strict-transport-security 响应头的字段。他将告诉浏览器，在接下来的 16070400 秒内，当前网站的所有请求都强制使用 HTTPS 的方式访问。即使用户手动输入 `http://`，浏览器也会强制使用 HTTPS 方式访问。
 
 参数 includeSubDomains 是可选的，当指定了该参数，所有子域名将采用同样的 HSTS 规则。
 

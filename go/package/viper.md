@@ -19,3 +19,11 @@ Viper 配置读取顺序：
 - 配置文件
 - 配置中心：etcd/consul
 - 默认值
+
+## 初始化配置
+
+## 使用
+
+- viper.GetString()
+- viper.GetInt()
+- viper.GetBool()
