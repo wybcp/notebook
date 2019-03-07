@@ -30,10 +30,11 @@ var test map[string]int
 //test["hi"]=3
 //panic: assignment to entry in nil map
 spew.Dump(test)
+// (map[string]int) <nil>
 test=make(map[string]int)
 test["hi"]=3
 spew.Dump(test)
-// (map[string]int) <nil>
+
 // (map[string]int) (len=1) {
 //  (string) (len=2) "hi": (int) 3
 // }
@@ -45,7 +46,7 @@ spew.Dump(test)
 
 如果 key 在 map 中是存在的，那么将得到与 key 对应的 value；如果 key 不存在，那么将得到 value 对应类型的零值。
 
-这个规则很实用，但是有时候可能需要知道对应的元素是否真的是在 map 之中。例如，如果元素类型是一个数字，你可能需要区分一个已经存在的 0，和不存在而返回零值的 0，可以像下面这样测试：
+这个规则很实用，但是有时候可能需要知道对应的元素是否真的是在 map 之中。例如，如果元素类型是一个数字，可能需要区分一个已经存在的 0 和不存在而返回零值的 0，可以像下面这样测试：
 
 ```Go
 age, ok := ages["bob"]

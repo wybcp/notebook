@@ -1,9 +1,11 @@
 # 冒泡算法
 
+## PHP
+
 ```php
 <?php
 /**
- *  思路分析：就是像冒泡一样，每次从数组当中 冒一个最大的数出来。
+ *  思路分析：就是像冒泡一样，每次从数组当中冒一个最大的数出来。
  *  比如：2,4,1    // 第一次 冒出的泡是4
  *        2,1,4    // 第二次 冒出的泡是 2
  *        1,2,4    // 最后就变成这样
@@ -27,4 +29,41 @@ function bubble($data)
 }
 
 var_dump(bubble($data));
+```
+
+## go
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	values := []int{4, 93, 84, 85, 80, 37, 81, 93, 27,12}
+	fmt.Println(values)
+	BubbleIncSort(values)
+	BubbleDecSort(values)
+}
+
+func BubbleIncSort(values []int) {
+	for i := 0; i < len(values)-1; i++ {
+		for j := i+1; j < len(values); j++ {
+			if  values[i]>values[j]{
+				values[i],values[j] = values[j],values[i]
+			}
+		}
+	}
+	fmt.Println(values)
+}
+
+func BubbleDecSort(values []int) {
+	for i := 0; i < len(values)-1; i++ {
+		for j := i+1; j < len(values); j++ {
+			if  values[i]<values[j]{
+				values[i],values[j] = values[j],values[i]
+			}
+		}
+	}
+	fmt.Println(values)
+}
 ```

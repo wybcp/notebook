@@ -3,7 +3,6 @@
 整数反转
 
 ```go
-
 func reverse(x int) int {
 	reversed := 0
 	for {

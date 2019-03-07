@@ -1,6 +1,6 @@
 # 斐波纳契数列
 
-计算斐波纳契数列（Fibonacci）的第N个数：
+计算斐波纳契数列（Fibonacci）的第 N 个数：
 
 ```Go
 func fib(n int) int {
@@ -11,4 +11,3 @@ func fib(n int) int {
     return x
 }
 ```
-

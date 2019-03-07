@@ -30,5 +30,4 @@ func lengthOfLongestSubstring(s string) int {
 	// fmt.Printf("Longest Substring Without Repeating Characters:%d", maxLength)
 	return maxLength
 }
-
 ```
