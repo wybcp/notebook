@@ -2,6 +2,8 @@
 
 MySQL 5.7
 
+macOS 操作系统上的安装目录：`/usr/local/mysql/`，`/etc/mysql/my.cnf`
+
 ## 免密码登录
 
 MySQL 5.6 以上版本提供 mysql_config_editor 工具用于用户安全验证。
