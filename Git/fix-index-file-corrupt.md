@@ -1,4 +1,4 @@
-# git 的 index 被损坏
+# [git 的 index 被损坏](http://www.cnblogs.com/fuyanwen/p/3729387.html)
 
 解决方法：
 
@@ -8,5 +8,3 @@
 rm -f .git/index
 git reset --mixed HEAD
 ```
-
-http://www.cnblogs.com/fuyanwen/p/3729387.html

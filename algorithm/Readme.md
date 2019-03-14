@@ -64,27 +64,25 @@
 
 ## 目录
 
-- [冒泡算法](bubble-sort.md)
-- [选择排序](select-sort.md)
-- [快速排序](quick-sort.md)
-- [插入排序](insert-sort.md)
+- [排序算法](sort/README.md)
 - [php 实现算法](https://github.com/wybcp/arithmetic-php)
-- [贪心算法](greedy-algorithm.md)
-
 - 约瑟夫环
 
-```php
-function yuesefu($n,$m) {
-    $r=0;
-    for($i=2; $i<=$n; $i++) {
-        $r=($r+$m)%$i;
-    }
-    return $r+1;
-}
-```
+  ```php
+  function yuesefu($n,$m) {
+      $r=0;
+      for($i=2; $i<=$n; $i++) {
+          $r=($r+$m)%$i;
+      }
+      return $r+1;
+  }
+  ```
 
 - [二分查找](binary-search.md)
+- [贪心算法](greedy-algorithm.md)
+- [分治算法](divide-and-conquer-algorithm.md)
 
 ## ebook
 
 - [算法图解](https://book.douban.com/subject/26979890/)非常基础，小白入门首选。代码实现是基于 Python。
+- [LeetCode-in-Go](https://github.com/aQuaYi/LeetCode-in-Go) Go Solution for LeetCode algorithm problems

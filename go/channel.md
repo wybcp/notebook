@@ -79,6 +79,9 @@ func send(ch chan int, wg *sync.WaitGroup) {
 }
 
 func recv(ch chan int) {
+	// 当需要不断从channel读取数据时
+	// 使用for-range读取channel，当channel关闭时，for循环会自动退出，无需主动监测channel是否关闭，
+	// 可以防止读取已经关闭的channel，造成读到数据为通道所存储的数据类型的零值。
 	for v := range ch {
 		fmt.Println(v)
 	}
@@ -119,8 +122,8 @@ func main() {
 - 在为空并且已经关闭的通道上读取时会返回通道中元素类型的 “零值”。
 
 ```go
-item, valid := <- queue
-// 在这里, "valid" 取值:
+item, ok := <- queue
+// 在这里, 使用ok进行检测,ok 取值:
 // true => "item" 有效
 // false => "queue" 已经关闭, "item" 只是一个 “零值”
 ```
@@ -129,8 +132,8 @@ item, valid := <- queue
 
 ```go
 for {
-    item, valid := <- queue
-    if !valid {
+    item, ok := <- queue
+    if !ok {
         break
     }
     // 处理 item

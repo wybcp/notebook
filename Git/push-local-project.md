@@ -1,6 +1,6 @@
 # 推送本地项目
 
-## git初始化
+## git 初始化
 
 ```shell
 git init
