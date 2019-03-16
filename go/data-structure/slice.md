@@ -274,6 +274,21 @@ func equal(x, y []string) bool {
 }
 ```
 
+## 传参构造二维切片
+
+    如果这样写会报错：non-constant array bound length
+    //Length 是动态的值
+    var array [length]int
+    // 动态数组应该这样写
+    array := make([]int, length)
+
+```go
+f := make([][]int, n)
+for i := 0; i < len(matrix); i++ {
+    f[i] = make([]int, n)
+}
+```
+
 ## 参考
 
 [深入理解 Go Slice](https://github.com/EDDYCJY/blog/blob/master/golang/pkg/2018-12-11-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Go-Slice.md)
