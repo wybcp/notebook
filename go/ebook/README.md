@@ -22,3 +22,6 @@
 - [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)Go Web 编程
 - [Go in action](https://book.douban.com/subject/25858023/)Go 语言实践
 - [面向信仰编程](https://draveness.me/)
+
+- [Go 语言四十二章经](https://github.com/ffhelicopter/Go42)
+- [reading-go Go 夜读](https://github.com/developer-learning/reading-go)

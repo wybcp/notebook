@@ -20,3 +20,5 @@ Go 语言的类型推断可以明显提升程序的灵活性，使得代码重�
 ## [Go 语言参数传递是传值还是传引用](https://www.flysnow.org/2018/02/24/golang-function-parameters-passed-by-value.html)
 
 Go 语言中所有的传参都是值传递（传值），都是一个副本，一个拷贝。因为拷贝的内容有时候是非引用类型（int、string、struct 等这些），这样就在函数中就无法修改原内容数据；有的是引用类型（指针、map、slice、chan 等这些），这样就可以修改原内容数据。
+
+## [1、2、3 三个线程，让他们依次打印自己的编号](https://zhuanlan.zhihu.com/p/57969652?utm_source=wechat_session&utm_medium=social&utm_oi=29305031622656)

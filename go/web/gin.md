@@ -37,19 +37,24 @@ IRouter 接口
 
 ```go
 // IRoutes defines all router handle interface.
-	Handle(string, string, ...HandlerFunc) IRoutes
-	Any(string, ...HandlerFunc) IRoutes
-	GET(string, ...HandlerFunc) IRoutes
-	POST(string, ...HandlerFunc) IRoutes
-	DELETE(string, ...HandlerFunc) IRoutes
-	PATCH(string, ...HandlerFunc) IRoutes
-	PUT(string, ...HandlerFunc) IRoutes
-	OPTIONS(string, ...HandlerFunc) IRoutes
-	HEAD(string, ...HandlerFunc) IRoutes
+Handle(string, string, ...HandlerFunc) IRoutes
+Any(string, ...HandlerFunc) IRoutes
+GET(string, ...HandlerFunc) IRoutes
+POST(string, ...HandlerFunc) IRoutes
+DELETE(string, ...HandlerFunc) IRoutes
+PATCH(string, ...HandlerFunc) IRoutes
+PUT(string, ...HandlerFunc) IRoutes
+OPTIONS(string, ...HandlerFunc) IRoutes
+HEAD(string, ...HandlerFunc) IRoutes
 
-	StaticFile(string, string) IRoutes
-	Static(string, string) IRoutes
-	StaticFS(string, http.FileSystem) IRoutes
+// 加载单个文件
+//  router.StaticFile("/favicon.ico", "./resources/favicon.ico")
+StaticFile(string, string) IRoutes
+Static(string, string) IRoutes
+// 静态资源加载， css,js 以及资源图片
+// 加载一个完整的目录资源
+// router.StaticFS("/public", http.Dir("..."))
+StaticFS(string, http.FileSystem) IRoutes
 ```
 
 ### 路由参数

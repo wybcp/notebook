@@ -44,7 +44,7 @@ hello world
 
 ## 字符串代码片段
 
-### 字符串拼接
+### [字符串拼接](https://github.com/ffhelicopter/Go42/blob/master/content/42_10_string.md)
 
 当需要对一个字符串进行频繁的操作时，使用 a += b 形式连接字符串效率低下，尤其在一个循环内部使用这种形式。这会导致大量的内存开销和拷贝。应该使用一个字符数组代替字符串，将字符串内容写入一个缓存中。
 
@@ -111,3 +111,5 @@ fmt.Printf("\n一个字符串的字节数:%d", len(s))
 // 如何获取一个字符串的字符数：
 fmt.Printf("\n一个字符串的字符数:%d", utf8.RuneCountInString(s))
 ```
+
+Go 语言的 range 循环在处理字符串的时候，会自动隐式解码 UTF8 字符串。
