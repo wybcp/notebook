@@ -49,7 +49,7 @@ To generate this message, Docker took the following steps:
  3. The Docker daemon created a new container from that image which runs the
     executable that produces the output you are currently reading.
  4. The Docker daemon st
- ```
+```
 
 输出这段提示以后，`hello world`就会停止运行，容器自动终止。
 

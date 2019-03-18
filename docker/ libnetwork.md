@@ -5,6 +5,7 @@
 ## 容器网络模型
 
 Container Networking Model，CNM
+
 ![cnm](images/cnm-1.jpg)
 容器网络模型包括三种基本元素：
 

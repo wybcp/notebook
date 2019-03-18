@@ -25,5 +25,6 @@ python 的一些小知识点
 ## [Python 全栈之路](https://blog.ansheng.me/article/python-full-stack-way/)
 
 - [让你的 Python 代码优雅又地道](http://www.lightxue.com/transforming-code-into-beautiful-idiomatic-python)
-- [本文重点关注抽象方法，编程范例以及管理大型程序复杂性的技术](https://composingprograms.com/) 一所国外大学编写的Python3 教程
+- [本文重点关注抽象方法，编程范例以及管理大型程序复杂性的技术](https://composingprograms.com/) 一所国外大学编写的 Python3 教程
 - [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
+- [数据分析书](https://www.zhihu.com/question/60241622/answer/581029698)

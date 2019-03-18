@@ -5,7 +5,7 @@ Version 18.06.1-ce-mac73 (26764)
 2013 年发布至今， [Docker](https://www.docker.com/) 一直广受瞩目，被认为可能会改变软件行业。
 
 ![img](http://www.ruanyifeng.com/blogimg/asset/2018/bg2018020901.png)
-Docker 使用 Google 公司推出的 Go 语言 进行开发实现，基于 Linux 内核的 cgroup，namespace，以及 AUFS 类的 Union FS 等技术，对进程进行封装隔离，属于 操作系统层面的虚拟化技术。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。
+Docker 使用 Google 公司推出的 Go 语言 进行开发实现，基于 Linux 内核的 [cgroup](cgroups.md)，[namespace](namespace.md)，以及 AUFS 类的 Union FS 等技术，对进程进行封装隔离，属于 操作系统层面的虚拟化技术。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。
 
 软件开发最大的麻烦事之一，就是环境配置。用户必须保证两件事：操作系统的设置，各种库和组件的安装。只有它们都正确，软件才能运行。
 

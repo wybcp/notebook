@@ -1,10 +1,11 @@
-# 控制组
+# 资源控制组 Control Groups
 
-控制组（CGroups）是 Linux 内核的一个特性，主要用来对共享资源进行隔离、限制、审计等。只有将分配到容器的资源进行控制，才能避免多个容器同时运行时对宿主机系统的资源竞争。每个控制组是一组对资源的限制，支持层级化结构。
+资源控制组（CGroups）是 Linux 内核的一个特性，主要用来对共享资源进行隔离、限制、审计等。只有将分配到容器的资源进行控制，才能避免多个容器同时运行时对宿主机系统的资源竞争。每个控制组是一组对资源的限制，支持层级化结构，硬件资源的隔离。
 
 Docker 容器每次启动时候，通过调用 `func setCapabilities（s*specs.Spec，c*container.Container）error` 方法来完成对各个命名空间的配置。安装 Docker 后，用户可以在`/sys/fs/cgroup/memory/docker/`目录下看到对 Docker 组应用的各种限制项，包括全局限制和位于子目录中对于某个容器的单独限制
 
 进入对应的容器文件夹，可以看到对应容器的限制和目前的使用状态
+
 ```bash
 root@iZwz97tbgo9lk6rm6lxu2wZ:~# cd /sys/fs/cgroup/memory/docker/
 root@iZwz97tbgo9lk6rm6lxu2wZ:/sys/fs/cgroup/memory/docker# ls
