@@ -17,7 +17,7 @@
 
 ## 开源项目
 
-- [基于Laravel开发的在线点播系统](https://github.com/Qsnh/meedu)
+- [基于 Laravel 开发的在线点播系统](https://github.com/Qsnh/meedu)
 
 ## 目录
 

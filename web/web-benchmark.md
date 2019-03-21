@@ -18,7 +18,7 @@ ab 是一个 Apache HTTP 服务器基准测试工具，它可以测试 HTTP 服�
 2. ab 命令参数说明
    可以暂时不看直接看下面如何使用，有其他需求再看这里
 
-    ```config
+    ```conf
     Options are:
     -n requests Number of requests to perform
     -c concurrency Number of multiple requests to make at a time

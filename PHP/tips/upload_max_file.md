@@ -4,13 +4,13 @@
 
 `php.ini`：
 
-```config
+```conf
 upload_max_filesize = 2M
 post_max_size = 8M
 ```
 
 `nginx.conf`:
 
-```config
+```conf
 client_max_body_size
 ```

@@ -7,7 +7,7 @@
 我们可以使用以下命令来生成一个名为 `UserPolicy` 的授权策略类文件，用于管理用户模型的授权。
 
 ```bash
-$ php artisan make:policy UserPolicy
+php artisan make:policy UserPolicy
 ```
 
 所有生成的授权策略文件都会被放置在 `app/Policies` 文件夹下。
@@ -50,9 +50,7 @@ class UserPolicy
 <?php
 
 namespace App\Providers;
-.
-,
-.
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**

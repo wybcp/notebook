@@ -12,7 +12,7 @@ Composer 根据本地定义的 `composer.json` 信息去查询 Packagist，Packa
 
 ## Composer 命令行工具
 
-```shell
+```sh
 composer init
 ```
 
@@ -24,7 +24,7 @@ composer require
 
 假如手动或者交互式创建 `composer.json` 文件，可以直接使用该命令来安装包
 
-```shell
+```sh
 composer require  cerdic/css-tidy:1.5.2
 composer require "ywdblog/phpcomposer:dev-master"
 ```
@@ -72,7 +72,7 @@ composer create-project
 composer global
 ```
 
-这是一个全局的安装命令，它允许你在`COMPOSER_HOME`目录下执行 Composer 的命令，比如`install，update`。当然你的`COMPOSER_HOME`要在$PATH 环境下。
+这是一个全局的安装命令，它允许你在`COMPOSER_HOME`目录下执行 Composer 的命令，比如`install，update`。当然你的`COMPOSER_HOME`要在\$PATH 环境下。
 
 安装后想更新它，只需要运行
 

@@ -42,7 +42,7 @@ git rebase –continue
 
 修改 ~/.ssh/config
 
-```config
+```conf
 Host bitbucket.org
 HostName bitbucket.org
 PreferredAuthentications publickey
@@ -57,7 +57,7 @@ User git
 
 修改 .git/config
 
-```config
+```conf
 [remote "origin"]
 url = git@bitbucket.org-key2:XXXX/yyyy.git
 fetch = +refs/heads/_:refs/remotes/origin/_

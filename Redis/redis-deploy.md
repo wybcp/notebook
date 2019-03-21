@@ -364,7 +364,7 @@ Sentinel 在启动、切换时会对 config 文件进行 rewrite，在上线前�
 
 一个简单的备份脚本`backupconf.sh`如下：
 
-```config
+```conf
 #!/bin/bash
 for i in `find ~/redis-3.0.4/conf -name *.conf`
 do
@@ -374,7 +374,7 @@ done
 
 恢复脚本`recoveryconf.sh`：
 
-```config
+```conf
 #!/bin/bash
 for i in `find ~/redis-3.0.4/conf -name *.conf.bak`
 do

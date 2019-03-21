@@ -4,7 +4,7 @@
 
 在 php.ini 中开启 gzip 压缩：
 
-```config
+```conf
 zlib.output_compression = On
 zlib.output_compression_level = (level)
 ```

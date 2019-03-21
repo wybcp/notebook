@@ -27,7 +27,7 @@ Session 的工作机制是：为每个访客创建一个唯一的 id (UID)，并
 
 php.ini #配置文件中有一组会话配置选项，可以对其进行设置：
 
-```config
+```conf
 session.save_handler = files ; #如何存储session信息
 session.save_path = /tmp ; #save_handler 设为文件时， session文件保存的路径
 session.use_cookies = 1 ; #是否使用cookies

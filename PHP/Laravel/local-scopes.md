@@ -2,4 +2,4 @@
 
 本地作用域能定义通用的约束集合以便在应用中复用。
 
-https://laravel-china.org/courses/laravel-intermediate-training-5.5/653/topic-order
+<https://laravel-china.org/courses/laravel-intermediate-training-5.5/653/topic-order>

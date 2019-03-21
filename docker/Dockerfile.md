@@ -37,7 +37,7 @@ Dockerfile 主体内容分为四部分：基础镜像信息、维护者信息、
 
 - ENV
 
-  ```config
+  ```conf
   ENV <key> <value>
   ENV <key>=<value> ...
   ```
@@ -50,7 +50,7 @@ Dockerfile 主体内容分为四部分：基础镜像信息、维护者信息、
 
   指定镜像的默认入口命令，该入口命令会在启动容器时作为根命令执行，所有传入值作为该命令的参数。
 
-  ```config
+  ```conf
   ENTRYPOINT ["executable", "param1", "param2"] (exec form, preferred)
   ENTRYPOINT command param1 param2 (shell form)
   ```
@@ -99,7 +99,7 @@ Dockerfile 主体内容分为四部分：基础镜像信息、维护者信息、
 
   运行指定命令。当命令较长时可以使用`\`来换行。
 
-  ```config
+  ```conf
   RUN <command> (shell form, the command is run in a shell, which by default is /bin/sh -c on Linux or cmd /S /C on Windows)
   #指令会被解析为 JSON 数组，必须用双引号
   RUN ["executable", "param1", "param2"] (exec form)
@@ -109,7 +109,7 @@ Dockerfile 主体内容分为四部分：基础镜像信息、维护者信息、
 
   CMD 指令用来指定启动容器时默认执行的命令。
 
-  ```config
+  ```conf
   CMD ["executable","param1","param2"] (exec form, this is the preferred form)
   CMD ["param1","param2"] (as default parameters to ENTRYPOINT)
   CMD command param1 param2 (shell form)
@@ -123,7 +123,7 @@ Dockerfile 主体内容分为四部分：基础镜像信息、维护者信息、
 
   添加内容到镜像。
 
-  ```config
+  ```conf
   ADD [--chown=<user>:<group>] <src>... <dest>
   ADD [--chown=<user>:<group>] ["<src>",... "<dest>"] (this form is required for paths containing whitespace)
   ```

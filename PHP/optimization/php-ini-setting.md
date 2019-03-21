@@ -1,6 +1,6 @@
 # ini 设置
 
-```config
+```conf
 [opcache]
 opcache.enable=1
 opcache.enable_cli=1

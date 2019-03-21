@@ -91,7 +91,7 @@ phpcbf test.php
 
 安装 phpcs 扩展，配置 PSR-2。
 
-```config
+```conf
  {
      "phpcs.standard": "PSR2"
  }
