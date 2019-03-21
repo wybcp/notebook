@@ -93,9 +93,12 @@ config set maxmemory
   - 惰性删除
   - 定期任务删除
 - 内存溢出控制策略：`config set maxmemory-policy {policy}`
-  - noeviction：默认策略
-  - Volatile-lru：
-  - allkeys-lru
+  - noeviction：默认策略，即不进行数据淘汰
+  - Volatile-lru：推荐策略，辨识 Redis 中保存的数据的重要性。对于那些重要的，绝对不能丢弃的数据（如配置类数据等），应不设置有效期，这样 Redis 就永远不会淘汰这些数据。对于那些相对不是那么重要的，并且能够热加载的数据（比如缓存最近登录的用户信息，当在 Redis 中找不到时，程序会去 DB 中读取），可以设置上有效期，这样在内存不够时 Redis 就会淘汰这部分数据。
+  - allkeys-lru：使用 LRU 算法进行数据淘汰，所有的 key 都可以被淘汰
+  - volatile-random：随机淘汰数据，只淘汰设定了有效期的 key
+  - allkeys-random：随机淘汰数据，所有的 key 都可以被淘汰
+  - volatile-ttl：淘汰剩余有效期最短的 key
 
 ## 优化内存
 

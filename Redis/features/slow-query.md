@@ -38,7 +38,7 @@ OK
 
 ## 查询慢日志
 
-- `slowlog get [n]`：返回当前 redis 的慢查询
+- `slowlog get [n]`：返回当前 redis 的n 条慢查询
 - `slowlog len`：返回当前 redis 的慢日志的长度
 - `slowlog reset`：重置慢查询日志
 
