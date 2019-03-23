@@ -57,7 +57,7 @@ PHP 中遇到的错误类型大致有 3 类。
 ## 问题：如何在 PHP 中定义常量？
 
 PHP 中使用 Define () 来定义常量。
-define (“Newconstant”， 30);
+`define (“Newconstant”， 30);`
 
 ## 问题：如何不使用 submit 按钮来提交表单？
 
@@ -70,7 +70,7 @@ CGI 是一种通用网关协议。为了解决不同的语言解释器(如 php�
 
 ## 什么是 FastCGI
 
-是一种对 CGI 协议升华的一种协议。FastCGI 像是一个常驻(long-live)型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次(这是 CGI 最为人诟病的 fork-and-execute 模式)。它还支持分布式的运算， 即 FastCGI 程序可以在网站服务器以外的主机上执行并且接受来自其它网站服务器来的请求。
+是一种对 CGI 协议升华的一种协议。FastCGI 像是一个常驻(long-live)型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次(这是 CGI 最为人诟病的 fork-and-execute 模式)。它还支持分布式的运算，即 FastCGI 程序可以在网站服务器以外的主机上执行并且接受来自其它网站服务器来的请求。
 
 ## 什么是 PHP-FPM
 
@@ -85,14 +85,14 @@ Fastcgi 则会先 fork 一个 master，解析配置文件，初始化执行环�
 我们以用户访问 index.php 为，服务器环境为 LNMP:
 
 1. 用户请求 index.php 时，首先到 Nginx
-1. Nginx 流程步骤：
+2. Nginx 流程步骤：
    - 根据配置查找路由
    - 加载 nginx 的 fast-cgi 模块(FastCGI 的 Client)，将根据 fastcgi.conf 文件中 fastcgi\_\*配置参数值也一并加入转发任务中
-   - 根据 nginx.conf 文件 fastcgi_pass 配置将请求转发到 127.0.0.1:9000。
-1. PHP-FPM 操作：
+   - 根据 nginx.conf 文件 fastcgi_pass 配置将请求转发到 `127.0.0.1:9000`。
+3. PHP-FPM 操作：
    - PHP-FPM 的 master 进程监听 9000 端口。
    - 收到请求后调用子进程来处理逻辑，PHP 解释器解释 PHP 语法并返回给 Nginx。
-1. Nginx 操作：
+4. Nginx 操作：
    将响应返回给用户
 
 ## 访问权限修饰符
@@ -172,13 +172,13 @@ session 存储在服务器端，服务器用一种散列表类型的结构存储
 
 3）session 在服务器端，访问多了会影响服务器性能
 
-4） cookie 有大小限制，为 3K
+4）cookie 有大小限制，为 3K
 
 多服务器共享 session 可以尝试将 session 存储在 redis 中
 
 ## php 中 web 上传文件的原理是什么，如何限制上传文件的大小？
 
-PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_max_filesize，post_max_size 设置一次，POST 中 PHP 能接收的最大数据量，应该比 upload_max_filesize 大。
+PHP 上传文件默认大小为 2M，设置上传大小的配置项是 `upload_max_filesize`，`post_max_size` 设置一次，POST 中 PHP 能接收的最大数据量，应该比 upload_max_filesize 大。
 
 ## http 协议中的 post 和 get 有何区别？
 
@@ -196,7 +196,7 @@ PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_ma
 
 ## 怎么防止 sql 注入
 
-1. 过滤掉一些常见的数据库操作关键字：select，insert，update，delete，and，\*等
+1. 过滤掉一些常见的数据库操作关键字：select，insert，update，delete，and 等
    或者通过系统函数：addslashes(需要被过滤的内容)来进行过滤。
 1. 在 PHP 配置文件中
    Register_globals=off;设置为关闭状态 //作用将注册全局变量关闭。
@@ -230,27 +230,27 @@ PHP 上传文件默认大小为 2M，设置上传大小的配置项是 upload_ma
 
 ## 魔术方法并说明作用
 
-- \_\_call()当调用不存在的方法时会自动调用的方法
-- \_\_autoload()在实例化一个尚未被定义的类是会自动调用次方法来加载类文件
-- \_\_set()当给未定义的变量赋值时会自动调用的方法
-- \_\_get()当获取未定义变量的值时会自动调用的方法
-- \_\_construct()构造方法，实例化类时自动调用的方法
-- \_\_destroy()销毁对象时自动调用的方法
-- \_\_unset()当对一个未定义变量调用 unset()时自动调用的方法
-- \_\_isset()当对一个未定义变量调用 isset()方法时自动调用的方法
-- \_\_clone()克隆一个对象
-- \_\_tostring()当输出一个对象时自动调用的方法
+- `__call()`当调用不存在的方法时会自动调用的方法
+- `__autoload()`在实例化一个尚未被定义的类是会自动调用次方法来加载类文件
+- `__set()`当给未定义的变量赋值时会自动调用的方法
+- `__get()`当获取未定义变量的值时会自动调用的方法
+- `__construct()`构造方法，实例化类时自动调用的方法
+- `__destroy()`销毁对象时自动调用的方法
+- `__unset()`当对一个未定义变量调用 unset()时自动调用的方法
+- `__isset()`当对一个未定义变量调用 isset()方法时自动调用的方法
+- `__clone()`克隆一个对象
+- `__tostring()`当输出一个对象时自动调用的方法
 
-## $\_REQUEST、$\_POST、$\_GET、$\_COOKIE、$\_SESSION、$\_FILE 的意思是什么
+## `$_REQUEST`、$\_POST、$\_GET、$\_COOKIE、$\_SESSION、\$\_FILE 的意思是什么
 
 它们都是 PHP 预定义变量。
 
-- \$\_REQUEST 用来获取 post 或 get 方式提交的值
-- \$\_POST 用来获取 post 方式提交的值
-- \$\_GET 用来获取 get 方式提交的值
-- \$\_COOKIE 用来获取 cookie 存储的值
-- \$\_SESSION 用来获取 session 存储的值
-- \$\_FILE 用来获取上传文件表单的值
+- `$_REQUEST` 用来获取 post 或 get 方式提交的值
+- `$_POST` 用来获取 post 方式提交的值
+- `$_GET` 用来获取 get 方式提交的值
+- `$_COOKIE` 用来获取 cookie 存储的值
+- `$_SESSION`用来获取 session 存储的值
+- `$_FILE` 用来获取上传文件表单的值
 
 ## 数组中下标最好是什么类型的
 
@@ -406,7 +406,7 @@ accept 发生在三次握手之后。
 ## 简单描述 mysql 中，索引，主键，唯一索引，联合索引的区别，对数据库的性能有什么影响(从读写两方面)
 
 - 索引就相当于对指定的列进行排序，排序有利于对该列的查询，可以大大增加查询效率
-  建立索引也是要消耗系统资源，所以索引会降低写操作的效率
+- 建立索引也是要消耗系统资源，所以索引会降低写操作的效率
 - 主键，唯一，联合都属于索引
 - 主键属于唯一索引，且一个表只能有一个主键，主键列不允许空值
 - 唯一索引可以一个表中可以有多个，而且允许为空，列中的值唯一
@@ -421,6 +421,7 @@ accept 发生在三次握手之后。
 ## count()
 
 count — 计算数组中的单元数目或对象中的属性个数
+
 `int count ( mixed $var [， int $mode ] )`， 如果 var 不是数组类型或者实现了 Countable 接口的对象，将返回 1，有一个例外，如果 var 是 NULL 则结果是 0。
 
 ## error_reporting(2047)什么作用？
@@ -429,17 +430,17 @@ count — 计算数组中的单元数目或对象中的属性个数
 
 ## 打开 php.ini 中的 Safe_mode，会影响哪些函数？至少说出 6 个。
 
-答：1:用户输入输出函数(fopen() file() require()，只能用于调用这些函数有相同脚本的拥有者)
-2:创建新文件(限制用户只在该用户拥有目录下创建文件)
-3:用户调用 popen() systen() exec()等脚本，只有脚本处在 safe_mode_exec_dir 配置指令指定的目 录中才可能
-4:加强 HTTP 认证，认证脚本拥有者的 UID 的划入认证领域范围内，此外启用安全模式下，不会设置 PHP_AUTH
-5:mysql 服务器所用的用户名必须与调用 mysql_connect()的文件的拥有者用户名相同
-6:受影响的函数变量以及配置命令达到 40 个
+1. 用户输入输出函数(fopen() file() require()，只能用于调用这些函数有相同脚本的拥有者)
+2. 创建新文件(限制用户只在该用户拥有目录下创建文件)
+3. 用户调用 popen() systen() exec()等脚本，只有脚本处在 safe_mode_exec_dir 配置指令指定的目 录中才可能
+4. 加强 HTTP 认证，认证脚本拥有者的 UID 的划入认证领域范围内，此外启用安全模式下，不会设置 PHP_AUTH
+5. mysql 服务器所用的用户名必须与调用 mysql_connect()的文件的拥有者用户名相同
+6. 受影响的函数变量以及配置命令达到 40 个
 
-chmod() 检查被操作的文件或目录是否与正在执行的脚本有相同的 UID（所有者）。另外，不能设置 SUID、SGID 和 sticky bits
-mkdir() 检查被操作的目录是否与正在执行的脚本有相同的 UID（所有者）。
-touch() 检查被操作的文件是否与正在执行的脚本有相同的 UID（所有者）。检查被操作的目录是否与正在执行的脚本有相同的 UID（所有者）。
-chown()、chgrp()、chdir()、fopen()、rmdir()、copy()、link()、exec()等 检查被操作的文件或目录是否与正在执行的脚本有相同的 UID（所有者）。检查被操作的目录是否与正在执行的脚本有相同的 UID（所有者）。
+   chmod() 检查被操作的文件或目录是否与正在执行的脚本有相同的 UID（所有者）。另外，不能设置 SUID、SGID 和 sticky bits
+   mkdir() 检查被操作的目录是否与正在执行的脚本有相同的 UID（所有者）。
+   touch() 检查被操作的文件是否与正在执行的脚本有相同的 UID（所有者）。检查被操作的目录是否与正在执行的脚本有相同的 UID（所有者）。
+   chown()、chgrp()、chdir()、fopen()、rmdir()、copy()、link()、exec()等 检查被操作的文件或目录是否与正在执行的脚本有相同的 UID（所有者）。检查被操作的目录是否与正在执行的脚本有相同的 UID（所有者）。
 
 ## 写个函数来解决多线程同时读写一个文件的问题。
 
@@ -483,8 +484,8 @@ header(‘Content-type:text/plain’);
 
 ## mysql 中 varchar 的最大长度是多少？用什么类型的字段存储大文本？date 和 datetime 和 timestamp 什么区别？怎么看数据库中有哪些 sql 正在执行？
 
-答案：65535、text、
-
+- 65535、
+- text、
 - date 只保留日期，不保留时分秒。
 - datetime 保留日期和时分秒，MySQL 检索且以‘YYYY-MM-DD HH:MM:SS’格式显示 datetime 值，支持的范围是‘1000-01-01 00:00:00’到‘9999-12-31 23:59:59’。
 - timestamp 的格式与 datetime 相同，但其取值范围小于 datetime，使用 timestamp 可以自动地用当前的日期和时间标记 INSERT 或 UPDATE 的操作，如果有多个 timestamp 列，只有第一个自动更新。
@@ -562,3 +563,84 @@ function swap (int &$a， int &$b){
 ```
 
 <https://blog.tanteng.me/2018/04/php-interview-2/#more-12086>
+
+## 用 PHP 获取当前时间并打印,打印格式:2006-5-10 22:21:21
+
+```php
+date_default_timezone_set('PRC');//设置中国区域
+echo date('Y-n-d H:i:s'); // 2019-3-21 16:26:15
+echo date('Y-m-d H:i:s'); // 2019-03-21 16:26:15
+```
+
+## 字符串转数组,数组转字符串,字符串截取,字符串替换,字符串查找的函数分别是什么
+
+```php
+// 字符串转数组
+$str='www.baidu.com';
+print_r(str_split($str));//第一种按照长度 去切割字符串变成数组
+var_dump(explode('.',$str));//第二种 用explode 按照某个字符串 去切割这个字符串变为数组
+// 数组转字符串
+$arr=array("aaa","bbb","ccc");
+print_r(implode('',$arr)); //join() 这个函数不知道小伙伴们用过没有 其实join() 函数是 implode() 函数的别名 没什么区别！
+// 字符串截取
+
+substr($str,1,10);
+mb_substr($str,1,3);
+// 字符串替换
+
+$bodytag = str_replace("%body%", "black", "<body text='%body%'>");
+
+//函数搜索字符串在另一字符串中的第一次出现。并返回字符串的剩余部分：
+echo strstr("I love Shanghai!","Shanghai");
+// strpos()
+//函数查找字符串在另一字符串中第一次出现的位置 记住返回是int 就是索引的位置
+// strrpos()
+//函数查找字符串在另一字符串中最后一次出现的位置 记住返回是int 就是索引的位置
+```
+
+## 防止盗链
+
+1. 服务器上防止
+
+   Apache 和 nginx 做 rewrite 基于源来做判断阻止盗链
+
+   ```conf
+   # 设置防盗链文件类型
+   location ~* \.(gif|jpg|png|jpeg)$ {
+   expires     30d;
+   #白名单，允许文件链出的域名白名单，域名与域名之间使用空格隔开！
+   valid_referers *.hugao8.com www.hugao8.com m.hugao8.com *.baidu.com *.google.com;
+   #这个图片是盗链返回的图片。这个图片要放在没有设置防盗链的网站上，因为防盗链的作用，这个图片如果也放在防盗链网站上就会被当作防盗链显示不出来了，盗链者的网站所盗链图片会显示X符号。
+   if ($invalid_referer) {
+   rewrite ^/ http://ww4.sinaimg.cn/bmiddle/051bbed1gw1egjc4xl7srj20cm08aaa6.jpg;
+   #return 404;
+       }
+   }
+   ```
+
+2. 代码防止,设置 Referer
+
+   Referer 是 HTTP Header 的一部分，当浏览器向网站 Web 服务器发送请求的时候，通常会带上 Referer，告诉服务器此次请求的链接来源。
+   `$_SERVER[HTTP_REFERER]`
+
+## php 数组中 如果有一个人下标没标注 那么就是这个数组中最大的下标+1
+
+```php
+<?php
+$a = array(1=>5,5=>8,22,2=>'8',81);
+echo $a[7];
+echo $a[6];
+echo $a[3];
+print_r($a);
+
+// 8122<br />
+// <b>Notice</b>:  Undefined offset: 3 in <b>[...][...]</b> on line <b>5</b><br />
+// Array
+// (
+//     [1] => 5
+//     [5] => 8
+//     [6] => 22
+//     [2] => 8
+//     [7] => 81
+// )
+```

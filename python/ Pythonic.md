@@ -1,6 +1,6 @@
 # [Pythonic](http://lovesoo.org/tag/pythonic)
 
-[Python](http://lovesoo.org/tag/python)最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。要写出 [Pythonic](http://lovesoo.org/tag/pythonic)（优雅的、地道的、整洁的）代码，需要多看多学大牛们写的代码，github 上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，下面列举一些常见的[Pythonic](http://lovesoo.org/tag/pythonic)写法。
+Python最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。要写出 [Pythonic](http://lovesoo.org/tag/pythonic)（优雅的、地道的、整洁的）代码，需要多看多学大牛们写的代码，github 上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，下面列举一些常见的[Pythonic](http://lovesoo.org/tag/pythonic)写法。
 
 1. 程序必须先让人读懂，然后才能让计算机执行。
 
@@ -59,18 +59,6 @@
    ##推荐
    colors = ['red', 'blue', 'green', 'yellow']
    result = ''.join(colors)  #  没有额外的内存分配
-   ```
-
-1. 字典键值列表
-
-   ```python
-   ##不推荐
-   if my_dict.has_key(key):
-       # ...do something with d[key]
-
-   ##推荐
-   if key in my_dict:
-       # ...do something with d[key]
    ```
 
 1. 字典键值判断

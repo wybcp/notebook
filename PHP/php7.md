@@ -51,7 +51,8 @@ function add(int $x, int $y)
 {
     return $x + $y;
 }
-var_dump(add('2', 3)); // Fatal error: Argument 1 passed to add() must be of the type integer
+var_dump(add('2', 3));
+// Fatal error: Argument 1 passed to add() must be of the type integer
 ```
 
 #### 5. 返回值类型声明
@@ -169,7 +170,7 @@ use app\model{A,B}
 
 #### 13.生成器支持返回表达式
 
-它允许在生成器函数中通过使用 _return_ 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 _Generator::getReturn()_ 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
+它允许在生成器函数中通过使用 `return` 语法来返回一个表达式（但是不允许返回引用值），可以通过调用 `Generator::getReturn()` 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
 
 ```php
 $gen = (function() {
@@ -316,7 +317,7 @@ PHP 7 改变了大多数错误的报告方式。不同于传统（PHP 5）的错
 
 ERROR 层级结构：
 
-```
+```c
 interface Throwable
     |- Exception implements Throwable
         |- ...
@@ -360,7 +361,7 @@ $array = [0, 1, 2];
 foreach ($array as &$val) {
     var_dump(current($array));
 }
-?>
+
 #php 5
 int(1)
 int(2)
@@ -381,9 +382,9 @@ true
 false
 ```
 
-#### 5.$HTTP_RAW_POST_DATA 被移
+#### 5.`$HTTP_RAW_POST_DATA` 被移
 
-$HTTP_RAW_POST_DATA 被移，使用`php://input`代替
+`$HTTP_RAW_POST_DATA` 被移，使用`php://input`代替
 
 #### 6. 移除了 ASP 和 script PHP 标签
 
@@ -545,7 +546,7 @@ test(new StdClass());
 
 扩展文件不再需要通过文件加载 (Unix 下以*.so*为文件扩展名，在 Windows 下以 _.dll_ 为文件扩展名) 进行指定。可以在 php.ini 配置文件进行启用
 
-```ini
+```conf
 ; ini file
 extension=php-ast
 zend_extension=opcache
@@ -571,7 +572,7 @@ abstract class B extends A
 
 #### 4. 使用 Argon2 算法生成密码散列
 
-Argon2 已经被加入到密码散列（password hashing） API (这些函数以 \_password\_\_ 开头), 以下是暴露出来的常量
+Argon2 已经被加入到密码散列（password hashing） API (这些函数以 `_password__` 开头), 以下是暴露出来的常量
 
 #### 5. 新增 PDO 字符串扩展类型
 
@@ -623,13 +624,13 @@ count(1), // integers are not countable
 var_dump(HEELLO);
 ```
 
-#### 6.  被废弃
+#### 6. 被废弃
 
 `__autoload` 方法已被废弃
 
 #### 7. each 被废弃
 
-使用此函数遍历时，比普通的 _foreach_ 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
+使用此函数遍历时，比普通的 `foreach` 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
 
 #### 8. is_object、gettype 修正
 

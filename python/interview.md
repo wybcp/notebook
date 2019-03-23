@@ -197,9 +197,9 @@ AttributeError: myClass instance has no attribute '__superprivate'
 
 `__foo__`:一种约定,Python 内部的名字,用来区别其他用户自定义的命名,以防冲突，就是例如`__init__()`,`__del__()`,`__call__()`这些特殊方法
 
-`_foo`:一种约定,用来指定变量私有.程序员用来指定私有变量的一种方式.不能用 from module import \* 导入，其他方面和公有一样访问；
+`_foo`:一种约定,用来指定变量私有.程序员用来指定私有变量的一种方式.不能用 `from module import *`导入，其他方面和公有一样访问；
 
-`__foo`:这个有真正的意义:解析器用`_classname__foo`来代替这个名字,以区别和其他类相同的命名,它无法直接像公有成员一样随便访问,通过对象名.\_类名\_\_xxx 这样的方式可以访问.
+`__foo`:这个有真正的意义:解析器用`_classname__foo`来代替这个名字,以区别和其他类相同的命名,它无法直接像公有成员一样随便访问,通过对象名.\_类名`__xxx` 这样的方式可以访问.
 
 详情见:<http://stackoverflow.com/questions/1301346/the-meaning-of-a-single-and-a-double-underscore-before-an-object-name-in-python>
 
@@ -234,8 +234,8 @@ AttributeError: myClass instance has no attribute '__superprivate'
 
 这是中文版: <http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/1/README.html>
 
-这里有个关于生成器的创建问题面试官有考：
 问： 将列表生成式中[]改成() 之后数据结构是否改变？
+
 答案：是，从列表变为生成器
 
 ```python
@@ -253,7 +253,9 @@ AttributeError: myClass instance has no attribute '__superprivate'
 
 用`*args`和`**kwargs`只是为了方便并没有强制使用它们.
 
-当你不确定你的函数里将要传递多少参数时你可以用`*args`.例如,它可以传递任意数量的参数:
+当你不确定你的函数里将要传递多少参数时你可以用`*args`.
+
+例如,它可以传递任意数量的参数:
 
 ```python
 >>> def print_everything(*args):

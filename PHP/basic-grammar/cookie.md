@@ -4,9 +4,9 @@ cookie 常用于识别用户。cookie 是一种服务器留在用户计算机上
 
 ## 创建 Cookie
 
-setcookie() 函数用于设置 cookie。
+`setcookie()` 函数用于设置 cookie。
 
-注释：setcookie() 函数必须位于 `<html>` 标签之前。
+注释：`setcookie()` 函数必须位于 `<html>` 标签之前。
 
 语法:`setcookie(name, value, expire, path, domain);`
 

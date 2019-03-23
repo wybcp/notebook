@@ -1,6 +1,6 @@
-# z数组
+# 数组
 
-数值数组 for，关联数组 foreach
+数值数组 `for`，关联数组 `foreach`
 
 ## 入门
 
@@ -8,7 +8,7 @@
 
 ### [array_combine()](http://php.net/manual/zh/function.array-combine.php)
 
-[array_combine()](http://php.net/manual/zh/function.array-combine.php) 用于通过使用一个数组的值作为其键名，另一个数组的值作为其值来创建一个全新数组：
+用于通过使用一个数组的值作为其键名，另一个数组的值作为其值来创建一个全新数组：
 
 ```php
 <?php
@@ -112,7 +112,7 @@ extract($array);
 echo $clothes, ' ', $size, ' ', $color;
 ```
 
-注意在处理用户数据（如请求的数据）时 `extract()` 函数是一个安全的函数，所以此时最好使用更好的 标志类型 如 `EXTR_IF_EXISTS` 和 `EXTR_PREFIX_ALL`。
+注意在处理用户数据（如请求的数据）时 `extract()` 函数是一个安全的函数，所以此时最好使用更好的标志类型 如 `EXTR_IF_EXISTS` 和 `EXTR_PREFIX_ALL`。
 
 ### [compact()](http://php.net/manual/zh/function.compact.php)
 
@@ -661,8 +661,6 @@ var_dump(array_count_values($arr4));
 //移除数组中的重复值 Array_unique($arr)
 var_dump(array_unique($arr4));
 ```
-
-
 
 ## 参考
 

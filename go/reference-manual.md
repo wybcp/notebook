@@ -32,7 +32,7 @@ MixedCaps or mixedCaps
 
 ## make
 
-只用于创建 slices、 maps and channels，返回一个初始化的 `type T (not *T)`。因为这三种类型的数据在使用前必须初始化
+只用于创建 slices、 maps、channels，返回一个初始化的 `type T (not *T)`。因为这三种类型的数据在使用前必须初始化
 
 ## interface
 

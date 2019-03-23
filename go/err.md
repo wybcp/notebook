@@ -9,7 +9,7 @@ defer func() {
 		if p := recover(); p != nil {
 			err = fmt.Errorf("internal error: %v", p)
 		}
-    }()
+  }()
 ```
 
 ## 错误处理

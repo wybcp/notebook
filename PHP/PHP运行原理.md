@@ -54,9 +54,9 @@ Opcode 是 PHP 程序执行的最基本单位。一个 opcode 由两个参数(op
 - ZEND_ASSIGN_SPEC_CV_CV_HANDLER : 变量分配 （$a=$b）
 - ZEND_DO_FCALL_BY_NAME_SPEC_HANDLER：函数调用
 - ZEND_CONCAT_SPEC_CV_CV_HANDLER：字符串拼接 $a.$b
-- ZEND_ADD_SPEC_CV_CONST_HANDLER: 加法运算 $a+2
-- ZEND_IS_EQUAL_SPEC_CV_CONST：判断相等 $a==1
-- ZEND_IS_IDENTICAL_SPEC_CV_CONST：判断相等 $a===1
+- ZEND_ADD_SPEC_CV_CONST_HANDLER: 加法运算 \$a+2
+- ZEND_IS_EQUAL_SPEC_CV_CONST：判断相等 \$a==1
+- ZEND_IS_IDENTICAL_SPEC_CV_CONST：判断相等 \$a===1
 
 ## 5. HashTable — 核心数据结构
 
@@ -92,7 +92,7 @@ while (p) {
 RETURN FALTURE;
 ```
 
-PHP 索引数组：索引数组就是我们常见的数组，通过下标访问。例如 $arr[0]，Zend HashTable 内部进行了归一化处理，对于 index 类型 key 同样分配了 hash 值和 nKeyLength(为 0)。内部成员变量 nNextFreeElement 就是当前分配到的最大 id，每次 push 后自动加一。正是这种归一化处理，PHP 才能够实现关联和非关联的混合。由于 push 操作的特殊性，索引 key 在 PHP 数组中先后顺序并不是通过下标大小来决定，而是由 push 的先后决定。例如 $arr[1] = 2; $arr[2] = 3; 对于 double 类型的 key，Zend HashTable 会将他当做索引 key 处理
+PHP 索引数组：索引数组就是我们常见的数组，通过下标访问。例如 `$arr[0]`，Zend HashTable 内部进行了归一化处理，对于 index 类型 key 同样分配了 hash 值和 nKeyLength(为 0)。内部成员变量 nNextFreeElement 就是当前分配到的最大 id，每次 push 后自动加一。正是这种归一化处理，PHP 才能够实现关联和非关联的混合。由于 push 操作的特殊性，索引 key 在 PHP 数组中先后顺序并不是通过下标大小来决定，而是由 push 的先后决定。例如 `$arr[1] = 2; $arr[2] = 3;`对于 double 类型的 key，Zend HashTable 会将他当做索引 key 处理
 
 ## 6. PHP 变量
 
@@ -176,7 +176,7 @@ $strA = sprintf ("%s%s", $strA . $strB);
 
 PHP 的数组通过 Zend HashTable 来天然实现。
 
-foreach 操作如何实现？对一个数组的 foreach 就是通过遍历 hashtable 中的双向链表完成。对于索引数组，通过 foreach 遍历效率比 for 高很多，省去了 key->value 的查找。count 操作直接调用 HashTable->NumOfElements，O(1)操作。对于 '123' 这样的字符串，zend 会转换为其整数形式。$arr['123']和$arr[123]是等价的。
+foreach 操作如何实现？对一个数组的 foreach 就是通过遍历 hashtable 中的双向链表完成。对于索引数组，通过 foreach 遍历效率比 for 高很多，省去了 key->value 的查找。count 操作直接调用 HashTable->NumOfElements，O(1)操作。对于 '123' 这样的字符串，zend 会转换为其整数形式。`$arr['123']`和`$arr[123]`是等价的。
 
 ### 资源
 

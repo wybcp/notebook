@@ -78,7 +78,7 @@ PHP 脚本经过词法分析、语法分析生成抽象语法树结构后，再�
 
 执行静态优化所需的脚本上下文信息则封装在结构 zend_script 中，如下：
 
-```
+```c
 typedef struct _zend_script {
     zend_string   *filename;        //文件名
     zend_op_array  main_op_array;   //栈帧
@@ -116,7 +116,7 @@ opcache 优化器接收到上述脚本参数信息后，找到最小编译单位
 
 zend*optimize*script 及实际的优化注册 zend_optimize 流程如下：
 
-```
+```c
 zend_optimize_script(zend_script *script,
       zend_long optimization_level, zend_long debug_level)
     ｜zend_optimize_op_array(&script->main_op_array, &ctx);
@@ -147,7 +147,7 @@ zend_optimize_script(zend_script *script,
 
 用于 opcode 转换的 pass 则集中在函数 zend_optimize 内，如下：
 
-```
+```c
 zend_optimize
 ｜op_array类型为ZEND_EVAL_CODE，不做优化
 ｜开debug，    可dump优化前内容
@@ -185,12 +185,9 @@ zend_optimize
 
 还有其他一些优化遍如下：
 
-```
-优化pass12   矫正栈大小
-优化pass15   收集常量信息
-优化pass16   函数调用优化，主要是函数内联优化
-
-```
+    优化 pass12 矫正栈大小
+    优化 pass15 收集常量信息
+    优化 pass16 函数调用优化，主要是函数内联优化
 
 除此之外，pass 8/13/14 可能为预留 pass id。由此可看出当前提供给用户选项控制的 opcode 转换 pass 有 13 个。但是这并不计入其依赖的数据流／控制流的分析 pass。
 
@@ -202,7 +199,7 @@ zend_optimize
 
 ZendVM 的内联则发生在 opcode 生成后的 FCALL 指令的替换优化，pass id 为 16，其原理大致如下：
 
-```
+```c
 ｜ 遍历op_array中的opcode,找到DO_XCALL四个opcode之一
 ｜ opcode ZEND_INIT_FCALL
 ｜ opcode ZEND_INIT_FCALL_BY_NAMEZ
@@ -224,14 +221,14 @@ ZendVM 的内联则发生在 opcode 生成后的 FCALL 指令的替换优化，p
 
 如下示例代码，当调用 fname()时，使用字符串变量名 fname 来动态调用函数 foo，而没有使用直接调用的方式。此时可通过 VLD 扩展查看其生成的 opcode，或打开 opcache 调试选项(opcache.opt*debug*level=0xFFFFFFFF)亦可查看。
 
-```
+```php
 function foo() { }
 $fname = 'foo';
 ```
 
 开启 debug 后 dump 可看出，发生函数调用优化前 opcode 序列（仅截取片段）为：
 
-```
+```c
 ASSIGN CV0($fname) string("foo")
 INIT_FCALL_BY_NAME 0 CV0($fname)
 DO_FCALL_BY_NAME

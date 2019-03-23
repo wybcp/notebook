@@ -57,7 +57,7 @@ echo $new_email;
 
 ## 字符串比较
 
-`int strcmp(str1, str2)`相等返回 0，按字典顺序 str1 在 str2 后面返回正数，区分大小写。'int strcasecmp(str1, str2)'不区分大小写。
+`int strcmp(str1, str2)`相等返回 0，按字典顺序 str1 在 str2 后面返回正数，区分大小写。`int strcasecmp(str1, str2)`不区分大小写。
 
 `strnatcmp()`按自然排序。
 
@@ -190,5 +190,4 @@ echo $result;//结果显示99.90
 <?php
 $str = "How many words do I have?";
 echo str_word_count($str); //Outputs 6
-?>
 ```

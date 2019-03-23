@@ -25,7 +25,7 @@ $addr = strtr($addr, ['a' => 'e',]);  // 不建议
 
 ## 压缩大的字符串
 
-使用 [gzcompress()](http://php.net/manual/zh/function.gzcompress.php) 和 [gzuncompress()](http://php.net/manual/zh/function.gzuncompress.php) 对容量大的字符串进行压缩和解压，再## 存入和取出数据库## 。
+使用 [gzcompress()](http://php.net/manual/zh/function.gzcompress.php) 和 [gzuncompress()](http://php.net/manual/zh/function.gzuncompress.php) 对容量大的字符串进行压缩和解压，再存入和取出数据库。
 
 这种内置的函数使用 gzip 算法，能压缩字符串`90%`。
 

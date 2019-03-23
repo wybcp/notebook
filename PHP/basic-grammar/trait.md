@@ -33,8 +33,8 @@ class Test{
 
 为了解决多个 trait 在同一个类中的命名冲突，
 
-- 需要使用  *insteadof*  操作符来明确指定使用冲突方法中的哪一个
-- *as*  操作符可以 为某个方法引入别名
+- 需要使用`insteadof`操作符来明确指定使用冲突方法中的哪一个
+- `as`操作符可以为某个方法引入别名
 
 ```php
 trait A {
@@ -101,7 +101,9 @@ $s->say2();//error
 ```php
 trait A{}
 trait B{}
-trait C{use A,B;}
+trait C{
+    use A,B;
+}
 ```
 
 ## trait 抽象成员方法

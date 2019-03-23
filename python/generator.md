@@ -118,7 +118,6 @@ itertools 模块提供了三个函数来解决这类问题。
 ('a',)
 ('b',)
 ('c',)
->>>
 ```
 
 ### `itertools.combinations_with_replacement()`

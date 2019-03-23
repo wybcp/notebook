@@ -13,6 +13,5 @@ print_r(get_defined_vars());
 当需要在一个网站中展示 PHP 代码时，highlight_string()函数就变的非常有用了。该函数通过使用 PHP 语法高亮程序中定义的颜色，输出或返回给定的 PHP 代码的语法高亮版本。
 
 ```php
-<?php
 highlight_string('<?php phpinfo(); ?>');
 ```

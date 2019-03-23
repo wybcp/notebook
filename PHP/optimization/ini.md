@@ -1,20 +1,20 @@
-# php配置
+# php 配置
 
-使用 php 的同学都知道 php.ini 配置的生效会贯穿整个 SAPI 的生命周期。在一段 php 脚本的执行过程中，如果手动修改 ini 配置，是不会启作用的。此时如果无法重启 apache 或者 nginx 等，那么就只能显式的在 php 代码中调用 ini_set 接口。ini_set 是 php 向我们提供的一个动态修改配置的函数，需要注意的是，利用 ini_set 所设置的配置与 ini 文件中设置的配置，其生效的时间范围并不相同。在 php 脚本执行结束之后，ini_set 的设置便会随即失效。
+使用 php 的同学都知道 `php.ini` 配置的生效会贯穿整个 SAPI 的生命周期。在一段 php 脚本的执行过程中，如果手动修改 ini 配置，是不会启作用的。此时如果无法重启 apache 或者 nginx 等，那么就只能显式的在 php 代码中调用 ini_set 接口。ini_set 是 php 向我们提供的一个动态修改配置的函数，需要注意的是，利用 ini_set 所设置的配置与 ini 文件中设置的配置，其生效的时间范围并不相同。在 php 脚本执行结束之后，ini_set 的设置便会随即失效。
 
 ## 参数
 
-- max_execution_time：设置了脚本被解析器中止之前允许的最大执行时间，单位秒。 这有助于防止写得不好的脚本占尽服务器资源。 默认设置为 30。 从命令行运行 PHP 时，默认设置为 0。set_time_limit() 函数就是通过 ini_set() 调整 max_execution_time 这个配置项的值的。
-- upload_max_filesize：一个表单中上传文件的大小。
-- post_max_size：一个 post 请求，以表单为例，表单各个字段（包含文件）的总大小。
+- `max_execution_time`：设置了脚本被解析器中止之前允许的最大执行时间，单位秒。 这有助于防止写得不好的脚本占尽服务器资源。 默认设置为 30。 从命令行运行 PHP 时，默认设置为 0。`set_time_limit()` 函数就是通过 ini_set() 调整 `max_execution_time` 这个配置项的值的。
+- `upload_max_filesize`：一个表单中上传文件的大小。
+- `post_max_size`：一个 post 请求，以表单为例，表单各个字段（包含文件）的总大小。
 
 ## 解析 INI 配置文件
 
-由于 php.ini 需要在 SAPI 过程中一直生效，那么解析 ini 文件并据此来构建 php 配置的工作，必定是发生 SAPI 的一开始。换句话说，也就是必定发生在 php 的启动过程中。php 需要任意一个实际的请求到达之前，其内部已经生成好这些配置。
+由于 `php.ini` 需要在 SAPI 过程中一直生效，那么解析 ini 文件并据此来构建 php 配置的工作，必定是发生 SAPI 的一开始。换句话说，也就是必定发生在 php 的启动过程中。php 需要任意一个实际的请求到达之前，其内部已经生成好这些配置。
 
-反映到 php 的内核，即为 php_module_startup 函数。
+反映到 php 的内核，即为 `php_module_startup` 函数。
 
-php_module_startup 主要负责对 php 进行启动，通常它会在 SAPI 开始的时候被调用。btw，还有一个常见的函数是 php_request_startup，它负责将在每个请求到来的时刻进行初始化，php_module_startup 与 php_request_startup 是两个标识性的动作，不过对他们进行分析并不在本文的探讨范围内。
+`php_module_startup` 主要负责对 php 进行启动，通常它会在 SAPI 开始的时候被调用。btw，还有一个常见的函数是 php_request_startup，它负责将在每个请求到来的时刻进行初始化，php_module_startup 与 `php_request_startup` 是两个标识性的动作，不过对他们进行分析并不在本文的探讨范围内。
 
 举个例子，当 php 挂接在 apache 下面做一个 module，那么 apache 启动的时候，便会激活所有这些 module，其中包括 php module。在激活 php module 时，便会调用到 php_module_startup。php_module_startup 函数完成了茫茫多的工作，一旦 php_module_startup 调用结束就意味着，OK，php 已经启动，现在可以接受请求并作出响应了。
 
@@ -31,9 +31,7 @@ if (php_init_config(TSRMLS_C) == FAILURE) {
 
 可以看到，其实就是调用了 php_init_config 函数，去完成对 ini 文件的 parse。parse 工作主要进行 lex&grammar 分析，并将 ini 文件中的 key、value 键值对提取出来并保存。php.ini 的格式很简单，等号左侧为 key，右侧为 value。每当一对 kv 被提取出来之后，php 将它们存储到哪儿呢？答案就是之前提到的 configuration_hash。
 
-```
-static HashTable configuration_hash;
-```
+`static HashTable configuration_hash;`
 
 configuration_hash 声明在 php_ini.c 中，它是一个 HashTable 类型的数据结构。顾名思义，其实就是张 hash 表。题外话，在 php5.3 之前的版本是没法获取 configuration_hash 的，因为它是 php_ini.c 文件的一个 static 的变量。后来 php5.3 添加了 php_ini_get_configuration_hash 接口，该接口直接返回&configuration_hash，使 得 php 各个扩展可以方便的一窥 configuration_hash 全貌...真是普大喜奔...
 
@@ -84,7 +82,7 @@ val : "1024"
 
 2，解析结果存放在 configuration_hash 里。
 
-# 配置作用到模块
+## 配置作用到模块
 
 php 的大致结构可以看成是最下层有一个 zend 引擎，它负责与 OS 进行交互、编译 php 代码、提供内存托管等等，在 zend 引擎的上层，排列着很多很多的模块。其中最核心的就一个 Core 模块，其他还有比如 Standard，PCRE，Date，Session 等等...这些模块还有另一个名字叫 php 扩展。我们可以简单理解为，每个模块都会提供一组功能接口给开发者来调用，举例来说，常用的诸如 explode，trim，array 等内置函数，便是由 Standard 模块提供的。
 
@@ -92,7 +90,7 @@ php 的大致结构可以看成是最下层有一个 zend 引擎，它负责与 
 
 例如，date 模块，它提供了常见的 date， time，strtotime 等函数。在 php.ini 中，它的相关配置形如：
 
-```
+```conf
 [Date]
 ;date.timezone = 'Asia/Shanghai'
 ;date.default_latitude = 31.7667
@@ -187,7 +185,7 @@ ZEND_END_MODULE_GLOBALS(json)
 
 模块需要什么样的 INI 配置，都是在各个模块中自己定义的。举例来说，对于 Core 模块，有如下的配置项定义：
 
-```
+```c
 PHP_INI_BEGIN()
     ......
     STD_PHP_INI_ENTRY_EX("display_errors", "1", PHP_INI_ALL,    OnUpdateDisplayErrors, display_errors, php_core_globals, core_globals, display_errors_mode)
@@ -202,7 +200,7 @@ PHP_INI_END()
 
 上述代码进行宏展开后得到：
 
-```
+```c
 static const zend_ini_entry ini_entries[] = {
     ..
     { 0, PHP_INI_ALL,    "display_errors",sizeof("display_errors"),OnUpdateDisplayErrors,(void *)XtOffsetOf(php_core_globals, display_errors), (void *)&core_globals, NULL, "1", sizeof("1")-1, NULL, 0, 0, 0, display_errors_mode },
@@ -216,7 +214,7 @@ static const zend_ini_entry ini_entries[] = {
 
 我们看到，配置项的定义，其本质上就是定义了一个 zend_ini_entry 类型的数组。zend_ini_entry 结构体的字段具体含义为：
 
-```
+```c
 struct _zend_ini_entry {
     int module_number;                // 模块的id
     int modifiable;                   // 可被修改的范围，例如php.ini，ini_set
@@ -245,7 +243,7 @@ struct _zend_ini_entry {
 
 REGISTER_INI_ENTRIES 也是一个宏，展开之后实则为 zend_register_ini_entries 方法。具体来看下 zend_register_ini_entries 的实现：
 
-```
+```c
 ZEND_API int zend_register_ini_entries(const zend_ini_entry *ini_entry, int module_number TSRMLS_DC) /* {{{ */
 {
     // ini_entry为zend_ini_entry类型数组，p为数组中每一项的指针
@@ -311,14 +309,14 @@ STD_PHP_INI_ENTRY("log_errors_max_len","1024", PHP_INI_ALL, OnUpdateLong, log_er
 
 进一步假设我们在 php.ini 中的配置为：
 
-```
+```conf
 log_errors = On
 log_errors_max_len = 1024
 ```
 
 具体来看下 OnUpdateBool 函数：
 
-```
+```c
 ZEND_API ZEND_INI_MH(OnUpdateBool)
 {
     zend_bool *p;
@@ -350,15 +348,15 @@ ZEND_API ZEND_INI_MH(OnUpdateBool)
 
 最令人费解的估计就是 mh_arg1 和 mh_arg2 了，其实对照前面所述的 zend_ini_entry 定义，mh_arg1，mh_arg2 还是很容易参透的。mh_arg1 表示字节偏移量，mh_arg2 表示 XXX_globals 的地址。因此，(char \*)mh_arg2 + mh_arg1 的结果即为 XXX_globals 中某个字段的地址。具体到本 case 中，就是计算 core_globals 中 log_errors 的地址。因此，当 OnUpdateBool 最后执行到
 
-\*p = (zend_bool) atoi(new_value);
+`*p = (zend_bool) atoi(new_value);`
 
 其作用就相当于
 
-core_globals.log_errors = (zend_bool) atoi("1");
+`core_globals.log_errors = (zend_bool) atoi("1");`
 
 分析完了 OnUpdateBool，我们再来看 OnUpdateLong 便觉得一目了然：
 
-```
+```c
 ZEND_API ZEND_INI_MH(OnUpdateLong)
 {
     long *p;
@@ -377,23 +375,23 @@ ZEND_API ZEND_INI_MH(OnUpdateLong)
 
 zend_register_ini_entries 中的 default_value 变量命名比较糟糕，相当容易造成误解。其实 default_value 并非表示默认值，而是表示用户实际配置的值。
 
-# 总结
+## 总结
 
 至此，三块数据 configuration_hash，EG(ini_directives)以及 PG、BG、PCRE_G、JSON_G、XXX_G...已经都交代清楚了。
 
 总结一下：
 
-1，configuration_hash，存放 php.ini 文件里的配置，不做校验，其值为字符串。
-2，EG(ini_directives)，存放的是各个模块中定义的 zend_ini_entry，如果用户在 php.ini 配置过（configuration_hash 中存在），则值被替换为 configuration_hash 中的值，类型依然是字符串。
-3，XXX_G，该宏用于访问模块的全局空间，这块内存空间可用来存放 ini 配置，并通过 on_modify 指定的函数进行更新，其数据类型由 XXX_G 中的字段声明来决定。
+1. configuration_hash，存放 php.ini 文件里的配置，不做校验，其值为字符串。
+2. EG(ini_directives)，存放的是各个模块中定义的 zend_ini_entry，如果用户在 php.ini 配置过（configuration_hash 中存在），则值被替换为 configuration_hash 中的值，类型依然是字符串。
+3. XXX_G，该宏用于访问模块的全局空间，这块内存空间可用来存放 ini 配置，并通过 on_modify 指定的函数进行更新，其数据类型由 XXX_G 中的字段声明来决定。
 
-# 运行时改变配置
+## 运行时改变配置
 
 在前一篇中曾经谈到，ini_set 函数可以在 php 执行的过程中，动态修改 php 的部分配置。注意，仅仅是部分，并非所有的配置都可以动态修改。关于 ini 配置的可修改性，参见：<http://php.net/manual/zh/configuration.changes.modes.php>
 
 我们直接进入 ini_set 的实现，函数虽然有点长，但是逻辑很清晰：
 
-```
+```c
 PHP_FUNCTION(ini_set)
 {
     char *varname, *new_value;
@@ -458,7 +456,7 @@ PHP_FUNCTION(ini_set)
 
 我们继续跟进到 zend_alter_ini_entry_ex 函数中：
 
-```
+```c
 ZEND_API int zend_alter_ini_entry_ex(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage, int force_change TSRMLS_DC) /* {{{ */
 {
     zend_ini_entry *ini_entry;
@@ -526,7 +524,7 @@ ZEND_API int zend_alter_ini_entry_ex(char *name, uint name_length, char *new_val
 
 1）ini_entry 中的 modified 字段用来表示该配置是否被动态修改过。一旦该 ini 配置发生修改，modified 就会被置为 1。上述代码中有一段很关键：
 
-```
+```c
 // 如果多次调用ini_set，则orig_value等始终保持最原始的值
 if (!modified) {
     ini_entry->orig_value = ini_entry->value;
@@ -549,7 +547,7 @@ EG(modified_ini_directives)只用于存放被动态修改过的 ini 配置，如
 
 答案是肯定的。个人觉得，这里的 EG(modified_ini_directives)主要还是为了提升性能，酱直接遍历 EG(modified_ini_directives)就足够了。此外，把 EG(modified_ini_directives)的初始化推迟到 zend_alter_ini_entry_ex 中，也可以看出 php 在细节上的性能优化点。
 
-# 恢复配置
+## 恢复配置
 
 **ini_set 的作用时间和 php.ini 文件的作用时间是不一样的，一旦请求执行结束，则 ini_set 会失效**。此外，当我们代码中调用了 ini_restore 函数，则之前通过 ini_set 设置的配置也会失效。
 
@@ -557,14 +555,14 @@ EG(modified_ini_directives)只用于存放被动态修改过的 ini 配置，如
 
 在 php_request_shutdown 中，我们可以看到针对 ini 的恢复处理：
 
-```
+```c
 /* 7. Shutdown scanner/executor/compiler and restore ini entries */
 zend_deactivate(TSRMLS_C);
 ```
 
 进入 zend_deactivate，可以进一步看到调用了 zend_ini_deactivate 函数，由 zend_ini_deactivate 来负责将 php 的配置进行恢复。
 
-```
+```c
 zend_try {
     zend_ini_deactivate(TSRMLS_C);
 } zend_end_try();
@@ -572,7 +570,7 @@ zend_try {
 
 具体来看看 zend_ini_deactivate 的实现：
 
-```
+```c
 ZEND_API int zend_ini_deactivate(TSRMLS_D) /* {{{ */
 {
     if (EG(modified_ini_directives)) {
@@ -591,7 +589,7 @@ ZEND_API int zend_ini_deactivate(TSRMLS_D) /* {{{ */
 
 从 zend_hash_apply 来看，真正恢复 ini 的任务最终落地到了 zend_restore_ini_entry_wrapper 回调函数。
 
-```
+```c
 static int zend_restore_ini_entry_wrapper(zend_ini_entry **ini_entry TSRMLS_DC)
 {
     // zend_restore_ini_entry_wrapper就是zend_restore_ini_entry_cb的封装
@@ -636,7 +634,7 @@ static int zend_restore_ini_entry_cb(zend_ini_entry *ini_entry, int stage TSRMLS
 
 php_request_shutdown--->zend_deactivate--->zend_ini_deactivate--->zend_restore_ini_entry_wrapper--->zend_restore_ini_entry_cb
 
-# 配置的销毁
+## 配置的销毁
 
 在 sapi 生命周期结束的时候，比如 apache 关闭，cli 程序执行完毕等等。一旦进入到这个阶段，之前所说的 configuration_hash，EG(ini_directives)等都需要被销毁，其用到的内存空间需要被释放。
 
@@ -646,7 +644,7 @@ UNREGISTER_INI_ENTRIES 主要做的事情，是将某个模块的 ini_entry 配�
 
 当所有模块的 PHP_MSHUTDOWN_FUNCTION 都调用 UNREGISTER_INI_ENTRIES 一遍之后，EG(ini_directives)中只剩下了 Core 模块的 ini 配置。此时，就需要手动调用 UNREGISTER_INI_ENTRIES，来完成对 Core 模块配置的删除工作。
 
-```
+```c
 void php_module_shutdown(TSRMLS_D)
 {
     ...
@@ -665,7 +663,7 @@ void php_module_shutdown(TSRMLS_D)
     php_shutdown_config();
 ```
 
-```
+```c
     // 回收EG(ini_directives)
     zend_ini_shutdown(TSRMLS_C);
 
@@ -677,7 +675,7 @@ void php_module_shutdown(TSRMLS_D)
 
 2，configuration_hash 的回收发生在 EG(ini_directives)之后，上面贴出的代码中有关于 php_shutdown_config 的函数调用。php_shutdown_config 主要负责回收 configuration_hash。
 
-```
+```c
 int php_shutdown_config(void)
 {
     // 回收configuration_hash
@@ -693,7 +691,7 @@ int php_shutdown_config(void)
 
 3，当 php_shutdown_config 完成时，只剩下 EG(ini_directives)的自身空间还没被释放。因此最后一步调用 zend_ini_shutdown。zend_ini_shutdown 用于释放 EG(ini_directives)。在前文已经提到，此时的 EG(ini_directives)理论上是一张空的 hash 表，因此该 HashTable 本身所占用的空间需要被释放。
 
-```
+```c
 ZEND_API int zend_ini_shutdown(TSRMLS_D)
 {
     // EG(ini_directives)是动态分配出的空间，需要回收
@@ -703,12 +701,10 @@ ZEND_API int zend_ini_shutdown(TSRMLS_D)
 }
 ```
 
-## 总结
-
 用一张图大致描述一下和 ini 配置相关的流程：
 
 ![img](https://images.cnblogs.com/cnblogs_com/driftcloudy/491509/o_2014101301.png)
 
-http://www.cnblogs.com/driftcloudy/p/4011954.html
+<http://www.cnblogs.com/driftcloudy/p/4011954.html>
 
-http://www.cnblogs.com/driftcloudy/p/4021079.html
+<http://www.cnblogs.com/driftcloudy/p/4021079.html>

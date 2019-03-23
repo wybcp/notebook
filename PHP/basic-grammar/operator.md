@@ -140,7 +140,7 @@ echo $a . $b; //1222
 
 ## 类型运算符
 
-*instanceof*  用于确定一个 PHP 变量是否属于某一类
+`instanceof` 用于确定一个 PHP 变量是否属于某一类
 
 ```php
 $c = new C();

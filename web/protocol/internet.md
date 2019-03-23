@@ -18,6 +18,7 @@
 - TCP 协议：
   - 带有确认机制的 UDP 协议
   - 过程复杂，实现困难，消耗资源
+  
     ```
     tcp/ip connect: tcp/ip的三次握手
     syn握手信号

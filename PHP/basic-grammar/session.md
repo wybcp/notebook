@@ -12,7 +12,7 @@ Session 的工作机制是：为每个访客创建一个唯一的 id (UID)，并
 
 注释：session_start() 函数必须位于 `<html>` 标签之前。
 
-也可以在 php.ini 里启动`session.auto_start=1`，这样就无需每次使用 session 之前都要调用 session_start()。启用此指令的缺点是无法在会话中存储对象，因为定义要在会话开始之前加载才能重新创建对象。
+也可以在 php.ini 里启动`session.auto_start=1`，这样就无需每次使用 session 之前都要调用 `session_start()`。启用此指令的缺点是无法在会话中存储对象，因为定义要在会话开始之前加载才能重新创建对象。
 
 ## 存储 Session 变量
 

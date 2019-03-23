@@ -35,47 +35,47 @@ RS 控制记录分隔符
 
 1. 打印出/etc/passwd 中个的第一个域，并在前面追加"账号"
 
-```shell
-cat /etc/passwd | awk -F ":" '{print "账号"$1}'
-```
+   ```shell
+   cat /etc/passwd | awk -F ":" '{print "账号"$1}'
+   ```
 
 2. 打印出/etc/passwd 第三个域和第四个域
 
-```shell
-cat /etc/passwd | awk -F ":" '{print $3,$4}'
-```
+   ```shell
+   cat /etc/passwd | awk -F ":" '{print $3,$4}'
+   ```
 
 3. 匹配/etc/passwd 第三域大于 100 的显示出完整信息
 
-```shell
-cat /etc/passwd | awk -F ":" '{if($3 > 100) {print $0}}'
-```
+   ```shell
+   cat /etc/passwd | awk -F ":" '{if($3 > 100) {print $0}}'
+   ```
 
 4. 打印行号小于 15 的，并且最后一域匹配 bash 的信息.
 
-NR 表示行号。NF 表示最后一个域 ~ 正则匹配符号。 // 正则表达式开始和结束符号
+   NR 表示行号。NF 表示最后一个域 ~ 正则匹配符号。 // 正则表达式开始和结束符号
 
-```shell
-cat /etc/passwd | awk -F ":" '{if($NR < 15 && $NF~/bash/) {print $0}}'
-```
+   ```shell
+   cat /etc/passwd | awk -F ":" '{if($NR < 15 && $NF~/bash/) {print $0}}'
+   ```
 
 5. 打印出第三域数字之和
 
-```SHELL
-awk -F ":" 'BEGIN{sum =0} {sum = sum+$3} END {print sum}'
-```
+   ```SHELL
+   awk -F ":" 'BEGIN{sum =0} {sum = sum+$3} END {print sum}'
+   ```
 
 6. 请匹配 passwd 最后一段域 bash 结尾的信息，有多少条
 
-```shell
-awk -F ":" '{if( $NF~/bash/) {i++}} END {print i }'
-```
+   ```shell
+   awk -F ":" '{if( $NF~/bash/) {i++}} END {print i }'
+   ```
 
 7. 请同时匹配 passwd 文件中，带 mail 和 bash 的关键字的信息
 
-```shell
-cat /etc/passwd | awk -F ":" '{if( $NF~/bash/ || $NF~/mail/) {print $0}} '
-```
+   ```shell
+   cat /etc/passwd | awk -F ":" '{if( $NF~/bash/ || $NF~/mail/) {print $0}} '
+   ```
 
 8. 统计/etc/fstab 文件中每个文件系统类型出现的次数
 
@@ -85,9 +85,9 @@ cat /etc/passwd | awk -F ":" '{if( $NF~/bash/ || $NF~/mail/) {print $0}} '
 
    for(i in fs){print i,fs[i]}：在每条记录都处理完之后，用 for 循环遍历数组，打印下标（文件类型）和数组元素值（文件类型出现的次数）
 
-```shell
-awk '/^UUID/{fs[$3]++}END{for(i in fs){print i,fs[i]}}' /etc/fstab
-```
+   ```shell
+   awk '/^UUID/{fs[$3]++}END{for(i in fs){print i,fs[i]}}' /etc/fstab
+   ```
 
 ### nginx 日志分析
 

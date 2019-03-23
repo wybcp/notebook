@@ -4,7 +4,7 @@
 
 ## PHP 数据封包示例
 
-````php
+```php
 /**
  * 包头二进制封包
  * @param int $length
@@ -22,13 +22,14 @@ private function getHeaderPack(int $length):string
     return $headerPack;
 }
 ```
+
 一个 TCP 协议的接口，数据包通常是由包头和包体组成的，把包头和包体分别二进制封包拼接起来（实际上合为一体进行封包也是一样的），就是一个完整的数据包。
 
 如包头结构体定义三个字段，分别是 version,seq,body_length，类型都是 unsigned long，那么给包头封包的 PHP 写法就是：
 
 ```php
 pack('L3', $header['version'], $header['seq'], $header['body_length']);
-````
+```
 
 同理，包体的封包方式也是一样的，有时包体里的字段本身也是一个二进制的封包，也有他的包头和包体，不过方法是一样的，这个就看具体的定义了。
 

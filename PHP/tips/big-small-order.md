@@ -4,7 +4,6 @@
 
 ```php
 <?php
-
 function getArray(array $data){
 
     rsort($data);        //对数组顺向排序
@@ -13,7 +12,7 @@ function getArray(array $data){
     print_r($data);
     $result_data=[];
     // 奇数
-    $is_odd = (($num%2===0)?false:true);
+    $is_odd = ($num%2===0)?false:true;
 
     if($num%2===0){
         $half_num=$num/2;

@@ -350,7 +350,7 @@ return back()->with('message', __('app.article_added'));
 | 授权                    | Policies                               | Entrust, Sentinel and other packages                    |
 | 前端编译                | Laravel Mix                            | Grunt, Gulp, 3rd party packages                         |
 | 开发环境                | Homestead                              | Docker                                                  |
-| 部署                    | Laravel Forge                          | Deployer and other solutions                            |
+| 部署                    | Laravel Forge                          | deployer and other solutions                            |
 | 单元测试                | PHPUnit, Mockery                       | Phpspec                                                 |
 | 浏览器测试              | Laravel Dusk                           | Codeception                                             |
 | 数据库操作              | Eloquent                               | SQL, Doctrine                                           |

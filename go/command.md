@@ -61,4 +61,4 @@ GOOS=linux GOARCH=amd64 go build flysnow.org/hello
 
 编译并运行。
 
-[Go 语言中自动选择 json 解析库 条件编译 tags](https://www.flysnow.org/2017/11/05/go-auto-choice-json-libs.html)
+[Go 语言中自动选择 json 解析库条件编译 tags](https://www.flysnow.org/2017/11/05/go-auto-choice-json-libs.html)

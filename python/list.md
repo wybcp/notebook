@@ -6,8 +6,8 @@ enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或�
 enumerate(sequence, [start=0])
 ```
 
-- sequence -- 一个序列、迭代器或其他支持迭代对象。
-- start -- 下标起始位置。
+- sequence  一个序列、迭代器或其他支持迭代对象。
+- start 下标起始位置。
 
 ## 翻转
 

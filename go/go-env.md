@@ -9,6 +9,7 @@ $HOME/go on Unix, $home/go on Plan 9, and %USERPROFILE%\go (usually C:\Users\You
 ## bin
 
 `$ export PATH=$PATH:$(go env GOPATH)/bin`
+
 bin contains executable commands
 
 ## remote repository

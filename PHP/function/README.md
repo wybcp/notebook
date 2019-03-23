@@ -17,41 +17,45 @@ function 函数名字(参数){
 ```php
 $a = 100;
 function fn($arg) {
-echo $arg;
+  echo $arg;
 }
 fn($a);//100
 ```
 
-- 引用传值
-    ```php
-    function fn(&$arg){
-    $arg = 10;
-    }
-    fn($a);
-    echo $a;//10;
-    ```
+- 引用传值
+
+  ```php
+  function fn(&$arg){
+  $arg = 10;
+  }
+  fn($a);
+  echo $a;//10;
+  ```
+
 - 默认参数
-    ```php
-    # 默认值
-    $a = 100;
-    function fn($arg = 10){
-    echo $arg;
-    }
-    fn($a);//100
-    fn();//10
-    ```
+
+  ```php
+  # 默认值
+  $a = 100;
+  function fn($arg = 10){
+  echo $arg;
+  }
+  fn($a);//100
+  fn();//10
+  ```
+
 - 可变参数
 
-    PHP 在用户自定义函数中支持可变数量的参数列表。在 PHP 5.6 及以上的版本中，由  *...*  语法实现
+  PHP 在用户自定义函数中支持可变数量的参数列表。在 PHP 5.6 及以上的版本中，由  `...` 语法实现
 
-    ```php
-    function fn(...$arg){
+  ```php
+  function fn(...$arg){
     foreach($arg as $v){
         echo $v;
     }
-    }
-    fn(1,2,3,4);
-    ```
+  }
+  fn(1,2,3,4);
+  ```
 
 ## 函数类型声明
 

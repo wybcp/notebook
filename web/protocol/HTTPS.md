@@ -1,6 +1,6 @@
 # HTTPS
 
-## **HTTPS 与 HTTP 的一些区别**
+## HTTPS 与 HTTP 的一些区别
 
 1. HTTPS 协议需要到 CA 申请证书
 2. HTTP 协议运行在 TCP 之上，所有传输的内容都是明文，HTTPS 运行在 SSL/TLS 之上，SSL/TLS 运行在 TCP 之上，所有传输的内容都经过加密的。
