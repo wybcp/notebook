@@ -12,7 +12,7 @@ Redis 使用操作系统的多进程 COW(Copy On Write) 机制来实现快照持
 
 对性能影响最小，适合灾难恢复备份，加载速度快。
 
-Redis 会定期保存数据快照至一个 rbd 文件中，并在启动时自动加载 rdb 文件，恢复之前保存的数据。可以在配置文件中配置 Redis 进行快照保存的时机。
+Redis 会定期保存数据快照至一个 rdb 文件中，并在启动时自动加载 rdb 文件，恢复之前保存的数据。可以在配置文件中配置 Redis 进行快照保存的时机。
 
 ### 触发机制
 
@@ -30,20 +30,31 @@ Redis 会定期保存数据快照至一个 rbd 文件中，并在启动时自动
 
   `save 60 100`会让 Redis 每 60 秒检查一次数据变更情况，如果发生了 100 次或以上的数据变更，则进行 RDB 快照保存。
 
-  可以配置多条 save 指令，让 Redis 执行多级的快照保存策略。
-  Redis 默认开启 RDB 快照，默认的 RDB 策略如下：
+  可以配置多条 save 指令，让 Redis 执行多级的快照保存策略。 Redis 默认开启 RDB 快照，默认的 RDB 策略如下：
 
-  save 900 1
-  save 300 10
-  save 60 10000
+  ```conf
+  save 900 1 //15分钟内有一条数据写入时触发rdb持久化
+  save 300 10 //5分钟内有10条数据写入时触发rdb持久化
+  save 60 10000 //1分钟内有10000条数据写入时触发rdb持久化
+  ```
 
 - 执行 debug reload 重新加载 Redis 时。
+
+### rdb 持久化难点
+
+1. 如何获取当前内存数据快照
+
+   redis 利用 linux fork 子进程后( cow 机制:https://juejin.im/post/5bd96bcaf265da396b72f855 )子进程拥有父进程的内存快照来获取内存快照
+
+2. 保存数据落盘时 io 操作阻塞其他请求
+
+   redis rdb 持久化落盘操作只在独立的子进程中进行不会影响到主进程中的其他请求
 
 ## AOF
 
 内存数据修改的指令记录文本。
 
-append only file ，以独立日志的方式记录每次写命令，重启时重新执行 AOF 文件的命令恢复数据，解决数据持久化的实时性问题，主流方案。
+append only file，以独立日志的方式记录每次写命令，重启时重新执行 AOF 文件的命令恢复数据，解决数据持久化的实时性问题，主流方案。
 
 默认不开启 AOF，设置：`appendonly yes`。查询`config get appendonly`
 
@@ -88,6 +99,8 @@ appendfsync 参数：
 - 旧的 AOF 无效命令清除
 - 多条写命令合为一条，过大则拆分为多条。
 
+[bgrewriteaof](https://redis.io/commands/bgrewriteaof) aof 重写客户端触发命令
+
 ### 4.重启加载 load
 
 ### AOF 的优点：
@@ -101,6 +114,10 @@ appendfsync 参数：
 - AOF 文件通常比 RDB 文件更大
 - 性能消耗比 RDB 高
 - 数据恢复速度比 RDB 慢
+
+aof 持久化涉及磁盘 io 操作(write 数据到 aof 文件)，那么该操作是否会严重影响 redis 吞吐量?
+
+答: 在 aof 文件追加过程中，write 调用是在 redis 主线程内，而 fsync(将文件数据从内核缓存区 buffer 中真正写入磁盘)控制刷盘却是在一个独立的后台线程中来完成，所以并不需要担心开启 aof 会十分影响 redis 性能
 
 ## 混合持久化
 

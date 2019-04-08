@@ -4,75 +4,12 @@
 
 nginx 的负载均衡策略可以划分为两大类：内置策略和扩展策略。内置策略包含加权轮询和 ip hash，在默认情况下这两种策略会编译进 nginx 内核，只需在 nginx 配置中指明参数即可。扩展策略有很多，如 fair、通用 hash、consistent hash 等，默认不编译进 nginx 内核。
 
-首先给大家说下 upstream 这个配置的，这个配置是写一组被代理的服务器地址，然后配置负载均衡的算法。这里的被代理服务器地址有 2 中写法。
+Nginx 目前提供的负载均衡模块：
 
-```conf
-upstream mysvr {
-server 192.168.10.121:3333;
-server 192.168.10.122:3333;
-}
-server {
-....
-location ~*^.+$ {
-
-proxy_pass http://mysvr; #请求转向mysvr 定义的服务器列表
-
-}
-upstream mysvr {
-server http://192.168.10.121:3333;
-server http://192.168.10.122:3333;
-
-}
-server {
-....
-location ~*^.+$ {
-proxy_pass mysvr; #请求转向mysvr 定义的服务器列表
-}
-```
-
-1、热备：如果你有 2 台服务器，当一台服务器发生事故时，才启用第二台服务器给提供服务。服务器处理请求的顺序：AAAAAA 突然 A 挂啦，BBBBBBBBBBBBBB.....
-
-```nginx
-upstream mysvr {
-server 127.0.0.1:7878;
-server 192.168.10.121:3333 backup; #热备
-
-}
-```
-
-2、 加权轮询（weighted round robin）：nginx 默认就是轮询其权重都默认为 1，服务器处理请求的顺序：ABABABABAB....
-
-```nginx
-upstream mysvr {
-server 127.0.0.1:7878;
-server 192.168.10.121:3333;
-}
-```
-
-![image](http://ou1viq65b.bkt.clouddn.com/17-8-30/7300152.jpg)
-
-第一，如果可以把加权轮询算法分为先深搜索和先广搜索，那么 nginx 采用的是先深搜索算法，即将首先将请求都分给高权重的机器，直到该机器的权值降到了比其他机器低，才开始将请求分给下一个高权重的机器；第二，当所有后端机器都 down 掉时，nginx 会立即将所有机器的标志位清成初始状态，以避免造成所有的机器都处在 timeout 的状态，从而导致整个前端被夯住。
-
-3、加权轮询：跟据配置的权重的大小而分发给不同服务器不同数量的请求。如果不设置，则默认为 1。下面服务器的请求顺序为：ABBABBABBABBABB....
-
-```nginx
-upstream mysvr {
-server 127.0.0.1:7878 weight=1;
-server 192.168.10.121:3333 weight=2; }
-```
-
-4、ip_hash:nginx 会让相同的客户端 ip 请求相同的服务器。
-
-```nginx
-upstream mysvr {
-server 127.0.0.1:7878;
-server 192.168.10.121:3333;
-ip_hash;
-
-}
-```
-
-![](http://ou1viq65b.bkt.clouddn.com/17-8-30/69178371.jpg)
+- ngx_http_upstream_round_robin，加权轮询，可均分请求，是默认的 HTTP 负载均衡算法，集成在框架中。
+- ngx_http_upstream_ip_hash_module，IP 哈希，可保持会话。
+- ngx_http_upstream_least_conn_module，最少连接数，可均分连接。
+- ngx_http_upstream_hash_module，一致性哈希，可减少缓存数据的失效。
 
 关于 nginx 负载均衡配置的几个状态参数讲解。
 
@@ -81,11 +18,67 @@ ip_hash;
 - max_fails，允许请求失败的次数，默认为 1。当超过最大次数时，返回 proxy_next_upstream 模块定义的错误。
 - fail_timeout，在经历了 max_fails 次失败后，暂停服务的时间。max_fails 可以和 fail_timeout 一起使用。
 
-```nginx
+```conf
 upstream mysvr {
-server 127.0.0.1:7878 weight=2 max_fails=2 fail_timeout=2;
-server 192.168.10.121:3333 weight=1 max_fails=2 fail_timeout=1;
+    server 127.0.0.1:7878 weight=2 max_fails=2 fail_timeout=2;
+    server 192.168.10.121:3333 weight=1 max_fails=2 fail_timeout=1;
+}
+```
 
+## 热备
+
+如果你有 2 台服务器，当一台服务器发生事故时，才启用第二台服务器给提供服务。服务器处理请求的顺序：AAAAAA 突然 A 挂啦，BBBBBBBBBBBBBB.....
+
+```conf
+upstream mysvr {
+    server 127.0.0.1:7878;
+    server 192.168.10.121:3333 backup; #热备
+}
+```
+
+## 加权轮询（weighted round robin）
+
+nginx 默认就是轮询其权重都默认为 1，服务器处理请求的顺序：ABABABABAB....
+
+```conf
+upstream mysvr {
+    server 127.0.0.1:7878;
+    server 192.168.10.121:3333;
+}
+```
+
+第一，如果可以把加权轮询算法分为先深搜索和先广搜索，那么 nginx 采用的是先深搜索算法，即将首先将请求都分给高权重的机器，直到该机器的权值降到了比其他机器低，才开始将请求分给下一个高权重的机器；第二，当所有后端机器都 down 掉时，nginx 会立即将所有机器的标志位清成初始状态，以避免造成所有的机器都处在 timeout 的状态，从而导致整个前端被夯住。
+
+加权轮询：跟据配置的权重的大小而分发给不同服务器不同数量的请求。如果不设置，则默认为 1。下面服务器的请求顺序为：ABBABBABBABBABB....
+
+```conf
+upstream mysvr {
+    server 127.0.0.1:7878 weight=1;
+    server 192.168.10.121:3333 weight=2;
+}
+```
+
+## ip_hash
+
+nginx 会让相同的客户端 ip 请求相同的服务器。
+
+```conf
+upstream mysvr {
+    ip_hash;
+    server 127.0.0.1:7878;
+    server 192.168.10.121:3333;
+}
+```
+
+##　最少连接
+
+把请求分配到连接数最少的 server
+
+```conf
+upstream  fengzp.com {
+    least_conn;
+    server   192.168.99.100:42000;
+    server   192.168.99.100:42001;
 }
 ```
 
@@ -95,7 +88,7 @@ server 192.168.10.121:3333 weight=1 max_fails=2 fail_timeout=1;
 
 nginx.conf 配置如下：
 
-```nginx
+```conf
 http {
     #设定mime类型,类型由mime.type文件定义
    include       /etc/nginx/mime.types;
@@ -162,7 +155,7 @@ http {
 
 配置也不难，来看看怎么做吧：
 
-```javascript
+```js
 http {
    #此处省略一些基本配置
 
@@ -211,9 +204,6 @@ http {
 
 其他和 http 反向代理基本一样，只是在 Server 部分配置有些不同。
 
-```javascript
-```
-
 ## 静态站点配置
 
 有时候，我们需要配置静态站点(即 html 文件和一堆静态资源)。
@@ -222,7 +212,7 @@ http {
 
 配置如下：
 
-```javascript
+```js
 worker_processes  1;
 
 events {
@@ -280,7 +270,7 @@ web 领域开发中，经常采用前后端分离模式。这种模式下，前�
 
 首先，在 enable-cors.conf 文件中设置 cors ：
 
-```javascript
+```js
 # allow origin list
 set $ACAO '*';
 
@@ -311,7 +301,7 @@ if ($request_method = 'POST') {
 
 接下来，在你的服务器中 include enable-cors.conf 来引入跨域配置：
 
-```javascript
+```js
 # ----------------------------------------------------
 # 此文件为项目 nginx 配置片段
 # 可以直接在 nginx config 中 include（推荐）

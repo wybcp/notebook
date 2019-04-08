@@ -12,18 +12,17 @@
 
 - 在第一次提交后禁用提交按钮；
 
-```
-EventUtil.addHandler(form, "submit", function(event){
-                event = EventUtil.getEvent(event);
-                var target = EventUtil.getTarget(event);
+```js
+EventUtil.addHandler(form, "submit", function(event) {
+  event = EventUtil.getEvent(event);
+  var target = EventUtil.getTarget(event);
 
-                //get the submit button
-                var btn = target.elements["submit-btn"];
+  //get the submit button
+  var btn = target.elements["submit-btn"];
 
-                //disable it
-                btn.disabled = true;
-
-            });
+  //disable it
+  btn.disabled = true;
+});
 ```
 
 - 利用 onsubmit 事件处理程序取消后续的提交操作。

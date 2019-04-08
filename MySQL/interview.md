@@ -432,8 +432,26 @@ innodb 支持事务、myiam 不支持
 
 innodb 支持外键、支持行锁
 
+## 为什么用自增列作为主键
+
+1. 如果我们定义了主键(PRIMARY KEY)，那么 InnoDB 会选择主键作为聚集索引、如果没有显式定义主键，则 InnoDB 会选择第一个不包含有 NULL 值的唯一索引作为主键索引、如果也没有这样的唯一索引，则 InnoDB 会选择内置 6 字节长的 ROWID 作为隐含的聚集索引(ROWID 随着行记录的写入而主键递增，这个 ROWID 不像 ORACLE 的 ROWID 那样可引用，是隐含的)。
+
+2. 数据记录本身被存于主索引（一颗 B+Tree）的叶子节点上。这就要求同一个叶子节点内（大小为一个内存页或磁盘页）的各条数据记录按主键顺序存放，因此每当有一条新的记录插入时，MySQL 会根据其主键将其插入适当的节点和位置，如果页面达到装载因子（InnoDB 默认为 15/16），则开辟一个新的页（节点）
+
+3. 如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页
+
+4. 如果使用非自增主键（如果身份证号或学号等），由于每次插入主键的值近似于随机，因此每次新纪录都要被插到现有索引页得中间某个位置，此时 MySQL 不得不为了将新记录插到合适位置而移动数据，甚至目标页面可能已经被回写到磁盘上而从缓存中清掉，此时又要从磁盘上读回来，这增加了很多开销，同时频繁的移动、分页操作造成了大量的碎片，得到了不够紧凑的索引结构，后续不得不通过 OPTIMIZE TABLE 来重建表并优化填充页面。
+
+##　为什么使用数据索引能提高效率
+
+1. 数据索引的存储是有序的
+
+2. 在有序的情况下，通过索引查询一个数据是无需遍历索引记录的
+
+3. 极端情况下，数据索引的查询效率为二分法查询效率，趋近于 log2(N)
+
 ## 参考
 
 - [企业面试题｜最常问的 MySQL 面试题集合（一）](https://mp.weixin.qq.com/s?__biz=MzI0MDQ4MTM5NQ==&mid=2247486211&idx=1&sn=c8bbf47e3dd892443142ba9b33c37321&chksm=e91b6e1fde6ce7095709efd81614c72fcde19b00524e680a65458b25a181c73b227daa150506&scene=21#wechat_redirect)
-- [企业面试题｜最常问的 MySQL 面试题集合（二)](https://mp.weixin.qq.com/s?__biz=MzI0MDQ4MTM5NQ==&mid=2247486284&idx=1&sn=5f8ed7d5985d7feb202bdcbd3343125c&chksm=e91b6e50de6ce746831e2744188a30d99d6729be7f1344ef4c5b6add4a2b456c1acf8f4a5f58#rd)
+- [企业面试题｜最常问的 MySQL 面试题集合（二）](https://mp.weixin.qq.com/s?__biz=MzI0MDQ4MTM5NQ==&mid=2247486284&idx=1&sn=5f8ed7d5985d7feb202bdcbd3343125c&chksm=e91b6e50de6ce746831e2744188a30d99d6729be7f1344ef4c5b6add4a2b456c1acf8f4a5f58#rd)
 - [面试中有哪些经典的数据库问题](https://mp.weixin.qq.com/s?__biz=MzI0MDQ4MTM5NQ==&mid=2247486600&idx=1&sn=ffe2f7e8650db98bb1dfe874447b6863&scene=19#wechat_redirect)

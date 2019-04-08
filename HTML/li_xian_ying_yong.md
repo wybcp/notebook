@@ -8,8 +8,8 @@ application cache，从浏览器的缓存中分出来的一块缓存区。使用
 
 在`<html>`中的 manifest 属性中指定描述文件的路径：
 
-```
-<html manifest="./offline.appcache">
+```html
+<html manifest="./offline.appcache"></html>
 ```
 
 描述文件的扩展名以前用.manifest，现在推荐.appcache
@@ -68,52 +68,52 @@ document.cookie 返回当前页面可用的所有 cookie 的字符串，一系�
 
 函数简化 cookie 操作：读取、写入、删除。
 
-```
+```js
 var CookieUtil = {
+  get: function(name) {
+    var cookieName = encodeURIComponent(name) + "=",
+      cookieStart = document.cookie.indexOf(cookieName),
+      cookieValue = null,
+      cookieEnd;
 
-    get: function (name){
-        var cookieName = encodeURIComponent(name) + "=",
-            cookieStart = document.cookie.indexOf(cookieName),
-            cookieValue = null,
-            cookieEnd;
+    if (cookieStart > -1) {
+      cookieEnd = document.cookie.indexOf(";", cookieStart);
+      if (cookieEnd == -1) {
+        cookieEnd = document.cookie.length;
+      }
+      cookieValue = decodeURIComponent(
+        document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
+      );
+    }
 
-        if (cookieStart > -1){
-            cookieEnd = document.cookie.indexOf(";", cookieStart);
-            if (cookieEnd == -1){
-                cookieEnd = document.cookie.length;
-            }
-            cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
-        }
+    return cookieValue;
+  },
 
-        return cookieValue;
-    },
+  set: function(name, value, expires, path, domain, secure) {
+    var cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 
-    set: function (name, value, expires, path, domain, secure) {
-        var cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    if (expires instanceof Date) {
+      cookieText += "; expires=" + expires.toGMTString();
+    }
 
-        if (expires instanceof Date) {
-            cookieText += "; expires=" + expires.toGMTString();
-        }
+    if (path) {
+      cookieText += "; path=" + path;
+    }
 
-        if (path) {
-            cookieText += "; path=" + path;
-        }
+    if (domain) {
+      cookieText += "; domain=" + domain;
+    }
 
-        if (domain) {
-            cookieText += "; domain=" + domain;
-        }
+    if (secure) {
+      cookieText += "; secure";
+    }
 
-        if (secure) {
-            cookieText += "; secure";
-        }
+    document.cookie = cookieText;
+  },
 
-        document.cookie = cookieText;
-    },
-
-    unset: function (name, path, domain, secure){
-        this.set(name, "", new Date(0), path, domain, secure);
-    }//没有删除已有cookie的直接方法，通过设置失效时间为过去时间达到删除效果。
-
+  unset: function(name, path, domain, secure) {
+    this.set(name, "", new Date(0), path, domain, secure);
+  } //没有删除已有cookie的直接方法，通过设置失效时间为过去时间达到删除效果。
 };
 ```
 
@@ -121,8 +121,7 @@ var CookieUtil = {
 
 为了绕开浏览器的单域名下的 cookie 数限制，开发人员使用一种称为子 cookie(subcookie)的概念，子 cookie 是存放在单个 cookie 中的更小端的数据，即使用 cookie 值来存储多个名值对儿 。
 
-格式如下：
-name=name1=value1&name2=value2&name3=value3&name4=value4&name5=value5
+格式如下： name=name1=value1&name2=value2&name3=value3&name4=value4&name5=value5
 
 ### Web 存储机制
 
