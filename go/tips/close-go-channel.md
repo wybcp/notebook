@@ -1,16 +1,14 @@
 # [如何优雅地关闭 Go channel](https://golangcaff.com/topics/129/how-to-close-the-channel-gracefully?order_by=vote_count&)
 
-几天前, 我写了一篇介绍 [Go 中管道有关的规则的文章](https://go101.org/article/channel.html)。 这篇文章在 [reddit](https://www.reddit.com/r/golang/comments/5k489v/the_full_list_of_channel_rules_in_golang/) 和 [HN](https://news.ycombinator.com/item?id=13252416) 得到很多投票。
-
-我收集了一些关于 Go 中管道的设计和规则的意见：
+关于 Go 中管道的设计和规则的意见：
 
 1. 没有简单易行的方法去检查管道是否没有通过改变它的状态来关闭。
 2. 关闭一个已经关闭的管道会触发 panic，所以，关闭者不知道管道是否关闭仍去关闭它，这是一个危险的行为。
 3. 发送数据到一个关闭的管道会触发 panic, 所以，发送者不知道管道是否关闭仍去发送消息给它，这是一个危险的行为。
 
-这些意见看起来很合理 （其实并不是）。然而 Go 中没有一个內建函数去检测管道是否已经被关闭。
+Go 中没有一个內建函数去检测管道是否已经被关闭。
 
-如果你能保证没有任何数据发送到管道，这有一个简单的方法去检查管道是否被关闭 （这个方法在这篇文章的其他例子中会被经常用到）:
+如果你能保证没有任何数据发送到管道，这有一个简单的方法去检查管道是否被关闭:
 
 ```go
 package main
@@ -49,7 +47,7 @@ func main() {
 
 ## 粗暴关闭通道的解决方案
 
-无论如何，如果你要从接收方或通道的多个发送方之一中关闭通道， 那么你可以使用 recover 机制去预防可能的 panic 破坏你的程序。这里有一个例子 （假设通道的元素类型是 `T`）。
+无论如何，如果你要从接收方或通道的多个发送方之一中关闭通道， 那么你可以使用 recover 机制去预防可能的 panic 破坏你的程序。（假设通道的元素类型是 `T`）。
 
 ```go
 func SafeClose(ch chan T) (justClosed bool) {
@@ -91,8 +89,8 @@ func SafeSend(ch chan T, value T) (closed bool) {
 ```go
 // Once is an object that will perform exactly one action.
 type Once struct {
-	m    Mutex
-	done uint32
+    m    Mutex
+    done uint32
 }
 
 // Do calls the function f if and only if Do is being called for the
@@ -114,16 +112,16 @@ type Once struct {
 // without calling f.
 //
 func (o *Once) Do(f func()) {
-	if atomic.LoadUint32(&o.done) == 1 {
-		return
-	}
-	// Slow-path.
-	o.m.Lock()
-	defer o.m.Unlock()
-	if o.done == 0 {
-		defer atomic.StoreUint32(&o.done, 1)
-		f()
-	}
+    if atomic.LoadUint32(&o.done) == 1 {
+        return
+    }
+    // Slow-path.
+    o.m.Lock()
+    defer o.m.Unlock()
+    if o.done == 0 {
+        defer atomic.StoreUint32(&o.done, 1)
+        f()
+    }
 }
 ```
 
@@ -180,8 +178,6 @@ func (mc *MyChannel) IsClosed() bool {
 ## 优雅关闭通道的方案
 
 上文提到的 `SafeSend` 函数的其中一个缺陷是它不能在 select 代码块中 `case` 关键词后面作为一个发送行为被调用。 上文提到的 `SafeSend` 和 `SafeClose` 函数的另一个缺陷是很多人，包括我，都会觉得上文使用 `panic/recover` 和 `sync` 包的解决方案并不优雅。 下面，将会介绍一些不使用 `panic/recover` 和 `sync` 包的纯通道解决方案，这些方案适用于所有情况。
-
-（在接下来的例子中，`sync.WaitGroup` 会被用于完成例子。 它在实践中并不是必要的。）
 
 ### 1. M 个接受者，1 个发送者， 发送者通过关闭数据通道说 「不要再发送了」
 

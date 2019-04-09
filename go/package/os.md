@@ -18,19 +18,19 @@ os.Args 的第一个元素，os.Args[0], 是命令本身的名字；其它的元
 
 ```go
 func env() {
-	// 为了设置一个key/value对，使用`os.Setenv`
-	// 为了获取一个key的value，使用`os.Getenv`
-	// 如果所提供的key在环境变量中没有对应的value，
-	// 那么返回空字符串
-	os.Setenv("foo", "1")
-	fmt.Println("foo:", os.Getenv("foo"))
+    // 为了设置一个key/value对，使用`os.Setenv`
+    // 为了获取一个key的value，使用`os.Getenv`
+    // 如果所提供的key在环境变量中没有对应的value，
+    // 那么返回空字符串
+    os.Setenv("foo", "1")
+    fmt.Println("foo:", os.Getenv("foo"))
     fmt.Println("foo 1:", os.Getenv("foo1"))
     for i, e := range os.Environ() {
-		pair := strings.Split(e, "=")
-		fmt.Println(e)
-		fmt.Println(pair)
-		fmt.Println(i)
-	}
+        pair := strings.Split(e, "=")
+        fmt.Println(e)
+        fmt.Println(pair)
+        fmt.Println(i)
+    }
 }
 ```
 
@@ -40,29 +40,28 @@ func env() {
 
 ```go
 func execExample() {
-	// `exec.Command` 函数创建了一个代表外部进程的对象
-	dateCmd := exec.Command("date")
-	// `Output`是另一个运行命令时用来处理信息的函数，这个
-	// 函数等待命令结束，然后收集命令输出。
-	dateOut, err := dateCmd.Output()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(dateOut))
-	// stdin输入数据的命令，
-	// 数据输入传给外部进程的stdin，然后从它输出到stdout
-	// 的运行结果收集信息
-	grepCmd := exec.Command("grep", "hello")
-	// 显式地获取input/output管道，启动进程，
-	// 向进程写入数据，然后读取输出结果，最后等待进程结束
-	grepIn, _ := grepCmd.StdinPipe()
-	grepOut, _ := grepCmd.StdoutPipe()
-	grepCmd.Start()
-	grepIn.Write([]byte("hello grep\ngoodbye grep"))
-	grepIn.Close()
-	grepBytes, _ := ioutil.ReadAll(grepOut)
-	grepCmd.Wait()
-	fmt.Println(string(grepBytes))
+    // `exec.Command` 函数创建了一个代表外部进程的对象
+	  dateCmd := exec.Command("date")
+	  // `Output`是另一个运行命令时用来处理信息的函数，这个
+	  // 函数等待命令结束，然后收集命令输出。
+	  dateOut, err := dateCmd.Output()
+	  if err != nil {
+	  	panic(err)
+	  }
+	  fmt.Println(string(dateOut))
+	  // stdin输入数据的命令，
+	  // 数据输入传给外部进程的stdin，然后从它输出到stdout
+	  // 的运行结果收集信息
+	  grepCmd := exec.Command("grep", "hello")
+	  // 显式地获取input/output管道，启动进程，
+	  // 向进程写入数据，然后读取输出结果，最后等待进程结束
+	  grepIn, _ := grepCmd.StdinPipe()
+	  grepOut, _ := grepCmd.StdoutPipe()
+	  grepCmd.Start()
+	  grepIn.Write([]byte("hello grep\ngoodbye grep"))
+	  grepIn.Close()
+	  grepBytes, _ := ioutil.ReadAll(grepOut)
+	  grepCmd.Wait()
+	  fmt.Println(string(grepBytes))
 }
-
 ```
