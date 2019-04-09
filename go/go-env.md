@@ -4,7 +4,7 @@
 
 ## [GOPATH](https://golang.org/cmd/go/#hdr-GOPATH_environment_variable)
 
-$HOME/go on Unix, $home/go on Plan 9, and %USERPROFILE%\go (usually C:\Users\YourName\go) on Windows.
+`$HOME/go` on Unix, `$home/go` on Plan 9, and `%USERPROFILE%\go` (usually `C:\Users\YourName\go`) on Windows.
 
 ## bin
 

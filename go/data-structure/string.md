@@ -38,9 +38,7 @@ hello world
 
 包 unicode 包含了一些针对测试字符的非常有用的函数（其中 ch 代表字符）：
 
-判断是否为字母：`unicode.IsLetter(ch)`
-判断是否为数字：`unicode.IsDigit(ch)`
-判断是否为空白符号：`unicode.IsSpace(ch)`
+判断是否为字母：`unicode.IsLetter(ch)` 判断是否为数字：`unicode.IsDigit(ch)` 判断是否为空白符号：`unicode.IsSpace(ch)`
 
 ## 字符串代码片段
 
@@ -89,7 +87,7 @@ func main() {
 	}
 
 }
-...
+------
 bytes
 e5 98 bb e5 93 88 63 68 69 6e 61
 the Unicode characters
