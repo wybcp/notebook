@@ -29,7 +29,9 @@ XSS 是实现 CSRF 的诸多途径中的一条，但绝对不是唯一的一条�
 经过 escape 之后就成了：
 
 ```html
-  &lt;script&gt;window.location.href=&quot;http://www.baidu.com&quot;&lt;/script&gt;
+<script>
+  window.location.href=”http://www.baidu.com”;
+</script>
 ```
 
 它现在会像普通文本一样显示出来，变得无毒无害，不能执行了。

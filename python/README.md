@@ -1,6 +1,6 @@
 # Python
 
-Python 3.6
+Python 3.7
 
 ## [语言规范](https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules/)
 

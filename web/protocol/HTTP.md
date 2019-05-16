@@ -2,9 +2,6 @@
 
 影响一个 HTTP 网络请求的因素主要有两个：带宽和延迟。
 
-- **带宽：**
-- **延迟：**
-
 1. **浏览器阻塞（HOL blocking）**：浏览器会因为一些原因阻塞请求。浏览器对于同一个域名，同时只能有 4 个连接（这个根据浏览器内核不同可能会有所差异），超过浏览器最大连接数限制，后续请求就会被阻塞。
 2. **DNS 查询（DNS Lookup）**：浏览器需要知道目标服务器的 IP 才能建立连接。将域名解析为 IP 的这个系统就是 DNS。这个通常可以利用 DNS 缓存结果来达到减少这个时间的目的。
 3. **建立连接（Initial connection）**：HTTP 是基于 TCP 协议的，浏览器最快也要在第三次握手时才能捎带 HTTP 请求报文，达到真正的建立连接，但是这些连接无法复用会导致每次请求都经历三次握手和[慢启动](http://en.wikipedia.org/wiki/Slow-start)。三次握手在高延迟的场景下影响较明显，慢启动则对文件类大请求影响较大。
@@ -98,19 +95,12 @@ HTTP 协议中规定 POST 提交的数据必须在 body 部分中，但是协议
 这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 `<form>` 表单的 enctype 等于 `multipart/form-data`。
 
 ```html
-POST http://www.example.com HTTP/1.1
-Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA
-
-------WebKitFormBoundaryrGKCBY7qhFd3TrwA
-Content-Disposition: form-data; name="text"
-
-title
-------WebKitFormBoundaryrGKCBY7qhFd3TrwA
-Content-Disposition: form-data; name="file"; filename="chrome.png"
-Content-Type: image/png
-
-PNG ... content of chrome.png ...
-------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
+POST http://www.example.com HTTP/1.1 Content-Type:multipart/form-data;
+boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA Content-Disposition: form-data;
+name="text" title ------WebKitFormBoundaryrGKCBY7qhFd3TrwA Content-Disposition:
+form-data; name="file"; filename="chrome.png" Content-Type: image/png PNG ...
+content of chrome.png ... ------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
 ```
 
 这个例子稍微复杂点。首先生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。然后 `Content-Type` 里指明了数据是以 `multipart/form-data` 来编码，本次请求的 boundary 是什么内容。消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 --boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 --boundary-- 标示结束。关于 `multipart/form-data` 的详细定义，请前往 [RFC1867](http://www.ietf.org/rfc/rfc1867.txt) 查看（或者相对友好一点的 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition)）。
@@ -147,13 +137,12 @@ HTTP 响应与 HTTP 请求相似，HTTP 响应也由 3 个部分构成，分别�
 下面是一个 HTTP 响应的例子：
 
 ```html
-HTTP/1.1 200 OK
-
-Server:Apache Tomcat/5.0.12
-Date:Mon,6Oct2003 13:23:42 GMT
+HTTP/1.1 200 OK Server:Apache Tomcat/5.0.12 Date:Mon,6Oct2003 13:23:42 GMT
 Content-Length:112
 
-<html>...
+<html>
+  ...
+</html>
 ```
 
 ### 条件 GET
@@ -173,23 +162,17 @@ HTTP 条件 GET 是 HTTP 协议为了减少不必要的带宽浪费，提出的�
    客户端发送请求：
 
    ```html
-    GET / HTTP/1.1
-    Host: www.sina.com.cn:80
-    If-Modified-Since:Thu, 4 Feb 2010 20:39:13 GMT
-    Connection: Close
+   GET / HTTP/1.1 Host: www.sina.com.cn:80 If-Modified-Since:Thu, 4 Feb 2010
+   20:39:13 GMT Connection: Close
    ```
 
    第一次请求时，服务器端返回请求数据，之后的请求，服务器根据请求中的 `If-Modified-Since` 字段判断响应文件没有更新，如果没有更新，服务器返回一个 `304 Not Modified`响应，告诉浏览器请求的资源在浏览器上没有更新，可以使用已缓存的上次获取的文件。
 
    ```html
-    HTTP/1.0 304 Not Modified
-    Date: Thu, 04 Feb 2010 12:38:41 GMT
-    Content-Type: text/html
-    Expires: Thu, 04 Feb 2010 12:39:41 GMT
-    Last-Modified: Thu, 04 Feb 2010 12:29:04 GMT
-    Age: 28
-    X-Cache: HIT from sy32-21.sina.com.cn
-    Connection: close
+   HTTP/1.0 304 Not Modified Date: Thu, 04 Feb 2010 12:38:41 GMT Content-Type:
+   text/html Expires: Thu, 04 Feb 2010 12:39:41 GMT Last-Modified: Thu, 04 Feb
+   2010 12:29:04 GMT Age: 28 X-Cache: HIT from sy32-21.sina.com.cn Connection:
+   close
    ```
 
    如果服务器端资源已经更新的话，就返回正常的响应。
@@ -224,16 +207,8 @@ Transfer-Encoding 是一个用来标示 HTTP 报文传输格式的头部值。�
 一个示例响应如下：
 
 ```html
-HTTP/1.1 200 OK
-Content-Type: text/plain
-Transfer-Encoding: chunked
-
-25
-This is the data in the first chunk
-
-1A
-and this is the second one
-0
+HTTP/1.1 200 OK Content-Type: text/plain Transfer-Encoding: chunked 25 This is
+the data in the first chunk 1A and this is the second one 0
 ```
 
 注意：

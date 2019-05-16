@@ -14,8 +14,7 @@
 
 > 指定通信的源端端口号、目的端端口号、UDP 长度、校验和、数据
 
-![udp-1](../images/udp-1.png)
-![udp-2](../images/udp-2.png)
+![udp-1](../images/udp-1.png) ![udp-2](../images/udp-2.png)
 
 UDP 报文各个位置详解：
 

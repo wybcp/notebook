@@ -8,8 +8,6 @@
 - **header 压缩，**如上文中所言，对前面提到过 HTTP1.x 的 header 带有大量信息，而且每次都要重复发送，HTTP2.0 使用 encoder 来减少需要传输的 header 大小，通讯双方各自 cache 一份 header fields 表，既避免了重复 header 的传输，又减小了需要传输的大小。
 - **服务端推送**（server push），HTTP2.0 也具有 server push 功能。目前，有大多数网站已经启用 HTTP2.0，例如[YouTuBe](https://www.youtube.com/)，[淘宝网](http://www.taobao.com/)等网站
 
-![HTTP2](http://tenny.qiniudn.com/diff332.png)
-
 [HTTP/2 in GO(一)](https://mp.weixin.qq.com/s?__biz=MzU4ODgyMDI0Mg==&mid=2247485964&idx=1&sn=72e023c275ef6893132439ab69b21430&chksm=fdd7b071caa039678a3809ca49f93ac26bbb7fd4f278997c7a3dbb0501072e597fbbf5b4a603&scene=21#wechat_redirect)
 
 [HTTP/2 in GO(二)](https://mp.weixin.qq.com/s/eBhWbwv7UDhMFSeZFEOiHQ)

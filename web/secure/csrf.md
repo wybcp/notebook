@@ -64,8 +64,7 @@ CSRF tokens 是如何工作的呢？
 
 攻击者需要通过某种手段获取你站点的 CSRF token，他们只能使用 JavaScript 来做。所以，如果你的站点不支持 CORS，那么他们就没有办法来获取 CSRF token，降低了威胁。
 
-**确保 CSRF token 不能通过 AJAX 访问到!**
-不要创建一个`/CSRF`路由来获取一个 token，尤其不要在这个路由上支持 CORS!
+**确保 CSRF token 不能通过 AJAX 访问到!** 不要创建一个`/CSRF`路由来获取一个 token，尤其不要在这个路由上支持 CORS!
 
 token 需要是不容易被猜到的，让它很难被攻击者尝试几次得到。
 
@@ -77,8 +76,7 @@ Breach 攻击相当简单：如果服务器通过`HTTPS+gzip`多次发送相同�
 
 解决办法？让每一个响应都有那么一点不同。
 
-于是，CSRF tokens 依据每一个不同的请求还有不同的时间来生成。但是服务器需要知道客户端请求中带的 token 是否是合法的。
-因此：
+于是，CSRF tokens 依据每一个不同的请求还有不同的时间来生成。但是服务器需要知道客户端请求中带的 token 是否是合法的。因此：
 
 1. 一般认为安全加密的 CSRF tokens 是防护 CSRF 的关键
 2. CSRF tokens 现在通常是一个秘钥或者 salt 的 hash
@@ -95,15 +93,11 @@ Breach 攻击相当简单：如果服务器通过`HTTPS+gzip`多次发送相同�
 
 ## salt 不需要加密
 
-**因为客户端知道 salt!!!**
-服务器会发送 `<salt>;<token>` ，然后客户端会通过请求返回相同的值给服务器。服务器然后会检验 `<secret>+<salt>=<token>` 。
-salt 必须跟 token 一起被发送给服务器，否则服务器不能验证这个 token。
-这是最简单的加密方式。
+**因为客户端知道 salt!!!** 服务器会发送 `<salt>;<token>` ，然后客户端会通过请求返回相同的值给服务器。服务器然后会检验 `<secret>+<salt>=<token>` 。 salt 必须跟 token 一起被发送给服务器，否则服务器不能验证这个 token。这是最简单的加密方式。
 
 ## 创建 tokens 必须要快
 
-**因为每当进来一个请求他们就会被创建!**
-像`Math.random().toString(36).slice(2)`这么做也是性能足够好的!你不需要 OpenSSL 来为每一个请求创建一个密码安全的 token。
+**因为每当进来一个请求他们就会被创建!** 像`Math.random().toString(36).slice(2)`这么做也是性能足够好的!你不需要 OpenSSL 来为每一个请求创建一个密码安全的 token。
 
 ## 秘钥不需要是加密的，但需要是安全的
 

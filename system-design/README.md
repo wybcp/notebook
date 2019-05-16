@@ -3,7 +3,6 @@
 ## 目录
 
 - [系统设计入门](https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md)
-
 - [设计数据密集型应用](https://vonng.gitbooks.io/ddia-cn/content/)
 
 ## 案例

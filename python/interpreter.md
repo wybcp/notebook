@@ -30,5 +30,4 @@ IronPython 是 Python 的 C#实现，并且它将 Python 代码编译成 C#中�
 
 ## 参考
 
-- [Python 全栈之路系列之基础篇
-  ](https://github.com/anshengme/blog/edit/master/source/_posts/python-full-stack-way-basics.md)
+- [Python 全栈之路系列之基础篇](https://github.com/anshengme/blog/edit/master/source/_posts/python-full-stack-way-basics.md)
