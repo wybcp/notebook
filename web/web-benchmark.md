@@ -1,138 +1,126 @@
 # 网站性能测试
 
-怎么去评定一个网站的性能，网站在高并发下的测试，服务器端的测试，下面是几种方案
-mysql 基准测试工具等简介 google page speed test ,ab test，mysqlslap,sysbench
+怎么去评定一个网站的性能，网站在高并发下的测试，服务器端的测试，下面是几种方案 mysql 基准测试工具等简介 google page speed test ,ab test，mysqlslap,sysbench
 
 ## 一. google page test
 
-登陆 google，搜索 [google page speed test](https://developers.google.com/speed/pagespeed/insights/)
-进入后，在输入框中输入自己要输入的内容然后确认
+登陆 google，搜索 [google page speed test](https://developers.google.com/speed/pagespeed/insights/) 进入后，在输入框中输入自己要输入的内容然后确认
 
 ## 二. ab test
 
-简介
-ab 是一个 Apache HTTP 服务器基准测试工具，它可以测试 HTTP 服务器每秒可以处理多少个请求，如果测试的是 WEB 服务，这个结果可以转换为整个应用每秒可以处理多少个应用
+简介 ab 是一个 Apache HTTP 服务器基准测试工具，它可以测试 HTTP 服务器每秒可以处理多少个请求，如果测试的是 WEB 服务，这个结果可以转换为整个应用每秒可以处理多少个应用
 
-1. 安裝 ab 命令
-   sudo apt-get install apache2-utils
-2. ab 命令参数说明
-   可以暂时不看直接看下面如何使用，有其他需求再看这里
+1. 安裝 ab 命令 `sudo apt-get install apache2-utils`
+2. ab 命令参数说明可以暂时不看直接看下面如何使用，有其他需求再看这里
 
-    ```conf
-    Options are:
-    -n requests Number of requests to perform
-    -c concurrency Number of multiple requests to make at a time
-    -t timelimit Seconds to max. to spend on benchmarking
-    This implies -n 50000
-    -s timeout Seconds to max. wait for each response
-    Default is 30 seconds
-    -b windowsize Size of TCP send/receive buffer, in bytes
-    -B address Address to bind to when making outgoing connections
-    -p postfile File containing data to POST. Remember also to set -T
-    -u putfile File containing data to PUT. Remember also to set -T
-    -T content-type Content-type header to use for POST/PUT data, eg.
-    'application/x-www-form-urlencoded'
-    Default is 'text/plain'
-    -v verbosity How much troubleshooting info to print
-    -w Print out results in HTML tables
-    -i Use HEAD instead of GET
-    -x attributes String to insert as table attributes
-    -y attributes String to insert as tr attributes
-    -z attributes String to insert as td or th attributes
-    -C attribute Add cookie, eg. 'Apache=1234'. (repeatable)
-    -H attribute Add Arbitrary header line, eg. 'Accept-Encoding: gzip'
-    Inserted after all normal header lines. (repeatable)
-    -A attribute Add Basic WWW Authentication, the attributes
-    are a colon separated username and password.
-    -P attribute Add Basic Proxy Authentication, the attributes
-    are a colon separated username and password.
-    -X proxy:port Proxyserver and port number to use
-    -V Print version number and exit
-    -k Use HTTP KeepAlive feature
-    -d Do not show percentiles served table.
-    -S Do not show confidence estimators and warnings.
-    -q Do not show progress when doing more than 150 requests
-    -l Accept variable document length (use this for dynamic pages)
-    -g filename Output collected data to gnuplot format file.
-    -e filename Output CSV file with percentages served
-    -r Don't exit on socket receive errors.
-    -m method Method name
-    -h Display usage information (this message)
-    -Z ciphersuite Specify SSL/TLS cipher suite (See openssl ciphers)
-    -f protocol Specify SSL/TLS protocol
-    (SSL3, TLS1, TLS1.1, TLS1.2 or ALL)
-    ```
+   ```conf
+   Options are:
+   -n requests Number of requests to perform
+   -c concurrency Number of multiple requests to make at a time
+   -t timelimit Seconds to max. to spend on benchmarking
+   This implies -n 50000
+   -s timeout Seconds to max. wait for each response
+   Default is 30 seconds
+   -b windowsize Size of TCP send/receive buffer, in bytes
+   -B address Address to bind to when making outgoing connections
+   -p postfile File containing data to POST. Remember also to set -T
+   -u putfile File containing data to PUT. Remember also to set -T
+   -T content-type Content-type header to use for POST/PUT data, eg.
+   'application/x-www-form-urlencoded'
+   Default is 'text/plain'
+   -v verbosity How much troubleshooting info to print
+   -w Print out results in HTML tables
+   -i Use HEAD instead of GET
+   -x attributes String to insert as table attributes
+   -y attributes String to insert as tr attributes
+   -z attributes String to insert as td or th attributes
+   -C attribute Add cookie, eg. 'Apache=1234'. (repeatable)
+   -H attribute Add Arbitrary header line, eg. 'Accept-Encoding: gzip'
+   Inserted after all normal header lines. (repeatable)
+   -A attribute Add Basic WWW Authentication, the attributes
+   are a colon separated username and password.
+   -P attribute Add Basic Proxy Authentication, the attributes
+   are a colon separated username and password.
+   -X proxy:port Proxyserver and port number to use
+   -V Print version number and exit
+   -k Use HTTP KeepAlive feature
+   -d Do not show percentiles served table.
+   -S Do not show confidence estimators and warnings.
+   -q Do not show progress when doing more than 150 requests
+   -l Accept variable document length (use this for dynamic pages)
+   -g filename Output collected data to gnuplot format file.
+   -e filename Output CSV file with percentages served
+   -r Don't exit on socket receive errors.
+   -m method Method name
+   -h Display usage information (this message)
+   -Z ciphersuite Specify SSL/TLS cipher suite (See openssl ciphers)
+   -f protocol Specify SSL/TLS protocol
+   (SSL3, TLS1, TLS1.1, TLS1.2 or ALL)
+   ```
 
 3. 运行 ab
 
-   `ab -n 100 -c 10 https://www.baidu.com/`
-   对 `https://www.baidu.com/` 进行 100 次请求，10 个并发请求压力测试结果。
+   `ab -n 100 -c 10 https://www.baidu.com/` 对 `https://www.baidu.com/` 进行 100 次请求，10 个并发请求压力测试结果。
 
-    ```
-    This is ApacheBench, Version 2.3 <$Revision: 1638069 $>
-    Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-    Licensed to The Apache Software Foundation, http://www.apache.org/
+   ```
+   This is ApacheBench, Version 2.3 <$Revision: 1638069 $>
+   Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+   Licensed to The Apache Software Foundation, http://www.apache.org/
 
-    Benchmarking www.baidu.com (be patient).....done
+   Benchmarking www.baidu.com (be patient).....done
 
-    Server Software: bfe/1.0.8.18
-    Server Hostname: www.baidu.com
-    Server Port: 443
-    SSL/TLS Protocol: TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+   Server Software: bfe/1.0.8.18
+   Server Hostname: www.baidu.com
+   Server Port: 443
+   SSL/TLS Protocol: TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
 
-    Document Path: /
-    Document Length: 227 bytes
+   Document Path: /
+   Document Length: 227 bytes
 
-    Concurrency Level: 10
-    Time taken for tests: 0.321 seconds
-    Complete requests: 100
-    Failed requests: 0
-    Total transferred: 103266 bytes
-    HTML transferred: 22700 bytes
-    Requests per second: 311.94 [#/sec] (mean)
-    Time per request: 32.057 [ms] (mean)
-    Time per request: 3.206 [ms] (mean, across all concurrent requests)
-    Transfer rate: 314.58 [Kbytes/sec] received
+   Concurrency Level: 10
+   Time taken for tests: 0.321 seconds
+   Complete requests: 100
+   Failed requests: 0
+   Total transferred: 103266 bytes
+   HTML transferred: 22700 bytes
+   Requests per second: 311.94 [#/sec] (mean)
+   Time per request: 32.057 [ms] (mean)
+   Time per request: 3.206 [ms] (mean, across all concurrent requests)
+   Transfer rate: 314.58 [Kbytes/sec] received
 
-    Connection Times (ms)
-    min mean[+/-sd] median max
-    Connect: 19 24 3.1 24 33
-    Processing: 5 7 1.2 7 13
-    Waiting: 5 7 1.2 7 13
-    Total: 25 31 3.5 31 41
+   Connection Times (ms)
+   min mean[+/-sd] median max
+   Connect: 19 24 3.1 24 33
+   Processing: 5 7 1.2 7 13
+   Waiting: 5 7 1.2 7 13
+   Total: 25 31 3.5 31 41
 
-    Percentage of the requests served within a certain time (ms)
-    50% 31
-    66% 32
-    75% 34
-    80% 34
-    90% 36
-    95% 37
-    98% 41
-    99% 41
-    100% 41 (longest request)
-    ```
+   Percentage of the requests served within a certain time (ms)
+   50% 31
+   66% 32
+   75% 34
+   80% 34
+   90% 36
+   95% 37
+   98% 41
+   99% 41
+   100% 41 (longest request)
+   ```
 
-4. ab 结果分析 : 1. 19 行 Failed request 数目 2. 23 行 Time per request: 32.057 [ms](mean) 平均每个请求使用的数目 3. 35-43 行大概的响应时间
-   例如第一个 50% 31 表示百分之 50 的时间在 31 毫秒之内完成
+4. ab 结果分析 : 1. 19 行 Failed request 数目 2. 23 行 Time per request: 32.057 [ms](mean) 平均每个请求使用的数目 3. 35-43 行大概的响应时间例如第一个 50% 31 表示百分之 50 的时间在 31 毫秒之内完成
 
 其中有个注意的点 如果你 failed request 太多，看看是不是并发太多导致项目崩溃，也有可能你这个页面是动态的，每次返回的值不一样，这个 ab 工具也会默认为失败
 
 ## 三：mysqlslap
 
-简介：
-这是 mysql 自带的测试工具，可以模拟服务器的负载，并且输出计时信息，我觉得最重要的是他能指定特点的 sql 语句，你可以查看该语句在高并发下的执行情况
-，这里主要介绍指定的 sql，假如你的数据库有个数据库名字为 database1，数据库中表的名字为 city 表，我们需要随机取出 10 条，然后查看该语句的性能，数据库用户名为 root，密码为 123
-指定 sql 测试
-直接执行
+简介：这是 mysql 自带的测试工具，可以模拟服务器的负载，并且输出计时信息，我觉得最重要的是他能指定特点的 sql 语句，你可以查看该语句在高并发下的执行情况，这里主要介绍指定的 sql，假如你的数据库有个数据库名字为 database1，数据库中表的名字为 city 表，我们需要随机取出 10 条，然后查看该语句的性能，数据库用户名为 root，密码为 123 指定 sql 测试直接执行
 
 ```bash
 mysqlslap -uroot -p123 --iterations=1 --concurrency=1,10 --number-of-queries=100
  --create-schema="databases1" --query="select * from city order by rand() limit 10;"
 ```
 
-介绍 --concurency = 1,10 表示分别以 1 个并发，10 个并发 --number-of-queries=100 总共发出 100 个请求所用时间 --iterations=1 只运行一次就出结果，建议多写几次，会更准确
-其实还有很多功能，例如可以测试不同的引擎等
+介绍 --concurency = 1,10 表示分别以 1 个并发，10 个并发 --number-of-queries=100 总共发出 100 个请求所用时间 --iterations=1 只运行一次就出结果，建议多写几次，会更准确其实还有很多功能，例如可以测试不同的引擎等
 
 输出结果分析：
 
@@ -170,27 +158,15 @@ Average number of queries per client: 10 平均每个线程(客户端)查询的�
 15) --no-drop 在测试过程中不删除任何schema
 ```
 
-个人看法：
-mysqkslap 只不过是测试服务器的性能，想要测试某一条语句在高并发下的执行速度，感觉不是很可靠，其实用 ab test，或者 screaming frog for seo 工具进行直接测试可能更好。
+个人看法： mysqkslap 只不过是测试服务器的性能，想要测试某一条语句在高并发下的执行速度，感觉不是很可靠，其实用 ab test，或者 screaming frog for seo 工具进行直接测试可能更好。
 
 ## 四：sysbench
 
-sysbench 的提供的基准测试功能的 Linux 版本。它支持测试 CPU，内存，文件 I
-/ O，互斥性能 甚至支持 mysql 的性能。
+sysbench 的提供的基准测试功能的 Linux 版本。它支持测试 CPU，内存，文件 I / O，互斥性能 甚至支持 mysql 的性能。
 
-安装
-On Debian/Ubuntu 等系统可以直接执行下面的命令进行安装
-apt-get install sysbench
-查看是否按照成功以及使用方法
-man sysbench
-如果出现以下那么就成功
-SYSBENCH(1) sysbench User Manual SYSBENCH(1)
-SYSBENCH(1) sysbench User Manual SYSBENCH(1)
+安装 On Debian/Ubuntu 等系统可以直接执行下面的命令进行安装 apt-get install sysbench 查看是否按照成功以及使用方法 man sysbench 如果出现以下那么就成功 SYSBENCH(1) sysbench User Manual SYSBENCH(1) SYSBENCH(1) sysbench User Manual SYSBENCH(1)
 
-使用方法
-这里只介绍查看 mysql 的性能的方法:
-假如有个数据库名字角 databases1，数据库名字为 root，密码为 123
-准备一张表,这一句话必须执行
+使用方法这里只介绍查看 mysql 的性能的方法: 假如有个数据库名字角 databases1，数据库名字为 root，密码为 123 准备一张表,这一句话必须执行
 
 ```bash
 sysbench --test=oltp --oltp-table-size=1000000 --mysql-db=databases1
@@ -198,17 +174,14 @@ sysbench --test=oltp --oltp-table-size=1000000 --mysql-db=databases1
  prepare
 ```
 
-这里会在你填写的数据库中生成一张 sbtest 表,里面的内容有 100000 条数据
-之后，运行下面的语句：
+这里会在你填写的数据库中生成一张 sbtest 表,里面的内容有 100000 条数据之后，运行下面的语句：
 
 ```bash
 sysbench --test=oltp --oltp-table-size=1000000 --mysql-db=databases1 --mysql-user=root --mysql-password=123
  --max-time=60 --oltp-read-only=on --max-requests=0 --num-threads=8 run
 ```
 
-这句话的解释：
---num-threads=8 表示使用的线程为 8 个
---oltp-table-size=1000000 表示测试表的记录总数为 500000 条
+这句话的解释： --num-threads=8 表示使用的线程为 8 个 --oltp-table-size=1000000 表示测试表的记录总数为 500000 条
 
 最后结果显示分析
 
@@ -262,5 +235,4 @@ Threads fairness:
 --version=[on|off]：输出版本信息，然后退出。
 ```
 
-使用心得：
-这个不能测试单条语句的性能，只能测试服务器中该数据库的性能，如果有一些服务器或者机器的对比，才能看得出效果
+使用心得：这个不能测试单条语句的性能，只能测试服务器中该数据库的性能，如果有一些服务器或者机器的对比，才能看得出效果

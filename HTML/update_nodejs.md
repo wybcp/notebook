@@ -2,7 +2,7 @@
 
 引用[Windows/Linux 下 Node 更新](http://mp.weixin.qq.com/s?src=3&timestamp=1464871223&ver=1&signature=M7kiAJ69wjYck5vlMU0Ktv3VxxY5PtQiUER8yZHFIvh-4uT*kOwoVUqkdFYY9kNb7SeIyaPiCcRnD2Jb4bYCJ3-FOqcqQWpCnOgf19BtxV*AhVSmQxHlph8MxUN6esGi30UYfcSvMw20uOlEQQT5eyca7aIg7OuXpxfZNnJQcVM=)
 
-##关于 node 版本号
+## 关于 node 版本号
 
 江湖人称版本帝，release 如下：
 
@@ -32,21 +32,15 @@ LTS 表示长期支持版本，更注重稳定性和安全性，适合线上使�
 
 P.S.关于 Node 版本的更多信息，请查看 nodejs/node
 
-二.Windows 更新 Node
+## Windows 更新 Node
 
 windows 下安装 Node 一般选择 Windows Installer (.msi)或者 Windows Binary (.exe)，更新的方式就是覆盖安装：直接下载目标版本的 msi 或者 exe，在原安装目录覆盖安装即可
 
-三.Linux 更新 Node
+## Linux 更新 Node
 
-linux 下一般选择手动编译源码安装，npm 有开源模块提供了版本管理工具：n，先全局安装（npm install -g n），然后直接：
+linux 下一般选择手动编译源码安装，npm 有开源模块提供了版本管理工具：n，先全局安装（npm install -g n），然后直接： `n lts` 就可以安装最新的 LTS 了，但笔者今天遇到了奇怪错误，最后直接安装了 Stable，其它可能有用的命令如下：
 
-n lts
-
-就可以安装最新的 LTS 了，但笔者今天遇到了奇怪错误，最后直接安装了 Stable，其它可能有用的命令如下：
-
-````
-n latest #安装最新版本
-n stable #安装最新稳定版本
-n #查看已通过n安装的各个版本
-n rm 0.9.4 #移除0.9.4版本```
-````
+    n latest #安装最新版本
+    n stable #安装最新稳定版本
+    n #查看已通过n安装的各个版本
+    n rm 0.9.4 #移除0.9.4版本

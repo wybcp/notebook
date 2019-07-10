@@ -8,7 +8,7 @@
 
 结构体定义如下：
 
-```golang
+```go
 type identifier struct {
     filed type
     filed type
@@ -19,7 +19,7 @@ filed 就是结构体的字段名字，type 是字段的类型，如果暂时不
 
 使用 new 函数给一个新的结构体变量分配内存，返回已分配内存的指针类型：
 
-```golang
+```go
 var t *T = new(T)
 // or
 t := new(T)

@@ -24,12 +24,11 @@ func Default() *Engine {
 	engine.Use(Logger(), Recovery())
 	return engine
 }
-
 ```
 
 ## 路由
 
-GetHeader()：获取 HTTP 头
+`GetHeader()`：获取 HTTP 头
 
 ### 路由方法
 
@@ -81,7 +80,7 @@ Context 对象提供了非常丰富的方法用于获取当前请求的上下文
 
 ### HandlersChain
 
-Gin 提供了插件，只有函数链的尾部是业务处理，前面的部分都是插件函数。在 Gin 中插件和业务处理函数形式是一样的，都是 func(\*Context)。当我们定义路由时，Gin 会将插件函数和业务处理函数合并在一起形成一个链条结构。
+Gin 提供了插件，只有函数链的尾部是业务处理，前面的部分都是插件函数。在 Gin 中插件和业务处理函数形式是一样的，都是 `func(*Context)`。当我们定义路由时，Gin 会将插件函数和业务处理函数合并在一起形成一个链条结构。
 
 Gin 还支持 Abort() 方法中断请求链的执行，它的原理是将 Context.index 调整到一个比较大的数字，这样 Next() 方法中的调用循环就会立即结束。需要注意的 Abort() 方法并不是通过 panic 的方式中断执行流，执行 Abort() 方法之后，当前函数内后面的代码逻辑还会继续执行。
 
@@ -93,16 +92,15 @@ RouterGroup 提供了 Use() 方法来注册插件
 
 [model-binding-and-validation](https://github.com/gin-gonic/gin#model-binding-and-validation)
 
-If `GET` method , only `Form` binding engine (`query`) used.
+- If `GET` method , only `Form` binding engine (`query`) used.
 
-你可以使用直接指定 BindJSON 处理 json 请求格式
+  你可以使用直接指定 BindJSON 处理 json 请求格式
 
-    //使用默认的bind ，get方法只处理 form 格式
-    //if err := c.Bind(&r); err != nil {
-    //使用默认的BindJSON ，get方法keyi处理 json 格式
+      //使用默认的bind ，get方法只处理 form 格式
+      //if err := c.Bind(&r); err != nil {
+      //使用默认的BindJSON ，get方法keyi处理 json 格式
 
-If `POST`, first checks the `content-type` for `JSON` or `XML`, then uses `Form` (`form-data`).
-// See more at https://github.com/gin-gonic/gin/blob/master/binding/binding.go#L48
+- If `POST`, first checks the `content-type` for `JSON` or `XML`, then uses `Form` (`form-data`). // See more at https://github.com/gin-gonic/gin/blob/master/binding/binding.go#L48
 
 Context.ShouldBind 是比较柔和的校验方法，它只负责校验，并将校验结果以返回值的形式传递给上层，遇到校验不通过时，会返回一个错误对象告知调用者校验失败的原因。Context 还有另外一个比较暴力的校验方法 Context.Bind，它和 ShouldBind 的调用形式一摸一样，区别是当校验错误发生时，它会调用 Abort() 方法中断调用链的执行，向客户端返回一个 HTTP 400 Bad Request 错误。
 
@@ -134,7 +132,6 @@ router := gin.New()
 // LoggerWithFormatter middleware will write the logs to gin.DefaultWriter
 // By default gin.DefaultWriter = os.Stdout
 router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
-
 	// your custom format
 	return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
 			param.ClientIP,

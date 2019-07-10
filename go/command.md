@@ -14,11 +14,11 @@
 
 GOOS 和 GOARCH 组合起来，支持生成的可执行程序种类很多，具体组合参考<https://golang.org/doc/install/source#environment>。
 
-    $GOOS	$GOARCH
-    android	arm
-    darwin	386
-    darwin	amd64
-    darwin	arm
+    $GOOS    $GOARCH
+    android    arm
+    darwin    386
+    darwin    amd64
+    darwin    arm
     darwin	arm64
     dragonfly	amd64
     freebsd	386

@@ -391,8 +391,7 @@ ps: `__metaclass__`是创建类时起作用.所以我们可以分别使用`__met
 
 > ​ 单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例类的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。
 >
-> `__new__()`在`__init__()`之前被调用，用于生成实例对象。利用这个方法和类的属性的特点可以实现设计模式的单例模式。单例模式是指创建唯一对象，单例模式设计的类只能实例
-> **这个绝对常考啊.绝对要记住 1~2 个方法,当时面试官是让手写的.**
+> `__new__()`在`__init__()`之前被调用，用于生成实例对象。利用这个方法和类的属性的特点可以实现设计模式的单例模式。单例模式是指创建唯一对象，单例模式设计的类只能实例 **这个绝对常考啊.绝对要记住 1~2 个方法,当时面试官是让手写的.**
 
 ### 1 使用`__new__`方法
 
@@ -587,8 +586,7 @@ PyObject 是每个对象必有的内容，其中`ob_refcnt`就是做为引用计
 
 Python 默认定义了三代对象集合，索引数越大，对象存活时间越长。
 
-举例：
-当某些内存块 M 经过了 3 次垃圾收集的清洗之后还存活时，我们就将内存块 M 划到一个集合 A 中去，而新分配的内存都划分到集合 B 中去。当垃圾收集开始工作时，大多数情况都只对集合 B 进行垃圾回收，而对集合 A 进行垃圾回收要隔相当长一段时间后才进行，这就使得垃圾收集机制需要处理的内存少了，效率自然就提高了。在这个过程中，集合 B 中的某些内存块由于存活时间长而会被转移到集合 A 中，当然，集合 A 中实际上也存在一些垃圾，这些垃圾的回收会因为这种分代的机制而被延迟。
+举例：当某些内存块 M 经过了 3 次垃圾收集的清洗之后还存活时，我们就将内存块 M 划到一个集合 A 中去，而新分配的内存都划分到集合 B 中去。当垃圾收集开始工作时，大多数情况都只对集合 B 进行垃圾回收，而对集合 A 进行垃圾回收要隔相当长一段时间后才进行，这就使得垃圾收集机制需要处理的内存少了，效率自然就提高了。在这个过程中，集合 B 中的某些内存块由于存活时间长而会被转移到集合 A 中，当然，集合 A 中实际上也存在一些垃圾，这些垃圾的回收会因为这种分代的机制而被延迟。
 
 ## 25 Python 的 List
 
@@ -620,12 +618,7 @@ Note that the syntax changed in Python 3.0: you can just say super().`__init__`(
 
 ## 30 range and xrange
 
-都在循环时使用，xrange 内存性能更好。
-for i in range(0, 20):
-for i in xrange(0, 20):
-What is the difference between range and xrange functions in Python 2.X?
-range creates a list, so if you do range(1, 10000000) it creates a list in memory with 9999999 elements.
-xrange is a sequence object that evaluates lazily.
+都在循环时使用，xrange 内存性能更好。 for i in range(0, 20): for i in xrange(0, 20): What is the difference between range and xrange functions in Python 2.X? range creates a list, so if you do range(1, 10000000) it creates a list in memory with 9999999 elements. xrange is a sequence object that evaluates lazily.
 
 <http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x>
 
@@ -635,8 +628,7 @@ MyISAM 适合于一些需要大量查询的应用，但其对于有大量写操�
 
 InnoDB 的趋势会是一个非常复杂的存储引擎，对于一些小的应用，它会比 MyISAM 还慢。他是它支持“行锁” ，于是在写操作比较多的时候，会更优秀。并且，他还支持更多的高级应用，比如：事务。
 
-mysql 数据库引擎: <http://www.cnblogs.com/0201zcr/p/5296843.html>
-MySQL 存储引擎－－MyISAM 与 InnoDB 区别: <https://segmentfault.com/a/1190000008227211>
+mysql 数据库引擎: <http://www.cnblogs.com/0201zcr/p/5296843.html> MySQL 存储引擎－－MyISAM 与 InnoDB 区别: <https://segmentfault.com/a/1190000008227211>
 
 ## 1 三次握手
 
@@ -661,11 +653,9 @@ _注意: 中断连接端可以是客户端，也可以是服务器端. 下面仅
 
 ## 5 Post 和 Get
 
-[GET 和 POST 有什么区别？及为什么网上的多数答案都是错的](http://www.cnblogs.com/nankezhishi/archive/2012/06/09/getandpost.html)
-[知乎回答](https://www.zhihu.com/question/31640769?rf=37401322)
+[GET 和 POST 有什么区别？及为什么网上的多数答案都是错的](http://www.cnblogs.com/nankezhishi/archive/2012/06/09/getandpost.html) [知乎回答](https://www.zhihu.com/question/31640769?rf=37401322)
 
-get: [RFC 2616 - Hypertext Transfer Protocol -- HTTP/1.1](http://tools.ietf.org/html/rfc2616#section-9.3)
-post: [RFC 2616 - Hypertext Transfer Protocol -- HTTP/1.1](http://tools.ietf.org/html/rfc2616#section-9.5)
+get: [RFC 2616 - Hypertext Transfer Protocol -- HTTP/1.1](http://tools.ietf.org/html/rfc2616#section-9.3) post: [RFC 2616 - Hypertext Transfer Protocol -- HTTP/1.1](http://tools.ietf.org/html/rfc2616#section-9.5)
 
 ## 6 Cookie 和 Session
 
@@ -710,8 +700,7 @@ apache 相对 nginx 的优点：
 | 4xx 客户端出错 | 请求包括错的顺序或不能完成      |
 | 5xx 服务器出错 | 服务器无法完成显然有效的请求    |
 
-403: Forbidden
-404: Not Found
+403: Forbidden 404: Not Found
 
 ## 10 XSRF 和 XSS
 
@@ -750,8 +739,7 @@ RPC（Remote Procedure Call Protocol）——远程过程调用协议，它是�
 
 ## 15 CGI 和 WSGI
 
-CGI 是通用网关接口，是连接 web 服务器和应用程序的接口，用户通过 CGI 来获取动态数据或文件等。
-CGI 程序是一个独立的程序，它可以用几乎所有语言来写，包括 perl，c，lua，python 等等。
+CGI 是通用网关接口，是连接 web 服务器和应用程序的接口，用户通过 CGI 来获取动态数据或文件等。 CGI 程序是一个独立的程序，它可以用几乎所有语言来写，包括 perl，c，lua，python 等等。
 
 WSGI, Web Server Gateway Interface，是 Python 应用程序或框架和 Web 服务器之间的一种接口，WSGI 的其中一个目的就是让用户可以用统一的语言(Python)编写前后端。
 
@@ -763,8 +751,7 @@ WSGI, Web Server Gateway Interface，是 Python 应用程序或框架和 Web 服
 
 ## 17 c10k 问题
 
-所谓 c10k 问题，指的是服务器同时支持成千上万个客户端的问题，也就是 concurrent 10 000 connection（这也是 c10k 这个名字的由来）。
-推荐: https://my.oschina.net/xianggao/blog/664275
+所谓 c10k 问题，指的是服务器同时支持成千上万个客户端的问题，也就是 concurrent 10 000 connection（这也是 c10k 这个名字的由来）。推荐: https://my.oschina.net/xianggao/blog/664275
 
 ## 18 socket
 
@@ -787,8 +774,7 @@ Socket=Ip address+ TCP/UDP + port
 3. 文件断点续传
 4. 身份认证,状态管理,Cache 缓存
 
-HTTP 请求 8 种方法介绍
-HTTP/1.1 协议中共定义了 8 种 HTTP 请求方法，HTTP 请求方法也被叫做“请求动作”，不同的方法规定了不同的操作指定的资源方式。服务端也会根据不同的请求方法做不同的响应。
+HTTP 请求 8 种方法介绍 HTTP/1.1 协议中共定义了 8 种 HTTP 请求方法，HTTP 请求方法也被叫做“请求动作”，不同的方法规定了不同的操作指定的资源方式。服务端也会根据不同的请求方法做不同的响应。
 
 - GET
 
@@ -980,8 +966,7 @@ l2 = []
 
 sorted 排序并且用列表推导式.
 
-l = ['b','c','d','b','c','a','a'][single.append(i) for i in sorted(l) if i not in single]
-print single
+l = ['b','c','d','b','c','a','a'][single.append(i) for i in sorted(l) if i not in single] print single
 
 ## 6 链表成对调换
 

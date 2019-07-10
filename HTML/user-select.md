@@ -14,29 +14,28 @@ https://www.qianduan.net/user-select/
   }
 ```
 
-不过，这个属性还并没有被各浏览器以标准的行为来实现，所以使用的适合还是要加上各种前缀：
-.no-select {
--moz-user-select: none;
--ms-user-select: none;
--webkit-user-select: none;
-}
+不过，这个属性还并没有被各浏览器以标准的行为来实现，所以使用的适合还是要加上各种前缀： .no-select { -moz-user-select: none; -ms-user-select: none; -webkit-user-select: none; }
 
 注意： IE 9 才开始支持，IE 8 及更早期的版本不支持
 
-##Javascript 方案
+## Javascript 方案
 
 当然也可以用 javascript 来实现类似的行为：
 
-```
+```js
 //禁用选择
 function disableSelection() {
-   document.onselectstart = function() {return false;} // IE 浏览器
-   document.onmousedown = function() {return false;} // 其它浏览器
+  document.onselectstart = function() {
+    return false;
+  }; // IE 浏览器
+  document.onmousedown = function() {
+    return false;
+  }; // 其它浏览器
 }
 //启用选择
 function enableSelection() {
-   document.onselectstart = null; // IE 浏览器
-   document.onmousedown = null; // 其它浏览器
+  document.onselectstart = null; // IE 浏览器
+  document.onmousedown = null; // 其它浏览器
 }
 ```
 

@@ -32,6 +32,8 @@ Go 语言的标准库（通常被称为语言自带的电池），提供了清�
 
 ![learn](images/go-learn.png)
 
+[Go 开发者路线图](https://github.com/Quorafind/golang-developer-roadmap-cn)
+
 ## go 知识点
 
 ![knowledges](images/go-knowledges.jpg)
@@ -60,7 +62,7 @@ godoc -http=:6060
 - [defer 延迟](defer.md)
 - [函数](func.md)
 - [go 程](goroutine.md)
-- [流程控制](loop-control.md)`6
+- [流程控制](loop-control.md)
 - [包](package/README.md)
 - [指针](pointer.md)
 - [切片](slice.md)
@@ -73,3 +75,4 @@ godoc -http=:6060
 - [Go 语言核心 36 讲](https://time.geekbang.org/column/112)
 - [Golang 微服务框架 micro](https://micro.mu/docs/)
 - [正则参考](https://github.com/google/re2/wiki/Syntax)
+- [编写和优化 Go 代码](https://github.com/dgryski/go-perfbook/blob/master/performance-zh.md)

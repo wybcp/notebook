@@ -6,9 +6,9 @@ Go 语言库的实现习惯: 即使在包内部使用了 panic，但是在导出
 
 ```go
 defer func() {
-		if p := recover(); p != nil {
-			err = fmt.Errorf("internal error: %v", p)
-		}
+        if p := recover(); p != nil {
+            err = fmt.Errorf("internal error: %v", p)
+        }
   }()
 ```
 
@@ -21,8 +21,8 @@ defer func() {
 ```go
 f, err := os.Open("filename.ext")
 if err != nil {
-	// 失败的情形, 马上返回错误
-	panic("ERROR occurred: " + err.Error())
+    // 失败的情形, 马上返回错误
+    panic("ERROR occurred: " + err.Error())
 }
 
 // 正常的处理流程
