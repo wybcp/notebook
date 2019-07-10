@@ -68,7 +68,7 @@ import (
 ## 著名三方包
 
 - [delve 调试工具](delve.md)
-- [Pholcus（幽灵蛛）爬出工具](pholcus.md)
+- [Pholcus（幽灵蛛）爬虫工具](pholcus.md)
 - [logrus 日志系统](logrus.md)
 - [go-spew 打印数据的结构](go-spew.md)
 - [Web 中间件](negroni.md)
@@ -79,3 +79,6 @@ import (
 - [cobra](cobra.md)强大的现代 CLI 应用程序的库，也是生成应用程序和命令文件的程序。
 - [limiter](limiter.md) 限流中间件
 - [swagger 文档自动化](swag.md)
+- [Microsoft Excel](excelize.md)
+- [archiver压缩解压](archiver.md)
+- [uuid](uuid.md)

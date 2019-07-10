@@ -618,7 +618,7 @@ echo strstr("I love Shanghai!","Shanghai");
    }
    ```
 
-2. 代码防止,设置 Referer
+2. 代码防止,设置 [Referer](http://www.ruanyifeng.com/blog/2019/06/http-referer.html)
 
    Referer 是 HTTP Header 的一部分，当浏览器向网站 Web 服务器发送请求的时候，通常会带上 Referer，告诉服务器此次请求的链接来源。
    `$_SERVER[HTTP_REFERER]`

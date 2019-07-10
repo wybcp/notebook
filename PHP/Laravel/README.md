@@ -23,3 +23,4 @@
 
 - [laravel-china 的 Laravel 项目开发规范](https://laravel-china.org/docs/laravel-specification/5.5)
 - [Laravel 5.5 中文文档](https://laravel-china.org/docs/laravel/5.5)
+- [Laravel 源码](https://github.com/xiaohuilam/laravel)

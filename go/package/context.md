@@ -177,3 +177,5 @@ func watch(ctx context.Context, name string) {
 这就是取消函数的类型，该函数可以取消一个 Context，以及这个节点 Context 下所有的所有的 Context，不管有多少层级。
 
 [Go 语言实战笔记（二十）| Go Context](https://www.flysnow.org/2017/05/12/go-in-action-go-context.html)
+
+[Golang 并发编程与 Context](https://draveness.me/golang-context)
