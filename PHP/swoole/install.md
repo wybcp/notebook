@@ -17,4 +17,4 @@ wget https://pecl.php.net/get/swoole-4.0.3.tgz
 pecl install /path/swoole-4.0.3.tgz
 ```
 
-`/private/tmp/pear/temp/swoole/include/swoole.h:427:10: fatal error: 'openssl/ssl.h' file not found`https://blog.csdn.net/qq_34908844/article/details/79319054找到你们的openssl文件夹，把它拷贝到swoole安装包下的include下面，技术是openssl的所有.h文件，我的openssl文件的目录为/usr/local/opt/openssl/include 把这个路径下的openssl文件夹copy到安装文件夹中的include下就ok了。
+`/private/tmp/pear/temp/swoole/include/swoole.h:427:10: fatal error: 'openssl/ssl.h' file not found`<https://blog.csdn.net/qq_34908844/article/details/79319054>找到你们的 openssl 文件夹，把它拷贝到 swoole 安装包下的 include 下面，技术是 openssl 的所有.h 文件，我的 openssl 文件的目录为`/usr/local/opt/openssl/include` 把这个路径下的 openssl 文件夹 copy 到安装文件夹中的 include 下就 ok 了。

@@ -115,4 +115,7 @@ delete 函数删除不存在的键也是可以的，只是没有任何作用。
 
 - [Go 的 map 中删除子 map，内存会自动释放吗？](http://lessisbetter.site/2018/09/29/go-map-delete/)
 
-  在 Go 中，map 中存放 map，上层 map 执行 delete，子层 map 占用的内存会释放，无需手动先释放子 map 内存，再在上层 map 执行删除。普通的 map，执行 delete 删除 map 的每一项，执行垃圾回收，内存不被回收，map 设置为 nil，内存被回收。
+  在 Go 中，map 中存放 map，上层 map 执行 delete，子层 map 占用的内存会释放，无需手动先释放子 map 内存，再在上层 map 执行删除。
+  普通的 map，执行 delete 删除 map 的每一项，执行垃圾回收，内存不被回收，map 设置为 nil，内存被回收。
+
+- [理解 Golang 哈希表 Map 的原理](https://draveness.me/golang-hashmap)

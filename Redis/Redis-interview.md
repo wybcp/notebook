@@ -2,7 +2,7 @@
 
 导读：在程序员面试过程中 Redis 相关的知识是常被问到的话题。
 
-## Redis 有哪些数据结构？
+## Redis 有哪些数据结构
 
 字符串 String、字典 Hash、列表 List、集合 Set、有序集合 SortedSet。
 
@@ -10,7 +10,7 @@
 
 如果你说还玩过 Redis Module，像 BloomFilter，RedisSearch，Redis-ML，面试官得眼睛就开始发亮了。
 
-## 使用过 Redis 分布式锁么，它是什么回事？
+## 使用过 Redis 分布式锁么，它是什么回事
 
 先拿 setnx 来争抢锁，抢到之后，再用 expire 给锁加一个过期时间防止锁忘记了释放。
 
