@@ -9,7 +9,7 @@
 ![Alt text](https://raw.githubusercontent.com/zqjflash/tcp-ip-protocal/master/tcp-ip-protocal.png)
 
 ## TCP/IP 各个分层详解
-
+ 
 - 应用层
 
   - 大多数普通与网络相关的程序为了通过网络与其他程序通信所使用的层。这个层的处理过程是应用特有的；数据从网络相关的程序以这种应用内部使用的格式进行传送，然后被编码成标准协议的格式。

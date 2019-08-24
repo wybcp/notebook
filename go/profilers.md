@@ -17,3 +17,6 @@ brew install graphviz
 ## [linux perf](https://perf.wiki.kernel.org/index.php/Tutorial)
 
 ## [macOS, Instruments](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/)
+
+
+[实战Go内存泄露](https://github.com/Shitaibin/shitaibin.github.io/blob/hexo_resource/source/_posts/go-goroutine-leak.md)
