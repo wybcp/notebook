@@ -56,6 +56,20 @@ godoc -http=:6060
 
 [VS Code 中的代码自动补全和自动导入包](https://maiyang.me/post/2018-09-14-tips-vscode/)
 
+## mirrors
+
+### [阿里云](https://mirrors.aliyun.com/goproxy/)
+
+1. 使用 go1.11 以上版本并开启 go module 机制`export GO111MODULE=on`
+
+2. 导出 GOPROXY 环境变量
+
+`export GOPROXY=https://mirrors.aliyun.com/goproxy/`
+
+### [七牛云](https://github.com/goproxy/goproxy.cn/blob/master/README.zh-CN.md#%E7%94%A8%E6%B3%95)
+
+`export GOPROXY=https://goproxy.cn`
+
 ## 目录
 
 - [常量](const.md)

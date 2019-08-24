@@ -57,6 +57,12 @@ GOOS=linux GOARCH=amd64 go build flysnow.org/hello
 
 命令`go get`会自动从一些主流公用代码仓库（比如 GitHub）下载目标代码包，并把它们安装到环境变量`GOPATH`包含的第 1 工作区的相应目录中。如果存在环境变量`GOBIN`，那么仅包含命令源码文件的代码包会被安装到`GOBIN`指向的那个目录。
 
+更新全部包
+
+```sh
+go get -u all
+```
+
 ## run
 
 编译并运行。

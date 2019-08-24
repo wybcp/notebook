@@ -28,3 +28,4 @@ python 的一些小知识点
 - [本文重点关注抽象方法，编程范例以及管理大型程序复杂性的技术](https://composingprograms.com/) 一所国外大学编写的 Python3 教程
 - [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 - [数据分析书](https://www.zhihu.com/question/60241622/answer/581029698)
+- [Develop with Python on Windows](https://docs.microsoft.com/zh-cn/windows/python)文档内容包括设置 Python 开发环境、在 Windows 与 WSL 子系统中安装相应开发工具，以及集成 VS Code 与 Git 工具并进行开发等

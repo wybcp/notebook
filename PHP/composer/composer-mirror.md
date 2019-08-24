@@ -21,12 +21,12 @@ composer config repo.packagist composer “https://packagist.phpcomposer.com“
 }
 ```
 
-## [laravel-china](https://laravel-china.org/topics/4484/composer-mirror-use-help)镜像
+## [阿里巴巴开源镜像](https://developer.aliyun.com/composer)
 
 选项一、全局配置（推荐）
 
 ```shell
-composer config -g repo.packagist composer https://packagist.laravel-china.org
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ```
 
 选项二、单独使用
@@ -34,7 +34,7 @@ composer config -g repo.packagist composer https://packagist.laravel-china.org
 如果仅限当前工程使用镜像，去掉 -g 即可，如下：
 
 ```shell
-composer config repo.packagist composer https://packagist.laravel-china.org
+composer config repo.packagist composer https://mirrors.aliyun.com/composer/
 ```
 
 composer 命令后面加上 -vvv （是 3 个 v）可以打印出调错信息，命令如下：
