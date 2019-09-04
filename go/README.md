@@ -70,6 +70,23 @@ godoc -http=:6060
 
 `export GOPROXY=https://goproxy.cn`
 
+## [goimports](https://www.jianshu.com/p/8719bf5aeca0)
+使用`go get golang.org/x/tools/cmd/goimports`
+
+如果没有翻墙的话，获取不到。国内需要翻墙才可以从golang.org获取到。
+GitHub上获取：
+
+```
+go get -v github.com/gpmgo/gopm
+```
+gopm 获取完成后需要获取goimports：
+gopm get -g -v golang.org/x/tools/cmd/goimports
+
+install goimports
+```bash
+cd $GOPATH/src/golang.org/x/tools/cmd/goimports
+go install
+```
 ## 目录
 
 - [常量](const.md)
