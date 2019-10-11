@@ -1,6 +1,6 @@
 # admin
 
-##  安全检查
+## 安全检查
 
 [Sasha's Pony Checkup](https://www.ponycheckup.com/) 针对 Django 网站进行基本的安全检查。
 

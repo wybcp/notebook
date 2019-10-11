@@ -52,7 +52,7 @@ set smartcase
 
 `:s/foo/bar/g` 全文：
 
-:%s/foo/bar/g
+`:%s/foo/bar/g`
 选区，在 Visual 模式下选择区域后输入:，Vim 即可自动补全为 :'<,'>。
 
 :'<,'>s/foo/bar/g
@@ -125,7 +125,7 @@ noremap _ \*:set hlsearch<cr>
 
 可以通过配置文件来直接 vim 操作环境！ 整体 vim 的设置值一般是放置在 /etc/vimrc 这个文件，不过，不建议修改！ 你可以修改 ~/.vimrc 这个文件 （默认不存在，请你自行手动创建！），将你所希望的设置值写入！
 
-```
+```bash
 [dmtsai@study ~]$ vim ~/.vimrc
 "这个文件的双引号 （"） 是注解
 set hlsearch            "高亮度反白
