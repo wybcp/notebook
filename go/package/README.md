@@ -82,3 +82,10 @@ import (
 - [Microsoft Excel](excelize.md)
 - [archiver压缩解压](archiver.md)
 - [uuid](uuid.md)
+
+## 爬虫项目
+- [awesome-spider](https://github.com/facert/awesome-spider)搜集了几乎所有可以爬取的中文网址，从知乎豆瓣到知网，抖音微博到 QQ
+- [Nyspider](https://github.com/Nyloner/Nyspider)各类网址 头条风格
+- [awesome-python-login-model](https://github.com/CriseLYJ/awesome-python-login-model)用于模拟各种网址登陆
+- [Google，Baidu，Bing 三大搜素引擎图片爬虫](https://github.com/sczhengyabin/Image-Downloader)
+- [各大视频网站爬虫](https://github.com/iawia002/annie)Annie 是一款以 go 语言编码的视频下载工具，使用便捷并支持 youtube，腾讯视频，抖音等多个网站视频和图像的下载
