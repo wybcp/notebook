@@ -60,10 +60,6 @@ godoc -http=:6060
 
 ### [阿里云](https://mirrors.aliyun.com/goproxy/)
 
-1. 使用 go1.11 以上版本并开启 go module 机制`export GO111MODULE=on`
-
-2. 导出 GOPROXY 环境变量
-
 `export GOPROXY=https://mirrors.aliyun.com/goproxy/`
 
 ### [七牛云](https://github.com/goproxy/goproxy.cn/blob/master/README.zh-CN.md#%E7%94%A8%E6%B3%95)
@@ -71,22 +67,29 @@ godoc -http=:6060
 `export GOPROXY=https://goproxy.cn`
 
 ## [goimports](https://www.jianshu.com/p/8719bf5aeca0)
+
 使用`go get golang.org/x/tools/cmd/goimports`
 
-如果没有翻墙的话，获取不到。国内需要翻墙才可以从golang.org获取到。
-GitHub上获取：
+如果没有翻墙的话，获取不到。国内需要翻墙才可以从 golang.org 获取到。
+GitHub 上获取：
 
-```
+```bash
 go get -v github.com/gpmgo/gopm
 ```
-gopm 获取完成后需要获取goimports：
+
+gopm 获取完成后需要获取 goimports：
+
+```bash
 gopm get -g -v golang.org/x/tools/cmd/goimports
+```
 
 install goimports
+
 ```bash
 cd $GOPATH/src/golang.org/x/tools/cmd/goimports
 go install
 ```
+
 ## 目录
 
 - [常量](const.md)

@@ -59,7 +59,7 @@ GOOS=linux GOARCH=amd64 go build flysnow.org/hello
 
 更新全部包
 
-```sh
+```bash
 go get -u all
 ```
 
