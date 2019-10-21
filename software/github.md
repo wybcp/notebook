@@ -8,3 +8,4 @@
 - [Build Go projects with Github Actions](https://sosedoff.com/2019/02/12/go-github-actions.html)
 - [Enterprise-Grade Continuous Delivery & DevOps Automation Open Source Platform](https://github.com/ovh/cds)一个用 Go 编写的企业级持续交付和 DevOps 自动化平台。
 - [公开免费 api](https://github.com/toddmotto/public-apis)A collective list of free APIs for use in software and web development.
+- [d2-admin 企业中后台产品前端集成方案](https://github.com/d2-projects/d2-admin)

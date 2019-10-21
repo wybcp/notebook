@@ -111,3 +111,15 @@ func ticker() {
 	fmt.Println("Ticker stopped")
 }
 ```
+
+## [timezone 时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+```go
+func change(){
+	//按照时区解析时间时间
+time.ParseInLocation(layout, value string, loc *Location)
+// 将当前时间转化为目标timezone的时间
+time.Now().In(timezone)
+// time.local 系统时区
+}
+```
