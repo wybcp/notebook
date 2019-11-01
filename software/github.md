@@ -54,7 +54,7 @@
 ## GitHub End
 ```
 
-##　　项目
+##　项目
 
 - [pwxcoo/chinese-xinhua 中华新华字典数据库](https://github.com/pwxcoo/chinese-xinhua) 包括歇后语，成语，词语，汉字。
 - [Fast-Chinese-NeroParser(快速神经网络分词包)](https://github.com/yaoguangluo/NeroParser)简体中文带声调拼音包，英，法，德，韩，日，西，俄，阿 语言 9 种专业级别语料库。
