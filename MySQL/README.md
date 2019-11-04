@@ -4,6 +4,10 @@ MySQL 5.7
 
 macOS 操作系统上的安装目录：`/usr/local/mysql/`，`/etc/mysql/my.cnf`
 
+## install ubuntu 安装
+
+[A Quick Guide to Using the MySQL APT Repository](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/)
+
 ## 免密码登录
 
 MySQL 5.6 以上版本提供 mysql_config_editor 工具用于用户安全验证。

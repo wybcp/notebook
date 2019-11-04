@@ -9,3 +9,4 @@
 - filesize
 - gitlens
 - Path Intellisense
+- code run
