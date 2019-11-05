@@ -33,7 +33,7 @@ git revert -m 1 xxxx
 
 将需要修改的记录的 pick 改成 edit 执行更改
 
-```shell
+```bash
 git commit –all –amend
 git rebase –continue
 ```
