@@ -8,3 +8,8 @@
 ## PC
 
 [ChromeGo 翻墙工具包](https://github.com/killgcd/chromego)
+
+## [Some Linux scripts](https://github.com/oooldking/script)
+
+- Superspeed.sh: Test your server's network with Speedtest to China
+- Superbench.sh: Auto test download & I/O speed & network to China script
