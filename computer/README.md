@@ -10,3 +10,5 @@
 - [计算机网络](https://www.icourse163.org/learn/HIT-154005?tid=1003040001#/learn/announce)
 - [编译原理](https://www.icourse163.org/course/HIT-1002123007?tid=1002655021)
 - [数据结构](https://www.icourse163.org/course/ZJU-93001)
+
+## [计算机技术与科学自学之旅](https://github.com/ossu/computer-science-cn)
