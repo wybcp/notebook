@@ -13,3 +13,5 @@
 
 - Superspeed.sh: Test your server's network with Speedtest to China
 - Superbench.sh: Auto test download & I/O speed & network to China script
+
+## [V2ray](https://www.v2ray.com/awesome/tools.html)

@@ -13,3 +13,4 @@
 - [SwitchHosts](https://github.com/oldj/SwitchHosts/blob/master/README_cn.md)快速切换 hosts 文件
 - [百度网盘直链下载助手](https://github.com/syhyz1990/baiduyun)
 - [文献管理神器 Zotero 学习路径指南](https://sspai.com/post/56724)
+- [Microsoft math solver](https://www.microsoft.com/en-us/download/details.aspx?id=15702)目前支持的数学题类型有：算数、初级代数、代数、微积分（求和，极限，求导数，积分）、统计（数列）。

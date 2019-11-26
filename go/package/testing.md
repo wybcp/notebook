@@ -17,6 +17,7 @@ func BenchmarkFind(b *testing.B){
 - `b.ResetTimer()`：重置时间和内存分配计数器，避免忽略设置过程中消耗的时间。
 - `b.StartTimer()`：This function is called automatically before a benchmark starts, but it can also be used to resume timing after a call to StopTimer.如果每次循环迭代都有一些开销比较大的设置逻辑，使用这两个函数
 - `b.StopTimer()`：This can be used to pause the timer while performing complex initialization
+- `b.ReportAllocs()`：,内存分配统计，等价于`-test.benchmem`
 
   在 `b.StopTimer()` 和 `b.StartTimer()` 之间可以做一些准备工作，这样这些时间不影响我们测试函数本身的性能。
 
