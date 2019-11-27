@@ -123,3 +123,17 @@ time.Now().In(timezone)
 // time.local 系统时区
 }
 ```
+
+## [monday](https://github.com/goodsign/monday)
+
+Monday is a minimalistic l10n, i18n package for translation of month and day of week names in time.Date objects.
+
+解析不同国家的月份和星期。
+
+```golang
+  time.ParseInLocation(yourLayout, yourString, yourLocation)
+  time.Parse(yourLayout, yourString)
+  // Change LocaleEnUS to the locale you want to use for translation
+  monday.ParseInLocation(yourLayout, yourString, yourLocation, monday.LocaleEnUS)
+  monday.Parse(yourLayout, yourString, monday.LocaleEnUS)
+```
