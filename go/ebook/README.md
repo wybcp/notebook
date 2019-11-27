@@ -25,3 +25,4 @@
 
 - [Go 语言四十二章经](https://github.com/ffhelicopter/Go42)
 - [reading-go Go 夜读](https://github.com/developer-learning/reading-go)
+- [Go by Example 中文版](https://gobyexample.xgwang.me/)Go by Example 是对 Go 基于实践的介绍，包含一系列带有标注说明的示例程序。
