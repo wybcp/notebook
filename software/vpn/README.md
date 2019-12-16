@@ -15,3 +15,11 @@
 - Superbench.sh: Auto test download & I/O speed & network to China script
 
 ## [V2ray](https://www.v2ray.com/awesome/tools.html)
+
+## [ssr]()
+
+[ShadowSocksR(SSR)功能详细介绍及使用教程]()https://www.quchao.net/ShadowsocksR.html)
+
+- 加密请使用 none
+- 协议请使用 chain_a
+- 混淆请使用 plain
