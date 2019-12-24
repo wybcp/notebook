@@ -15,3 +15,25 @@
 - JavaScript (ES6) code snippets：常用的类声明、ES 模块声明、CMD 模块导入等
 - ESLint：代码语法检查
 - Beautify：格式化代码的工具
+
+## config
+
+```json
+{
+    "workbench.iconTheme": "vscode-icons",
+    "typescript.locale": "zh-CN",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "explorer.confirmDelete": false,
+    "go.useLanguageServer": true,
+    "[markdown]": {
+
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.markdownlint": true
+    },
+    "go.lintTool":"golangci-lint",
+    "go.lintFlags": [
+    "--fast"
+    ]
+}
+```

@@ -37,7 +37,9 @@ RDP Wrapper Library by Stas’M 是 Windows 7、8、10 家庭版中打开远程�
     "useAcrylic": false
 },
 ```
+
 ### 在terminal中添加git bash
+
 ```json
 // git bash
 {
@@ -61,8 +63,17 @@ RDP Wrapper Library by Stas’M 是 Windows 7、8、10 家庭版中打开远程�
     "useAcrylic" : false
 },
 ```
+
 ### [cmd运行时间](https://stackoverflow.com/questions/673523/how-do-i-measure-execution-time-of-a-command-on-the-windows-command-line/4801509#4801509)
+
 Windows PowerShell has a built in command that is similar to Bash's "time" command, called "Measure-Command.
+
 ```cmd
 Measure-Command {echo hi}
 ```
+
+## [Fiddler](https://www.telerik.com/fiddler)
+
+Fiddler运行在Windows平台，而Charles是基于Java实现的，Fiddler开源免费。
+
+抓包、断点调试、请求替换、构造请求、代理功能
