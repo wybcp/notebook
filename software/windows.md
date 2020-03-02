@@ -77,3 +77,12 @@ Measure-Command {echo hi}
 Fiddler运行在Windows平台，而Charles是基于Java实现的，Fiddler开源免费。
 
 抓包、断点调试、请求替换、构造请求、代理功能
+
+徐少寒（作者） ：顶点工具箱 <http://www.pc6.com/softview/SoftView_57259.html>
+系统便捷工具箱 <http://www.pc6.com/softview/SoftView_725136.html>
+盘姬工具箱 <http://www.pc6.com/softview/SoftView_552724.html>
+黑科技工具箱 <http://www.pc6.com/softview/SoftView_661290.html>
+电脑图像工具箱 <http://www.pc6.com/softview/SoftView_101067.html>
+万彩办公大师 <http://www.wofficebox.com/>
+彩虹工具箱 <http://www.pc6.com/softview/SoftView_679358.html>
+uTools <https://www.u.tools/>

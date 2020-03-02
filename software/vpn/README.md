@@ -3,7 +3,7 @@
 ##　路由器
 [fancyss_history_package](https://github.com/hq450/fancyss_history_package)科学上网插件的离线安装包
 
-## [lantern]()
+## lantern
 
 ## PC
 
@@ -16,9 +16,9 @@
 
 ## [V2ray](https://www.v2ray.com/awesome/tools.html)
 
-## [ssr]()
+## ssr
 
-[ShadowSocksR(SSR)功能详细介绍及使用教程]()https://www.quchao.net/ShadowsocksR.html)
+[ShadowSocksR(SSR)功能详细介绍及使用教程](https://www.quchao.net/ShadowsocksR.html)
 
 - 加密请使用 none
 - 协议请使用 chain_a
