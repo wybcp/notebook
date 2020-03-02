@@ -29,3 +29,4 @@ python 的一些小知识点
 - [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 - [数据分析书](https://www.zhihu.com/question/60241622/answer/581029698)
 - [Develop with Python on Windows](https://docs.microsoft.com/zh-cn/windows/python)文档内容包括设置 Python 开发环境、在 Windows 与 WSL 子系统中安装相应开发工具，以及集成 VS Code 与 Git 工具并进行开发等
+- [Python 最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/)为 Python 初学者和专家提供一个 关于 Python 安装、配置、和日常使用的最佳实践手册。

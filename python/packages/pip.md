@@ -22,9 +22,17 @@
 
 阿里云镜像下载
 
-```bash
-pip install -i https://mirrors.aliyun.com/pypi/simple/ numpy
-```
+- 临时下载：
+
+    ```bash
+    pip install -i https://mirrors.aliyun.com/pypi/simple/ numpy
+    ```
+
+- 永久修改：
+
+    ```bash
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+    ```
 
 修改 pip 的配置文件，将镜像源写入配置文件中 。
 

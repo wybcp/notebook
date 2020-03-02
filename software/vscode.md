@@ -7,7 +7,12 @@
 ##　插件
 
 - filesize
+- Chinese(Simplified) Language Pack for Visual Studio Code
+- vscode-icons
+- Image preview
 - gitlens
+- Live Server：静态、动态页面的实时预览
+- Code Spell Checker
 - Path Intellisense
 - code run
 - vscode-fileheader：顶部注释模板，可定义作者、时间等信息，并会自动更新最后修改时间
@@ -20,20 +25,16 @@
 
 ```json
 {
-    "workbench.iconTheme": "vscode-icons",
-    "typescript.locale": "zh-CN",
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    "explorer.confirmDelete": false,
-    "go.useLanguageServer": true,
-    "[markdown]": {
-
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.markdownlint": true
-    },
-    "go.lintTool":"golangci-lint",
-    "go.lintFlags": [
-    "--fast"
-    ]
+  "workbench.iconTheme": "vscode-icons",
+  "typescript.locale": "zh-CN",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "explorer.confirmDelete": false,
+  "go.useLanguageServer": true,
+  "[markdown]": {},
+  "editor.codeActionsOnSave": {
+    "source.fixAll.markdownlint": true
+  },
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"]
 }
 ```
