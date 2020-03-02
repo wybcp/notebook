@@ -77,3 +77,13 @@ Measure-Command {echo hi}
 Fiddler运行在Windows平台，而Charles是基于Java实现的，Fiddler开源免费。
 
 抓包、断点调试、请求替换、构造请求、代理功能
+
+## 看图软件
+
+- [MassiGra](https://www.vector.co.jp/download/file/win95/art/fh604583.html)，功能全面，读图快速，关键是占用内存极低
+- [Honeyview](https://cn.bandisoft.com/honeyview/),实时显示照片的EXIF信息，并且非常全面，除了常规的信息之外，甚至可以显示GPS的位置
+- [IrfanView](https://www.irfanview.com/)
+
+## [Sumatra PDF](https://www.sumatrapdfreader.org/downloadafter.html)
+
+使用Sumatra PDF打开文件后，无论是哪种文件格式都会自动记忆上次的阅读位置
