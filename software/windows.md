@@ -12,6 +12,7 @@ RDP Wrapper Library by Stas’M 是 Windows 7、8、10 家庭版中打开远程�
 
 [Github 下载 RDP Wrapper Library by Stas’M](https://github.com/stascorp/rdpwrap)
 
+<<<<<<< HEAD
 ## [bing-wallpaper](https://www.microsoft.com/en-gb/bing/bing-wallpaper)
 
 必应（Bing）精美壁纸。自动同步地设置成 Windows 10 操作系统的桌面壁纸
@@ -68,6 +69,8 @@ RDP Wrapper Library by Stas’M 是 Windows 7、8、10 家庭版中打开远程�
 },
 ```
 
+=======
+>>>>>>> 641f8486d7e17bebc7c48724fe730b86c52a0196
 ### [cmd运行时间](https://stackoverflow.com/questions/673523/how-do-i-measure-execution-time-of-a-command-on-the-windows-command-line/4801509#4801509)
 
 Windows PowerShell has a built in command that is similar to Bash's "time" command, called "Measure-Command.
