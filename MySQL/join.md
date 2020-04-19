@@ -42,7 +42,7 @@ select 父.type_id,父.type_name,子.type_name from 子表 as 子 left join 父�
 select 父.type_id,父.type_name,子.type_name from 父表 as  父 right join 子表 as 子 on 子.parent_id = 父.type_id;
 ```
 
-## 多表删除：
+## 多表删除
 
 delete 语句无法进行多表删除数据操作，不过可以建立多表连接，在两个表之间删除满足条件的记录。
 

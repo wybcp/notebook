@@ -12,6 +12,10 @@ RDP Wrapper Library by Stas’M 是 Windows 7、8、10 家庭版中打开远程�
 
 [Github 下载 RDP Wrapper Library by Stas’M](https://github.com/stascorp/rdpwrap)
 
+## [bing-wallpaper](https://www.microsoft.com/en-gb/bing/bing-wallpaper)
+
+必应（Bing）精美壁纸。自动同步地设置成 Windows 10 操作系统的桌面壁纸
+
 ## Terminal
 
 微软为开发者打造的一款字体 [Cascadia](https://github.com/microsoft/cascadia-code/releases)

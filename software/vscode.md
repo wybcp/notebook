@@ -4,6 +4,11 @@
 
 在 Open 界面中，使用 Mac 快捷键`Command+Shift+.`
 
+增加code命令: vscode->view->command palette->输入path，选择install code command in path
+
+- `code 文件夹`：打开指定文件夹
+- `code .`：打开当前目录
+- `code -h`
 ##　插件
 
 - filesize

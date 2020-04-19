@@ -1,13 +1,5 @@
 # MySQL
 
-MySQL 5.7
-
-macOS 操作系统上的安装目录：`/usr/local/mysql/`，`/etc/mysql/my.cnf`
-
-## install ubuntu 安装
-
-[A Quick Guide to Using the MySQL APT Repository](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/)
-
 ## 免密码登录
 
 MySQL 5.6 以上版本提供 mysql_config_editor 工具用于用户安全验证。
@@ -86,6 +78,7 @@ Threads: 3  Questions: 7949  Slow queries: 0  Opens: 376  Flush tables: 1  Open 
   - [索引优化](https://github.com/xianyunyh/PHP-Interview/blob/master/Mysql/MySQL%E4%BC%98%E5%8C%96.md)
 
 - [锁](lock.md)
+- [安装](install.md)
 
 ## 参考
 
