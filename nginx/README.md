@@ -14,3 +14,4 @@ Nginx (engine x) 是一款轻量级的 Web 服务器。
 - [日志信息](log.md)
 - [负载均衡](load-balance.md)
 - [不安全检查](insecure.md)
+- [NGINX Config简易配置](https://www.digitalocean.com/community/tools/nginx#)
