@@ -2,7 +2,7 @@
 
 在今年的 Stack Overflow 开发者调查报告中，超过 70% 的开发者使用 Git，使其成为世界上使用人数最多的版本控制系统。Git 通常用于开源和商业软件开发，对个人、团队和企业都颇有益处。
 
-## Q1: 什么是 Git 复刻（fork）？复刻（fork）、分支（branch）和克隆（clone）之间有什么区别？
+## Q1: 什么是 Git 复刻（fork）？复刻（fork）、分支（branch）和克隆（clone）之间有什么区别
 
 > 主题：**Git** 难度：⭐⭐
 
@@ -12,7 +12,7 @@
 
 🔗**来源：** [stackoverflow.com](https://stackoverflow.com/questions/3329943/git-branch-fork-fetch-merge-rebase-and-clone-what-are-the-differences/)
 
-## Q2: “拉取请求（pull request）”和“分支（branch）”之间有什么区别？
+## Q2: “拉取请求（pull request）”和“分支（branch）”之间有什么区别
 
 > 主题：**Git** 难度：⭐⭐
 
@@ -21,7 +21,7 @@
 
 🔗**来源：** [stackoverflow.com](https://stackoverflow.com/questions/19059838/whats-the-difference-between-a-pull-request-and-a-branch)
 
-## Q3: “git pull”和“git fetch”之间有什么区别？
+## Q3: “git pull”和“git fetch”之间有什么区别
 
 > 主题：**Git** 难度：⭐⭐
 
@@ -32,7 +32,7 @@
 
 🔗**来源：** [stackoverflow.com](https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch)
 
-## Q4: 如在 Git 恢复先前的提交？
+## Q4: 如在 Git 恢复先前的提交
 
 > 主题：**Git** 难度：⭐⭐⭐
 
@@ -61,16 +61,16 @@
 
 - 撤销提交但保留文件和索引：
 
-  ````shell
+  ```shell
   git reset --soft HEAD~1
-  ``` |
-  ````
+  ```
+
 
   执行此操作后，`git status`，你讲看到索引中的文件跟以前一致。
 
 🔗**来源：** [stackoverflow.com](https://stackoverflow.com/questions/927358/how-to-undo-the-most-recent-commits-in-git)
 
-## Q5: 什么是“git cherry-pick”？
+## Q5: 什么是“git cherry-pick”
 
 > 主题：**Git** 难度：⭐⭐⭐
 
@@ -98,7 +98,7 @@ Forking 工作流程的**主要优点**是可以汇集提交贡献，又无需�
 
 🔗**来源：** [atlassian.com](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
 
-### Q7: 告诉我 Git 中 HEAD、工作树和索引之间的区别？
+### Q7: 告诉我 Git 中 HEAD、工作树和索引之间的区别
 
 > 主题：**Git** 难度：⭐⭐⭐
 
@@ -108,7 +108,7 @@ Forking 工作流程的**主要优点**是可以汇集提交贡献，又无需�
 
 🔗**来源：** [stackoverflow.com](https://stackoverflow.com/questions/3689838/whats-the-difference-between-head-working-tree-and-index-in-git)
 
-### Q8: 你能解释下 Gitflow 工作流程吗？
+### Q8: 你能解释下 Gitflow 工作流程吗
 
 > 主题：**Git** 难度：⭐⭐⭐
 
@@ -126,7 +126,7 @@ Gitflow 工作流程使用两个并行的、**长期运行**的分支来记录�
 
 🔗**来源：** [atlassian.com](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
 
-### Q9: 什么时候应使用 “git stash”？
+### Q9: 什么时候应使用 “git stash”
 
 > 主题：**Git** 难度：⭐⭐⭐
 
@@ -164,7 +164,7 @@ $ git stash pop
 
 🔗**来源：** [atlassian.com](https://www.atlassian.com/git/tutorials/saving-changes/git-stash)
 
-### Q10: 如何从 git 中删除文件，而不将其从文件系统中删除？
+### Q10: 如何从 git 中删除文件，而不将其从文件系统中删除
 
 > 主题：**Git** 难度：⭐⭐⭐⭐
 
@@ -182,7 +182,7 @@ echo filename >> .gitingore # add it to .gitignore to avoid re-adding it
 
 🔗**来源：** [codementor.io](https://www.codementor.io/citizen428/git-tutorial-10-common-git-problems-and-how-to-fix-them-aajv0katd)
 
-### Q11: 是么时候使用“git rebase”代替“git merge”？
+### Q11: 是么时候使用“git rebase”代替“git merge”
 
 > 主题：**Git** 难度：⭐⭐⭐⭐⭐
 

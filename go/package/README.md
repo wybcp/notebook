@@ -82,8 +82,10 @@ import (
 - [Microsoft Excel](excelize.md)
 - [archiver压缩解压](archiver.md)
 - [uuid](uuid.md)
+- [quickxml](https://github.com/dgrr/quickxml)xml解析包[XML in Go is not that difficult.](https://medium.com/@dgrripoll/xml-in-go-is-not-that-difficult-61e7f1fde124)
 
 ## 爬虫项目
+
 - [awesome-spider](https://github.com/facert/awesome-spider)搜集了几乎所有可以爬取的中文网址，从知乎豆瓣到知网，抖音微博到 QQ
 - [Nyspider](https://github.com/Nyloner/Nyspider)各类网址 头条风格
 - [awesome-python-login-model](https://github.com/CriseLYJ/awesome-python-login-model)用于模拟各种网址登陆

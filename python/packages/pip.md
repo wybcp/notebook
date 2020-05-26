@@ -4,6 +4,7 @@
 
 ## 常见命令
 
+- `python -m pip install -U pip`：更新pip
 - `pip install django`: Install packages.`pip install -r requirements.txt`从 requirements 文件安装
 - `pip download django`: Download packages.
 - `pip uninstall django`: Uninstall packages.

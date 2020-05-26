@@ -11,3 +11,7 @@ QSpace 是一款简洁高效的多视图文件管理器。她有着和系统访�
 QSpace 有着强大的多视图状态自动保存和恢复功能，这使得她不仅是个文件管理器，更是你的工作小秘书。让你工作的更轻松，工作效率更上一层楼。
 
 另外，QSpace 还支持一键从终端和编辑器打开文件或文件夹，是开发人员的效率利器！
+
+## [NTFSTool](https://www.appinn.com/ntfstool-for-macos/)
+
+NTFSTool 是一款 macOS 下的免费开源 NTFS 磁盘格式读写工具，需 FUSE for macOS 支持，提供一个简单易用的磁盘管理界面

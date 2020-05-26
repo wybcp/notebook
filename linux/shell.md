@@ -12,6 +12,8 @@ shell 脚本第一行必须以 #！开头，它表示该脚本使用后面的解
 #!/bin/bash
 ```
 
+## [Bash 脚本教程](https://github.com/wangdoc/bash-tutorial)
+
 ## shell 变量
 
 **shell 变量中间不能有空格，合法的标识符（字母、数字、\_）,不能使用关键字。首字母必须是字母**
@@ -102,43 +104,43 @@ echo ${str:0:4} //从0开始截取4个字符 hell
 
 - 字符串判断操作
 
-```shell
-    ${var}	变量var的值, 与$var相同
+```bash
+    ${var} 变量var的值, 与$var相同
 
-    ${var-DEFAULT}	如果var没有被声明, 那么就以$DEFAULT作为其值 *
-    ${var:-DEFAULT}	如果var没有被声明, 或者其值为空, 那么就以$DEFAULT作为其值 *
+    ${var-DEFAULT} 如果var没有被声明, 那么就以$DEFAULT作为其值 *
+    ${var:-DEFAULT} 如果var没有被声明, 或者其值为空, 那么就以$DEFAULT作为其值 *
 
-    ${var=DEFAULT}	如果var没有被声明, 那么就以$DEFAULT作为其值 *
-    ${var:=DEFAULT}	如果var没有被声明, 或者其值为空, 那么就以$DEFAULT作为其值 *
+    ${var=DEFAULT} 如果var没有被声明, 那么就以$DEFAULT作为其值 *
+    ${var:=DEFAULT} 如果var没有被声明, 或者其值为空, 那么就以$DEFAULT作为其值 *
 
-    ${var+OTHER}	如果var声明了, 那么其值就是$OTHER, 否则就为null字符串
-    ${var:+OTHER}	如果var被设置了, 那么其值就是$OTHER, 否则就为null字符串
+    ${var+OTHER} 如果var声明了, 那么其值就是$OTHER, 否则就为null字符串
+    ${var:+OTHER} 如果var被设置了, 那么其值就是$OTHER, 否则就为null字符串
 
-    ${var?ERR_MSG}	如果var没被声明, 那么就打印$ERR_MSG *
-    ${var:?ERR_MSG}	如果var没被设置, 那么就打印$ERR_MSG *
+    ${var?ERR_MSG} 如果var没被声明, 那么就打印$ERR_MSG *
+    ${var:?ERR_MSG} 如果var没被设置, 那么就打印$ERR_MSG *
 
-    ${!varprefix*}	匹配之前所有以varprefix开头进行声明的变量
-    ${!varprefix@}	匹配之前所有以varprefix开头进行声明的变量
+    ${!varprefix*} 匹配之前所有以varprefix开头进行声明的变量
+    ${!varprefix@} 匹配之前所有以varprefix开头进行声明的变量
 
 ```
 
 - 字符串截取
 
 ```shell
-${#string}	$string的长度
+${#string} $string的长度
 
-${string:position}	在$string中, 从位置$position开始提取子串
-${string:position:length}	在$string中, 从位置$position开始提取长度为$length的子串
+${string:position} 在$string中, 从位置$position开始提取子串
+${string:position:length} 在$string中, 从位置$position开始提取长度为$length的子串
 
-${string#substring}	从变量$string的开头, 删除最短匹配$substring的子串
-${string##substring}	从变量$string的开头, 删除最长匹配$substring的子串
-${string%substring}	从变量$string的结尾, 删除最短匹配$substring的子串
-${string%%substring}	从变量$string的结尾, 删除最长匹配$substring的子串
+${string#substring} 从变量$string的开头, 删除最短匹配$substring的子串
+${string##substring} 从变量$string的开头, 删除最长匹配$substring的子串
+${string%substring} 从变量$string的结尾, 删除最短匹配$substring的子串
+${string%%substring} 从变量$string的结尾, 删除最长匹配$substring的子串
 
-${string/substring/replacement}	使用$replacement, 来代替第一个匹配的$substring
-${string//substring/replacement}	使用$replacement, 代替所有匹配的$substring
-${string/#substring/replacement}	如果$string的前缀匹配$substring, 那么就用$replacement来代替匹配到的$substring
-${string/%substring/replacement}	如果$string的后缀匹配$substring, 那么就用$replacement来代替匹配到的$substring
+${string/substring/replacement} 使用$replacement, 来代替第一个匹配的$substring
+${string//substring/replacement} 使用$replacement, 代替所有匹配的$substring
+${string/#substring/replacement} 如果$string的前缀匹配$substring, 那么就用$replacement来代替匹配到的$substring
+${string/%substring/replacement} 如果$string的后缀匹配$substring, 那么就用$replacement来代替匹配到的$substring
 
 例子
 
@@ -215,18 +217,18 @@ arr=("${arr[*]}"  "test")
 ### 逻辑运算符
 
 ```shell
-&&	逻辑的 AND	[[ $a -lt 100 && $b -gt 100 ]] 返回 false
-||	逻辑的 OR	[[ $a -lt 100 || $b -gt 100 ]] 返回 true
+&& 逻辑的 AND [[ $a -lt 100 && $b -gt 100 ]] 返回 false
+|| 逻辑的 OR [[ $a -lt 100 || $b -gt 100 ]] 返回 true
 ```
 
 ### 字符串比较
 
 ```shell
-=	检测两个字符串是否相等，相等返回 true。	[ $a = $b ] 返回 false。
-!=	检测两个字符串是否相等，不相等返回 true。	[ $a != $b ] 返回 true。
--z	检测字符串长度是否为0，为0返回 true。	[ -z $a ] 返回 false。
--n	检测字符串长度是否为0，不为0返回 true。	[ -n $a ] 返回 true。
-str	检测字符串是否为空，不为空返回 true。	[ $a ] 返回 true。
+= 检测两个字符串是否相等，相等返回 true。 [ $a = $b ] 返回 false。
+!= 检测两个字符串是否相等，不相等返回 true。 [ $a != $b ] 返回 true。
+-z 检测字符串长度是否为0，为0返回 true。 [ -z $a ] 返回 false。
+-n 检测字符串长度是否为0，不为0返回 true。 [ -n $a ] 返回 true。
+str 检测字符串是否为空，不为空返回 true。 [ $a ] 返回 true。
 ```
 
 ### 关系运算符
@@ -234,12 +236,12 @@ str	检测字符串是否为空，不为空返回 true。	[ $a ] 返回 true。
 关系运算符只支持数字
 
 ```shell
-eq	检测两个数是否相等，相等返回 true。	[ $a -eq $b ] 返回 false。
--ne	检测两个数是否相等，不相等返回 true。	[ $a -ne $b ] 返回 true。
--gt	检测左边的数是否大于右边的，如果是，则返回 true。	[ $a -gt $b ] 返回 false。
--lt	检测左边的数是否小于右边的，如果是，则返回 true。	[ $a -lt $b ] 返回 true。
--ge	检测左边的数是否大于等于右边的，如果是，则返回 true。	[ $a -ge $b ] 返回 false。
--le	检测左边的数是否小于等于右边的，如果是，则返回 true。	[ $a -le $b ] 返回 true。
+eq 检测两个数是否相等，相等返回 true。 [ $a -eq $b ] 返回 false。
+-ne 检测两个数是否相等，不相等返回 true。 [ $a -ne $b ] 返回 true。
+-gt 检测左边的数是否大于右边的，如果是，则返回 true。 [ $a -gt $b ] 返回 false。
+-lt 检测左边的数是否小于右边的，如果是，则返回 true。 [ $a -lt $b ] 返回 true。
+-ge 检测左边的数是否大于等于右边的，如果是，则返回 true。 [ $a -ge $b ] 返回 false。
+-le 检测左边的数是否小于等于右边的，如果是，则返回 true。 [ $a -le $b ] 返回 true。
 ```
 
 ```shell
@@ -253,27 +255,27 @@ fi
 ### 布尔运算符
 
 ```shell
-!	非运算，表达式为 true 则返回 false，否则返回 true。	[ ! false ] 返回 true。
--o	或运算，有一个表达式为 true 则返回 true。	[ $a -lt 20 -o $b -gt 100 ] 返回 true。
--a	与运算，两个表达式都为 true 才返回 true。	[ $a -lt 20 -a $b -gt 100 ] 返回 false。
+! 非运算，表达式为 true 则返回 false，否则返回 true。 [ ! false ] 返回 true。
+-o 或运算，有一个表达式为 true 则返回 true。 [ $a -lt 20 -o $b -gt 100 ] 返回 true。
+-a 与运算，两个表达式都为 true 才返回 true。 [ $a -lt 20 -a $b -gt 100 ] 返回 false。
 ```
 
 ### 文件测试符号
 
 ```shell
-b file	检测文件是否是块设备文件，如果是，则返回 true。	[ -b $file ] 返回 false。
--c file	检测文件是否是字符设备文件，如果是，则返回 true。	[ -c $file ] 返回 false。
--d file	检测文件是否是目录，如果是，则返回 true。	[ -d $file ] 返回 false。
--f file	检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。	[ -f $file ] 返回 true。
--g file	检测文件是否设置了 SGID 位，如果是，则返回 true。	[ -g $file ] 返回 false。
--k file	检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。	[ -k $file ] 返回 false。
--p file	检测文件是否是有名管道，如果是，则返回 true。	[ -p $file ] 返回 false。
--u file	检测文件是否设置了 SUID 位，如果是，则返回 true。	[ -u $file ] 返回 false。
--r file	检测文件是否可读，如果是，则返回 true。	[ -r $file ] 返回 true。
--w file	检测文件是否可写，如果是，则返回 true。	[ -w $file ] 返回 true。
--x file	检测文件是否可执行，如果是，则返回 true。	[ -x $file ] 返回 true。
--s file	检测文件是否为空（文件大小是否大于0），不为空返回 true。	[ -s $file ] 返回 true。
--e file	检测文件（包括目录）是否存在，如果是，则返回 true。	[ -e $file ] 返回 true。
+b file 检测文件是否是块设备文件，如果是，则返回 true。 [ -b $file ] 返回 false。
+-c file 检测文件是否是字符设备文件，如果是，则返回 true。 [ -c $file ] 返回 false。
+-d file 检测文件是否是目录，如果是，则返回 true。 [ -d $file ] 返回 false。
+-f file 检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。 [ -f $file ] 返回 true。
+-g file 检测文件是否设置了 SGID 位，如果是，则返回 true。 [ -g $file ] 返回 false。
+-k file 检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。 [ -k $file ] 返回 false。
+-p file 检测文件是否是有名管道，如果是，则返回 true。 [ -p $file ] 返回 false。
+-u file 检测文件是否设置了 SUID 位，如果是，则返回 true。 [ -u $file ] 返回 false。
+-r file 检测文件是否可读，如果是，则返回 true。 [ -r $file ] 返回 true。
+-w file 检测文件是否可写，如果是，则返回 true。 [ -w $file ] 返回 true。
+-x file 检测文件是否可执行，如果是，则返回 true。 [ -x $file ] 返回 true。
+-s file 检测文件是否为空（文件大小是否大于0），不为空返回 true。 [ -s $file ] 返回 true。
+-e file 检测文件（包括目录）是否存在，如果是，则返回 true。 [ -e $file ] 返回 true。
 ```
 
 ```shell
@@ -289,7 +291,7 @@ fi
 
 ```shell
 if [[condition]];then
-	echo '1'
+ echo '1'
 fi
 
 //if else
@@ -323,7 +325,7 @@ done
 //1 2 3 4
 
 for (( i = 0; i < 10; i++ )); do
-	echo $i
+ echo $i
 done
 ```
 
@@ -331,7 +333,7 @@ done
 
 ```shell
 while [[ condition ]]; do
-	#statements
+ #statements
 done
 ```
 
@@ -428,7 +430,7 @@ test 22 //22
 
 在 shell 中有时候需要引入外部的脚本文件 我们需要使用下面的两种方式
 
-1.  . filename
+1. . filename
 
 ```shell
 . ./a.sh
@@ -454,7 +456,7 @@ $ bash test.sh test test2
   $* 所有参数
 
 for i in  $*; do
-	echo $i
+ echo $i
 done
 
 $$ 脚本运行的进程号

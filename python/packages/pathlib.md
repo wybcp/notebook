@@ -53,7 +53,7 @@ print(f.read())
 
 由于 os.path 模块中的大部分函数都是类似的恼人的使用，开发人员通常会忘记使用它们，即使他们知道使用这些会更好。这导致了很多跨平台的 bug 和愤怒的用户。
 
-## 更好的解决方案：Python 3 的 pathlib！
+## 更好的解决方案：Python 3 的 pathlib
 
 Python 3.4 引入了一个新的标准库，用于处理文件和路径称为 pathlib 的。 这真是太棒了！
 
@@ -135,6 +135,11 @@ webbrowser.open(filename.absolute().as_uri())
 ```
 
 这只是 pathlib 的一个小高峰。它可以替代许多不同的文件相关的功能，这些功能曾经分散在不同的 Python 模块中。
+
+## 常用方法
+
+- `Path.resolve(strict=False)`:Make the path absolute, resolving any symlinks. A new path object is returned:返回绝对路径的路径对象
+- [`Path.glob(pattern)`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob)返回匹配文件的相对路径`Path('.').glob('*.py')`，当使用`**`模式意味着递归当前目录及子目录`Path('.').glob('**/*.py')`,和一个专门的方法`Path.rglob(pattern)`一样的效果
 
 查看更多关于[pathlib](https://docs.python.org/3/library/pathlib.html)的使用
 

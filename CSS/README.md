@@ -14,3 +14,5 @@ CSS 用层叠的原则考虑样式声明：
 
 - 内容宽度
 - 内容宽度、内边距、边框：`box-sizing:border-box;`
+
+[CSS 参考](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)按 字母索引 的所有标准 CSS 属性、伪类、伪元素、数据类型、以及@ 规则。

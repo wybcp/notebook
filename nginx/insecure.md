@@ -25,7 +25,7 @@
 
 解释一下，1 和 2 表示的是解码以后的请求路径，不带参数；3 表示的是完整的 URI（没有解码）。那么，如果运维配置了下列的代码：
 
-```
+```conf
 location / {
     return 302 https://$host$uri;
 }
@@ -43,7 +43,7 @@ location / {
 
 如何修复这个 CRLF 漏洞？正确的做法应该是如下：
 
-```
+```conf
 location / {
     return 302 https://$host$request_uri;
 }
@@ -118,4 +118,4 @@ Nginx 配置文件造成的漏洞绝不止这三种，比如之前特别火的�
 
 ## 原文
 
-https://www.leavesongs.com/PENETRATION/nginx-insecure-configuration.html
+<https://www.leavesongs.com/PENETRATION/nginx-insecure-configuration.html>
