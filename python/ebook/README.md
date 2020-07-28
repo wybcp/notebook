@@ -33,3 +33,5 @@ python 的一些小知识点
 - [用Python做科学计算](https://docs.huihoo.com/scipy/scipy-zh-cn/index.html#)
 - [interactive Python tutorial.](https://www.learnpython.org/en/Welcome)
 - [Python教程 - 廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/1016959663602400)
+- [Python资源大全中文版](https://github.com/jobbole/awesome-python-cn)
+- [Practical Python Programming](https://github.com/dabeaz-course/practical-python)

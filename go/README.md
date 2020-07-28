@@ -36,7 +36,7 @@ Go 语言的标准库（通常被称为语言自带的电池），提供了清�
 
 ## go 知识点
 
-![knowledges](images/go-knowledges.jpg)
+![knowledge](images/go-knowledge.jpg)
 
 ## godoc
 
