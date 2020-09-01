@@ -5,6 +5,7 @@
 | [ctrl]+u/[ctrl]+k | 分别是从光标处向前删除指令串 （[ctrl]+u） 及向后删除指令串 （[ctrl]+k） |
 | [ctrl]+a/[ctrl]+e | 分别是让光标移动到整个指令串的最前面 （[ctrl]+a） 或最后面 （[ctrl]+e） |
 | [Ctrl]-c          | 将正在运行中的指令中断                                                  |
+| [Ctrl]+L          | 清屏                                                  |
 | [Ctrl]-d 按键     | 键盘输入结束（End Of File, EOF 或 End Of Input）”                       |
 
 ## [Tab]按键
