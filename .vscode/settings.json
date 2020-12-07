@@ -1,3 +1,9 @@
 {
-    "python.pythonPath": "C:\\Program Files\\Python38\\python.exe"
+    "python.pythonPath": "C:\\Program Files\\Python38\\python.exe",
+    "cSpell.ignoreWords": [
+        "dism",
+        "m",
+        "stas",
+        "stas’m"
+    ]
 }

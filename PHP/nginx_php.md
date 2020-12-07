@@ -27,7 +27,7 @@
   }
   ```
 
-- step2:nginx 匹配到.php 结尾的访问通过 fastcgi_pass 命令传递给 php-fpm.sock 文件，其实这里的 ngnix 发挥的是反向代理的角色，把 http 协议请求转到 fastcgi 协议请求
+- step2:nginx 匹配到.php 结尾的访问通过 fastcgi_pass 命令传递给 php-fpm.sock 文件，其实这里的 nginx 发挥的是反向代理的角色，把 http 协议请求转到 fastcgi 协议请求
 
   ```conf
   // nginx 配置资料
