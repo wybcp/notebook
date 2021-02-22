@@ -111,13 +111,13 @@ php artisan migrate
 
 然后为数据库填充测试数据：
 
-```
+```bash
 php artisan db:seed
 ```
 
 默认情况下 Apiato 会填充一个超级用户，我们可以为其设置 `admin` 权限：
 
-```
+```bash
 php artisan apiato:permissions:toRole admin
 ```
 
@@ -127,7 +127,7 @@ php artisan apiato:permissions:toRole admin
 
 通过运行如下 Artisan 命令即可：
 
-```
+```bash
 php artisan passport:install
 ```
 
@@ -173,4 +173,4 @@ API_URL=http://api.apiato.test
 
 接口返回成功，数据插入成功。
 
-http://laravelacademy.org/post/9129.html
+<http://laravelacademy.org/post/9129.html>

@@ -138,4 +138,4 @@ class VerifyCsrfToken extends BaseVerifier {
 
 ## 参考
 
-[[PHP] - Laravel - CSRF token禁用方法](http://www.cnblogs.com/HD/p/4555369.html)：http://www.cnblogs.com/HD/p/4555369.html
+[[PHP] - Laravel - CSRF token禁用方法](http://www.cnblogs.com/HD/p/4555369.html)：<http://www.cnblogs.com/HD/p/4555369.html>

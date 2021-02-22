@@ -56,6 +56,32 @@ str_after('jane@example.com', '@')
 // -> example.com
 ```
 
+## 自定义辅助函数
+
+1. 创建`touch app/helpers.php`
+
+1. `composer.json`加载该文件
+
+    ```json
+    {
+
+        "autoload": {
+            "psr-4": {
+                "App\\": "app/"
+            },
+            "classmap": [
+                "database/seeds",
+                "database/factories"
+            ],
+            "files": [
+                "app/helpers.php"
+            ]
+        }
+    }
+    ```
+
+1. 重新加载生效`composer dump-autoload`
+
 ## 参考
 
 - [Laravel 5.4 及 5.5 中新的字符串辅助方法介绍](https://9iphp.com/web/laravel/new-laravel-string-helpers-in-laravel-55.html)

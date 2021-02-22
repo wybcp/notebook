@@ -1,12 +1,31 @@
 # 小技巧
 
+base on laravel 7.x
+
+## git
+
+`git clean -f -d`命令`git clean` 作用是清理项目，`-f` 是强制清理文件的设置，`-d` 选项命令连文件夹一并清除。
+
+## 初始化
+
+### `config`
+
+```php
+'timezone' => 'Asia/Shanghai',
+'locale' => 'zh-CN',//zh_CN
+'faker_locale' => 'zh_CN',
+```
+
+## html
+
+- 应用配置的语言设置`<html lang="{{ app()->getLocale() }}">`
+- csrf-token 标签是为了方便前端的 JavaScript 脚本获取 CSRF 令牌。`<meta name="csrf-token" content="{{ csrf_token() }}">`
+- 页面标题`<title>@yield('title', 'LaraBBS')</title>`
+- 自动加载mix生成的文件`<link href="{{ mix('css/app.css') }}" rel="stylesheet">`
+
 ## 分组计数 `groupby and count`
 
 直接写查询语句执行
-
-## 生成注册相关文件
-
-`php artisan ui bootstrap --auth`
 
 ## 异常exception
 
@@ -17,7 +36,18 @@
 
 <https://learnku.com/laravel/wikis/27707>
 
-## 前端流程
+## 前端
+
+### 框架
+
+1. 开发环境使用 Bootstrap 前端框架`composer require laravel/ui:^2.0 --dev`
+1. 引入bootstrap`php artisan ui bootstrap`
+
+### 生成注册相关文件
+
+`php artisan ui bootstrap --auth`
+
+### 流程
 
 手动编译
 
@@ -30,6 +60,68 @@ npm run dev
 ```bash
 npm run watch-poll
 ```
+
+### 浏览器缓存
+
+Laravel Mix 给出的方案是为每一次的文件修改做哈希处理。
+
+`webpack.mix.js`文件修改：
+
+```js
+const mix = require('laravel-mix');
+
+mix.js('resources/js/app.js', 'public/js')
+   .sass('resources/sass/app.scss', 'public/css').version();
+```
+
+页面引用：
+`<link href="{{ mix('css/app.css') }}" rel="stylesheet">`
+
+### fontawesome字体图标库
+
+Font Awesome 提供了可缩放的矢量图标，允许我们使用 CSS 所提供的所有特性对它们进行更改，包括：大小、颜色、阴影或者其它任何支持的效果。
+`yarn add @fortawesome/fontawesome-free`
+样式中载入：`resources/sass/app.scss`
+
+```scss
+// Fontawesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+```
+
+### 用户验证脚手架
+
+`php artisan ui:auth`
+
+```php
+// 用户身份验证相关的路由
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// 用户注册相关路由
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+// 密码重置相关路由
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+// Email 认证相关路由
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+```
+
+### 本地化
+
+Laravel 提供的本地化特性，使用 `__()` 函数来辅助实现。按照约定，本地化文件存储在 `resources/lang` 文件夹中，为 JSON 格式。
+
+#### `overtrue/laravel-lang`
 
 ## 创建模型
 
