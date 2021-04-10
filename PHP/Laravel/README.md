@@ -15,6 +15,12 @@
 - DRY（Don't repeat yourself）不要重复自己，提倡代码重用；
 - 重视「编码愉悦性」。
 
+## error
+
+### homestead: SSH auth method: private key
+
+关闭虚拟机，重新启动
+
 ## 开源项目
 
 - [基于 Laravel 开发的在线点播系统](https://github.com/Qsnh/meedu)

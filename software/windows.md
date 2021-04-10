@@ -78,6 +78,10 @@ Windows PowerShell has a built in command that is similar to Bash's "time" comma
 Measure-Command {echo hi}
 ```
 
+## [openssl](http://slproweb.com/products/Win32OpenSSL.html)
+
+windows下的openssl的下载安装及版本查看
+
 ## [Fiddler](https://www.telerik.com/fiddler)
 
 Fiddler运行在Windows平台，而Charles是基于Java实现的，Fiddler开源免费。
@@ -91,4 +95,4 @@ Fiddler运行在Windows平台，而Charles是基于Java实现的，Fiddler开源
 电脑图像工具箱 <http://www.pc6.com/softview/SoftView_101067.html>
 万彩办公大师 <http://www.wofficebox.com/>
 彩虹工具箱 <http://www.pc6.com/softview/SoftView_679358.html>
-uTools <https://www.u.tools/>
+uTools <https://www.u.tools/>你的生产力工具集，推荐
