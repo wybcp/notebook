@@ -366,6 +366,14 @@ Out[92]:
 dtype: float64
 ```
 
+### [swifter](https://github.com/jmcarpenter2/swifter)多核执行
+
+优化，提速
+
+```python
+df_demo.swifter.apply(lambda x:x.mean(), axis=1).head()
+```
+
 ## 窗口对象
 
 滑动窗口 rolling 、扩张窗口 expanding 以及指数加权窗口 ewm
@@ -409,7 +417,7 @@ np.nan是一个float类型的数据 None是一个NoneType类型
 2、 在Serise中显示的时候都会显示为NAN，均可以视作np.nan
 
     进行计算时可以通过`np.sum()`得到结果，此时NAN默认为0.0
-
+    
     s1 + 10 对于空值得到的结果为NAN,
     如果使用加法 可以通过s1.add(参数，fill_value = 0)指定空值的默认值为0
 
@@ -440,3 +448,30 @@ item_dict = item.set_index('item_id')['item_category'].to_dict()
 
 或者另一种复杂一点方法
 [将dataframe中的两列数据转换成字典dic](https://lover.blog.csdn.net/article/details/100692266?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control)
+
+## SettingWithCopyWarning
+
+<https://zhuanlan.zhihu.com/p/41202576>
+
+`SettingWithCopyWarning` 是一个警告 Warning，而不是错误 Error。
+
+错误表明某些内容是“坏掉”的，例如无效语法（invalid syntax）或尝试引用未定义的变量；警告的作用是提醒编程人员，他们的代码可能存在潜在的错误或问题，但是这些操作在该编程语言中依然合法。在这种情况下，警告很可能表明一个严重但不容易意识到的错误。
+
+## Memory Error问题的解决方法汇总
+
+<https://blog.csdn.net/qq_41780295/article/details/89677453>
+
+## read csv
+
+报错提示：“sys:1: DtypeWarning: Columns (15) have mixed types. Specify dtype option on import or set low_memory=False.”
+
+low_memory : boolean, default True
+
+- 分块加载到内存，再低内存消耗中解析，但是可能出现类型混淆。
+- 确保类型不被混淆需要设置为False，或者使用dtype 参数指定类型。
+- 注意使用chunksize 或者iterator 参数分块读入会将整个文件读入到一个Dataframe，而忽略类型（只能在C解析器中有效）
+
+```python
+import pandas as pd
+pd = pd.read_csv(Your_path, low_memory=False)
+```

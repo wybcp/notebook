@@ -2,11 +2,24 @@
 
 ## 更新所有包
 
-`conda update --all`
+```bash
+#先把conda更新到最新版
+conda update conda
+#把anaconda更新的新版
+conda update anaconda
+#配置环境也更新到最新版的Anaconda
+conda update --all
+```
+
+
 
 ## 查看安装的库
 
 `conda list`
+
+## 查看配置
+
+`conda config --show`
 
 ## conda换国内源
 

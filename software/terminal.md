@@ -6,8 +6,6 @@ Eternal Terminal is a remote shell that automatically reconnects without interru
 
 使用终端 ssh 连接时自动重连。
 
-## []
-
 ## 主题
 
 [10 个 Terminal 主题，让你的 macOS 终端更好看](https://sspai.com/post/53008)

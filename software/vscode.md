@@ -9,7 +9,8 @@
 - `code 文件夹`：打开指定文件夹
 - `code .`：打开当前目录
 - `code -h`
-##　插件
+
+## 插件
 
 - filesize
 - Chinese(Simplified) Language Pack for Visual Studio Code

@@ -21,3 +21,7 @@
 - [开源表情包 ChineseBQB](https://www.v2fy.com/asset/0i/ChineseBQB/#)
 - [微信小程序入门教程](http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html)
 - [md](https://github.com/doocs/md) 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 所有基础语法、色盘取色、一键复制并粘贴到公众号后台、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性
+- [中国历史地图集](http://www.ccamc.co/chinese_historical_map/index.php)一个历史地图网站，可按年份、年号查询
+- [地图生成器](http://datav.aliyun.com/tools/atlas/index.html)支持下载各省、市、县的svg格式的地图素材，可以导入PPT中进行编辑，能单独更改颜色和轮廓！界面简洁
+- 剪映，抖音视频剪辑软件
+- [OBS直播录屏软件](https://obsproject.com/zh-cn)
