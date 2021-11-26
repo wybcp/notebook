@@ -25,3 +25,4 @@
 - [地图生成器](http://datav.aliyun.com/tools/atlas/index.html)支持下载各省、市、县的svg格式的地图素材，可以导入PPT中进行编辑，能单独更改颜色和轮廓！界面简洁
 - 剪映，抖音视频剪辑软件
 - [OBS直播录屏软件](https://obsproject.com/zh-cn)
+- [KubeSphere](https://kubesphere.com.cn/docs/)KubeSphere 是在 Kubernetes 之上构建的面向云原生应用的分布式操作系统，完全开源，支持多云与多集群管理，提供全栈的 IT 自动化运维能力，简化企业的 DevOps 工作流。它的架构可以非常方便地使第三方应用与云原生生态组件进行即插即用 (plug-and-play) 的集成。

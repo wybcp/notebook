@@ -6,6 +6,10 @@
 
 - set_index()设置索引
 
+## 强制重置
+
+`pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade --force-reinstall --no-cache-dir jupyter`
+
 ## 基本数据结构
 
 pandas 中具有两种基本的数据存储结构，存储一维 values 的 Series 和存储二维 values 的 DataFrame ，在这两种结构上定义了很多的属性和方法。
@@ -475,3 +479,8 @@ low_memory : boolean, default True
 import pandas as pd
 pd = pd.read_csv(Your_path, low_memory=False)
 ```
+
+## 交集
+
+## 并集
+
