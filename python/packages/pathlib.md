@@ -4,7 +4,7 @@
 
     Windows filenames:
     C:\some_folder\some_file.txt
-
+    
     Most other operating systems:
     /some_folder/some_file.txt
 
@@ -63,16 +63,17 @@ Python 3.4 引入了一个新的标准库，用于处理文件和路径称为 pa
 from pathlib import Path
 data_folder = Path("source_data/text_files/")
 file_to_open = data_folder / "raw_data.txt"
-f = open(file_to_open)
-print(f.read())
+with open(file_to_open,mode='r') as f:
+    print(f.read())
+# 或者使用pathlib自有的open
+with file_to_open.open('r') as f:
+    print(f.read())
 ```
 
 这里需要注意两点：
 
 - 你应该在 pathlib 函数中使用正斜杠。`Path()`对象为当前的操作系统将正斜杠转换成正确的斜线。
 - 如果要添加到路径中，可以直接在代码中使用`/`运算符。
-
-如果这就是所有 pathlib 所做的，那么这对 Python 来说将是一个很好的补充 - 但它还有更多的功能！
 
 例如，我们可以读取文本文件的内容，而不必打开和关闭文件：
 
@@ -82,6 +83,13 @@ data_folder = Path("source_data/text_files/")
 file_to_open = data_folder / "raw_data.txt"
 print(file_to_open.read_text())
 ```
+
+pathlib 还提供几种文件的读写方式：可以不用再使用 with open 的形式即可以进行读写。
+
+> .read_text(): 找到对应的路径然后打开文件，读成str格式。等同open操作文件的"r"格式。
+> .read_bytes(): 读取字节流的方式。等同open操作文件的"rb"格式。
+> .write_text(): 文件的写的操作，等同open操作文件的"w"格式。
+> .write_bytes(): 文件的写的操作，等同open操作文件的"wb"格式。		
 
 实际上，pathlib 使得大多数标准的文件操作变得简单快捷：
 
@@ -95,6 +103,10 @@ print(filename.suffix)
 # prints "txt"
 print(filename.stem)
 # prints "raw_data"
+print(filename.anchor)
+# print 类似盘符的一个东西/
+print(filename.parent)
+# print 上级目录
 if not filename.exists():
     print("Oops, file doesn't exist!")
 else:
@@ -136,9 +148,150 @@ webbrowser.open(filename.absolute().as_uri())
 
 这只是 pathlib 的一个小高峰。它可以替代许多不同的文件相关的功能，这些功能曾经分散在不同的 Python 模块中。
 
+```python
+from pathlib import Path
+
+now_path = Path.cwd()
+home_path = Path.home()
+
+print("当前工作目录",now_path,type(now_path))
+print("home目录",home_path,type(home_path))
+```
+
+### **移动和删除文件**
+
+当然 pathlib 还可以支持文件其他操作，像移动，更新，甚至删除文件，但是使用这些方法的时候要小心因为，使用过程不用有任何的错误提示即使文件不存在也不会出现等待的情况。 使用 replace 方法可以移动文件，如果文件存在则会覆盖。为避免文件可能被覆盖，最简单的方法是在替换之前测试目标是否存在。
+
+```python
+import pathlib
+
+destination = pathlib.Path.cwd() / "target" 
+source = pathlib.Path.cwd() / "demo.txt"
+if not destination.exists():
+    source.replace(destination)
+```
+
+但是上面的方法存在问题就是，在多个进程多 destination 进行的操作的时候就会现问题，可以使用下面的方法避免这个问题。也就是说上面的方法适合单个文件的操作。
+
+```python
+import pathlib
+
+destination = pathlib.Path.cwd() / "target" 
+source = pathlib.Path.cwd() / "demo.txt"
+with destination.open(mode='xb') as fid: 
+    #xb表示文件不存在才操作
+    fid.write(source.read_bytes())
+```
+
+当 destination 文件存在的时候上面的代码就会出现 FileExistsError 异常。 从技术上讲，这会复制一个文件。 要执行移动，只需在复制完成后删除源即可。 使用 with_name 和 with.shuffix 可以修改文件名字或者后缀。
+
+```python
+import pathlib
+source = pathlib.Path.cwd() / "demo.py"
+source.replace(source.with_suffix(".txt")) #修改后缀并移动文件，即重命名
+```
+
+可以使用 .rmdir () 和 .unlink () 来删除文件。
+
+```python
+import pathlib
+
+destination = pathlib.Path.cwd() / "target" 
+source = pathlib.Path.cwd() / "demo.txt"
+source.unlink()
+```
+
+### **统计文件个数**
+
+我们可以使用.iterdir 方法获取当前文件下的所以文件.
+
+```
+import pathlib
+from collections import Counter
+now_path = pathlib.Path.cwd()
+gen = (i.suffix for i in now_path.iterdir())
+print(Counter(gen))
+```
+
+输出内容
+
+```
+Counter({'.py': 16, '': 11, '.txt': 1, '.png': 1, '.csv': 1})
+```
+
+通过配合使用 collections 模块的 Counter 方法，我们获取了当文件夹下文件类型情况。 前面我们说过 glob 模块点这里了解【[https://www.cnblogs.com/c-x-a/p/9261832.html](https://link.zhihu.com/?target=https%3A//www.cnblogs.com/c-x-a/p/9261832.html)】，同样的 pathlib 也有 glob 方法和 rglob 方法，不同的是 glob 模块里的 glob 方法结果是列表形式的，iglob 是生成器类型，在这里 pathlib 的 glob 模块返回的是生成器类型，然后 pathlib 还有一个支持递归操作的 rglob 方法。 下面的这个操作我通过使用 glob 方法，设定规则进行文件的匹配。
+
+```
+import pathlib
+from  collections import Counter
+gen =(p.suffix for p in pathlib.Path.cwd().glob('*.py'))
+print(Counter(gen))
+```
+
+### **展示目录树**
+
+下一个示例定义了一个函数 tree ()，该函数的作用是打印一个表示文件层次结构的可视树，该树以一个给定目录为根。因为想列出其子目录，所以我们要使用 .rglob () 方法：
+
+```
+import pathlib
+from  collections import Counter
+def tree(directory):
+    print(f'+ {directory}')
+    for path in sorted(directory.rglob('*')):
+        depth = len(path.relative_to(directory).parts)
+        spacer = '    ' * depth
+        print(f'{spacer}+ {path.name}')
+
+now_path = pathlib.Path.cwd()
+
+if __name__ == '__main__':
+    tree(now_path)
+```
+
+其中 relative_to 的方法的作用是返回 path 相对于 directory 的路径。 parts 方法可以返回路径的各部分。例如
+
+```
+import pathlib
+now_path = pathlib.Path.cwd()
+if __name__ == '__main__':
+    print(now_path.parts)
+```
+
+返回
+
+```
+('/', 'Users', 'chennan', 'pythonproject', 'demo')
+```
+
+### **获取文件最后一次修改时间**
+
+iterdir (),.glob () 和.rglob () 方法非常适合于生成器表达式和列表理解。 使用 stat () 方法可以获取文件的一些基本信息，使用.stat ().st_mtime 可以获取文件最后一次修改的信息
+
+```python
+import pathlib
+now_path = pathlib.Path.cwd()
+from datetime import datetime
+time, file_path = max((f.stat().st_mtime, f) for f in now_path.iterdir())
+print(datetime.fromtimestamp(time), file_path)
+```
+
+甚至可以使用类似的表达式获取上次修改的文件内容
+
+```python
+import pathlib
+from datetime import datetime
+now_path =pathlib.Path.cwd()
+result = max((f.stat().st_mtime, f) for f in now_path.iterdir())[1]
+print(result.read_text())
+```
+
+.stat ().st_mtime 会返回文件的时间戳，可以使用 datetime 或者 time 模块对时间格式进行进一步转换。
+
+### **其他内容**
+
 ## 常用方法
 
-- `Path.resolve(strict=False)`:Make the path absolute, resolving any symlinks. A new path object is returned:返回绝对路径的路径对象
+- `Path.resolve(strict=False)`:返回绝对路径的路径对象
 - [`Path.glob(pattern)`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob)返回匹配文件的相对路径`Path('.').glob('*.py')`，当使用`**`模式意味着递归当前目录及子目录`Path('.').glob('**/*.py')`,和一个专门的方法`Path.rglob(pattern)`一样的效果
 
 查看更多关于[pathlib](https://docs.python.org/3/library/pathlib.html)的使用

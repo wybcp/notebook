@@ -5,5 +5,6 @@
         "m",
         "stas",
         "stas’m"
-    ]
+    ],
+    "python.formatting.provider": "black"
 }

@@ -484,3 +484,8 @@ pd = pd.read_csv(Your_path, low_memory=False)
 
 ## 并集
 
+## [图表](https://mp.weixin.qq.com/s/-8Zadcms-uhXnploCMCfJA)
+
+用pandas一行代码来绘制可以动态交互的图表，并且将绘制的图表组合到一起，组成可视化大屏。
+
+- [折线图](line.ipynb)

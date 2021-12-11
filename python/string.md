@@ -21,8 +21,8 @@
 | str.isnumeric() |  |
 | str.isprintable() |  |
 | str.isspace() | 返回 True，如果字符串只包含空格、制表符和换行，并且非空; |
-| str.istitle() |  |
-| str.isupper() |  |
+| str.istitle() |所有单词都是首字母大写，像标题  |
+| str.isupper() |所有字符都是大写|
 | str.join(iterable) |  |
 | str.ljust(width[, fillchar]) | 左对齐 |
 | str.lstrip([chars]) | 删除前导空格，可以设置删除的字符 |
